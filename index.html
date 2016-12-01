@@ -9,6 +9,8 @@
     canvas {
         display: block;
         margin: 50px auto;
+        border: 3px #999 solid;
+        border-radius: 6px;
         box-shadow: -2px -2px 2px #efefef, 5px 5px 5px #b9b9b9;
     }
     
@@ -19,6 +21,8 @@
         margin: 5px auto;
         font-size: 18px;
         background-color: #99CC66;
+        border: 1px green solid;
+        border-radius: 4px;
     }
     
     button:hover {
@@ -151,13 +155,22 @@
         context.fill()
     }
 
+    function windowToCanvas(e) {
+        var bbox = chess.getBoundingClientRect();
+        return {
+            x: Math.round(e.clientX - bbox.left),
+            y: Math.round(e.clientY - bbox.top)
+        }
+    }
+
     chess.onclick = function(e) {
         if (over) {
             return
         }
         if (!over)
-            var x = e.offsetX;
-        var y = e.offsetY;
+            var curLoc = windowToCanvas(e);
+            var x = curLoc.x;
+        var y = curLoc.y;
         var i = Math.floor(x / 30)
         var j = Math.floor(y / 30)
         if (chessBoard[i][j] == 0) {
@@ -263,7 +276,7 @@
     }
 
     function remove() {
-    	context.clearRect(0,0,chess.width,chess.height);
+        context.clearRect(0, 0, chess.width, chess.height);
         drawChessBoard()
     }
     </script>
