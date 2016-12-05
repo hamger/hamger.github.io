@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>accordion</title>
+    <style>
+    * {
+        margin: 0;
+        padding: 0;
+        list-style: none;
+    }
+    
+    .main {
+        height: 130px;
+        border: 1px solid #003366;
+        width: 948px;
+        margin-top: 12px;
+        background: #fff;
+    }
+    
+    .main ul li {
+        width: 156px;
+        height: 128px;
+        border: 1px dashed #CCCCCC;
+        float: left;
+    }
+    
+    .main ul li a {
+        width: 156px;
+        height: 128px;
+        display: block;
+        position: relative;
+        cursor: pointer;
+        text-decoration: none;
+        overflow: hidden;
+    }
+    
+    .main ul li img {
+        height: 72px;
+        width: 117px;
+        position: absolute;
+        bottom: 0;
+        right: -13px;
+    }
+    
+    .main li .info {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 136px;
+        padding: 4px 10px;
+    }
+    
+    .main li .info h3 {
+        font-size: 14px;
+        font-weight: 700;
+    }
+    
+    .main li .info p {
+        color: #868686;
+        font-size: 12px;
+        overflow: hidden;
+        width: 136px;
+        height: 22px;
+        line-height: 22px;
+    }
+    
+    .main li .info p.price {
+        font-size: 14px;
+        font-style: italic;
+        color: #fa2a5d;
+        height: 35px;
+    }
+    
+    .main li .info p.price strong {
+        font-size: 22px;
+        font-family: Arial;
+        padding-right: 2px;
+    }
+    
+    .main li .info p.price i {
+        font-size: 14px;
+    }
+    
+    .main li .info p.more {
+        display: none;
+    }
+    
+    .main .mask {
+        height: 128px;
+        width: 156px;
+        display: none;
+        position: absolute;
+        top: 0;
+        left: 0;
+        background: #000;
+        opacity: 0;
+    }
+    
+    .main:hover .mask {
+        display: block;
+        opacity: 0.25;
+    }
+    
+    .main .big {
+        width: 314px;
+    }
+    
+    .main .big a {
+        width: 314px;
+    }
+    
+    .main .big img {
+        width: 195px;
+        height: 120px;
+        right: 0;
+        bottom: 0
+    }
+    
+    .main .big .info {
+        width: 294px
+    }
+    
+    .main .big .info h3 {
+        font-size: 18px
+    }
+    
+    .main .big .info p {
+        font-size: 14px;
+        width: 166px
+    }
+    
+    .main .big .info p.price {
+        font-size: 16px;
+        padding-top: 7px
+    }
+    
+    .main .big .info p.price strong {
+        font-size: 28px
+    }
+    
+    .main .big .info p.price i {
+        font-size: 16px
+    }
+    
+    .main .big .info p.more {
+        display: block;
+        font-size: 12px;
+        color: #ff2a5b
+    }
+    
+    .main .big .mask {
+        width: 314px
+    }
+    </style>
+    <script src="http://libs.baidu.com/jquery/2.1.4/jquery.min.js"></script>
+</head>
+
+<body>
+    <div class="main">
+        <ul>
+            <li>
+                <a>
+                    <img src="http://gtms01.alicdn.com/tps/i1/T1Lvt3Fv4kXXbA5QAK-195-120.jpg_Q90.jpg">
+                    <div class="info">
+                        <h3 style="color:#f62368">聚美妆</h3>
+                        <p>聚美妆1/2周年庆</p>
+                        <p class="price"><strong>1</strong><i>折起</i></p>
+                        <p class="more">进入专题抢购 &gt; </p>
+                    </div>
+                    <span class="mask"></span>
+                </a>
+            </li>
+            <li>
+                <a>
+                    <img src="http://gtms01.alicdn.com/tps/i1/T1qxGLFsVbXXbA5QAK-195-120.jpg_Q90.jpg">
+                    <div class="info">
+                        <h3 style="color:#ff578a">Baby购</h3>
+                        <p>宝宝该换装了，新品抢购</p>
+                        <p class="price"><strong>2.5</strong><i>折起</i></p>
+                        <p class="more">进入专题抢购 &gt; </p>
+                    </div>
+                    <span class="mask"></span>
+                </a>
+            </li>
+            <li class="big">
+                <a>
+                    <img src="http://gtms02.alicdn.com/tps/i2/T1KOSNFxXaXXbA5QAK-195-120.jpg_Q90.jpg">
+                    <div class="info">
+                        <h3 style="color:#6d3fa7">时装团</h3>
+                        <p>时尚春装，清新小潮搭配</p>
+                        <p class="price"><strong>1</strong><i>折起</i></p>
+                        <p class="more">进入专题抢购 &gt; </p>
+                    </div>
+                    <span class="mask"></span>
+                </a>
+            </li>
+            <li>
+                <a>
+                    <img src="http://gtms04.alicdn.com/tps/i4/T1CCeIFrVbXXbA5QAK-195-120.jpg_Q90.jpg">
+                    <div class="info">
+                        <h3 style="color:#d61939">TV购</h3>
+                        <p>补血养颜 就这么简单</p>
+                        <p class="price"><strong>2.6</strong><i>折起</i></p>
+                        <p class="more">进入专题抢购 &gt; </p>
+                    </div>
+                    <span class="mask"></span>
+                </a>
+            </li>
+            <li>
+                <a>
+                    <img src="http://gtms01.alicdn.com/tps/i1/T1jmKJFyJbXXbA5QAK-195-120.jpg_Q90.jpg">
+                    <div class="info">
+                        <h3 style="color:#6f9400">聚新鲜</h3>
+                        <p>最纯正的泰国香米</p>
+                        <p class="price"><strong>5</strong><i>折起</i></p>
+                        <p class="more">进入专题抢购 &gt; </p>
+                    </div>
+                    <span class="mask"></span>
+                </a>
+            </li>
+        </ul>
+    </div>
+    <script>
+    var list = $('li');
+    list.on("mouseover", function() {
+        list.each(function() {
+            list.removeClass('big');
+        });
+        $(this).addClass('big');
+        $('.mask').css("display",'block');
+        $(".big .mask").css('display','none');
+    });
+    </script>
+</body>
+
+</html>
