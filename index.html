@@ -3,31 +3,53 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Document</title>
-
+    <title>简历</title>
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
     <style>
-    	a{
-    		text-decoration: none;
-    		display: block;
-    		height: 20px;
-    		width: 200px;
-    		padding: 4px;
-    		font-size: 20px;
-    		background-color: #ABEECA;
-    		text-align: center;
-			border: 1px solid #9CE761;
-			border-radius: 4px;
-    	}
+    body {
+        padding-top: 50px;
+    }
+    
+    .starter-template {
+        padding: 40px 15px;
+        text-align: center;
+    }
     </style>
 </head>
 
 <body>
-    <a href="accordion/accordion.html">手风琴展示效果</a>
-    <br>
-    <a href="starGirl/starGirl.html">一闪一闪亮晶晶</a>
-    <br>
-    <a href="2048/index.html">2048游戏</a>
-<!--     <a href="starGril.html"> 打开另一个网页 </a>
- --></body>
+    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                    <span class="sr-only">toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="#" >简历</a>
+            </div>
+            <div id="navbar" class="collpase navbar-collpase">
+                <ul class="nav navbar-nav">
+                    <li class="active"><a href="#">简介</a></li>
+                    <li><a href="#skill">技能</a></li>
+                    <li><a href="#project">项目</a></li>
+                    <li><a href="#self-assessment">自评</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <div class="container">
+        <div class="starter-template">
+            <h1>我的名字是孟汉光</h1>
+            <p class="lead">我来自浙江诸暨
+            <br>我致力于前端技能的学习与实践</p>
+        </div>
+    </div>
+
+    <script src="http://libs.baidu.com/jquery/1.9.0/jquery.js"></script>
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+    
+</body>
 
 </html>
