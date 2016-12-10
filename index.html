@@ -18,38 +18,49 @@
 </head>
 
 <body>
+    <!-- Fixed navbar -->
     <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
         <div class="container">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-                    <span class="sr-only">toggle navigation</span>
+                    <span class="sr-only">简历</span>
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="#" >简历</a>
+                <a class="navbar-brand" href="#">简历</a>
             </div>
-            <div id="navbar" class="collpase navbar-collpase">
+            <div id="navbar" class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
                     <li class="active"><a href="#">简介</a></li>
                     <li><a href="#skill">技能</a></li>
-                    <li><a href="#project">项目</a></li>
-                    <li><a href="#self-assessment">自评</a></li>
+                    <li><a href="#selfAssessment">自评</a></li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">作品<span class="caret"></span></a>
+                        <ul class="dropdown-menu" role="menu">
+                            <li class="dropdown-header">网页特效</li>
+                            <li><a href="#">轮播图</a></li>
+                            <li><a href="#">手风琴</a></li>
+                            <li><a href="#">瀑布流</a></li>
+                            <li class="divider"></li>
+                            <li class="dropdown-header">游戏</li>
+                            <li><a href="#">2048</a></li>
+                            <li><a href="#">五子棋</a></li>
+                            <li><a href="#">手写板</a></li>
+                            <li class="divider"></li>
+                            <li class="dropdown-header">其他</li>
+                            <li><a href="#">倒计时效果</a></li>
+                            <li><a href="#">放大镜效果</a></li>
+                            <li><a href="#">canvas时钟</a></li>
+                        </ul>
+                    </li>
                 </ul>
             </div>
+            <!--/.nav-collapse -->
         </div>
     </nav>
-    <div class="container">
-        <div class="starter-template">
-            <h1>我的名字是孟汉光</h1>
-            <p class="lead">我来自浙江诸暨
-            <br>我致力于前端技能的学习与实践</p>
-        </div>
-    </div>
-
     <script src="http://libs.baidu.com/jquery/1.9.0/jquery.js"></script>
     <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
-    
 </body>
 
 </html>
