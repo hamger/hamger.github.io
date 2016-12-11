@@ -1,0 +1,182 @@
+/*---------------全局--------------*/
+
+html,
+body {
+    font-family: verdana, "微软雅黑";
+    background-color: #f7f7f7;
+    width: 100%;
+    height: 100%;
+}
+
+button {
+    outline: none;
+    -o-outline: none;
+    -moz-outline: none;
+    -webkit-outline: none;
+}
+
+.transition {
+    transition: all 0.3s;
+    -o-transition: all 0.3s;
+    -moz-transition: all 0.3s;
+    -webkit-transition: all 0.3s;
+}
+
+.transform:hover {
+    -webkit-transform: scale(1.15);
+    -moz-transform: scale(1.15);
+    -o-transform: scale(1.15);
+    transform: scale(1.15);
+    -webkit-box-shadow: inset 0 0 80px #000000;
+    -moz-box-shadow: inset 0 0 80px #000000;
+    -o-transform: inset 0 0 80px #000000;
+    box-shadow: inset 0 0 80px #000000;
+}
+
+a:hover,
+a:active {
+    text-decoration: none;
+}
+
+
+/*-------------总容器-------------*/
+
+.wraper {
+    width: 100%;
+    position: relative;
+    overflow: hidden;
+}
+
+
+/*---------------分页--------------*/
+
+.sectionwrap {
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    z-index: 0;
+    top: 0;
+}
+
+.sectionwrap .section {
+    height: 100%;
+    width: 100%;
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    position: relative;
+    left: 0px;
+}
+
+#sec00 {
+    background-image: url("../img/moback01.png");
+}
+
+#sec01 {
+    background-image: url("../img/moback02.png");
+}
+
+#sec02 {
+    background-image: url("../img/moback03.png");
+}
+
+#sec03 {
+    background-image: url("../img/moback04.png");
+}
+
+#sec04 {
+    background-image: url("../img/moback05.png");
+}
+
+#sec00 .colormask {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(253, 92, 0, 0.5);
+}
+
+#sec01 .colormask {
+    position: absolute;
+    width: 100%;
+    background-color: rgba(229, 89, 52, 0.5);
+}
+
+#sec02 .colormask {
+    position: absolute;
+    width: 100%;
+    background-color: rgba(155, 197, 61, 0.5);
+}
+
+#sec03 .colormask {
+    position: absolute;
+    width: 100%;
+    background-color: rgba(91, 192, 235, 0.5);
+}
+
+#sec04 .colormask {
+    position: absolute;
+    width: 100%;
+    background-color: rgba(253, 92, 0, 0.5);
+}
+
+.section .textwrap {
+    color: #ffffff;
+    text-align: center;
+    width: 90%;
+    height: 180px;
+    position: absolute;
+    top: 0;
+    left: 0px;
+    right: 0px;
+    bottom: 0;
+    margin: auto;
+    z-index: 2;
+}
+
+.index-title {
+    font-family: 'webfont-bold';
+    font-size: 45px;
+}
+
+.index-content {
+    font-family: 'webfont-fine';
+    font-size: 20px;
+}
+
+
+/*---------------状态小圆--------------*/
+
+.status {
+    position: absolute;
+    bottom: 0px;
+    right: 7%;
+    top: 0px;
+    margin: auto;
+    height: 120px;
+}
+
+.status ul {
+    padding: 0px;
+}
+
+.status ul li {
+    list-style-type: none;
+    margin-bottom: 5px;
+}
+
+.status .status_bar {
+    display: inline-block;
+    width: 12px;
+    height: 12px;
+    background: none;
+    border: 1px solid #FFFFFF;
+    border-radius: 6px;
+    transition: 0.9s;
+    -o-transition: 0.9s;
+    -moz-transition: 0.9s;
+    -webkit-transition: 0.9s;
+    cursor: pointer;
+}
+.status .select {
+    background: #FFFFFF;
+}

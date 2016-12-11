@@ -1,66 +1,127 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-Hans">
 
 <head>
     <meta charset="UTF-8">
-    <title>简历</title>
-    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
-    <style>
-    body {
-        padding-top: 50px;
-    }
-    
-    .starter-template {
-        padding: 40px 15px;
-        text-align: center;
-    }
-    </style>
+    <title>重建</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/font-awesome.min.css">
+    <link rel="stylesheet" href="css/h.css">
 </head>
 
 <body>
-    <!-- Fixed navbar -->
-    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-        <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-                    <span class="sr-only">简历</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a class="navbar-brand" href="#">简历</a>
-            </div>
-            <div id="navbar" class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                    <li class="active"><a href="#">简介</a></li>
-                    <li><a href="#skill">技能</a></li>
-                    <li><a href="#selfAssessment">自评</a></li>
-                    <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">作品<span class="caret"></span></a>
-                        <ul class="dropdown-menu" role="menu">
-                            <li class="dropdown-header">网页特效</li>
-                            <li><a href="#">轮播图</a></li>
-                            <li><a href="#">手风琴</a></li>
-                            <li><a href="#">瀑布流</a></li>
-                            <li class="divider"></li>
-                            <li class="dropdown-header">游戏</li>
-                            <li><a href="#">2048</a></li>
-                            <li><a href="#">五子棋</a></li>
-                            <li><a href="#">手写板</a></li>
-                            <li class="divider"></li>
-                            <li class="dropdown-header">其他</li>
-                            <li><a href="#">倒计时效果</a></li>
-                            <li><a href="#">放大镜效果</a></li>
-                            <li><a href="#">canvas时钟</a></li>
-                        </ul>
-                    </li>
-                </ul>
-            </div>
-            <!--/.nav-collapse -->
+    <div class="wraper">
+        <!-- 导航按钮 -->
+        <div class="munebtn" status="0">
+            <i></i>
+            <i></i>
+            <i></i>
         </div>
-    </nav>
-    <script src="http://libs.baidu.com/jquery/1.9.0/jquery.js"></script>
-    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+        <!-- 分页 -->
+        <div class="sectionwrap" data-num="0">
+            <div class="section" id="sec00">
+                <div class="colormask">
+                    <div class="textwrap">
+                        <p class="index-title">简介</p>
+                        <p class="index-content">简介zcvx</p>
+                    </div>
+                </div>
+            </div>
+            <div class="section" id="sec01">
+                <div class="colormask">
+                    <div class="textwarp">
+                        <p class="index-title">技能</p>
+                        <p class="index-content">简介xcvbcx</p>
+                    </div>
+                </div>
+            </div>
+            <div class="section" id="sec02">
+                <div class="colormask">
+                    <div class="textwarp">
+                        <p class="index-title">项目</p>
+                        <p class="index-content">简介tutryurt</p>
+                    </div>
+                </div>
+            </div>
+            <div class="section" id="sec03">
+                <div class="colormask">
+                    <div class="textwarp">
+                        <p class="index-title">自评</p>
+                        <p class="index-content">简介ghf</p>
+                    </div>
+                </div>
+            </div>
+            <div class="section" id="sec04">
+                <div class="colormask">
+                    <div class="textwarp">
+                        <p class="index-title">联系</p>
+                        <p class="index-content">简介sdfsf</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- 状态显示 -->
+        <div id="zhuangt" class="status hidden-sm hidden-xs">
+            <ul>
+                <li><span class="status_bar select"></span></li>
+                <li><span class="status_bar"></span></li>
+                <li><span class="status_bar"></span></li>
+                <li><span class="status_bar"></span></li>
+                <li><span class="status_bar"></span></li>
+            </ul>
+        </div>
+        <!-- 下一页 -->
+       <!--  <span class="nextbtn transition"><i class="fa fa-angle-down"></i></span> -->
+        <!-- 隐藏菜单 -->
+        <div class="hidemenu">
+            <div class="topmenu">
+                <span class="name"></span>
+                <i class="fa fa-close transition"></i>
+            </div>
+            <ul class="listmenu">
+                <li>
+                    <a href="">
+                        <i class="fa fa-user"></i>
+                        <span>基本资料</span>
+                        <i class="fa fa-angle-right fa-lg" ></i>
+                    </a>
+                </li>
+                <li>
+                    <a href="">
+                        <i class="fa fa-wrench"></i>
+                        <span>职业技能</span>
+                        <i class="fa fa-angle-right fa-lg" ></i>
+                    </a>
+                </li>
+                <li>
+                    <a href="">
+                        <i class="fa fa-folder"></i>
+                        <span>独立作品</span>
+                        <i class="fa fa-angle-right fa-lg" ></i>
+                    </a>
+                </li>
+                <li>
+                    <a href="">
+                        <i class="fa fa-comment"></i>
+                        <span>自我评价</span>
+                        <i class="fa fa-angle-right fa-lg" ></i>
+                    </a>
+                </li>
+                <li>
+                    <a href="">
+                        <i class="fa fa-phone"></i>
+                        <span>联系方式</span>
+                        <i class="fa fa-angle-right fa-lg" ></i>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <script src="script/jquery-2.1.4.min.js"></script>
+    <script src="script/bootstrap.min.js"></script>
+    <script src="script/h.js"></script>
 </body>
 
 </html>
