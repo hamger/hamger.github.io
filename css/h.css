@@ -53,9 +53,13 @@ a:active {
 .sectionwrap {
     width: 100%;
     height: 100%;
-    position: fixed;
+    position: relative;
     z-index: 0;
     top: 0;
+    transition: 1s cubic-bezier(0.8,0.1,0.1,1);
+    -o-transition: 1s cubic-bezier(0.8,0.1,0.1,1);
+    -moz-transition: 1s cubic-bezier(0.8,0.1,0.1,1);
+    -webkit-transition: 1s cubic-bezier(0.8,0.1,0.1,1);
 }
 
 .sectionwrap .section {
@@ -120,7 +124,7 @@ a:active {
 }
 
 .section .textwrap {
-    color: #ffffff;
+    color: #fff;
     text-align: center;
     width: 90%;
     height: 180px;
@@ -179,4 +183,110 @@ a:active {
 }
 .status .select {
     background: #FFFFFF;
+}
+
+/*---------------栅格菜单--------------*/
+
+.wraper .menubtn {
+    position: absolute;
+    top: 20px;
+    right: 6%;
+    color: #fff;
+    cursor: pointer;
+    z-index: 2;
+}
+.wraper .menubtn i {
+    display: block;
+    width: 22px;
+    height: 2px;
+    background: #fff;
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+/*---------------隐藏菜单--------------*/
+
+.hidemenu {
+    color: #555555;
+    width: 0;
+    height: 5px;
+    z-index: 3;
+    position: fixed;
+    top: 0px;
+    right: 0px;
+}
+.hidemenu .maskmenu{
+    display: none;
+    width: 100%;
+    height: 100%;
+    background: rgba(255,255,255,0.5);
+    position: fixed;
+    z-index: -1;
+    left: 0;
+    top: 0;
+}
+
+.hidemenu .listmenu {
+    overflow: hidden;
+    width: 100%;
+    height: 100%;
+    padding: 80px 0 0;
+    background-color: rgba(0, 0, 0, 0.9);
+    position: absolute;
+    bottom: 0px;
+}
+
+.hidemenu .listmenu li {
+    position: relative;
+    display: block;
+    list-style-type: none;
+}
+
+.hidemenu .listmenu li i {
+    position: absolute;
+    right: 7%;
+    top: 0px;
+    bottom: 0px;
+    margin: auto;
+    height: 20px;
+}
+.hidemenu .name {
+    position: absolute;
+    display: inline-block;
+    font-size: 36px;
+    top: 3%;
+    left: 7%;
+    color: #999;
+}
+.hidemenu .closemenu {
+    position: absolute;
+    top: 5%;
+    right: 7%;
+    display: inline-block;
+    font-size: 40px;
+    cursor: pointer;
+    color: #999;
+}
+
+.listmenu > li > a {
+    display: block;
+    opacity: 0;
+    line-height: 55px;
+    text-decoration: none;
+    font-size: 16px;
+    padding: 0 0 0 7%;
+    color: #999;
+    cursor: pointer;
+    border-top: 1px solid #232323;
+    position: relative;
+    left: 7%;
+    top: 0px;
+}
+.listmenu > li:last-child > a {
+    border-bottom: 1px solid #232323;
+}
+
+.listmenu > li > a:hover {
+    color: #FFFFFF;
+    background-color: rgba(253, 92, 0, 1);
 }
