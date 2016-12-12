@@ -120,7 +120,7 @@ a:active {
 #sec04 .colormask {
     position: absolute;
     width: 100%;
-    background-color: rgba(253, 92, 0, 0.5);
+    background-color: rgba(253, 199, 0, 0.5);
 }
 
 .section .textwrap {
@@ -153,7 +153,7 @@ a:active {
 .status {
     position: absolute;
     bottom: 0px;
-    right: 7%;
+    right: 6%;
     top: 0px;
     margin: auto;
     height: 120px;
@@ -170,11 +170,11 @@ a:active {
 
 .status .status_bar {
     display: inline-block;
-    width: 12px;
-    height: 12px;
+    width: 20px;
+    height: 20px;
     background: none;
     border: 1px solid #FFFFFF;
-    border-radius: 6px;
+    border-radius: 10px;
     transition: 0.9s;
     -o-transition: 0.9s;
     -moz-transition: 0.9s;
@@ -183,6 +183,26 @@ a:active {
 }
 .status .select {
     background: #FFFFFF;
+}
+/*---------------下一页--------------*/
+
+.nextbtn {
+    cursor: pointer;
+    text-align: center;
+    display: inline-block;
+    width: 36px;
+    height: 35px;
+    line-height: 35px;
+    border-radius: 20px;
+    margin: auto;
+    font-size: 18px;
+    color: #FFFFFF;
+    border: #FFF solid 1px;
+    position: absolute;
+    bottom: 40px;
+    left: 0px;
+    right: 0px;
+    z-index: 2;
 }
 
 /*---------------栅格菜单--------------*/
@@ -207,7 +227,7 @@ a:active {
 /*---------------隐藏菜单--------------*/
 
 .hidemenu {
-    color: #555555;
+    color: #555;
     width: 0;
     height: 5px;
     z-index: 3;
