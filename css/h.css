@@ -55,7 +55,6 @@ a:active {
     height: 100%;
     position: relative;
     z-index: 0;
-    top: 0;
     transition: 1s cubic-bezier(0.8,0.1,0.1,1);
     -o-transition: 1s cubic-bezier(0.8,0.1,0.1,1);
     -moz-transition: 1s cubic-bezier(0.8,0.1,0.1,1);
@@ -65,88 +64,32 @@ a:active {
 .sectionwrap .section {
     height: 100%;
     width: 100%;
-    background-position: center;
-    background-size: cover;
-    background-repeat: no-repeat;
     position: relative;
-    left: 0px;
+}
+
+.container-fluid{
+    padding: 5%;
 }
 
 #sec00 {
-    background-image: url("../img/moback01.png");
-}
-
-#sec01 {
-    background-image: url("../img/moback02.png");
-}
-
-#sec02 {
-    background-image: url("../img/moback03.png");
-}
-
-#sec03 {
-    background-image: url("../img/moback04.png");
-}
-
-#sec04 {
-    background-image: url("../img/moback05.png");
-}
-
-#sec00 .colormask {
-    position: absolute;
-    width: 100%;
-    height: 100%;
     background-color: rgba(253, 92, 0, 0.5);
 }
 
-#sec01 .colormask {
-    position: absolute;
-    width: 100%;
+#sec01 {
     background-color: rgba(229, 89, 52, 0.5);
 }
 
-#sec02 .colormask {
-    position: absolute;
-    width: 100%;
+#sec02 {
     background-color: rgba(155, 197, 61, 0.5);
 }
 
-#sec03 .colormask {
-    position: absolute;
-    width: 100%;
+#sec03 {
     background-color: rgba(91, 192, 235, 0.5);
 }
 
-#sec04 .colormask {
-    position: absolute;
-    width: 100%;
+#sec04 {
     background-color: rgba(253, 199, 0, 0.5);
 }
-
-.section .textwrap {
-    color: #fff;
-    text-align: center;
-    width: 90%;
-    height: 180px;
-    position: absolute;
-    top: 0;
-    left: 0px;
-    right: 0px;
-    bottom: 0;
-    margin: auto;
-    z-index: 2;
-}
-
-.index-title {
-    font-family: 'webfont-bold';
-    font-size: 45px;
-}
-
-.index-content {
-    font-family: 'webfont-fine';
-    font-size: 20px;
-}
-
 
 /*---------------状态小圆--------------*/
 
@@ -211,7 +154,7 @@ a:active {
     position: absolute;
     top: 20px;
     right: 6%;
-    color: #fff;
+    color: #FFFFFF;
     cursor: pointer;
     z-index: 2;
 }
@@ -219,7 +162,7 @@ a:active {
     display: block;
     width: 22px;
     height: 2px;
-    background: #fff;
+    background: #FFFFFF;
     margin-top: 5px;
     margin-bottom: 5px;
 }
