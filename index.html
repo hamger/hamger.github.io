@@ -8,22 +8,31 @@
     <link rel="shortcut icon" type="image/x-icon" href="http://static.yangbai.me/images/favicon.ico">
     <script type="text/javascript" src="zepto.js"></script>
     <style>
-        ul , li {
-            margin: 0;
-            padding: 0;
-            list-style: none;
-        }
-        #gameBox {
-            width: 300px;
-            height: 300px;
-            margin: 30 auto;
-        }
-        #gameBox li {
-            width: 100px;
-            height: 100px;
-            overflow: hidden;
-            display: inline-block;
-        }
+    ul,
+    li {
+        margin: 0;
+        padding: 0;
+        list-style: none;
+    }
+    
+    #gameBox {
+        width: 300px;
+        height: 300px;
+        margin: 30 auto;
+    }
+    
+    #gameBox li {
+        width: 100px;
+        height: 100px;
+        overflow: hidden;
+        display: inline-block;
+    }
+    
+    #gameBox img {
+        border: 0;
+        vertical-align: middle;
+        width: 100%;
+    }
     </style>
 </head>
 
@@ -43,8 +52,6 @@
     </div>
     <canvas id="canvas" style="display: none" width="300" height="300"></canvas>
     <script>
-
-
     function randomSort(arr, newArr) {
         if (arr.length == 1) {
             newArr.push(arr[0]);
@@ -151,14 +158,14 @@
             });
         },
         check: function() {
-                var resArr = [];
-                $('#gameBox img').each(function(k, v) {
-                    resArr.push(v.getAttribute("data-seq"));
-                });
-                if (resArr.join("") === oriArr.join("")) {
-                    alert('拼图完成，真聪明！');
-                }
-            },
+            var resArr = [];
+            $('#gameBox img').each(function(k, v) {
+                resArr.push(v.getAttribute("data-seq"));
+            });
+            if (resArr.join("") === oriArr.join("")) {
+                alert('拼图完成，真聪明！');
+            }
+        },
     }
 
     App.start()
