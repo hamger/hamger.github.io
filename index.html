@@ -7,6 +7,7 @@
     <title>互换拼图</title>
     <link rel="shortcut icon" type="image/x-icon" href="http://static.yangbai.me/images/favicon.ico">
     <script type="text/javascript" src="zepto.js"></script>
+    <link rel="stylesheet" href="rem.css">
     <style>
     ul,
     li {
@@ -15,19 +16,47 @@
         list-style: none;
     }
     
+    .page {
+        position: relative;
+        display: -webkit-box;
+        display: flex;
+        -webkit-box-pack: center;
+        justify-content: center;
+        -webkit-box-orient: vertical;
+        -webkit-box-direction: normal;
+        flex-direction: column;
+        -webkit-box-align: center;
+        align-items: center;
+        min-height: 100%;
+        background-size: 7.5rem 1.6rem;
+        padding-bottom: 1.5rem;
+    }
+    
     #gameBox {
         width: 300px;
         height: 300px;
         margin: 30 auto;
     }
     
-    #gameBox li {
-        width: 100px;
-        height: 100px;
-        overflow: hidden;
-        display: inline-block;
+    #gameBox ul {
+        display: block;
+        width: 100%;
+        height: 100%;
+        border: .04rem solid #fff;
+        border-top: none;
+        border-right: none;
+        position: relative;
     }
     
+    #gameBox li {
+        width: 2.22rem;
+        height: 2.22rem;
+        border-top: .04rem solid #fff;
+        border-right: .04rem solid #fff;
+        position: absolute;
+    }
+    
+
     #gameBox img {
         border: 0;
         vertical-align: middle;
@@ -37,18 +66,20 @@
 </head>
 
 <body>
-    <div class="game-box">
-        <ul id="gameBox">
-            <li><img src="" alt=""></li>
-            <li><img src="" alt=""></li>
-            <li><img src="" alt=""></li>
-            <li><img src="" alt=""></li>
-            <li><img src="" alt=""></li>
-            <li><img src="" alt=""></li>
-            <li><img src="" alt=""></li>
-            <li><img src="" alt=""></li>
-            <li><img src="" alt=""></li>
-        </ul>
+    <div class="page">
+        <div class="game-box">
+            <ul id="gameBox">
+                <li><img src="" alt=""></li>
+                <li><img src="" alt=""></li>
+                <li><img src="" alt=""></li>
+                <li><img src="" alt=""></li>
+                <li><img src="" alt=""></li>
+                <li><img src="" alt=""></li>
+                <li><img src="" alt=""></li>
+                <li><img src="" alt=""></li>
+                <li><img src="" alt=""></li>
+            </ul>
+        </div>
     </div>
     <canvas id="canvas" style="display: none" width="300" height="300"></canvas>
     <script>
