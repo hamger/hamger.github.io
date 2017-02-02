@@ -142,26 +142,28 @@
                 $lis.on('swipeUp', function(e) {
                     e.preventDefault();
                     var $this = $(this);
+                    var index = $this.index();
                     var html = $this.html();
-                    var index = $this.index() - 3;
-                    var $up = $lis.eq(index);
-                    if (index >= 0 && $up.size() > 0) {
-                        $this.html($up.html());
-                        $up.html(html);
-                        App.check();
+                    var $up = $lis.eq(index - 3);
+                    if ($.inArray(index, [0, 1, 2]) > -1) {
+                        return false;
                     }
+                    $this.html($up.html());
+                    $up.html(html);
+                    App.check();
                 });
                 $lis.on('swipeDown', function(e) {
                     e.preventDefault();
                     var $this = $(this);
+                    var index = $this.index();
                     var html = $this.html();
-                    var index = $this.index() + 3;
-                    var $down = $lis.eq(index);
-                    if (index < 9 && $down.size() > 0) {
-                        $this.html($down.html());
-                        $down.html(html);
-                        App.check();
+                    var $down = $lis.eq(index+3);
+                    if ($.inArray(index, [6, 7, 8]) > -1) {
+                        return false;
                     }
+                    $this.html($down.html());
+                    $down.html(html);
+                    App.check();
                 });
             },
             check: function() {
