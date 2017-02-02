@@ -141,8 +141,8 @@
             },
             bind: function() {
                 $box.on('mousedown', function(ev) {
-                    var oDiv = $(this);
-                    console.log(oDiv)
+                    var Div = $(this);
+                    var oDiv = Div[0];
                     var oEvent = ev || event;
                     var startX = oEvent.pageX;
                     var atartY = oEvent.pageY;
@@ -159,7 +159,7 @@
 
                         position.x = boxLeft + $('#div0').width() / 2;
                         position.y = boxTop + $('#div0').height() / 2;
-                        
+
                         oDiv.css({
                             left: boxLeft + 'px',
                             top: boxTop + 'px'
