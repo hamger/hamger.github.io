@@ -141,7 +141,7 @@
             },
             bind: function() {
                 $box.on('mousedown', function(ev) {
-                    var oDiv = document.getElementById(this.id);
+                    var oDiv = $(this);
                     var oEvent = ev || event;
                     var startX = oEvent.pageX;
                     var startY = oEvent.pageY;
@@ -152,15 +152,17 @@
                         var slideLeft = oEvent.pageX - startX;
                         var slideTop = oEvent.pageY - startY;
 
-                        var boxLeft = oDiv.offsetLeft - parentOffset.left - slideLeft
-                        var boxTop = oDiv.offsetTop - parentOffset.top - slideTop
+                        var boxLeft = oDiv.offset().left - parentOffset.left - slideLeft
+                        var boxTop = oDiv.offset().top - parentOffset.top - slideTop
 
 
                         position.x = boxLeft + $('#div0').width() / 2;
                         position.y = boxTop + $('#div0').height() / 2;
 
-                        oDiv.style.left = boxLeft + 'px'
-                        oDiv.style.top = boxTop + 'px'
+                        oDiv.css({
+                            left: boxLeft + 'px',
+                            top: boxTop + 'px'
+                        })
 
                     };
                     document.onmouseup = function() {
