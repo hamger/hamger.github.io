@@ -154,20 +154,22 @@
                         var slideTop = oEvent.pageY - atartY;
 
                         var boxLeft = oDiv.offsetLeft - parentOffset.left - slideLeft
-                        var boxTop = oDiv.offsetTop - parentOffset.top - slideTop 
+                        var boxTop = oDiv.offsetTop - parentOffset.top - slideTop
 
-                        
+
                         position.x = boxLeft + $('#div0').width() / 2;
                         position.y = boxTop + $('#div0').height() / 2;
-
-                        oDiv.style.left = boxLeft + 'px'
-                        oDiv.style.top = boxTop + 'px'
+                        
+                        oDiv.css({
+                            left: boxLeft + 'px',
+                            top: boxTop + 'px'
+                        })
 
                     };
                     document.onmouseup = function() {
                         document.onmousemove = null;
                         document.onmouseup = null;
-                        
+
                         if (moveboxBosition(position) in oriArr) {
                             var index = oDiv.index()
                             var html = oDiv.html()
