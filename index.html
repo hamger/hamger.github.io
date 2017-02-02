@@ -152,9 +152,20 @@
                         var slideLeft = oEvent.clientX - startX;
                         var slideTop = oEvent.clientY - startY;
 
-                        var boxLeft = oDiv.offset().left - parentOffset.left + slideLeft
-                        var boxTop = oDiv.offset().top - parentOffset.top + slideTop
+                        var boxLeft = oDiv.position().left + slideLeft
+                        var boxTop = oDiv.position().top + slideTop
 
+                        if(boxLeft >= 200){
+                            boxLeft = 200
+                        }else if(boxLeft <= 0){
+                            boxLeft = 0
+                        }
+
+                        if (boxTop >= 200) {
+                            boxTop = 200
+                        } else if(boxTop <= 0){
+                            boxTop = 0
+                        }
 
                         position.x = boxLeft + $('#div0').width() / 2;
                         position.y = boxTop + $('#div0').height() / 2;
