@@ -7,8 +7,9 @@
     <title>互换拼图</title>
     <link rel="shortcut icon" type="image/x-icon" href="http://static.yangbai.me/images/favicon.ico">
     <script type="text/javascript" src="zepto.js"></script>
+    <script type="text/javascript" src="rem.js"></script>
     <style>
-    ul,
+/*    ul,
     li {
         margin: 0;
         padding: 0;
@@ -38,6 +39,50 @@
         height: 100%;
         margin: 0;
         padding: 0;
+    }
+    */
+
+
+body {
+    font-family: "Helvetica Neue", Helvetica, STHeiTi, sans-serif;
+    line-height: 1.5;
+    font-size: .28rem;
+    color: #333;
+    -webkit-user-select: none;
+    -webkit-text-size-adjust: 100%;
+    -webkit-tap-highlight-color: transparent;
+    outline: 0;
+    height: 100%;
+}
+
+    ul {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+    #gameBox {
+        display: block;
+        width: 100%;
+        height: 100%;
+        border: .04rem solid #fff;
+        border-top: none;
+        border-right: none;
+        position: relative;
+    }
+    
+    #gameBox li {
+        width: 2.22rem;
+        height: 2.22rem;
+        border-top: .04rem solid #fff;
+        border-right: .04rem solid #fff;
+        position: absolute;
+    }
+    
+    img {
+        border: 0;
+        vertical-align: middle;
+        width: 100%;
     }
     </style>
 </head>
