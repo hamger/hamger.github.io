@@ -23,13 +23,13 @@
     
     #gameBox {
         width: 100%;
-        position: relative;
+        overflow: hidden;
     }
     
     #gameBox li {
         width: 32%;
         height: 32%;
-        position: absolute;
+        display: inline-block;
     }
     
     #gameBox img {
@@ -57,121 +57,126 @@
     </div>
     <canvas id="canvas" style="display: none" width="100" height="100"></canvas>
     <script>
-    function randomSort(arr, newArr) {
-        if (arr.length == 1) {
-            newArr.push(arr[0]);
-            return newArr;
+    $(document).ready(function() {
+
+
+        function randomSort(arr, newArr) {
+            if (arr.length == 1) {
+                newArr.push(arr[0]);
+                return newArr;
+            }
+            var random = Math.floor(Math.random() * arr.length);
+            newArr.push(arr[random]);
+            arr.splice(random, 1);
+            return randomSort(arr, newArr);
         }
-        var random = Math.floor(Math.random() * arr.length);
-        newArr.push(arr[random]);
-        arr.splice(random, 1);
-        return randomSort(arr, newArr);
-    }
-    var imgArr = [0, 1, 2, 3, 4, 5, 6, 7, 8];
-    var imgRandomArr = [];
-    var oriArr = [0, 1, 2, 3, 4, 5, 6, 7, 8];
-    var $lis = $('#gameBox li')
-    var canvas = document.getElementById('canvas')
-    var ctx = canvas.getContext('2d')
-    var image = new Image();
-    var gameBoxHeight = $('#gameBox').width()
-    $('#gameBox').height(gameBoxHeight)
+        var imgArr = [0, 1, 2, 3, 4, 5, 6, 7, 8];
+        var imgRandomArr = [];
+        var oriArr = [0, 1, 2, 3, 4, 5, 6, 7, 8];
+        var $lis = $('#gameBox li')
+        var canvas = document.getElementById('canvas')
+        var ctx = canvas.getContext('2d')
+        var image = new Image();
+        var gameBoxHeight = $('#gameBox').width()
+        $('#gameBox').height(gameBoxHeight)
 
 
-    var App = {
-        start: function() {
-            this.init();
-            this.render();
-            this.bind();
-        },
-        init: function() {
-            imgRandomArr = randomSort(imgArr, imgRandomArr)
-            this.render();
-        },
-        render: function() {
-            image.onload = function() {
-                App.randomImage();
-            }
-            image.src = 'pic.jpg';
-        },
-        randomImage: function() {
-            var index = 0;
-            for (var i = 0; i < 3; i++) {
-                for (var j = 0; j < 3; j++) {
-                    ctx.drawImage(image, 100 * j, 100 * i, 100, 100, 0, 0, 100, 100);
-                    $lis.eq(imgRandomArr[index]).find('img').data('seq', index).attr('src', canvas.toDataURL('image/jpeg'));
-                    index++;
+        var App = {
+            start: function() {
+                this.init();
+                this.render();
+                this.bind();
+            },
+            init: function() {
+                imgRandomArr = randomSort(imgArr, imgRandomArr)
+                this.render();
+            },
+            render: function() {
+                image.onload = function() {
+                    App.randomImage();
                 }
-            }
-        },
-        bind: function() {
-            //阻止手机上浏览器的弹性下拉。。。
-            $('body').on('touchstart', function(e) {
-                e.preventDefault();
-            });
-            $lis.on('swipeLeft', function(e) {
-                e.preventDefault();
-                var $this = $(this);
-                var index = $this.index();
-                var html = $this.html();
-                var $prev = $this.prev();
-                if ($.inArray(index, [0, 3, 6]) > -1) {
-                    return false;
+                image.src = 'pic.jpg';
+            },
+            randomImage: function() {
+                var index = 0;
+                for (var i = 0; i < 3; i++) {
+                    for (var j = 0; j < 3; j++) {
+                        ctx.drawImage(image, 100 * j, 100 * i, 100, 100, 0, 0, 100, 100);
+                        $lis.eq(imgRandomArr[index]).find('img').data('seq', index).attr('src', canvas.toDataURL('image/jpeg'));
+                        index++;
+                    }
                 }
-                $this.html($prev.html());
-                $prev.html(html);
-                App.check();
-            });
-            $lis.on('swipeRight', function(e) {
-                e.preventDefault();
-                var $this = $(this);
-                var index = $this.index();
-                var html = $this.html();
-                var $next = $this.next();
-                if ($.inArray(index, [2, 5, 8]) > -1) {
-                    return false;
-                }
-                $this.html($next.html());
-                $next.html(html);
-                App.check();
-            });
-            $lis.on('swipeUp', function(e) {
-                e.preventDefault();
-                var $this = $(this);
-                var html = $this.html();
-                var index = $this.index() - 3;
-                var $up = $lis.eq(index);
-                if (index >= 0 && $up.size() > 0) {
-                    $this.html($up.html());
-                    $up.html(html);
+            },
+            bind: function() {
+                //阻止手机上浏览器的弹性下拉。。。
+                $('body').on('touchstart', function(e) {
+                    e.preventDefault();
+                });
+                $lis.on('swipeLeft', function(e) {
+                    e.preventDefault();
+                    var $this = $(this);
+                    var index = $this.index();
+                    var html = $this.html();
+                    var $prev = $this.prev();
+                    if ($.inArray(index, [0, 3, 6]) > -1) {
+                        return false;
+                    }
+                    $this.html($prev.html());
+                    $prev.html(html);
                     App.check();
-                }
-            });
-            $lis.on('swipeDown', function(e) {
-                e.preventDefault();
-                var $this = $(this);
-                var html = $this.html();
-                var index = $this.index() + 3;
-                var $down = $lis.eq(index);
-                if (index < 9 && $down.size() > 0) {
-                    $this.html($down.html());
-                    $down.html(html);
+                });
+                $lis.on('swipeRight', function(e) {
+                    e.preventDefault();
+                    var $this = $(this);
+                    var index = $this.index();
+                    var html = $this.html();
+                    var $next = $this.next();
+                    if ($.inArray(index, [2, 5, 8]) > -1) {
+                        return false;
+                    }
+                    $this.html($next.html());
+                    $next.html(html);
                     App.check();
+                });
+                $lis.on('swipeUp', function(e) {
+                    e.preventDefault();
+                    var $this = $(this);
+                    var html = $this.html();
+                    var index = $this.index() - 3;
+                    var $up = $lis.eq(index);
+                    if (index >= 0 && $up.size() > 0) {
+                        $this.html($up.html());
+                        $up.html(html);
+                        App.check();
+                    }
+                });
+                $lis.on('swipeDown', function(e) {
+                    e.preventDefault();
+                    var $this = $(this);
+                    var html = $this.html();
+                    var index = $this.index() + 3;
+                    var $down = $lis.eq(index);
+                    if (index < 9 && $down.size() > 0) {
+                        $this.html($down.html());
+                        $down.html(html);
+                        App.check();
+                    }
+                });
+            },
+            check: function() {
+                var resArr = [];
+                $('#gameBox img').each(function(k, v) {
+                    resArr.push(v.getAttribute("data-seq"));
+                });
+                if (resArr.join("") === oriArr.join("")) {
+                    alert('拼图完成，真聪明！');
                 }
-            });
-        },
-        check: function() {
-            var resArr = [];
-            $('#gameBox img').each(function(k, v) {
-                resArr.push(v.getAttribute("data-seq"));
-            });
-            if (resArr.join("") === oriArr.join("")) {
-                alert('拼图完成，真聪明！');
-            }
-        },
-    }
+            },
+        }
 
-    App.start()
+        App.start()
+
+    })
     </script>
 </body>
 
