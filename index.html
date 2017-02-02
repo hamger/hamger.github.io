@@ -56,12 +56,64 @@
         var imgArr = [0, 1, 2, 3, 4, 5, 6, 7, 8];
         var imgRandomArr = [];
         var oriArr = [0, 1, 2, 3, 4, 5, 6, 7, 8];
+        var position = {
+            x: 0,
+            y: 0
+        }
         var $box = $('.box')
         var canvas = document.getElementById('canvas')
         var parent = document.getElementById('parent')
         var ctx = canvas.getContext('2d')
         var image = new Image()
         var parentOffset = parent.getBoundingClientRect()
+
+        var scope = function(num, min, max) {
+            if (num >= min && num <= max) {
+                return true
+            } else {
+                return false
+            }
+        }
+
+        var moveboxBosition = function(position) {
+            if (scope(position.x, 0, 100) && scope(position.y, 0, 100)) {
+                return 0
+            }
+            if
+            else(scope(position.x, 100, 200) && scope(position.y, 0, 100)) {
+                return 1
+            }
+            if
+            else(scope(position.x, 200, 300) && scope(position.y, 0, 100)) {
+                return 2
+            }
+            if
+            else(scope(position.x, 0, 100) && scope(position.y, 100, 200)) {
+                return 3
+            }
+            if
+            else(scope(position.x, 100, 200) && scope(position.y, 100, 200)) {
+                return 4
+            }
+            if
+            else(scope(position.x, 200, 300) && scope(position.y, 100, 200)) {
+                return 5
+            }
+            if
+            else(scope(position.x, 0, 100) && scope(position.y, 200, 300)) {
+                return 6
+            }
+            if
+            else(scope(position.x, 100, 200) && scope(position.y, 200, 300)) {
+                return 7
+            }
+            if
+            else(scope(position.x, 200, 300) && scope(position.y, 200, 300)) {
+                return 8
+            } else {
+                return false
+            }
+        }
 
         var App = {
             start: function() {
@@ -104,22 +156,8 @@
                 }
             },
             bind: function() {
-                $box.on('mousemove', function() {
-                    var oDiv = document.getElementById(this.id);
-                    var oParent = document.getElementById('parent');
-                    var range = {
-                        t: 0,
-                        l: 0,
-                        r: oParent.offsetWidth - oDiv.offsetWidth,
-                        b: oParent.offsetHeight - oDiv.offsetHeight
-                    }
-                    drag(oDiv, range);
-                    check();
-                })
-            },
-            drag: function(oDiv, range) {
-
-                oDiv.onmousedown = function(ev) {
+                $box.on('mousedown', function(ev) {
+                    var oDiv = $(this);
                     var oEvent = ev || event;
                     var startX = oEvent.pageX;
                     var atartY = oEvent.pageY;
@@ -130,33 +168,27 @@
                         var slideLeft = oEvent.pageX - startX;
                         var slideTop = oEvent.pageY - atartY;
 
-                        var boxLeft = oDiv.offsetLeft - parentOffset.left - slideLeft;
-                        var boxTop = oDiv.offsetTop - parentOffset.top - slideTop
+                        var boxCentreLeft = oDiv.offsetLeft - parentOffset.left - slideLeft + $('#div0').width() / 2;
+                        var boxCentreTop = oDiv.offsetTop - parentOffset.top - slideTop + $('#div0').height() / 2;
 
-                        if (boxLeft <= range.l) {
-                            boxLeft = range.l;
-                        }
-                        if (boxLeft >= range.r) {
-                            boxLeft = range.r;
-                        }
-                        if (boxTop <= range.t) {
-                            boxTop = range.t;
-                        }
-                        if (boxTop >= range.b) {
-                            boxTop = range.b;
-                        }
-
-                        oDiv.style.left = boxLeft + 'px';
-                        oDiv.style.top = boxTop + 'px';
+                        position.x = boxCentreLeft;
+                        position.y = boxCentreTop;
 
                     };
                     document.onmouseup = function() {
                         document.onmousemove = null;
                         document.onmouseup = null;
+                        if(moveboxBosition(position) in oriArr){
+                            var index = oDiv.index()
+                            var html = oDiv.html()
+                            var html2 = $box.eq(moveboxBosition(position)).html()
+                            $box.eq(moveboxBosition(position)).html(html)
+                            oDiv.html(html2)
+                        }
                     }
 
                     return false;
-                }
+                })
             },
             check: function() {
                 var resArr = [];
