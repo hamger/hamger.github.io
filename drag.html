@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>拖拽</title>
+    <script type="text/javascript" src="http://code.jquery.com/jquery-latest.js"></script>
+    <style>
+    .box {
+        width: 100px;
+        height: 100px;
+        position: absolute;
+        cursor: pointer;
+    }
+    
+    #parent {
+        width: 300px;
+        height: 300px;
+        border: 1px solid #CDCDCD;
+        position: relative;
+        margin: 40px auto;
+        background-color: #F4F4F4;
+    }
+    </style>
+</head>
+
+<body>
+    <div id="parent">
+        <div class="box" id="div0" onmousemove="posMove(this.id)"></div>
+        <div class="box" id="div1" onmousemove="posMove(this.id)"></div>
+        <div class="box" id="div2" onmousemove="posMove(this.id)"></div>
+        <div class="box" id="div3" onmousemove="posMove(this.id)"></div>
+        <div class="box" id="div4" onmousemove="posMove(this.id)"></div>
+        <div class="box" id="div5" onmousemove="posMove(this.id)"></div>
+        <div class="box" id="div6" onmousemove="posMove(this.id)"></div>
+        <div class="box" id="div7" onmousemove="posMove(this.id)"></div>
+        <div class="box" id="div8" onmousemove="posMove(this.id)"></div>
+        <canvas id="canvas" style="display: none" width="100" height="100"></canvas>
+
+    </div>
+    <script>
+    function posMove(getdivid) {
+        var oDiv = document.getElementById(getdivid);
+        var oParent = document.getElementById('parent');
+        var sent = {
+            l: 10, //设置div在父元素的活动范围，10相当于给父div设置padding-left：10;
+            r: oParent.offsetWidth - oDiv.offsetWidth, // offsetWidth:当前对象的宽度， offsetWidth = width+padding+border
+            t: 10,
+            b: oParent.offsetHeight - oDiv.offsetHeight,
+            n: 10
+        }
+        drag(oDiv, sent);
+    }
+
+
+    $(document).ready(function() {
+
+
+        function randomSort(arr, newArr) {
+            if (arr.length == 1) {
+                newArr.push(arr[0]);
+                return newArr;
+            }
+            var random = Math.floor(Math.random() * arr.length);
+            newArr.push(arr[random]);
+            arr.splice(random, 1);
+            return randomSort(arr, newArr);
+        }
+        var imgArr = [0, 1, 2, 3, 4, 5, 6, 7, 8];
+        var imgRandomArr = [];
+        var oriArr = [0, 1, 2, 3, 4, 5, 6, 7, 8];
+        var $box = $('.box')
+        var canvas = document.getElementById('canvas')
+        var ctx = canvas.getContext('2d')
+        var image = new Image();
+
+
+        var App = {
+            start: function() {
+                this.init();
+                this.render();
+                this.bind();
+            },
+            init: function() {
+                imgRandomArr = randomSort(imgArr, imgRandomArr)
+                this.render();
+            },
+            render: function() {
+                image.onload = function() {
+                    App.randomImage();
+                }
+                image.src = 'pic.jpg';
+            },
+            randomImage: function() {
+                var index = 0;
+                for (var i = 0; i < 3; i++) {
+                    for (var j = 0; j < 3; j++) {
+                        ctx.drawImage(image, 100 * j, 100 * i, 100, 100, 0, 0, 100, 100);
+                        $box.eq(imgRandomArr[index]).find('img').data('seq', index).attr('src', canvas.toDataURL('image/jpeg'));
+                        index++;
+                    }
+                }
+            },
+            bind: function() {
+                $box.on('mousemove', function() {
+                    var oDiv = document.getElementById(this.id);
+                    var oParent = document.getElementById('parent');
+                    var sent = {
+                        l: 10, //设置div在父元素的活动范围，10相当于给父div设置padding-left：10;
+                        r: oParent.offsetWidth - oDiv.offsetWidth, // offsetWidth:当前对象的宽度， offsetWidth = width+padding+border
+                        t: 10,
+                        b: oParent.offsetHeight - oDiv.offsetHeight,
+                        n: 10
+                    }
+                    drag(oDiv, sent);
+                })
+            },
+            drag: function(oDiv, sent) {
+
+                var dmW = document.documentElement.clientWidth || document.body.clientWidth;
+                var dmH = document.documentElement.clientHeight || document.body.clientHeight;
+
+                var sent = sent || {};
+                var l = sent.l || 0;
+                var r = sent.r || dmW - obj.offsetWidth;
+                var t = sent.t || 0;
+                var b = sent.b || dmH - obj.offsetHeight;
+                var n = sent.n || 10;
+
+                obj.onmousedown = function(ev) {
+                    var oEvent = ev || event;
+                    var sentX = oEvent.clientX - obj.offsetLeft;
+                    var sentY = oEvent.clientY - obj.offsetTop;
+
+                    document.onmousemove = function(ev) {
+                        var oEvent = ev || event;
+
+                        var slideLeft = oEvent.clientX - sentX;
+                        var slideTop = oEvent.clientY - sentY;
+
+                        if (slideLeft <= l) {
+                            slideLeft = l;
+                        }
+                        if (slideLeft >= r) {
+                            slideLeft = r;
+                        }
+                        if (slideTop <= t) {
+                            slideTop = t;
+                        }
+                        if (slideTop >= b) {
+                            slideTop = b;
+                        }
+
+                        obj.style.left = slideLeft + 'px';
+                        obj.style.top = slideTop + 'px';
+
+                    };
+                    document.onmouseup = function() {
+                        document.onmousemove = null;
+                        document.onmouseup = null;
+                    }
+
+                    return false;
+                }
+            },
+            check: function() {
+                var resArr = [];
+                $('#gameBox img').each(function(k, v) {
+                    resArr.push(v.getAttribute("data-seq"));
+                });
+                if (resArr.join("") === oriArr.join("")) {
+                    alert('拼图完成，真聪明！');
+                }
+            }
+        }
+
+        App.start()
+
+    })
+    </script>
+</body>
+
+</html>
