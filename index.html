@@ -29,8 +29,6 @@
     }
     
     #gameBox li {
-        width: 33%;
-        height: 33%;
         overflow: hidden;
         display: inline-block;
     }
@@ -93,7 +91,7 @@
             var index = 0;
             for (var i = 0; i < 3; i++) {
                 for (var j = 0; j < 3; j++) {
-                    ctx.drawImage(image, 100 * j, 100 * i, 300, 300, 0, 0, 300, 300);
+                    ctx.drawImage(image, 100 * j, 100 * i, 100, 100, 0, 0, 100, 100);
                     $lis.eq(imgRandomArr[index]).find('img').data('seq', index).attr('src', canvas.toDataURL('image/jpeg'));
                     index++;
                 }
