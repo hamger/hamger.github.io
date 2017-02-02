@@ -77,9 +77,9 @@
                 var index = 0;
                 for (var i = 0; i < 3; i++) {
                     for (var j = 0; j < 3; j++) {
-                        $box[index].css({
-                            top: i * 100 + 'px',
-                            left: j * 100 + 'px'
+                        $box.eq(index).css({
+                            top : i * 100 + 'px',
+                            left : j * 100 + 'px'
                         });
                         index++;
                     }
@@ -101,20 +101,6 @@
                         index++;
                     }
                 }
-            },
-            bind: function() {
-                $box.on('mousemove', function() {
-                    var oDiv = document.getElementById(this.id);
-                    var oParent = document.getElementById('parent');
-                    var range = {
-                        t: 0,
-                        l: 0,
-                        r: oParent.offsetWidth - oDiv.offsetWidth,
-                        b: oParent.offsetHeight - oDiv.offsetHeight
-                    }
-                    drag(oDiv, range);
-                    check();
-                })
             },
             drag: function(oDiv, range) {
 
@@ -157,6 +143,21 @@
                     return false;
                 }
             },
+            bind: function() {
+                $box.on('mousemove', function() {
+                    var oDiv = document.getElementById(this.id);
+                    var oParent = document.getElementById('parent');
+                    var range = {
+                        t: 0,
+                        l: 0,
+                        r: oParent.offsetWidth - oDiv.offsetWidth,
+                        b: oParent.offsetHeight - oDiv.offsetHeight
+                    }
+                    drag(oDiv, range);
+                    check();
+                })
+            },
+            
             check: function() {
                 var resArr = [];
                 $('#gameBox img').each(function(k, v) {
