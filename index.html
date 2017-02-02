@@ -141,8 +141,9 @@
             },
             bind: function() {
                 $box.on('mousemove', function() {
+                    var oDiv = $(this);
                     document.onmousedown = function(ev) {
-                        var oDiv = $(this);
+                        
                         var oEvent = ev || event;
                         var startX = oEvent.pageX;
                         var atartY = oEvent.pageY;
