@@ -141,8 +141,7 @@
             },
             bind: function() {
                 $box.on('mousedown', function(ev) {
-                    var Div = $(this);
-                    var oDiv = Div[0];
+                    var oDiv = $(this);
                     var oEvent = ev || event;
                     var startX = oEvent.pageX;
                     var atartY = oEvent.pageY;
