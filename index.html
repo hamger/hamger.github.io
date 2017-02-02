@@ -16,8 +16,8 @@
     }
     
     #gameBox {
-        width: 91%;
-        margin: 30px auto;    
+        width: 86%;
+        margin: 40px auto;
     }
     
     #gameBox ul {
@@ -30,12 +30,11 @@
         overflow: hidden;
         display: inline-block;
     }
-
+    
     #gameBox img {
         margin: 0;
         padding: 0;
     }
-    
     </style>
 </head>
 
@@ -111,7 +110,7 @@
                 var index = $this.index();
                 var html = $this.html();
                 var $prev = $this.prev();
-                if ($.inArray(index, [3, 6]) > -1 || $prev.size() <= 0) {
+                if ($.inArray(index, [0, 3, 6]) > -1) {
                     return false;
                 }
                 $this.html($prev.html());
@@ -124,7 +123,7 @@
                 var index = $this.index();
                 var html = $this.html();
                 var $next = $this.next();
-                if ($.inArray(index, [2, 5]) > -1 || $next.size() <= 0) {
+                if ($.inArray(index, [2, 5, 8]) > -1) {
                     return false;
                 }
                 $this.html($next.html());
