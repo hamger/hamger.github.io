@@ -140,43 +140,44 @@
                 }
             },
             bind: function() {
-                $box.on('mousemove', function() {
+                $box.on('mousedown', function(ev) {
                     var oDiv = $(this);
-                    document.onmousedown = function(ev) {
-                        
+                    var oEvent = ev || event;
+                    var startX = oEvent.pageX;
+                    var atartY = oEvent.pageY;
+
+                    document.onmousemove = function(ev) {
                         var oEvent = ev || event;
-                        var startX = oEvent.pageX;
-                        var atartY = oEvent.pageY;
 
-                        document.onmousemove = function(ev) {
-                            var oEvent = ev || event;
+                        var slideLeft = oEvent.pageX - startX;
+                        var slideTop = oEvent.pageY - atartY;
 
-                            var slideLeft = oEvent.pageX - startX;
-                            var slideTop = oEvent.pageY - atartY;
+                        var boxLeft = oDiv.offsetLeft - parentOffset.left - slideLeft
+                        var boxTop = oDiv.offsetTop - parentOffset.top - slideTop 
 
-                            var boxCentreLeft = oDiv.offsetLeft - parentOffset.left - slideLeft + $('#div0').width() / 2;
-                            var boxCentreTop = oDiv.offsetTop - parentOffset.top - slideTop + $('#div0').height() / 2;
+                        
+                        position.x = boxLeft + $('#div0').width() / 2;
+                        position.y = boxTop + $('#div0').height() / 2;
 
-                            position.x = boxCentreLeft;
-                            position.y = boxCentreTop;
+                        oDiv.style.left = boxLeft
+                        oDiv.style.top = boxTop
 
-                        };
-                        document.onmouseup = function() {
-                            document.onmousemove = null;
-                            document.onmouseup = null;
-                            if (moveboxBosition(position) in oriArr) {
-                                var index = oDiv.index()
-                                var html = oDiv.html()
-                                var html2 = $box.eq(moveboxBosition(position)).html()
-                                $box.eq(moveboxBosition(position)).html(html)
-                                oDiv.html(html2)
-                            }
+                    };
+                    document.onmouseup = function() {
+                        document.onmousemove = null;
+                        document.onmouseup = null;
+                        
+                        if (moveboxBosition(position) in oriArr) {
+                            var index = oDiv.index()
+                            var html = oDiv.html()
+                            var html2 = $box.eq(moveboxBosition(position)).html()
+                            $box.eq(moveboxBosition(position)).html(html)
+                            oDiv.html(html2)
                         }
-
-                        return false;
                     }
-                })
 
+                    return false;
+                })
             },
             check: function() {
                 var resArr = [];
