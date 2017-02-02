@@ -27,33 +27,18 @@
 
 <body>
     <div id="parent">
-        <div class="box" id="div0" onmousemove="posMove(this.id)"></div>
-        <div class="box" id="div1" onmousemove="posMove(this.id)"></div>
-        <div class="box" id="div2" onmousemove="posMove(this.id)"></div>
-        <div class="box" id="div3" onmousemove="posMove(this.id)"></div>
-        <div class="box" id="div4" onmousemove="posMove(this.id)"></div>
-        <div class="box" id="div5" onmousemove="posMove(this.id)"></div>
-        <div class="box" id="div6" onmousemove="posMove(this.id)"></div>
-        <div class="box" id="div7" onmousemove="posMove(this.id)"></div>
-        <div class="box" id="div8" onmousemove="posMove(this.id)"></div>
-        <canvas id="canvas" style="display: none" width="100" height="100"></canvas>
-
+        <div class="box" id="div0"><img src="" alt=""></div>
+        <div class="box" id="div1"><img src="" alt=""></div>
+        <div class="box" id="div2"><img src="" alt=""></div>
+        <div class="box" id="div3"><img src="" alt=""></div>
+        <div class="box" id="div4"><img src="" alt=""></div>
+        <div class="box" id="div5"><img src="" alt=""></div>
+        <div class="box" id="div6"><img src="" alt=""></div>
+        <div class="box" id="div7"><img src="" alt=""></div>
+        <div class="box" id="div8"><img src="" alt=""></div>
     </div>
+    <canvas id="canvas" style="display: none" width="100" height="100"></canvas>
     <script>
-    function posMove(getdivid) {
-        var oDiv = document.getElementById(getdivid);
-        var oParent = document.getElementById('parent');
-        var sent = {
-            l: 10, //设置div在父元素的活动范围，10相当于给父div设置padding-left：10;
-            r: oParent.offsetWidth - oDiv.offsetWidth, // offsetWidth:当前对象的宽度， offsetWidth = width+padding+border
-            t: 10,
-            b: oParent.offsetHeight - oDiv.offsetHeight,
-            n: 10
-        }
-        drag(oDiv, sent);
-    }
-
-
     $(document).ready(function() {
 
 
@@ -72,9 +57,10 @@
         var oriArr = [0, 1, 2, 3, 4, 5, 6, 7, 8];
         var $box = $('.box')
         var canvas = document.getElementById('canvas')
+        var parent = document.getElementById('parent')
         var ctx = canvas.getContext('2d')
-        var image = new Image();
-
+        var image = new Image()
+        var parentOffset = parent.getBoundingClientRect()
 
         var App = {
             start: function() {
@@ -84,9 +70,20 @@
             },
             init: function() {
                 imgRandomArr = randomSort(imgArr, imgRandomArr)
+
                 this.render();
             },
             render: function() {
+                var index = 0;
+                for (var i = 0; i < 3; i++) {
+                    for (var j = 0; j < 3; j++) {
+                        $box[index].css({
+                            top: i * 100 + 'px',
+                            left: j * 100 + 'px'
+                        });
+                        index++;
+                    }
+                }
                 image.onload = function() {
                     App.randomImage();
                 }
@@ -97,7 +94,10 @@
                 for (var i = 0; i < 3; i++) {
                     for (var j = 0; j < 3; j++) {
                         ctx.drawImage(image, 100 * j, 100 * i, 100, 100, 0, 0, 100, 100);
-                        $box.eq(imgRandomArr[index]).find('img').data('seq', index).attr('src', canvas.toDataURL('image/jpeg'));
+                        $box.eq(imgRandomArr[index]).find('img').attr({
+                            'index': imgArr[index],
+                            'src': canvas.toDataURL('image/jpeg')
+                        });
                         index++;
                     }
                 }
@@ -106,54 +106,47 @@
                 $box.on('mousemove', function() {
                     var oDiv = document.getElementById(this.id);
                     var oParent = document.getElementById('parent');
-                    var sent = {
-                        l: 10, //设置div在父元素的活动范围，10相当于给父div设置padding-left：10;
-                        r: oParent.offsetWidth - oDiv.offsetWidth, // offsetWidth:当前对象的宽度， offsetWidth = width+padding+border
-                        t: 10,
-                        b: oParent.offsetHeight - oDiv.offsetHeight,
-                        n: 10
+                    var range = {
+                        t: 0,
+                        l: 0,
+                        r: oParent.offsetWidth - oDiv.offsetWidth,
+                        b: oParent.offsetHeight - oDiv.offsetHeight
                     }
-                    drag(oDiv, sent);
+                    drag(oDiv, range);
+                    check();
                 })
             },
-            drag: function(oDiv, sent) {
+            drag: function(oDiv, range) {
 
-                var dmW = document.documentElement.clientWidth || document.body.clientWidth;
-                var dmH = document.documentElement.clientHeight || document.body.clientHeight;
-
-                var sent = sent || {};
-                var l = sent.l || 0;
-                var r = sent.r || dmW - obj.offsetWidth;
-                var t = sent.t || 0;
-                var b = sent.b || dmH - obj.offsetHeight;
-                var n = sent.n || 10;
-
-                obj.onmousedown = function(ev) {
+                oDiv.onmousedown = function(ev) {
                     var oEvent = ev || event;
-                    var sentX = oEvent.clientX - obj.offsetLeft;
-                    var sentY = oEvent.clientY - obj.offsetTop;
+                    var startX = oEvent.pageX;
+                    var atartY = oEvent.pageY;
 
                     document.onmousemove = function(ev) {
                         var oEvent = ev || event;
 
-                        var slideLeft = oEvent.clientX - sentX;
-                        var slideTop = oEvent.clientY - sentY;
+                        var slideLeft = oEvent.pageX - startX;
+                        var slideTop = oEvent.pageY - atartY;
 
-                        if (slideLeft <= l) {
-                            slideLeft = l;
+                        var boxLeft = oDiv.offsetLeft - parentOffset.left - slideLeft;
+                        var boxTop = oDiv.offsetTop - parentOffset.top - slideTop
+
+                        if (boxLeft <= range.l) {
+                            boxLeft = range.l;
                         }
-                        if (slideLeft >= r) {
-                            slideLeft = r;
+                        if (boxLeft >= range.r) {
+                            boxLeft = range.r;
                         }
-                        if (slideTop <= t) {
-                            slideTop = t;
+                        if (boxTop <= range.t) {
+                            boxTop = range.t;
                         }
-                        if (slideTop >= b) {
-                            slideTop = b;
+                        if (boxTop >= range.b) {
+                            boxTop = range.b;
                         }
 
-                        obj.style.left = slideLeft + 'px';
-                        obj.style.top = slideTop + 'px';
+                        oDiv.style.left = boxLeft + 'px';
+                        oDiv.style.top = boxTop + 'px';
 
                     };
                     document.onmouseup = function() {
@@ -167,7 +160,7 @@
             check: function() {
                 var resArr = [];
                 $('#gameBox img').each(function(k, v) {
-                    resArr.push(v.getAttribute("data-seq"));
+                    resArr.push(v.getAttribute("index"));
                 });
                 if (resArr.join("") === oriArr.join("")) {
                     alert('拼图完成，真聪明！');
