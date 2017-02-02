@@ -5,7 +5,8 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <title>拖拽</title>
-    <script type="text/javascript" src="http://code.jquery.com/jquery-latest.js"></script>
+    <link rel="shortcut icon" type="image/x-icon" href="http://static.yangbai.me/images/favicon.ico">
+    <script type="text/javascript" src="jquery.js"></script>
     <style>
     .box {
         width: 100px;
@@ -78,8 +79,8 @@
                 for (var i = 0; i < 3; i++) {
                     for (var j = 0; j < 3; j++) {
                         $box.eq(index).css({
-                            top : i * 100 + 'px',
-                            left : j * 100 + 'px'
+                            top: i * 100 + 'px',
+                            left: j * 100 + 'px'
                         });
                         index++;
                     }
@@ -101,6 +102,20 @@
                         index++;
                     }
                 }
+            },
+            bind: function() {
+                $box.on('mousemove', function() {
+                    var oDiv = document.getElementById(this.id);
+                    var oParent = document.getElementById('parent');
+                    var range = {
+                        t: 0,
+                        l: 0,
+                        r: oParent.offsetWidth - oDiv.offsetWidth,
+                        b: oParent.offsetHeight - oDiv.offsetHeight
+                    }
+                    drag(oDiv, range);
+                    check();
+                })
             },
             drag: function(oDiv, range) {
 
@@ -143,21 +158,6 @@
                     return false;
                 }
             },
-            bind: function() {
-                $box.on('mousemove', function() {
-                    var oDiv = document.getElementById(this.id);
-                    var oParent = document.getElementById('parent');
-                    var range = {
-                        t: 0,
-                        l: 0,
-                        r: oParent.offsetWidth - oDiv.offsetWidth,
-                        b: oParent.offsetHeight - oDiv.offsetHeight
-                    }
-                    drag(oDiv, range);
-                    check();
-                })
-            },
-            
             check: function() {
                 var resArr = [];
                 $('#gameBox img').each(function(k, v) {
