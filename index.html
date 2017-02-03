@@ -67,10 +67,8 @@
         }
         var $box = $('.box')
         var canvas = document.getElementById('canvas')
-        var parent = document.getElementById('parent')
         var ctx = canvas.getContext('2d')
         var image = new Image()
-        var parentOffset = parent.getBoundingClientRect()
 
         var scope = function(num, min, max) {
             if (num >= min && num <= max) {
@@ -147,9 +145,10 @@
                 this.bind();
             },
             init: function() {
+                var imgArr = [0, 1, 2, 3, 4, 5, 6, 7, 8];
+                var imgRandomArr = [];
+                var oriArr = [0, 1, 2, 3, 4, 5, 6, 7, 8];
                 imgRandomArr = randomSort(imgArr, imgRandomArr)
-
-                this.render();
             },
             render: function() {
                 var index = 0;
