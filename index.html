@@ -194,15 +194,15 @@
                         var boxLeft = oEvent.clientX - boxX
                         var boxTop = oEvent.clientY - boxY
 
-                        if (boxLeft >= 200) {
+                        if (boxLeft > 200) {
                             boxLeft = 200
-                        } else if (boxLeft <= 0) {
+                        } else if (boxLeft < 0) {
                             boxLeft = 0
                         }
 
-                        if (boxTop >= 200) {
+                        if (boxTop > 200) {
                             boxTop = 200
-                        } else if (boxTop <= 0) {
+                        } else if (boxTop < 0) {
                             boxTop = 0
                         }
 
