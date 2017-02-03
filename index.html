@@ -168,7 +168,7 @@
                     for (var j = 0; j < 3; j++) {
                         ctx.drawImage(image, 100 * j, 100 * i, 100, 100, 0, 0, 100, 100);
                         $box.eq(imgRandomArr[index]).find('img').attr({
-                            'index': imgArr[index],
+                            'index': index,
                             'src': canvas.toDataURL('image/jpeg')
                         });
                         index++;
