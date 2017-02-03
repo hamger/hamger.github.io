@@ -28,17 +28,17 @@
 
 <body>
     <div id="parent">
-        <div class="box" id="div0"><img src="" alt=""></div>
-        <div class="box" id="div1"><img src="" alt=""></div>
-        <div class="box" id="div2"><img src="" alt=""></div>
-        <div class="box" id="div3"><img src="" alt=""></div>
-        <div class="box" id="div4"><img src="" alt=""></div>
-        <div class="box" id="div5"><img src="" alt=""></div>
-        <div class="box" id="div6"><img src="" alt=""></div>
-        <div class="box" id="div7"><img src="" alt=""></div>
-        <div class="box" id="div8"><img src="" alt=""></div>
+        <div class="box" id="div0"><img src="" alt="" value=''></div>
+        <div class="box" id="div1"><img src="" alt="" value=''></div>
+        <div class="box" id="div2"><img src="" alt="" value=''></div>
+        <div class="box" id="div3"><img src="" alt="" value=''></div>
+        <div class="box" id="div4"><img src="" alt="" value=''></div>
+        <div class="box" id="div5"><img src="" alt="" value=''></div>
+        <div class="box" id="div6"><img src="" alt="" value=''></div>
+        <div class="box" id="div7"><img src="" alt="" value=''></div>
+        <div class="box" id="div8"><img src="" alt="" value=''></div>
     </div>
-    <canvas id="canvas" style="display: none" width="100" height="100"></canvas>
+    <canvas id="canvas" style="display: none" width="300" height="300"></canvas>
     <script>
     $(document).ready(function() {
 
@@ -166,9 +166,9 @@
                 var index = 0;
                 for (var i = 0; i < 3; i++) {
                     for (var j = 0; j < 3; j++) {
-                        ctx.drawImage(image, 100 * j, 100 * i, 100, 100, 0, 0, 100, 100);
+                        ctx.drawImage(image, 300 * j, 300 * i, 300, 300, 0, 0, 300, 300);
                         $box.eq(imgRandomArr[index]).find('img').attr({
-                            'alt': index,
+                            'value': index,
                             'src': canvas.toDataURL('image/jpeg')
                         });
                         index++;
@@ -238,7 +238,7 @@
             check: function() {
                 var resArr = [];
                 $('#gameBox img').each(function(index, element) {
-                    resArr.push(element.attr("alt"));
+                    resArr.push(element.attr('value'));
                 });
                 if (resArr.join("") === oriArr.join("")) {
                     alert('拼图完成，真聪明！');
