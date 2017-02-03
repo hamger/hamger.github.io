@@ -181,6 +181,8 @@
                     var oEvent = ev || event;
                     var startX = oEvent.pageX;
                     var startY = oEvent.pageY;
+                    var oriboxLeft = oDiv.position().left
+                    var oriboxTop = oDiv.position().top
 
                     $(document).mousemove(function(ev) {
                         var oEvent = ev || event;
@@ -206,9 +208,11 @@
                         position.x = boxLeft + 50;
                         position.y = boxTop + 50;
 
+                        var state = moveboxPosition(position);
+
                         oDiv.css({
-                            left: boxLeft + 'px',
-                            top: boxTop + 'px'
+                            left: state.left + 'px',
+                            top: state.top + 'px'
                         })
                     })
                     $(document).mouseup(function() {
@@ -221,8 +225,8 @@
                             $box.eq(state.index).html(html)
                             oDiv.html(html2)
                             oDiv.css({
-                                left: state.left + 'px',
-                                top: state.top + 'px'
+                                left: oriboxLeft + 'px',
+                                top: oriboxTop + 'px'
                             })
                         }
                     })
