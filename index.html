@@ -237,8 +237,8 @@
             },
             check: function() {
                 var resArr = [];
-                $('#gameBox img').each(function(k, v) {
-                    resArr.push(v.getAttribute("alt"));
+                $('#gameBox img').each(function(index, element) {
+                    resArr.push(element.attr("alt"));
                 });
                 if (resArr.join("") === oriArr.join("")) {
                     alert('拼图完成，真聪明！');
