@@ -238,7 +238,7 @@
             check: function() {
                 var resArr = [];
                 $('#gameBox img').each(function(index, element) {
-                    resArr.push(element.getAttribute('value'));
+                    resArr.push(element.attr('value'));
                 });
                 if (resArr.join("") === oriArr.join("")) {
                     alert('拼图完成，真聪明！');
