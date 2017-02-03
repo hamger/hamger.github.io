@@ -203,8 +203,8 @@
                             boxTop = 0
                         }
 
-                        position.x = boxLeft + $('#div0').width() / 2;
-                        position.y = boxTop + $('#div0').height() / 2;
+                        position.x = boxLeft + 50;
+                        position.y = boxTop + 50;
 
                         oDiv.css({
                             left: boxLeft + 'px',
@@ -214,7 +214,7 @@
                     $(document).mouseup(function() {
                         $(document).unbind(); 
                         var state = moveboxPosition(position);
-                        if (state.in in oriArr) {
+                        if (state.index in oriArr) {
                             var index = oDiv.index()
                             var html = oDiv.html()
                             var html2 = $box.eq(state.index).html()
