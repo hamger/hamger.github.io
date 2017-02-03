@@ -179,14 +179,14 @@
                 $box.on('mousedown', function(ev) {
                     var oDiv = $(this);
                     var oEvent = ev || event;
-                    var startX = oEvent.clientX;
-                    var startY = oEvent.clientY;
+                    var startX = oEvent.pageX;
+                    var startY = oEvent.pageY;
 
                     $(document).mousemove(function(ev) {
                         var oEvent = ev || event;
 
-                        var slideLeft = oEvent.clientX - startX;
-                        var slideTop = oEvent.clientY - startY;
+                        var slideLeft = oEvent.pageX - startX;
+                        var slideTop = oEvent.pageY - startY;
 
                         var boxLeft = oDiv.position().left + slideLeft
                         var boxTop = oDiv.position().top + slideTop
