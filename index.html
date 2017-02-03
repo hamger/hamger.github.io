@@ -75,25 +75,61 @@
             }
         }
 
-        var moveboxBosition = function(position) {
+        var moveboxPosition = function(position) {
             if (scope(position.x, 0, 100) && scope(position.y, 0, 100)) {
-                return 0
+                return {
+                    'index' : 0,
+                    'left' : 0,
+                    'top' : 0
+                }
             } else if (scope(position.x, 100, 200) && scope(position.y, 0, 100)) {
-                return 1
+                return  {
+                    'index' : 1,
+                    'left' : 100,
+                    'top' : 0
+                }
             } else if (scope(position.x, 200, 300) && scope(position.y, 0, 100)) {
-                return 2
+                return  {
+                    'index' : 2,
+                    'left' : 200,
+                    'top' : 0
+                }
             } else if (scope(position.x, 0, 100) && scope(position.y, 100, 200)) {
-                return 3
+                return  {
+                    'index' : 3,
+                    'left' : 0,
+                    'top' : 100
+                }
             } else if (scope(position.x, 100, 200) && scope(position.y, 100, 200)) {
-                return 4
+                return  {
+                    'index' : 4,
+                    'left' : 100,
+                    'top' : 100
+                }
             } else if (scope(position.x, 200, 300) && scope(position.y, 100, 200)) {
-                return 5
+                return  {
+                    'index' : 5,
+                    'left' : 200,
+                    'top' : 100
+                }
             } else if (scope(position.x, 0, 100) && scope(position.y, 200, 300)) {
-                return 6
+                return  {
+                    'index' : 6,
+                    'left' : 0,
+                    'top' : 200
+                }
             } else if (scope(position.x, 100, 200) && scope(position.y, 200, 300)) {
-                return 7
+                return  {
+                    'index' : 7,
+                    'left' : 100,
+                    'top' : 200
+                }
             } else if (scope(position.x, 200, 300) && scope(position.y, 200, 300)) {
-                return 8
+                return  {
+                    'index' : 8,
+                    'left' : 200,
+                    'top' : 200
+                }
             } else {
                 return false
             }
@@ -176,13 +212,18 @@
                         })
                     })
                     $(document).mouseup(function() {
-                        $(document).unbind();
-                        if (moveboxBosition(position) in oriArr) {
+                        $(document).unbind(); 
+                        var state = moveboxPosition(position);
+                        if (state.in in oriArr) {
                             var index = oDiv.index()
                             var html = oDiv.html()
-                            var html2 = $box.eq(moveboxBosition(position)).html()
-                            $box.eq(moveboxBosition(position)).html(html)
+                            var html2 = $box.eq(state.index).html()
+                            $box.eq(state.index).html(html)
                             oDiv.html(html2)
+                            oDiv.css({
+                                left: state.left + 'px',
+                                top: state.top + 'px'
+                            })
                         }
                     })
                     return false;
