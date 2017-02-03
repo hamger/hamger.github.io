@@ -146,7 +146,7 @@
                     var startX = oEvent.clientX;
                     var startY = oEvent.clientY;
 
-                    document.onmousemove = function(ev) {
+                    $(document).mousemove(function(ev) {
                         var oEvent = ev || event;
 
                         var slideLeft = oEvent.clientX - startX;
@@ -155,15 +155,15 @@
                         var boxLeft = oDiv.position().left + slideLeft
                         var boxTop = oDiv.position().top + slideTop
 
-                        if(boxLeft >= 200){
+                        if (boxLeft >= 200) {
                             boxLeft = 200
-                        }else if(boxLeft <= 0){
+                        } else if (boxLeft <= 0) {
                             boxLeft = 0
                         }
 
                         if (boxTop >= 200) {
                             boxTop = 200
-                        } else if(boxTop <= 0){
+                        } else if (boxTop <= 0) {
                             boxTop = 0
                         }
 
@@ -174,12 +174,9 @@
                             left: boxLeft + 'px',
                             top: boxTop + 'px'
                         })
-
-                    };
-                    document.onmouseup = function() {
-                        document.onmousemove = null;
-                        document.onmouseup = null;
-
+                    })
+                    $(document).mouseup(function() {
+                        $(document).unbind();
                         if (moveboxBosition(position) in oriArr) {
                             var index = oDiv.index()
                             var html = oDiv.html()
@@ -187,8 +184,7 @@
                             $box.eq(moveboxBosition(position)).html(html)
                             oDiv.html(html2)
                         }
-                    }
-
+                    })
                     return false;
                 })
             },
