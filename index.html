@@ -183,19 +183,16 @@
                 $box.on('mousedown', function(ev) {
                     var oDiv = $(this);
                     var oEvent = ev || event;
-                    var startX = oEvent.pageX;
-                    var startY = oEvent.pageY;
+                    var boxX = oEvent.clientX - oDiv.offset().left;
+                    var boxY = oEvent.clientY - oDiv.offset().top;
                     var oriboxLeft = oDiv.position().left
                     var oriboxTop = oDiv.position().top
 
                     $(document).mousemove(function(ev) {
                         var oEvent = ev || event;
 
-                        var slideLeft = oEvent.pageX - startX;
-                        var slideTop = oEvent.pageY - startY;
-
-                        var boxLeft = oDiv.position().left + slideLeft
-                        var boxTop = oDiv.position().top + slideTop
+                        var boxLeft = oEvent.clientX - boxX
+                        var boxTop = oEvent.clientY - boxY
 
                         if (boxLeft >= 200) {
                             boxLeft = 200
