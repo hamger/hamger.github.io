@@ -22,7 +22,6 @@
         height: 100px;
         position: absolute;
         cursor: pointer;
-        z-index: 1;
     }
     
     #parent img {
@@ -147,7 +146,6 @@
             bind: function() {
                 box.on('mousedown', function(ev) {
                     var oDiv = $(this);
-                    oDiv.css('zIndex',2)
                     var oDivOffsetleft = oDiv.offset().left;
                     var oDivOffsettop = oDiv.offset().top;
                     var oEvent = ev || event;
@@ -192,8 +190,7 @@
                             oDiv.html(html2)
                             oDiv.css({
                                 left: oriboxLeft + 'px',
-                                top: oriboxTop + 'px',
-                                zIndex: 1
+                                top: oriboxTop + 'px'
                             })
                         }
                         $(document).unbind();
