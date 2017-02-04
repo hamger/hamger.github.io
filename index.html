@@ -183,10 +183,9 @@
                         })
                     })
                     $(document).mouseup(function() {
-                        $(document).unbind();
+                       
                         var positionIndex = moveboxPosition(position);
                         if (positionIndex in oriArr) {
-                            var index = oDiv.index()
                             var html = oDiv.html()
                             var html2 = box.eq(positionIndex).html()
                             box.eq(positionIndex).html(html)
@@ -197,6 +196,7 @@
                                 zIndex: 0
                             })
                         }
+                        $(document).unbind();
 
                         App.check()
                     })
