@@ -201,8 +201,7 @@
             },
             check: function() {
                 var resArr = [];
-                $('#gameBox img').each(function(index, element) {
-                    console.log(element.data('index'))
+                $('#parent img').each(function(index, element) {
                     resArr.push(element.data('index'));
                 });
                 if (resArr.join("") === oriArr.join("")) {
