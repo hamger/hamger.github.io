@@ -67,6 +67,7 @@
         var canvas = document.getElementById('canvas')
         var ctx = canvas.getContext('2d')
         var image = new Image()
+        var url = 'tuzi.jpg'
 
         var imgArr = [0, 1, 2, 3, 4, 5, 6, 7, 8];
         var imgRandomArr = [];
@@ -132,7 +133,7 @@
                 image.onload = function() {
                     App.randomImage();
                 }
-                image.src = 'tuzi.jpg';
+                image.src = url;
             },
             randomImage: function() {
                 var index = 0;
@@ -205,6 +206,7 @@
             check: function() {
                 var resArr = [];
                 $('#parent img').each(function(index, element) {
+                    console.log(element)
                     resArr.push(element.attr('index'));
                 });
                 if (resArr.join("") === oriArr.join("")) {
