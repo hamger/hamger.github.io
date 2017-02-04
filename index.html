@@ -206,8 +206,7 @@
             check: function() {
                 var resArr = [];
                 $('#parent img').each(function(index, element) {
-                    console.log(element)
-                    resArr.push(element.attr('index'));
+                    resArr.push(element.getAttribute('index'));
                 });
                 if (resArr.join("") === oriArr.join("")) {
                     alert('拼图完成，真聪明！');
