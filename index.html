@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>拖拽</title>
+    <title>拖拽拼图</title>
     <link rel="shortcut icon" type="image/x-icon" href="http://static.yangbai.me/images/favicon.ico">
     <script type="text/javascript" src="jquery.js"></script>
     <style>
@@ -64,6 +64,8 @@
         var parent = $('#parent')
         var parentOffsetleft = parent.offset().left
         var parentOffsettop = parent.offset().top
+        var boxLeft = 0
+        var boxTop = 0
         var canvas = document.getElementById('canvas')
         var ctx = canvas.getContext('2d')
         var image = new Image()
@@ -139,30 +141,41 @@
                 for (var i = 0; i < 3; i++) {
                     for (var j = 0; j < 3; j++) {
                         ctx.drawImage(image, 300 * j, 300 * i, 300, 300, 0, 0, 300, 300);
-                        box.eq(imgRandomArr[index]).find('img').data('index',index).attr('src', canvas.toDataURL('image/jpeg'));
+                        box.eq(imgRandomArr[index]).find('img').data('index', index).attr('src', canvas.toDataURL('image/jpeg'));
                         index++;
                     }
                 }
             },
             bind: function() {
                 box.on('mousedown', function(ev) {
-                    ev.preventDefault(); 
+                    ev.preventDefault();
                     var oDiv = $(this);
-                    oDiv.css('zIndex',1)
+                    oDiv.css('zIndex', 1)
                     var oDivOffsetleft = oDiv.offset().left;
                     var oDivOffsettop = oDiv.offset().top;
                     var oEvent = ev || event;
-                    var boxX = oEvent.clientX - oDivOffsetleft;// 鼠标到被选div的横距离
-                    var boxY = oEvent.clientY - oDivOffsettop;// 鼠标到被选div的纵距离
+                    var boxX = oEvent.clientX - oDivOffsetleft; // 鼠标到被选div的横距离
+                    var boxY = oEvent.clientY - oDivOffsettop; // 鼠标到被选div的纵距离
                     var oriboxLeft = oDiv.position().left
                     var oriboxTop = oDiv.position().top
 
                     $(document).mousemove(function(ev) {
-                        ev.preventDefault(); 
+                        ev.preventDefault();
                         var oEvent = ev || event;
 
-                        var boxLeft = oEvent.clientX - boxX - parentOffsetleft;
-                        var boxTop = oEvent.clientY - boxY - parentOffsettop;
+                        boxLeft = oEvent.clientX - boxX - parentOffsetleft;
+                        boxTop = oEvent.clientY - boxY - parentOffsettop;
+
+                        position.x = boxLeft + 50;
+                        position.y = boxTop + 50;
+
+                        oDiv.css({
+                            left: boxLeft + 'px',
+                            top: boxTop + 'px'
+                        })
+                    })
+                    $(document).mouseup(function() {
+                        $(document).unbind();
 
                         if (boxLeft > 200) {
                             boxLeft = 200
@@ -176,16 +189,11 @@
                             boxTop = 0
                         }
 
-                        position.x = boxLeft + 50;
-                        position.y = boxTop + 50;
-
                         oDiv.css({
                             left: boxLeft + 'px',
                             top: boxTop + 'px'
                         })
-                    })
-                    $(document).mouseup(function() {
-                        $(document).unbind();
+
                         var positionIndex = moveboxPosition(position);
                         if (positionIndex in oriArr) {
                             var html = oDiv.html()
@@ -198,7 +206,7 @@
                                 zIndex: 0
                             })
                         }
-                        
+
 
                         App.check()
                     })
