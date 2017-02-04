@@ -64,8 +64,6 @@
         var parent = $('#parent')
         var parentOffsetleft = parent.offset().left
         var parentOffsettop = parent.offset().top
-        var boxLeft = 0
-        var boxTop = 0
         var canvas = document.getElementById('canvas')
         var ctx = canvas.getContext('2d')
         var image = new Image()
@@ -163,8 +161,8 @@
                         ev.preventDefault();
                         var oEvent = ev || event;
 
-                        boxLeft = oEvent.clientX - boxX - parentOffsetleft;
-                        boxTop = oEvent.clientY - boxY - parentOffsettop;
+                        var boxLeft = oEvent.clientX - boxX - parentOffsetleft;
+                        var boxTop = oEvent.clientY - boxY - parentOffsettop;
 
                         position.x = boxLeft + 50;
                         position.y = boxTop + 50;
@@ -177,29 +175,18 @@
                     $(document).mouseup(function() {
                         $(document).unbind();
 
-                        if (boxLeft > 200) {
-                            boxLeft = 200
-                        } else if (boxLeft < 0) {
-                            boxLeft = 0
-                        }
-
-                        if (boxTop > 200) {
-                            boxTop = 200
-                        } else if (boxTop < 0) {
-                            boxTop = 0
-                        }
-
-                        oDiv.css({
-                            left: boxLeft + 'px',
-                            top: boxTop + 'px'
-                        })
-
                         var positionIndex = moveboxPosition(position);
                         if (positionIndex in oriArr) {
                             var html = oDiv.html()
                             var html2 = box.eq(positionIndex).html()
                             box.eq(positionIndex).html(html)
                             oDiv.html(html2)
+                            oDiv.css({
+                                left: oriboxLeft + 'px',
+                                top: oriboxTop + 'px',
+                                zIndex: 0
+                            })
+                        }else{
                             oDiv.css({
                                 left: oriboxLeft + 'px',
                                 top: oriboxTop + 'px',
