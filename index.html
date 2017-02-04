@@ -22,6 +22,7 @@
         height: 100px;
         position: absolute;
         cursor: pointer;
+        z-index: 0;
     }
     
     #parent img {
@@ -33,15 +34,15 @@
 
 <body>
     <div id="parent">
-        <div class="box" id="div0"><img src="" alt="" ></div>
-        <div class="box" id="div1"><img src="" alt="" ></div>
-        <div class="box" id="div2"><img src="" alt="" ></div>
-        <div class="box" id="div3"><img src="" alt="" ></div>
-        <div class="box" id="div4"><img src="" alt="" ></div>
-        <div class="box" id="div5"><img src="" alt="" ></div>
-        <div class="box" id="div6"><img src="" alt="" ></div>
-        <div class="box" id="div7"><img src="" alt="" ></div>
-        <div class="box" id="div8"><img src="" alt="" ></div>
+        <div class="box" id="div0"><img src="" alt=""></div>
+        <div class="box" id="div1"><img src="" alt=""></div>
+        <div class="box" id="div2"><img src="" alt=""></div>
+        <div class="box" id="div3"><img src="" alt=""></div>
+        <div class="box" id="div4"><img src="" alt=""></div>
+        <div class="box" id="div5"><img src="" alt=""></div>
+        <div class="box" id="div6"><img src="" alt=""></div>
+        <div class="box" id="div7"><img src="" alt=""></div>
+        <div class="box" id="div8"><img src="" alt=""></div>
     </div>
     <canvas id="canvas" style="display: none" width="300" height="300"></canvas>
     <script>
@@ -145,7 +146,9 @@
             },
             bind: function() {
                 box.on('mousedown', function(ev) {
+                    ev.preventDefault(); 
                     var oDiv = $(this);
+                    oDiv.css('zIndex',1)
                     var oDivOffsetleft = oDiv.offset().left;
                     var oDivOffsettop = oDiv.offset().top;
                     var oEvent = ev || event;
@@ -155,6 +158,7 @@
                     var oriboxTop = oDiv.position().top
 
                     $(document).mousemove(function(ev) {
+                        ev.preventDefault(); 
                         var oEvent = ev || event;
 
                         var boxLeft = oEvent.clientX - boxX - parentOffsetleft;
@@ -181,7 +185,7 @@
                         })
                     })
                     $(document).mouseup(function() {
-                       
+                        $(document).unbind();
                         var positionIndex = moveboxPosition(position);
                         if (positionIndex in oriArr) {
                             var html = oDiv.html()
@@ -190,10 +194,11 @@
                             oDiv.html(html2)
                             oDiv.css({
                                 left: oriboxLeft + 'px',
-                                top: oriboxTop + 'px'
+                                top: oriboxTop + 'px',
+                                zIndex: 0
                             })
                         }
-                        $(document).unbind();
+                        
 
                         App.check()
                     })
