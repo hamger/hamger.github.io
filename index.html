@@ -61,6 +61,8 @@
 
         var box = $('.box')
         var parent = $('#parent')
+        var parentOffsetleft = parent.offset().left
+        var parentOffsettop = parent.offset().top
         var canvas = document.getElementById('canvas')
         var ctx = canvas.getContext('2d')
         var image = new Image()
@@ -144,19 +146,19 @@
             bind: function() {
                 box.on('mousedown', function(ev) {
                     var oDiv = $(this);
-                    var parentOffsetleft = parent.offset().left;
-                    var parentOffsettop = parent.offset().top;
+                    var oDivOffsetleft = oDiv.offset().left;
+                    var oDivOffsettop = oDiv.offset().top;
                     var oEvent = ev || event;
-                    var boxX = oEvent.clientX - parentOffsetleft;
-                    var boxY = oEvent.clientY - parentOffsettop;
+                    var boxX = oEvent.clientX - oDivOffsetleft;// 鼠标到被选div的横距离
+                    var boxY = oEvent.clientY - oDivOffsettop;// 鼠标到被选div的纵距离
                     var oriboxLeft = oDiv.position().left
                     var oriboxTop = oDiv.position().top
 
                     $(document).mousemove(function(ev) {
                         var oEvent = ev || event;
 
-                        var boxLeft = oEvent.clientX - boxX
-                        var boxTop = oEvent.clientY - boxY
+                        var boxLeft = oEvent.clientX - boxX - parentOffsetleft
+                        var boxTop = oEvent.clientY - boxY - parentOffsettop
 
                         if (boxLeft > 200) {
                             boxLeft = 200
