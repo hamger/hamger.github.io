@@ -139,7 +139,7 @@
                 for (var i = 0; i < 3; i++) {
                     for (var j = 0; j < 3; j++) {
                         ctx.drawImage(image, 300 * j, 300 * i, 300, 300, 0, 0, 300, 300);
-                        box.eq(imgRandomArr[index]).find('img').data('value',index).attr('src', canvas.toDataURL('image/jpeg'));
+                        box.eq(imgRandomArr[index]).find('img').data('index',index).attr('src', canvas.toDataURL('image/jpeg'));
                         index++;
                     }
                 }
@@ -147,7 +147,7 @@
             bind: function() {
                 box.on('mousedown', function(ev) {
                     var oDiv = $(this);
-                    oDiv.css('index',1)
+                    oDiv.css('zIndex',1)
                     var oDivOffsetleft = oDiv.offset().left;
                     var oDivOffsettop = oDiv.offset().top;
                     var oEvent = ev || event;
@@ -184,7 +184,7 @@
                     })
                     $(document).mouseup(function() {
                         $(document).unbind();
-                        oDiv.css('index',0)
+                        oDiv.css('zIndex',0)
                         var index = moveboxPosition(position);
                         if (index in oriArr) {
                             var index = oDiv.index()
@@ -206,7 +206,7 @@
             check: function() {
                 var resArr = [];
                 $('#gameBox img').each(function(index, element) {
-                    resArr.push(element.data('value'));
+                    resArr.push(element.data('index'));
                 });
                 if (resArr.join("") === oriArr.join("")) {
                     alert('拼图完成，真聪明！');
