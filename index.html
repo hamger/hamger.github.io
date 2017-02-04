@@ -184,7 +184,6 @@
                     })
                     $(document).mouseup(function() {
                         $(document).unbind();
-                        oDiv.css('zIndex',0)
                         var index = moveboxPosition(position);
                         if (index in oriArr) {
                             var index = oDiv.index()
@@ -194,18 +193,19 @@
                             oDiv.html(html2)
                             oDiv.css({
                                 left: oriboxLeft + 'px',
-                                top: oriboxTop + 'px'
+                                top: oriboxTop + 'px',
+                                zIndex: 0
                             })
                         }
 
                         App.check()
                     })
-                    return false;
                 })
             },
             check: function() {
                 var resArr = [];
                 $('#gameBox img').each(function(index, element) {
+                    console.log(element.data('index'))
                     resArr.push(element.data('index'));
                 });
                 if (resArr.join("") === oriArr.join("")) {
