@@ -22,6 +22,7 @@
         height: 100px;
         position: absolute;
         cursor: pointer;
+        z-index: 0;
     }
     
     #parent img {
@@ -146,6 +147,7 @@
             bind: function() {
                 box.on('mousedown', function(ev) {
                     var oDiv = $(this);
+                    oDiv.css('index',1)
                     var oDivOffsetleft = oDiv.offset().left;
                     var oDivOffsettop = oDiv.offset().top;
                     var oEvent = ev || event;
@@ -157,8 +159,8 @@
                     $(document).mousemove(function(ev) {
                         var oEvent = ev || event;
 
-                        var boxLeft = oEvent.clientX - boxX - parentOffsetleft
-                        var boxTop = oEvent.clientY - boxY - parentOffsettop
+                        var boxLeft = oEvent.clientX - boxX - parentOffsetleft;
+                        var boxTop = oEvent.clientY - boxY - parentOffsettop;
 
                         if (boxLeft > 200) {
                             boxLeft = 200
@@ -182,6 +184,7 @@
                     })
                     $(document).mouseup(function() {
                         $(document).unbind();
+                        oDiv.css('index',0)
                         var index = moveboxPosition(position);
                         if (index in oriArr) {
                             var index = oDiv.index()
