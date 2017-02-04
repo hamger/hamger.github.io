@@ -184,12 +184,12 @@
                     })
                     $(document).mouseup(function() {
                         $(document).unbind();
-                        var index = moveboxPosition(position);
-                        if (index in oriArr) {
+                        var positionIndex = moveboxPosition(position);
+                        if (positionIndex in oriArr) {
                             var index = oDiv.index()
                             var html = oDiv.html()
-                            var html2 = box.eq(index).html()
-                            box.eq(index).html(html)
+                            var html2 = box.eq(positionIndex).html()
+                            box.eq(positionIndex).html(html)
                             oDiv.html(html2)
                             oDiv.css({
                                 left: oriboxLeft + 'px',
