@@ -139,7 +139,10 @@
                 for (var i = 0; i < 3; i++) {
                     for (var j = 0; j < 3; j++) {
                         ctx.drawImage(image, 300 * j, 300 * i, 300, 300, 0, 0, 300, 300);
-                        box.eq(imgRandomArr[index]).find('img').data('index', index).attr('src', canvas.toDataURL('image/jpeg'));
+                        box.eq(imgRandomArr[index]).find('img').attr({
+                            'index': index,
+                            'src': canvas.toDataURL('image/jpeg')
+                        })
                         index++;
                     }
                 }
@@ -202,7 +205,7 @@
             check: function() {
                 var resArr = [];
                 $('#parent img').each(function(index, element) {
-                    resArr.push(element.data('index'));
+                    resArr.push(element.attr('index'));
                 });
                 if (resArr.join("") === oriArr.join("")) {
                     alert('拼图完成，真聪明！');
