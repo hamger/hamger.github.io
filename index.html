@@ -72,7 +72,6 @@
         var imgArr = [0, 1, 2, 3, 4, 5, 6, 7, 8];
         var imgRandomArr = [];
         var oriArr = [0, 1, 2, 3, 4, 5, 6, 7, 8];
-        imgRandomArr = randomSort(imgArr, imgRandomArr);
         var position = {
             x: 0,
             y: 0
@@ -176,10 +175,10 @@
                             top: boxTop + 'px'
                         })
                     })
+
                     $(document).mouseup(function() {
                         $(document).unbind();
-
-                        var positionIndex = moveboxPosition(position);
+						var positionIndex = moveboxPosition(position);
                         if (positionIndex in oriArr) {
                             var html = oDiv.html()
                             var html2 = box.eq(positionIndex).html()
@@ -197,9 +196,7 @@
                                 zIndex: 0
                             })
                         }
-
-
-                        App.check()
+						App.check()
                     })
                 })
             },
