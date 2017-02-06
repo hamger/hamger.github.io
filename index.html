@@ -34,15 +34,15 @@
 
 <body>
     <div id="parent">
-        <div class="box" id="div0"><img src="" alt=""></div>
-        <div class="box" id="div1"><img src="" alt=""></div>
-        <div class="box" id="div2"><img src="" alt=""></div>
-        <div class="box" id="div3"><img src="" alt=""></div>
-        <div class="box" id="div4"><img src="" alt=""></div>
-        <div class="box" id="div5"><img src="" alt=""></div>
-        <div class="box" id="div6"><img src="" alt=""></div>
-        <div class="box" id="div7"><img src="" alt=""></div>
-        <div class="box" id="div8"><img src="" alt=""></div>
+        <div class="box"><img src="" alt=""></div>
+        <div class="box"><img src="" alt=""></div>
+        <div class="box"><img src="" alt=""></div>
+        <div class="box"><img src="" alt=""></div>
+        <div class="box"><img src="" alt=""></div>
+        <div class="box"><img src="" alt=""></div>
+        <div class="box"><img src="" alt=""></div>
+        <div class="box"><img src="" alt=""></div>
+        <div class="box"><img src="" alt=""></div>
     </div>
     <canvas id="canvas" style="display: none" width="300" height="300"></canvas>
     <script>
@@ -75,7 +75,7 @@
             }
         };
         //随机数组
-        Jigsaw.prototype.randomSort = function(arr, newArr) {
+        Jigsaw.prototype.randomSort = function(arr,newArr) {
             if (arr.length == 1) {
                 newArr.push(arr[0]);
                 return newArr;
@@ -83,9 +83,9 @@
             var random = Math.floor(Math.random() * arr.length);
             newArr.push(arr[random]);
             arr.splice(random, 1);
-            return this.randomSort(arr, newArr);
+            return this.randomSort(arr,newArr);
         };
-        //渲染九宫格
+        // 渲染九宫格
         Jigsaw.prototype.render = function() {
             var index = 0;
             for (var i = 0; i < 3; i++) {
@@ -103,7 +103,7 @@
             }
             this.image.src = this.url;
         };
-        //渲染图片
+        // 渲染图片
         Jigsaw.prototype.randomImage = function() {
             var self = this;
             var index = 0;
@@ -121,13 +121,12 @@
         //绑定事件
         Jigsaw.prototype.bind = function() {
             var self = this
-            var oDiv
             self.box.on('mousedown', function(ev) {
-                oDiv = $(this)
+                self.oDiv = $(this)
                 self.down(ev)
             })
             self.box.on('touchstart', function(ev) {
-                oDiv = $(this)
+                self.oDiv = $(this)
                 self.down(ev)
             })
 
@@ -163,13 +162,13 @@
             ev.preventDefault();
             var oEvent = this.isTouch(ev);
             this.flag = true
-            oDiv.css('zIndex', 1)
-            var oDivOffsetleft = oDiv.offset().left;
-            var oDivOffsettop = oDiv.offset().top;
+            this.oDiv.css('zIndex', 1)
+            var oDivOffsetleft = this.oDiv.offset().left;
+            var oDivOffsettop = this.oDiv.offset().top;
             this.boxX = oEvent.clientX - oDivOffsetleft; // 鼠标到被选div的横距离
             this.boxY = oEvent.clientY - oDivOffsettop; // 鼠标到被选div的纵距离
-            this.oriboxLeft = oDiv.position().left
-            this.oriboxTop = oDiv.position().top
+            this.oriboxLeft = this.oDiv.position().left
+            this.oriboxTop = this.oDiv.position().top
         };
         //移动时的事件程序
         Jigsaw.prototype.move = function(ev) {
@@ -181,7 +180,7 @@
             this.position.x = boxLeft + 50;
             this.position.y = boxTop + 50;
 
-            oDiv.css({
+            this.oDiv.css({
                 left: boxLeft + 'px',
                 top: boxTop + 'px'
             })
@@ -191,13 +190,13 @@
             this.flag = false
             var positionIndex = this.moveboxPosition(this.position);
             if (positionIndex in this.oriArr) {
-                var html = oDiv.html()
+                var html = this.oDiv.html()
                 var html2 = this.box.eq(positionIndex).html()
                 this.box.eq(positionIndex).html(html)
-                oDiv.html(html2)
+                this.oDiv.html(html2)
 
             }
-            oDiv.css({
+            this.oDiv.css({
                 left: this.oriboxLeft + 'px',
                 top: this.oriboxTop + 'px',
                 zIndex: 0
