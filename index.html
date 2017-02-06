@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>拖拽拼图</title>
+    <title>jigsaw</title>
     <link rel="shortcut icon" type="image/x-icon" href="http://static.yangbai.me/images/favicon.ico">
     <script type="text/javascript" src="jquery.js"></script>
     <style>
@@ -60,23 +60,6 @@
             return randomSort(arr, newArr);
         }
 
-        var box = $('.box')
-        var parent = $('#parent')
-        var parentOffsetleft = parent.offset().left
-        var parentOffsettop = parent.offset().top
-        var canvas = document.getElementById('canvas')
-        var ctx = canvas.getContext('2d')
-        var image = new Image()
-        var url = 'tuzi.jpg'
-
-        var imgArr = [0, 1, 2, 3, 4, 5, 6, 7, 8];
-        var imgRandomArr = [];
-        var oriArr = [0, 1, 2, 3, 4, 5, 6, 7, 8];
-        var position = {
-            x: 0,
-            y: 0
-        }
-
         var scope = function(num, min, max) {
             if (num >= min && num <= max) {
                 return true
@@ -109,110 +92,134 @@
             }
         }
 
-        var App = {
-            start: function() {
-                this.init();
-                this.render();
-                this.bind();
-            },
-            init: function() {
-                imgRandomArr = randomSort(imgArr, imgRandomArr);
-            },
-            render: function() {
-                var index = 0;
-                for (var i = 0; i < 3; i++) {
-                    for (var j = 0; j < 3; j++) {
-                        box.eq(index).css({
-                            top: i * 100 + 'px',
-                            left: j * 100 + 'px'
-                        });
-                        index++;
-                    }
-                }
-                image.onload = function() {
-                    App.randomImage();
-                }
-                image.src = url;
-            },
-            randomImage: function() {
-                var index = 0;
-                for (var i = 0; i < 3; i++) {
-                    for (var j = 0; j < 3; j++) {
-                        ctx.drawImage(image, 300 * j, 300 * i, 300, 300, 0, 0, 300, 300);
-                        box.eq(imgRandomArr[index]).find('img').attr({
-                            'index': index,
-                            'src': canvas.toDataURL('image/jpeg')
-                        })
-                        index++;
-                    }
-                }
-            },
-            bind: function() {
-                box.on('mousedown', function(ev) {
-                    ev.preventDefault();
-                    var oDiv = $(this);
-                    oDiv.css('zIndex', 1)
-                    var oDivOffsetleft = oDiv.offset().left;
-                    var oDivOffsettop = oDiv.offset().top;
-                    var oEvent = ev || event;
-                    var boxX = oEvent.clientX - oDivOffsetleft; // 鼠标到被选div的横距离
-                    var boxY = oEvent.clientY - oDivOffsettop; // 鼠标到被选div的纵距离
-                    var oriboxLeft = oDiv.position().left
-                    var oriboxTop = oDiv.position().top
+        var canvas = document.getElementById('canvas')
+        var ctx = canvas.getContext('2d')
+        var image = new Image()
+        var url = 'tuzi.jpg'
 
-                    $(document).mousemove(function(ev) {
-                        ev.preventDefault();
-                        var oEvent = ev || event;
+        function Jigsaw(url) {
 
-                        var boxLeft = oEvent.clientX - boxX - parentOffsetleft;
-                        var boxTop = oEvent.clientY - boxY - parentOffsettop;
+            this.url = url;
 
-                        position.x = boxLeft + 50;
-                        position.y = boxTop + 50;
-
-                        oDiv.css({
-                            left: boxLeft + 'px',
-                            top: boxTop + 'px'
-                        })
-                    })
-
-                    $(document).mouseup(function() {
-                        $(document).unbind();
-						var positionIndex = moveboxPosition(position);
-                        if (positionIndex in oriArr) {
-                            var html = oDiv.html()
-                            var html2 = box.eq(positionIndex).html()
-                            box.eq(positionIndex).html(html)
-                            oDiv.html(html2)
-                            oDiv.css({
-                                left: oriboxLeft + 'px',
-                                top: oriboxTop + 'px',
-                                zIndex: 0
-                            })
-                        }else{
-                            oDiv.css({
-                                left: oriboxLeft + 'px',
-                                top: oriboxTop + 'px',
-                                zIndex: 0
-                            })
-                        }
-						App.check()
-                    })
-                })
-            },
-            check: function() {
-                var resArr = [];
-                $('#parent img').each(function(index, element) {
-                    resArr.push(element.getAttribute('index'));
-                });
-                if (resArr.join("") === oriArr.join("")) {
-                    alert('拼图完成，真聪明！');
-                }
-            }
+            //构造三部曲 
+            this.init()
+            this.render()
+            this.bind()
         }
 
-        App.start()
+        Jigsaw.prototype.init = function() {
+            this.box = $('.box')
+            this.parent = $('#parent')
+            this.parentOffsetleft = this.parent.offset().left
+            this.parentOffsettop = this.parent.offset().top
 
+            this.imgArr = [0, 1, 2, 3, 4, 5, 6, 7, 8];
+            this.imgRandomArr = [];
+            this.imgRandomArr = randomSort(this.imgArr, this.imgRandomArr);
+            this.oriArr = [0, 1, 2, 3, 4, 5, 6, 7, 8];
+            this.position = {
+                x: 0,
+                y: 0
+            }
+        };
+
+        Jigsaw.prototype.render = function() {
+            var index = 0;
+            for (var i = 0; i < 3; i++) {
+                for (var j = 0; j < 3; j++) {
+                    this.box.eq(index).css({
+                        top: i * 100 + 'px',
+                        left: j * 100 + 'px'
+                    });
+                    index++;
+                }
+            }
+            image.onload = function() {
+                Jigsaw.randomImage();
+            }
+            image.src = this.url;
+        };
+
+        Jigsaw.prototype.randomImage = function() {
+            var index = 0;
+            for (var i = 0; i < 3; i++) {
+                for (var j = 0; j < 3; j++) {
+                    ctx.drawImage(image, 300 * j, 300 * i, 300, 300, 0, 0, 300, 300);
+                    this.box.eq(this.imgRandomArr[index]).find('img').attr({
+                        'index': index,
+                        'src': canvas.toDataURL('image/jpeg')
+                    })
+                    index++;
+                }
+            }
+        };
+
+        Jigsaw.prototype.bind = function() {
+            var self = this
+            self.box.on('mousedown', function(ev) {
+                ev.preventDefault();
+                var oDiv = $(this);
+                oDiv.css('zIndex', 1)
+                var oDivOffsetleft = oDiv.offset().left;
+                var oDivOffsettop = oDiv.offset().top;
+                var oEvent = ev || event;
+                var boxX = oEvent.clientX - oDivOffsetleft; // 鼠标到被选div的横距离
+                var boxY = oEvent.clientY - oDivOffsettop; // 鼠标到被选div的纵距离
+                var oriboxLeft = oDiv.position().left
+                var oriboxTop = oDiv.position().top
+
+                $(document).mousemove(function(ev) {
+                    ev.preventDefault();
+                    var oEvent = ev || event;
+
+                    var boxLeft = oEvent.clientX - boxX - parentOffsetleft;
+                    var boxTop = oEvent.clientY - boxY - parentOffsettop;
+
+                    self.position.x = boxLeft + 50;
+                    self.position.y = boxTop + 50;
+
+                    oDiv.css({
+                        left: boxLeft + 'px',
+                        top: boxTop + 'px'
+                    })
+                })
+
+                $(document).mouseup(function() {
+                    $(document).unbind();
+                    var positionIndex = moveboxPosition(position);
+                    if (positionIndex in oriArr) {
+                        var html = oDiv.html()
+                        var html2 = box.eq(positionIndex).html()
+                        box.eq(positionIndex).html(html)
+                        oDiv.html(html2)
+                        oDiv.css({
+                            left: oriboxLeft + 'px',
+                            top: oriboxTop + 'px',
+                            zIndex: 0
+                        })
+                    } else {
+                        oDiv.css({
+                            left: oriboxLeft + 'px',
+                            top: oriboxTop + 'px',
+                            zIndex: 0
+                        })
+                    }
+                    Jigsaw.check()
+                })
+            })
+        };
+
+        Jigsaw.prototype.check = function() {
+            var resArr = [];
+            $('#parent img').each(function(index, element) {
+                resArr.push(element.getAttribute('index'));
+            });
+            if (resArr.join("") === oriArr.join("")) {
+                alert('拼图完成，真聪明！');
+            }
+        };
+
+        new Jigsaw(url)
     })
     </script>
 </body>
