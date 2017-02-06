@@ -122,20 +122,20 @@
         Jigsaw.prototype.bind = function() {
             var self = this
             self.box.on('mousedown', function(ev) {
-                self.down()
+                self.down(ev)
             })
             self.box.on('touchstart', function(ev) {
-                self.down()
+                self.down(ev)
             })
 
             $(document).on('mousemove', function(ev) {
                 if (self.flag) {
-                    self.move()
+                    self.move(ev)
                 }
             })
             $(document).on('touchmove', function(ev) {
                 if (self.flag) {
-                    self.move()
+                    self.move(ev)
                 }
             })
             $(document).on('mouseup', function(ev) {
