@@ -121,10 +121,13 @@
         //绑定事件
         Jigsaw.prototype.bind = function() {
             var self = this
+            var oDiv
             self.box.on('mousedown', function(ev) {
+                oDiv = $(this)
                 self.down(ev)
             })
             self.box.on('touchstart', function(ev) {
+                oDiv = $(this)
                 self.down(ev)
             })
 
@@ -160,18 +163,16 @@
             ev.preventDefault();
             var oEvent = this.isTouch(ev);
             this.flag = true
-            this.oDiv = $(this);
-            this.oDiv.css('zIndex', 1)
-            var oDivOffsetleft = this.oDiv.offset().left;
-            var oDivOffsettop = this.oDiv.offset().top;
+            oDiv.css('zIndex', 1)
+            var oDivOffsetleft = oDiv.offset().left;
+            var oDivOffsettop = oDiv.offset().top;
             this.boxX = oEvent.clientX - oDivOffsetleft; // 鼠标到被选div的横距离
             this.boxY = oEvent.clientY - oDivOffsettop; // 鼠标到被选div的纵距离
-            this.oriboxLeft = this.oDiv.position().left
-            this.oriboxTop = this.oDiv.position().top
+            this.oriboxLeft = oDiv.position().left
+            this.oriboxTop = oDiv.position().top
         };
         //移动时的事件程序
         Jigsaw.prototype.move = function(ev) {
-
             ev.preventDefault();
             var oEvent = this.isTouch(ev);
             var boxLeft = oEvent.clientX - this.boxX - this.parentOffsetleft;
@@ -190,13 +191,13 @@
             this.flag = false
             var positionIndex = this.moveboxPosition(this.position);
             if (positionIndex in this.oriArr) {
-                var html = this.oDiv.html()
+                var html = oDiv.html()
                 var html2 = this.box.eq(positionIndex).html()
                 this.box.eq(positionIndex).html(html)
-                this.oDiv.html(html2)
+                oDiv.html(html2)
 
             }
-            this.oDiv.css({
+            oDiv.css({
                 left: this.oriboxLeft + 'px',
                 top: this.oriboxTop + 'px',
                 zIndex: 0
