@@ -190,8 +190,8 @@
                     var positionIndex = moveboxPosition(self.position);
                     if (positionIndex in self.oriArr) {
                         var html = oDiv.html()
-                        var html2 = this.box.eq(positionIndex).html()
-                        this.box.eq(positionIndex).html(html)
+                        var html2 = self.box.eq(positionIndex).html()
+                        self.box.eq(positionIndex).html(html)
                         oDiv.html(html2)
                         oDiv.css({
                             left: oriboxLeft + 'px',
