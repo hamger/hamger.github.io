@@ -91,7 +91,7 @@
             var random = Math.floor(Math.random() * arr.length);
             newArr.push(arr[random]);
             arr.splice(random, 1);
-            return randomSort(arr, newArr);
+            return this.randomSort(arr, newArr);
         };
 
         Jigsaw.prototype.render = function() {
