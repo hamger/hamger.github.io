@@ -187,7 +187,7 @@
 
                 $(document).mouseup(function() {
                     $(document).unbind();
-                    var positionIndex = moveboxPosition(position);
+                    var positionIndex = moveboxPosition(self.position);
                     if (positionIndex in oriArr) {
                         var html = oDiv.html()
                         var html2 = box.eq(positionIndex).html()
