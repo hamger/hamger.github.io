@@ -134,8 +134,9 @@
                     index++;
                 }
             }
+            var self = this
             image.onload = function() {
-                this.randomImage();
+                self.randomImage();
             }
             image.src = this.url;
         };
