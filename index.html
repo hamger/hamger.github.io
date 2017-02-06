@@ -188,7 +188,7 @@
                 $(document).mouseup(function() {
                     $(document).unbind();
                     var positionIndex = moveboxPosition(self.position);
-                    if (positionIndex in oriArr) {
+                    if (positionIndex in self.oriArr) {
                         var html = oDiv.html()
                         var html2 = box.eq(positionIndex).html()
                         box.eq(positionIndex).html(html)
@@ -212,10 +212,11 @@
 
         Jigsaw.prototype.check = function() {
             var resArr = [];
+            var self = this
             $('#parent img').each(function(index, element) {
                 resArr.push(element.getAttribute('index'));
             });
-            if (resArr.join("") === this.oriArr.join("")) {
+            if (resArr.join("") === self.oriArr.join("")) {
                 alert('拼图完成，真聪明！');
             }
         };
