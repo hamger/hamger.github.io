@@ -173,8 +173,8 @@
                     ev.preventDefault();
                     var oEvent = ev || event;
 
-                    var boxLeft = oEvent.clientX - boxX - this.parentOffsetleft;
-                    var boxTop = oEvent.clientY - boxY - this.parentOffsettop;
+                    var boxLeft = oEvent.clientX - boxX - self.parentOffsetleft;
+                    var boxTop = oEvent.clientY - boxY - self.parentOffsettop;
 
                     self.position.x = boxLeft + 50;
                     self.position.y = boxTop + 50;
