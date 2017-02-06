@@ -120,21 +120,21 @@
         };
         //绑定事件
         Jigsaw.prototype.bind = function() {
-
-            this.box.on('mousedown', function(ev) {
+            var self = this
+            self.box.on('mousedown', function(ev) {
                 down()
             })
-            this.box.on('touchstart', function(ev) {
+            self.box.on('touchstart', function(ev) {
                 down()
             })
 
             $(document).on('mousemove', function(ev) {
-                if (flag) {
+                if (self.flag) {
                     move()
                 }
             })
             $(document).on('touchmove', function(ev) {
-                if (flag) {
+                if (self.flag) {
                     move()
                 }
             })
