@@ -122,27 +122,27 @@
         Jigsaw.prototype.bind = function() {
             var self = this
             self.box.on('mousedown', function(ev) {
-                down()
+                self.down()
             })
             self.box.on('touchstart', function(ev) {
-                down()
+                self.down()
             })
 
             $(document).on('mousemove', function(ev) {
                 if (self.flag) {
-                    move()
+                    self.move()
                 }
             })
             $(document).on('touchmove', function(ev) {
                 if (self.flag) {
-                    move()
+                    self.move()
                 }
             })
             $(document).on('mouseup', function(ev) {
-                up()
+                self.up()
             })
             $(document).on('touchend', function(ev) {
-                up()
+                self.up()
             })
         };
         //根据PC端or移动端返回event
