@@ -47,19 +47,15 @@
     <canvas id="canvas" style="display: none" width="300" height="300"></canvas>
     <script>
     $(document).ready(function() {
-
-        var url = 'tuzi.jpg'
-
+        //创建构造函数
         function Jigsaw(url) {
-
             this.url = url;
-
             //构造三部曲 
             this.init()
             this.render()
             this.bind()
         }
-
+        //初始化数据
         Jigsaw.prototype.init = function() {
             this.canvas = document.getElementById('canvas')
             this.ctx = this.canvas.getContext('2d')
@@ -68,17 +64,17 @@
             this.parent = $('#parent')
             this.parentOffsetleft = this.parent.offset().left
             this.parentOffsettop = this.parent.offset().top
-
+            this.flag = false
             this.imgArr = [0, 1, 2, 3, 4, 5, 6, 7, 8];
             this.imgRandomArr = [];
-            this.imgRandomArr = this.randomSort(this.imgArr, this.imgRandomArr);
-            this.oriArr = [0, 1, 2, 3, 4, 5, 6, 7, 8];
+            this.imgRandomArr = this.randomSort(this.imgArr, this.imgRandomArr)
+            this.oriArr = [0, 1, 2, 3, 4, 5, 6, 7, 8]
             this.position = {
                 x: 0,
                 y: 0
             }
         };
-
+        //随机数组
         Jigsaw.prototype.randomSort = function(arr, newArr) {
             if (arr.length == 1) {
                 newArr.push(arr[0]);
@@ -89,7 +85,7 @@
             arr.splice(random, 1);
             return this.randomSort(arr, newArr);
         };
-
+        //渲染九宫格
         Jigsaw.prototype.render = function() {
             var index = 0;
             for (var i = 0; i < 3; i++) {
@@ -107,7 +103,7 @@
             }
             this.image.src = this.url;
         };
-
+        //渲染图片
         Jigsaw.prototype.randomImage = function() {
             var self = this;
             var index = 0;
@@ -122,62 +118,92 @@
                 }
             }
         };
-
+        //绑定事件
         Jigsaw.prototype.bind = function() {
-            var self = this
-            self.box.on('mousedown', function(ev) {
-                ev.preventDefault();
-                var oDiv = $(this);
-                oDiv.css('zIndex', 1)
-                var oDivOffsetleft = oDiv.offset().left;
-                var oDivOffsettop = oDiv.offset().top;
-                var oEvent = ev || event;
-                var boxX = oEvent.clientX - oDivOffsetleft; // 鼠标到被选div的横距离
-                var boxY = oEvent.clientY - oDivOffsettop; // 鼠标到被选div的纵距离
-                var oriboxLeft = oDiv.position().left
-                var oriboxTop = oDiv.position().top
 
-                $(document).mousemove(function(ev) {
-                    ev.preventDefault();
-                    var oEvent = ev || event;
+            this.box.on('mousedown', function(ev) {
+                down()
+            })
+            this.box.on('touchstart', function(ev) {
+                down()
+            })
 
-                    var boxLeft = oEvent.clientX - boxX - self.parentOffsetleft;
-                    var boxTop = oEvent.clientY - boxY - self.parentOffsettop;
-
-                    self.position.x = boxLeft + 50;
-                    self.position.y = boxTop + 50;
-
-                    oDiv.css({
-                        left: boxLeft + 'px',
-                        top: boxTop + 'px'
-                    })
-                })
-
-                $(document).mouseup(function() {
-                    $(document).unbind();
-                    var positionIndex = self.moveboxPosition(self.position);
-                    if (positionIndex in self.oriArr) {
-                        var html = oDiv.html()
-                        var html2 = self.box.eq(positionIndex).html()
-                        self.box.eq(positionIndex).html(html)
-                        oDiv.html(html2)
-                        oDiv.css({
-                            left: oriboxLeft + 'px',
-                            top: oriboxTop + 'px',
-                            zIndex: 0
-                        })
-                    } else {
-                        oDiv.css({
-                            left: oriboxLeft + 'px',
-                            top: oriboxTop + 'px',
-                            zIndex: 0
-                        })
-                    }
-                    self.check()
-                })
+            $(document).on('mousemove', function(ev) {
+                if (flag) {
+                    move()
+                }
+            })
+            $(document).on('touchmove', function(ev) {
+                if (flag) {
+                    move()
+                }
+            })
+            $(document).on('mouseup', function(ev) {
+                up()
+            })
+            $(document).on('touchend', function(ev) {
+                up()
             })
         };
+        //根据PC端or移动端返回event
+        Jigsaw.prototype.isTouch = function(ev) {
+            var oEvent;
+            if (ev.touches) {
+                oEvent = event.touches[0];
+            } else {
+                oEvent = ev || event;
+            }
+            return oEvent
+        };
+        //按下时的事件程序
+        Jigsaw.prototype.down = function(ev) {
+            ev.preventDefault();
+            var oEvent = this.isTouch(ev);
+            this.flag = true
+            this.oDiv = $(this);
+            this.oDiv.css('zIndex', 1)
+            var oDivOffsetleft = this.oDiv.offset().left;
+            var oDivOffsettop = this.oDiv.offset().top;
+            this.boxX = oEvent.clientX - oDivOffsetleft; // 鼠标到被选div的横距离
+            this.boxY = oEvent.clientY - oDivOffsettop; // 鼠标到被选div的纵距离
+            this.oriboxLeft = this.oDiv.position().left
+            this.oriboxTop = this.oDiv.position().top
+        };
+        //移动时的事件程序
+        Jigsaw.prototype.move = function(ev) {
 
+            ev.preventDefault();
+            var oEvent = this.isTouch(ev);
+            var boxLeft = oEvent.clientX - this.boxX - this.parentOffsetleft;
+            var boxTop = oEvent.clientY - this.boxY - this.parentOffsettop;
+
+            this.position.x = boxLeft + 50;
+            this.position.y = boxTop + 50;
+
+            oDiv.css({
+                left: boxLeft + 'px',
+                top: boxTop + 'px'
+            })
+        };
+        //抬起时的事件程序
+        Jigsaw.prototype.up = function() {
+            this.flag = false
+            var positionIndex = this.moveboxPosition(this.position);
+            if (positionIndex in this.oriArr) {
+                var html = this.oDiv.html()
+                var html2 = this.box.eq(positionIndex).html()
+                this.box.eq(positionIndex).html(html)
+                this.oDiv.html(html2)
+
+            }
+            this.oDiv.css({
+                left: this.oriboxLeft + 'px',
+                top: this.oriboxTop + 'px',
+                zIndex: 0
+            })
+            this.check()
+        };
+        //根据坐标位置返回index
         Jigsaw.prototype.moveboxPosition = function(position) {
             if (this.scope(position.x, 0, 100) && this.scope(position.y, 0, 100)) {
                 return 0
@@ -201,7 +227,7 @@
                 return false
             }
         };
-
+        //判断数值是否在给定区间
         Jigsaw.prototype.scope = function(num, min, max) {
             if (num >= min && num <= max) {
                 return true
@@ -209,7 +235,7 @@
                 return false
             }
         };
-
+        //检查拼图是否完成
         Jigsaw.prototype.check = function() {
             var resArr = [];
             var self = this
@@ -220,6 +246,8 @@
                 alert('拼图完成，真聪明！');
             }
         };
+
+        var url = 'tuzi.jpg'
 
         new Jigsaw(url)
     })
