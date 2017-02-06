@@ -79,7 +79,7 @@
             }
         };
 
-        jigsaw.prototype.randomSort = function(arr, newArr) {
+        Jigsaw.prototype.randomSort = function(arr, newArr) {
             if (arr.length == 1) {
                 newArr.push(arr[0]);
                 return newArr;
@@ -178,7 +178,7 @@
             })
         };
 
-        jigsaw.prototype.moveboxPosition = function(position) {
+        Jigsaw.prototype.moveboxPosition = function(position) {
             if (this.scope(position.x, 0, 100) && this.scope(position.y, 0, 100)) {
                 return 0
             } else if (this.scope(position.x, 100, 200) && this.scope(position.y, 0, 100)) {
@@ -202,7 +202,7 @@
             }
         };
 
-        jigsaw.prototype.scope = function(num, min, max) {
+        Jigsaw.prototype.scope = function(num, min, max) {
             if (num >= min && num <= max) {
                 return true
             } else {
