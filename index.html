@@ -66,24 +66,24 @@
             this.parentOffsettop = this.parent.offset().top
             this.flag = false
             this.imgArr = [0, 1, 2, 3, 4, 5, 6, 7, 8];
-            this.imgRandomArr = [];
-            this.imgRandomArr = this.randomSort(this.imgArr, this.imgRandomArr)
-            this.oriArr = [0, 1, 2, 3, 4, 5, 6, 7, 8]
+            this.imgRandomArr = this.randomSort(this.imgArr.slice(0))
             this.position = {
                 x: 0,
                 y: 0
             }
         };
         //随机数组
-        Jigsaw.prototype.randomSort = function(arr,newArr) {
-            if (arr.length == 1) {
-                newArr.push(arr[0]);
-                return newArr;
+        Jigsaw.prototype.randomSort = function(arr) {
+            var currentIndex = arr.length,
+                randomIndex, tempValue
+            while (currentIndex !== 0) {
+                randomIndex = Math.floor(Math.random() * currentIndex);
+                currentIndex--;
+                tempValue = arr[currentIndex]
+                arr[currentIndex] = arr[randomIndex]
+                arr[randomIndex] = tempValue
             }
-            var random = Math.floor(Math.random() * arr.length);
-            newArr.push(arr[random]);
-            arr.splice(random, 1);
-            return this.randomSort(arr,newArr);
+            return arr
         };
         // 渲染九宫格
         Jigsaw.prototype.render = function() {
@@ -122,11 +122,11 @@
         Jigsaw.prototype.bind = function() {
             var self = this
             self.box.on('mousedown', function(ev) {
-                self.oDiv = $(this)
+                /*self.oDiv = $(this)*/
                 self.down(ev)
             })
             self.box.on('touchstart', function(ev) {
-                self.oDiv = $(this)
+                /*self.oDiv = $(this)*/
                 self.down(ev)
             })
 
@@ -161,6 +161,7 @@
         Jigsaw.prototype.down = function(ev) {
             ev.preventDefault();
             var oEvent = this.isTouch(ev);
+            this.oDiv = $(ev.target)
             this.flag = true
             this.oDiv.css('zIndex', 1)
             var oDivOffsetleft = this.oDiv.offset().left;
@@ -189,7 +190,7 @@
         Jigsaw.prototype.up = function() {
             this.flag = false
             var positionIndex = this.moveboxPosition(this.position);
-            if (positionIndex in this.oriArr) {
+            if (positionIndex in this.imgArr) {
                 var html = this.oDiv.html()
                 var html2 = this.box.eq(positionIndex).html()
                 this.box.eq(positionIndex).html(html)
@@ -242,7 +243,7 @@
             $('#parent img').each(function(index, element) {
                 resArr.push(element.getAttribute('index'));
             });
-            if (resArr.join("") === self.oriArr.join("")) {
+            if (resArr.join("") === self.imgArr.join("")) {
                 alert('拼图完成，真聪明！');
             }
         };
