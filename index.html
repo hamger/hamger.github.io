@@ -5,6 +5,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <title>jigsaw</title>
+    <link rel="stylesheet" href="http://cdn.bootcss.com/bootstrap/3.3.0/css/bootstrap.min.css">
     <link rel="shortcut icon" type="image/x-icon" href="http://static.yangbai.me/images/favicon.ico">
     <script type="text/javascript" src="jquery.js"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -34,8 +35,16 @@
 </head>
 
 <body>
-    <div id="wrap"></div>
-    <input type="file" value="上传图片" id="selectPic" accept="image/*">
+    <div class="container-fluid">
+        <div id="wrap"></div>
+        <div class="row">
+            <button class="col-md-4 btn btn-info" type="button" id="three"></button>
+            <button class="col-md-4 btn btn-wraning" type="button" id="four"></button>
+            <button class="col-md-4 btn btn-danger" type="button" id="five"></button>
+        </div>
+        
+        <input type="file" value="上传图片" id="selectPic" accept="image/*">
+    </div>
     <script>
     $(document).ready(function() {
         var url = 'head.jpg'
@@ -64,7 +73,7 @@
         }
         //创建格子
         Jigsaw.prototype.createBox = function() {
-            for (var i = 0; i < size*size; i++) {
+            for (var i = 0; i < size * size; i++) {
                 wrap.append('<div class="box"><img src="" alt=""></div>')
             }
             $('.box').width(boxWidth)
@@ -264,7 +273,6 @@
         };
 
         var jig = new Jigsaw(wrap, url, size)
-        var saw
 
         function getImgURL() {
             var imgURL = ''
@@ -276,11 +284,21 @@
             if (this.files && this.files[0]) {
                 reader.onload = function(e) {
                     imgURL = e.target.result;
-                    saw = new Jigsaw(wrap, imgURL, size)
+                    jig(wrap, imgURL, size)
                 };
                 reader.readAsDataURL(this.files[0]);
             }
         }
+
+        $('#three').click(function () {
+            jig(wrap, url, 3)
+        })
+        $('#four').click(function () {
+            jig(wrap, url, 4)
+        })
+        $('#five').click(function () {
+            jig(wrap, url, 5)
+        })
 
 
         document.getElementById('selectPic').addEventListener('change',
