@@ -275,7 +275,6 @@
         var jig = new Jigsaw(wrap, url, size)
 
         function getImgURL() {
-            var imgURL = ''
             var reader = new FileReader()
             if (!reader) {
                 alert('你的浏览器不支持FileReader')
@@ -283,8 +282,8 @@
             }
             if (this.files && this.files[0]) {
                 reader.onload = function(e) {
-                    imgURL = e.target.result;
-                    new Jigsaw(wrap, imgURL, size)
+                    url = e.target.result;
+                    new Jigsaw(wrap, url, size)
                 };
                 reader.readAsDataURL(this.files[0]);
             }
