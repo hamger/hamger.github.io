@@ -47,6 +47,17 @@
     </div>
     <script>
     $(document).ready(function() {
+        var documentWidth = window.screen.availWidth
+        var parentWidth = documentWidth * 0.92;
+        var boxWidth = parentWidth / 3
+        if (documentWidth > 500) {
+            parentWidth = 300;
+        }
+        $('#parent').width(parentWidth)
+        $('#parent').height(parentWidth)
+        $('#parent box').width(boxWidth)
+        $('#parent box').height(boxWidth)
+
         //创建构造函数
         function Jigsaw(url) {
             this.url = url
@@ -55,6 +66,18 @@
             this.render()
             this.bind()
         }
+
+        //创建画布
+        Jigsaw.prototype.createCanvas = function() {
+            var can = document.createElement('canvas');
+            /*can.setAttribute("id",'canvas')*/
+            can.id = 'canvas'
+            can.style.display = 'none';
+            can.width = boxWidth;
+            can.height = boxWidth;
+            document.body.appendChild(can);
+        };
+        
         //初始化数据
         Jigsaw.prototype.init = function() {
             this.canvas = document.getElementById('canvas')
@@ -72,16 +95,7 @@
                 y: 0
             }
         };
-        //创建画布
-        Jigsaw.prototype.createCanvas = function() {
-            var can = document.createElement('canvas'); 
-            /*can.setAttribute("id",'canvas')*/
-            can.id = 'canvas'
-            can.style.display = 'none';
-            can.width = 100;
-            can.height = 100;
-            document.body.appendChild(can);
-        };
+        
         //随机数组
         Jigsaw.prototype.randomSort = function(arr) {
             var currentIndex = arr.length,
@@ -101,8 +115,8 @@
             for (var i = 0; i < 3; i++) {
                 for (var j = 0; j < 3; j++) {
                     this.box.eq(index).css({
-                        top: i * 100 + 'px',
-                        left: j * 100 + 'px'
+                        top: i * boxWidth + 'px',
+                        left: j * boxWidth + 'px'
                     });
                     index++;
                 }
@@ -119,8 +133,8 @@
             var index = 0;
             for (var i = 0; i < 3; i++) {
                 for (var j = 0; j < 3; j++) {
-                    var w = this.image.width/3
-                    self.ctx.drawImage(this.image, w * j, w * i, w, w, 0, 0, 100, 100);
+                    var w = this.image.width / 3
+                    self.ctx.drawImage(this.image, w * j, w * i, w, w, 0, 0, boxWidth, boxWidth);
                     self.box.eq(self.imgRandomArr[index]).find('img').attr({
                         'index': index,
                         'src': self.canvas.toDataURL('image/jpeg')
@@ -131,37 +145,38 @@
         };
         //绑定事件
         Jigsaw.prototype.bind = function() {
-            
-            var self = this
-            /*var boxs = document.getElementsByClassName('box')*/
 
-            this.box.on('mousedown',function(ev) {
+            var self = this
+                /*var boxs = document.getElementsByClassName('box')*/
+
+            this.box.on('mousedown', function(ev) {
                 self.oDiv = $(this)
                 self.down(ev)
             })
-           
+
             /* boxs.addEventListener('touchstart',function(ev) {
                 self.oDiv = $(this)
                 self.down(ev)
             })*/
 
             $(document).on('mousemove', function(ev) {
-                if (self.flag) {
-                    self.move(ev)
-                }
-            })
-            /*document.addEventListener('touchmove',function(ev) {
-                if (self.flag) {
-                    self.move(ev)
-                }
-            })*/
+                    if (self.flag) {
+                        self.move(ev)
+                    }
+                })
+                /*document.addEventListener('touchmove',function(ev) {
+                    if (self.flag) {
+                        self.move(ev)
+                    }
+                })*/
             $(document).on('mouseup', function(ev) {
-                self.up()
-            })
-            /*document.addEventListener('touchend',function(ev) {
-                self.up()
-            })*/
-            
+                    self.up()
+                    $(document).unbind()
+                })
+                /*document.addEventListener('touchend',function(ev) {
+                    self.up()
+                })*/
+
         };
         //根据PC端or移动端返回event
         Jigsaw.prototype.isTouch = function(ev) {
@@ -220,7 +235,7 @@
         };
         //根据坐标位置返回index
         Jigsaw.prototype.moveboxPosition = function(position) {
-            return Math.floor(position.y / 100) * 3 + Math.floor(position.x / 100);
+            return Math.floor(position.y / boxWidth) * 3 + Math.floor(position.x / boxWidth);
         };
         //检查拼图是否完成
         Jigsaw.prototype.check = function() {
