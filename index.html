@@ -148,17 +148,19 @@
         Jigsaw.prototype.bind = function() {
 
             var self = this
-            /*var boxs = document.getElementsByClassName('box')*/
+            var boxs = document.getElementsByClassName('box')
 
             this.box.on('mousedown', function(ev) {
                 self.oDiv = $(this)
                 self.down(ev)
             })
-            this.box.on('touchstart', function(ev) {
-                self.oDiv = $(this)
-                self.down(ev)
-            })
 
+            for (var i = 0; i < boxs.length; i++) {
+                boxs[i].addEventListener('touchstart', function(ev) {
+                    self.oDiv = $(this)
+                    self.down(ev)
+                })
+            }
             /*boxs.addEventListener('touchstart', function(ev) {
                 self.oDiv = $(this)
                 self.down(ev)
@@ -169,27 +171,20 @@
                     self.move(ev)
                 }
             })
-            $(document).on('touchmove', function(ev) {
+
+            document.addEventListener('touchmove', function(ev) {
                 if (self.flag) {
                     self.move(ev)
                 }
             })
-            /*document.addEventListener('touchmove', function(ev) {
-                if (self.flag) {
-                    self.move(ev)
-                }
-            })*/
+            
             $(document).on('mouseup', function(ev) {
                 self.up()
             })
-            $(document).on('touchend', function(ev) {
+
+            document.addEventListener('touchend', function(ev) {
                 self.up()
             })
-            /*document.addEventListener('touchend', function(ev) {
-                self.up()
-            })*/
-
-
         };
         //根据PC端or移动端返回event
         Jigsaw.prototype.isTouch = function(ev) {
@@ -209,8 +204,8 @@
             this.oDiv.css('zIndex', 1)
             var oDivOffsetleft = this.oDiv.offset().left;
             var oDivOffsettop = this.oDiv.offset().top;
-            this.boxX = oEvent.clientX - oDivOffsetleft; // 鼠标到被选div的横距离
-            this.boxY = oEvent.clientY - oDivOffsettop; // 鼠标到被选div的纵距离
+            this.boxX = oEvent.pageX - oDivOffsetleft; // 鼠标到被选div的横距离
+            this.boxY = oEvent.pageY - oDivOffsettop; // 鼠标到被选div的纵距离
             this.oriboxLeft = this.oDiv.position().left
             this.oriboxTop = this.oDiv.position().top
         };
@@ -218,8 +213,8 @@
         Jigsaw.prototype.move = function(ev) {
             ev.preventDefault();
             var oEvent = this.isTouch(ev);
-            var boxLeft = oEvent.clientX - this.boxX - this.parentOffsetleft;
-            var boxTop = oEvent.clientY - this.boxY - this.parentOffsettop;
+            var boxLeft = oEvent.pageX - this.boxX - this.parentOffsetleft;
+            var boxTop = oEvent.pageY - this.boxY - this.parentOffsettop;
 
             this.position.x = boxLeft + 50;
             this.position.y = boxTop + 50;
