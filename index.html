@@ -9,7 +9,7 @@
     <script type="text/javascript" src="jquery.js"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <style>
-    #parent {
+    #wrap {
         width: 300px;
         height: 300px;
         border: 1px solid #CDCDCD;
@@ -26,7 +26,7 @@
         z-index: 0;
     }
     
-    #parent img {
+    #wrap img {
         width: 100%;
         height: 100%;
     }
@@ -34,43 +34,40 @@
 </head>
 
 <body>
-    <div id="parent">
-        <div class="box"><img src="" alt=""></div>
-        <div class="box"><img src="" alt=""></div>
-        <div class="box"><img src="" alt=""></div>
-        <div class="box"><img src="" alt=""></div>
-        <div class="box"><img src="" alt=""></div>
-        <div class="box"><img src="" alt=""></div>
-        <div class="box"><img src="" alt=""></div>
-        <div class="box"><img src="" alt=""></div>
-        <div class="box"><img src="" alt=""></div>
-    </div>
+    <div id="wrap"></div>
     <input type="file" value="上传图片" id="selectPic" accept="image/*">
     <script>
     $(document).ready(function() {
         var url = 'head.jpg'
         var size = 4
+        var wrap = $('#wrap')
         var documentWidth = window.screen.availWidth
-        var parentWidth = documentWidth * 0.92;
-        var boxWidth = parentWidth / size
+        var wrapWidth = documentWidth * 0.92;
+        var boxWidth = wrapWidth / size
         if (documentWidth > 500) {
-            parentWidth = 300;
-            boxWidth = parentWidth / size
+            wrapWidth = 300;
+            boxWidth = wrapWidth / size
         }
-        $('#parent').width(parentWidth)
-        $('#parent').height(parentWidth)
-        $('#parent box').width(boxWidth)
-        $('#parent box').height(boxWidth)
+        $('#wrap').width(wrapWidth)
+        $('#wrap').height(wrapWidth)
 
         //创建构造函数
-        function Jigsaw(url, size) {
+        function Jigsaw(wrap, url, size) {
+            this.wrap = wrap
             this.url = url
             this.size = size
+            this.createBox()
             this.createCanvas()
             this.init()
             this.render()
             this.bind()
         }
+        //创建格子
+        Jigsaw.prototype.createBox = function() {
+            for (var i = 0; i < size; i++) {
+                wrap.append('<div class="box"><img src="" alt=""></div>')
+            }
+        };
 
         //创建画布
         Jigsaw.prototype.createCanvas = function() {
@@ -89,9 +86,9 @@
             this.ctx = this.canvas.getContext('2d')
             this.image = new Image()
             this.box = $('.box')
-            this.parent = $('#parent')
-            this.parentOffsetleft = this.parent.offset().left
-            this.parentOffsettop = this.parent.offset().top
+            this.wrap = $('#wrap')
+            this.parentOffsetleft = this.wrap.offset().left
+            this.parentOffsettop = this.wrap.offset().top
             this.flag = false
             this.imgArr = [];
             for (var i = 0; i < size * size; i++) {
@@ -257,7 +254,7 @@
         Jigsaw.prototype.check = function() {
             var resArr = [];
             var self = this
-            $('#parent img').each(function(index, element) {
+            $('#wrap img').each(function(index, element) {
                 resArr.push(element.getAttribute('index'));
             });
             if (resArr.join("") === self.imgArr.join("")) {
