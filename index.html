@@ -52,6 +52,7 @@
         var boxWidth = parentWidth / 3
         if (documentWidth > 500) {
             parentWidth = 300;
+            boxWidth = parentWidth / 3
         }
         $('#parent').width(parentWidth)
         $('#parent').height(parentWidth)
@@ -77,7 +78,7 @@
             can.height = boxWidth;
             document.body.appendChild(can);
         };
-        
+
         //初始化数据
         Jigsaw.prototype.init = function() {
             this.canvas = document.getElementById('canvas')
