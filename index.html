@@ -283,6 +283,7 @@
             if (this.files && this.files[0]) {
                 reader.onload = function(e) {
                     url = e.target.result;
+                    wrap.empty()
                     new Jigsaw(wrap, url, size)
                 };
                 reader.readAsDataURL(this.files[0]);
@@ -290,12 +291,15 @@
         }
 
         $('#three').click(function () {
+            wrap.empty()
             new Jigsaw(wrap, url, 3)
         })
         $('#four').click(function () {
+            wrap.empty()
             new Jigsaw(wrap, url, 4)
         })
         $('#five').click(function () {
+            wrap.empty()
             new Jigsaw(wrap, url, 5)
         })
 
