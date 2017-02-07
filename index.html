@@ -16,9 +16,6 @@
         position: relative;
         margin: 40px auto;
         background-color: #F4F4F4;
-        justify-content: center; //子元素水平居中
-        align-items: center; //子元素垂直居中
-        display: flex;
     }
     
     .box {
@@ -38,18 +35,18 @@
 
 <body>
     <div id="parent">
-        <div>
-            <div class="box"><img src="" alt=""></div>
-            <div class="box"><img src="" alt=""></div>
-            <div class="box"><img src="" alt=""></div>
-            <div class="box"><img src="" alt=""></div>
-            <div class="box"><img src="" alt=""></div>
-            <div class="box"><img src="" alt=""></div>
-            <div class="box"><img src="" alt=""></div>
-            <div class="box"><img src="" alt=""></div>
-            <div class="box"><img src="" alt=""></div>
-        </div>
+        <div class="box"><img src="" alt=""></div>
+        <div class="box"><img src="" alt=""></div>
+        <div class="box"><img src="" alt=""></div>
+        <div class="box"><img src="" alt=""></div>
+        <div class="box"><img src="" alt=""></div>
+        <div class="box"><img src="" alt=""></div>
+        <div class="box"><img src="" alt=""></div>
+        <div class="box"><img src="" alt=""></div>
+        <div class="box"><img src="" alt=""></div>
     </div>
+
+    <input type="file" value="上传图片" onchange="getImgURL(this)">
     <script>
     $(document).ready(function() {
         var documentWidth = window.screen.availWidth
@@ -63,6 +60,8 @@
         $('#parent').height(parentWidth)
         $('#parent box').width(boxWidth)
         $('#parent box').height(boxWidth)
+
+
 
         //创建构造函数
         function Jigsaw(url) {
@@ -263,6 +262,20 @@
         };
 
         var url = 'head.jpg'
+
+        function getImgURL(node) {
+        var file = null;
+        if (node.files && node.files[0]) {
+            file = node.files[0];
+        } else if (node.files && node.files.item(0)) {
+            file = node.files.item(0);
+        }
+
+        node.select();
+        url = document.selection.createRange().text;
+        new Jigsaw(url)
+
+    }
 
         new Jigsaw(url)
     })
