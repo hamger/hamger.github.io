@@ -45,8 +45,7 @@
         <div class="box"><img src="" alt=""></div>
         <div class="box"><img src="" alt=""></div>
     </div>
-
-    <input type="file" value="上传图片" onchange="getImgURL(this)">
+    <input type="file" value="上传图片" id="selectPic" accept="image/*">
     <script>
     $(document).ready(function() {
         var documentWidth = window.screen.availWidth
@@ -264,18 +263,23 @@
         var url = 'head.jpg'
 
         function getImgURL(node) {
-        var file = null;
-        if (node.files && node.files[0]) {
-            file = node.files[0];
-        } else if (node.files && node.files.item(0)) {
-            file = node.files.item(0);
+            var reader = new FileReader()
+            if (!reader) {
+                alert('你的浏览器不支持FileReader')
+                return
+            }
+            if (node.files && node.files[0]) {
+                reader.onload = function(e) {
+                    url = e.target.result;
+                };
+                reader.readAsDataURL(node.files[0]);
+            }
+
+            new Jigsaw(url)
         }
 
-        node.select();
-        url = document.selection.createRange().text;
-        var jigsaw = new Jigsaw(url)
-
-    }
+        document.getElementById('selectPic').addEventListener('change',
+            getImgURL, false);
 
         new Jigsaw(url)
     })
