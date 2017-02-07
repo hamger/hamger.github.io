@@ -38,9 +38,9 @@
     <div class="container-fluid">
         <div id="wrap"></div>
         <div class="row">
-            <button class="col-md-4 btn btn-info" type="button" id="three"></button>
-            <button class="col-md-4 btn btn-wraning" type="button" id="four"></button>
-            <button class="col-md-4 btn btn-danger" type="button" id="five"></button>
+            <button class="col-md-4 btn btn-info" type="button" id="three">3 x 3</button>
+            <button class="col-md-4 btn btn-wraning" type="button" id="four">4 x 4</button>
+            <button class="col-md-4 btn btn-danger" type="button" id="five">5 x 5</button>
         </div>
 
         <input type="file" value="上传图片" id="selectPic" accept="image/*">
@@ -284,20 +284,20 @@
             if (this.files && this.files[0]) {
                 reader.onload = function(e) {
                     imgURL = e.target.result;
-                    jig(wrap, imgURL, size)
+                    new Jigsaw(wrap, imgURL, size)
                 };
                 reader.readAsDataURL(this.files[0]);
             }
         }
 
         $('#three').click(function () {
-            jig(wrap, url, 3)
+            new Jigsaw(wrap, url, 3)
         })
         $('#four').click(function () {
-            jig(wrap, url, 4)
+            new Jigsaw(wrap, url, 4)
         })
         $('#five').click(function () {
-            jig(wrap, url, 5)
+            new Jigsaw(wrap, url, 5)
         })
 
 
