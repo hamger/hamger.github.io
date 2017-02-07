@@ -228,6 +228,7 @@
         };
         //抬起时的事件程序
         Jigsaw.prototype.up = function() {
+            event.preventDefault();
             this.flag = false
             var positionIndex = this.moveboxPosition(this.position);
             if (positionIndex in this.imgArr) {
