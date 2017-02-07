@@ -130,11 +130,11 @@
         Jigsaw.prototype.bind = function() {
             var boxs = getElementsByClassName('box')
             boxs.on('mousedown', function(ev) {
-                /*self.oDiv = $(this)*/
+                self.oDiv = $(this)
                 self.down(ev)
             })
             boxs.on('touchstart', function(ev) {
-                /*self.oDiv = $(this)*/
+                self.oDiv = $(this)
                 self.down(ev)
             })
 
@@ -170,7 +170,6 @@
         Jigsaw.prototype.down = function(ev) {
             ev.preventDefault();
             var oEvent = this.isTouch(ev);
-            this.oDiv = $(ev.target).parent()
             this.flag = true
             this.oDiv.css('zIndex', 1)
             var oDivOffsetleft = this.oDiv.offset().left;
