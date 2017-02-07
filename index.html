@@ -75,11 +75,11 @@
         };
         //创建画布
         Jigsaw.prototype.createCanvas = function() {
-            var canvas = document.createElement('canvas'); 
-            canvas.id  =  'canvas';
-            canvas.style.display = 'none';
-            canvas.width = 100;
-            canvas.height = 100;
+            this.can = document.createElement('canvas'); 
+            this.can.id  =  'canvas';
+            this.can.style.display = 'none';
+            this.can.width = 100;
+            this.can.height = 100;
         };
         //随机数组
         Jigsaw.prototype.randomSort = function(arr) {
