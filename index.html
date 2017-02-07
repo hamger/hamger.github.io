@@ -123,7 +123,7 @@
         Jigsaw.prototype.bind = function() {
             var self = this
             /*var boxs = document.getElementsByClassName('box')*/
-            
+
             this.box.on('mousedown',function(ev) {
                 self.oDiv = $(this)
                 self.down(ev)
@@ -199,7 +199,6 @@
                 var html2 = this.box.eq(positionIndex).html()
                 this.box.eq(positionIndex).html(html)
                 this.oDiv.html(html2)
-
             }
             this.oDiv.css({
                 left: this.oriboxLeft + 'px',
@@ -210,7 +209,7 @@
         };
         //根据坐标位置返回index
         Jigsaw.prototype.moveboxPosition = function(position) {
-            return Math.floor(position.x / 100) * 3 + Math.floor(position.y / 100);
+            return Math.floor(position.y / 100) * 3 + Math.floor(position.x / 100);
         };
         //检查拼图是否完成
         Jigsaw.prototype.check = function() {
