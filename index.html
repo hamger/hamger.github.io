@@ -12,6 +12,7 @@
     #drap {
         position: relative;
     }
+    
     #parent {
         width: 300px;
         height: 300px;
@@ -37,20 +38,19 @@
 </head>
 
 <body>
-<div id="drap">
-    <div id="parent">
-        <div class="box"><img src="" alt=""></div>
-        <div class="box"><img src="" alt=""></div>
-        <div class="box"><img src="" alt=""></div>
-        <div class="box"><img src="" alt=""></div>
-        <div class="box"><img src="" alt=""></div>
-        <div class="box"><img src="" alt=""></div>
-        <div class="box"><img src="" alt=""></div>
-        <div class="box"><img src="" alt=""></div>
-        <div class="box"><img src="" alt=""></div>
+    <div id="drap">
+        <div id="parent">
+            <div class="box"><img src="" alt=""></div>
+            <div class="box"><img src="" alt=""></div>
+            <div class="box"><img src="" alt=""></div>
+            <div class="box"><img src="" alt=""></div>
+            <div class="box"><img src="" alt=""></div>
+            <div class="box"><img src="" alt=""></div>
+            <div class="box"><img src="" alt=""></div>
+            <div class="box"><img src="" alt=""></div>
+            <div class="box"><img src="" alt=""></div>
+        </div>
     </div>
-</div>
-    
     <input type="file" value="上传图片" id="selectPic" accept="image/*">
     <script>
     $(document).ready(function() {
@@ -176,7 +176,7 @@
                 self.down(ev)
             })*/
 
-     
+
             drap.addEventListener('mousemove', function(ev) {
                 if (self.flag) {
                     self.move(ev)
@@ -270,18 +270,18 @@
 
         var url = 'head.jpg'
 
-        function getImgURL(node) {
+        function getImgURL() {
             var reader = new FileReader()
             if (!reader) {
                 alert('你的浏览器不支持FileReader')
                 return
             }
-            if (node.files && node.files[0]) {
+            if (this.files && this.files[0]) {
                 reader.onload = function(e) {
                     url = e.target.result;
                     new Jigsaw(url)
                 };
-                reader.readAsDataURL(node.files[0]);
+                reader.readAsDataURL(this.files[0]);
             }
 
 
