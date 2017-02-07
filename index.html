@@ -228,7 +228,6 @@
         };
         //抬起时的事件程序
         Jigsaw.prototype.up = function() {
-            event.preventDefault();
             this.flag = false
             var positionIndex = this.moveboxPosition(this.position);
             if (positionIndex in this.imgArr) {
@@ -262,6 +261,8 @@
 
         var url = 'head.jpg'
 
+        new Jigsaw(url)
+
         function getImgURL() {
             var reader = new FileReader()
             if (!reader) {
@@ -281,8 +282,6 @@
 
         document.getElementById('selectPic').addEventListener('change',
             getImgURL, false);
-
-        new Jigsaw(url)
     })
     </script>
 </body>
