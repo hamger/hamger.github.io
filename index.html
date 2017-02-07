@@ -96,7 +96,7 @@
                 y: 0
             }
         };
-        
+
         //随机数组
         Jigsaw.prototype.randomSort = function(arr) {
             var currentIndex = arr.length,
@@ -164,7 +164,7 @@
                     if (self.flag) {
                         self.move(ev)
                     }
-                })
+            })
                 /*document.addEventListener('touchmove',function(ev) {
                     if (self.flag) {
                         self.move(ev)
@@ -172,7 +172,6 @@
                 })*/
             $(document).on('mouseup', function(ev) {
                     self.up()
-                    $(document).unbind()
                 })
                 /*document.addEventListener('touchend',function(ev) {
                     self.up()
