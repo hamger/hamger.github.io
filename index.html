@@ -148,34 +148,46 @@
         Jigsaw.prototype.bind = function() {
 
             var self = this
-            var boxs = document.getElementsByClassName('box')
+            /*var boxs = document.getElementsByClassName('box')*/
 
             this.box.on('mousedown', function(ev) {
                 self.oDiv = $(this)
                 self.down(ev)
             })
-
-            boxs.addEventListener('touchstart', function(ev) {
+            this.box.on('touchstart', function(ev) {
                 self.oDiv = $(this)
                 self.down(ev)
             })
+
+            /*boxs.addEventListener('touchstart', function(ev) {
+                self.oDiv = $(this)
+                self.down(ev)
+            })*/
 
             $(document).on('mousemove', function(ev) {
                 if (self.flag) {
                     self.move(ev)
                 }
             })
-            document.addEventListener('touchmove', function(ev) {
+            $(document).on('touchmove', function(ev) {
                 if (self.flag) {
                     self.move(ev)
                 }
             })
+            /*document.addEventListener('touchmove', function(ev) {
+                if (self.flag) {
+                    self.move(ev)
+                }
+            })*/
             $(document).on('mouseup', function(ev) {
                 self.up()
             })
-            document.addEventListener('touchend', function(ev) {
+            $(document).on('touchend', function(ev) {
                 self.up()
             })
+            /*document.addEventListener('touchend', function(ev) {
+                self.up()
+            })*/
 
 
         };
@@ -250,7 +262,7 @@
             }
         };
 
-        var url = 'tuzi.jpg'
+        var url = 'head.jpg'
 
         new Jigsaw(url)
     })
