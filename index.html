@@ -45,13 +45,13 @@
         <div class="box"><img src="" alt=""></div>
         <div class="box"><img src="" alt=""></div>
     </div>
-    <canvas id="canvas" style="display: none" width="300" height="300"></canvas>
+    <!-- <canvas id="canvas" style="display: none" width="300" height="300"></canvas> -->
     <script>
     $(document).ready(function() {
         //创建构造函数
         function Jigsaw(url) {
-            this.url = url;
-            //构造三部曲 
+            this.url = url
+            this.createCanvas()
             this.init()
             this.render()
             this.bind()
@@ -72,6 +72,14 @@
                 x: 0,
                 y: 0
             }
+        };
+        //创建画布
+        Jigsaw.prototype.createCanvas = function() {
+            var canvas = document.createElement('canvas'); 
+            canvas.id  =  'canvas';
+            canvas.style.display = 'none';
+            canvas.width = 100;
+            canvas.height = 100;
         };
         //随机数组
         Jigsaw.prototype.randomSort = function(arr) {
@@ -110,7 +118,7 @@
             var index = 0;
             for (var i = 0; i < 3; i++) {
                 for (var j = 0; j < 3; j++) {
-                    self.ctx.drawImage(this.image, 300 * j, 300 * i, 300, 300, 0, 0, 300, 300);
+                    self.ctx.drawImage(this.image, 100 * j, 100 * i, 100, 100, 0, 0, 100, 100);
                     self.box.eq(self.imgRandomArr[index]).find('img').attr({
                         'index': index,
                         'src': self.canvas.toDataURL('image/jpeg')
@@ -121,6 +129,7 @@
         };
         //绑定事件
         Jigsaw.prototype.bind = function() {
+            
             var self = this
             /*var boxs = document.getElementsByClassName('box')*/
 
@@ -129,11 +138,11 @@
                 self.down(ev)
             })
            
-           /* boxs.addEventListener('touchstart',function(ev) {
+            /* boxs.addEventListener('touchstart',function(ev) {
                 self.oDiv = $(this)
                 self.down(ev)
-            })
-*/
+            })*/
+
             $(document).on('mousemove', function(ev) {
                 if (self.flag) {
                     self.move(ev)
@@ -223,7 +232,7 @@
             }
         };
 
-        var url = 'tuzi.jpg'
+        var url = 'head.jpg'
 
         new Jigsaw(url)
     })
