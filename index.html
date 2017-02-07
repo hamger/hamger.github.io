@@ -48,12 +48,14 @@
     <input type="file" value="上传图片" id="selectPic" accept="image/*">
     <script>
     $(document).ready(function() {
+        var url = 'head.jpg'
+        var size = 4
         var documentWidth = window.screen.availWidth
         var parentWidth = documentWidth * 0.92;
-        var boxWidth = parentWidth / 3
+        var boxWidth = parentWidth / size
         if (documentWidth > 500) {
             parentWidth = 300;
-            boxWidth = parentWidth / 3
+            boxWidth = parentWidth / size
         }
         $('#parent').width(parentWidth)
         $('#parent').height(parentWidth)
@@ -61,8 +63,9 @@
         $('#parent box').height(boxWidth)
 
         //创建构造函数
-        function Jigsaw(url) {
+        function Jigsaw(url, size) {
             this.url = url
+            this.size = size
             this.createCanvas()
             this.init()
             this.render()
@@ -90,7 +93,10 @@
             this.parentOffsetleft = this.parent.offset().left
             this.parentOffsettop = this.parent.offset().top
             this.flag = false
-            this.imgArr = [0, 1, 2, 3, 4, 5, 6, 7, 8];
+            this.imgArr = [];
+            for (var i = 0; i < size * size; i++) {
+                imgArr.push(i)
+            }
             this.imgRandomArr = this.randomSort(this.imgArr.slice(0))
             this.position = {
                 x: 0,
@@ -114,8 +120,8 @@
         // 渲染九宫格
         Jigsaw.prototype.render = function() {
             var index = 0;
-            for (var i = 0; i < 3; i++) {
-                for (var j = 0; j < 3; j++) {
+            for (var i = 0; i < size; i++) {
+                for (var j = 0; j < size; j++) {
                     this.box.eq(index).css({
                         top: i * boxWidth + 'px',
                         left: j * boxWidth + 'px'
@@ -133,9 +139,9 @@
         Jigsaw.prototype.randomImage = function() {
             var self = this;
             var index = 0;
-            for (var i = 0; i < 3; i++) {
-                for (var j = 0; j < 3; j++) {
-                    var w = this.image.width / 3
+            for (var i = 0; i < size; i++) {
+                for (var j = 0; j < size; j++) {
+                    var w = this.image.width / size
                     self.ctx.drawImage(this.image, w * j, w * i, w, w, 0, 0, boxWidth, boxWidth);
                     self.box.eq(self.imgRandomArr[index]).find('img').attr({
                         'index': index,
@@ -218,8 +224,8 @@
             var boxLeft = oEvent.pageX - this.boxX - this.parentOffsetleft;
             var boxTop = oEvent.pageY - this.boxY - this.parentOffsettop;
 
-            this.position.x = boxLeft + 50;
-            this.position.y = boxTop + 50;
+            this.position.x = boxLeft + boxWidth / 2;
+            this.position.y = boxTop + boxWidth / 2;
 
             this.oDiv.css({
                 left: boxLeft + 'px',
@@ -245,7 +251,7 @@
         };
         //根据坐标位置返回index
         Jigsaw.prototype.moveboxPosition = function(position) {
-            return Math.floor(position.y / boxWidth) * 3 + Math.floor(position.x / boxWidth);
+            return Math.floor(position.y / boxWidth) * size + Math.floor(position.x / boxWidth);
         };
         //检查拼图是否完成
         Jigsaw.prototype.check = function() {
@@ -259,9 +265,7 @@
             }
         };
 
-        var url = 'head.jpg'
-
-        var jig = new Jigsaw(url)
+        var jig = new Jigsaw(url, size)
         var saw
 
         function getImgURL() {
@@ -274,7 +278,7 @@
             if (this.files && this.files[0]) {
                 reader.onload = function(e) {
                     imgURL = e.target.result;
-                    saw = new Jigsaw(imgURL)
+                    saw = new Jigsaw(imgURL, sizes)
                 };
                 reader.readAsDataURL(this.files[0]);
             }
