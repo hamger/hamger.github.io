@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>jigsaw</title>
+    <title>拖拽拼图</title>
     <link rel="shortcut icon" type="image/x-icon" href="http://static.yangbai.me/images/favicon.ico">
     <link rel="" type="" href="bootstarp.min.css">
     <script type="text/javascript" src="jquery.js"></script>
@@ -73,7 +73,7 @@
         }
         //创建格子
         Jigsaw.prototype.createBox = function() {
-            for (var i = 0; i < size * size; i++) {
+            for (var i = 0; i < this.size * this.size; i++) {
                 wrap.append('<div class="box"><img src="" alt=""></div>')
             }
             $('.box').width(boxWidth)
@@ -101,7 +101,7 @@
             this.parentOffsettop = this.wrap.offset().top
             this.flag = false
             this.imgArr = [];
-            for (var i = 0; i < size * size; i++) {
+            for (var i = 0; i < this.size * this.size; i++) {
                 this.imgArr.push(i)
             }
             this.imgRandomArr = this.randomSort(this.imgArr.slice(0))
@@ -127,8 +127,8 @@
         // 渲染九宫格
         Jigsaw.prototype.render = function() {
             var index = 0;
-            for (var i = 0; i < size; i++) {
-                for (var j = 0; j < size; j++) {
+            for (var i = 0; i < this.size; i++) {
+                for (var j = 0; j < this.size; j++) {
                     this.box.eq(index).css({
                         top: i * boxWidth + 'px',
                         left: j * boxWidth + 'px'
@@ -146,9 +146,9 @@
         Jigsaw.prototype.randomImage = function() {
             var self = this;
             var index = 0;
-            for (var i = 0; i < size; i++) {
-                for (var j = 0; j < size; j++) {
-                    var w = this.image.width / size
+            for (var i = 0; i < this.size; i++) {
+                for (var j = 0; j < this.size; j++) {
+                    var w = this.image.width / this.size
                     self.ctx.drawImage(this.image, w * j, w * i, w, w, 0, 0, boxWidth, boxWidth);
                     self.box.eq(self.imgRandomArr[index]).find('img').attr({
                         'index': index,
@@ -258,7 +258,7 @@
         };
         //根据坐标位置返回index
         Jigsaw.prototype.moveboxPosition = function(position) {
-            return Math.floor(position.y / boxWidth) * size + Math.floor(position.x / boxWidth);
+            return Math.floor(position.y / boxWidth) * this.size + Math.floor(position.x / boxWidth);
         };
         //检查拼图是否完成
         Jigsaw.prototype.check = function() {
