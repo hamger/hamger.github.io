@@ -271,11 +271,12 @@
             if (node.files && node.files[0]) {
                 reader.onload = function(e) {
                     url = e.target.result;
+                    new Jigsaw(url)
                 };
                 reader.readAsDataURL(node.files[0]);
             }
 
-            new Jigsaw(url)
+
         }
 
         document.getElementById('selectPic').addEventListener('change',
