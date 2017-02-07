@@ -16,6 +16,9 @@
         position: relative;
         margin: 40px auto;
         background-color: #F4F4F4;
+        justify-content: center; //子元素水平居中
+        align-items: center; //子元素垂直居中
+        display: flex;
     }
     
     .box {
@@ -35,15 +38,17 @@
 
 <body>
     <div id="parent">
-        <div class="box"><img src="" alt=""></div>
-        <div class="box"><img src="" alt=""></div>
-        <div class="box"><img src="" alt=""></div>
-        <div class="box"><img src="" alt=""></div>
-        <div class="box"><img src="" alt=""></div>
-        <div class="box"><img src="" alt=""></div>
-        <div class="box"><img src="" alt=""></div>
-        <div class="box"><img src="" alt=""></div>
-        <div class="box"><img src="" alt=""></div>
+        <div>
+            <div class="box"><img src="" alt=""></div>
+            <div class="box"><img src="" alt=""></div>
+            <div class="box"><img src="" alt=""></div>
+            <div class="box"><img src="" alt=""></div>
+            <div class="box"><img src="" alt=""></div>
+            <div class="box"><img src="" alt=""></div>
+            <div class="box"><img src="" alt=""></div>
+            <div class="box"><img src="" alt=""></div>
+            <div class="box"><img src="" alt=""></div>
+        </div>
     </div>
     <script>
     $(document).ready(function() {
@@ -177,7 +182,7 @@
                     self.move(ev)
                 }
             })
-            
+
             $(document).on('mouseup', function(ev) {
                 self.up()
             })
