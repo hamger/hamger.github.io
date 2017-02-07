@@ -67,6 +67,8 @@
             for (var i = 0; i < size; i++) {
                 wrap.append('<div class="box"><img src="" alt=""></div>')
             }
+            $('.box').height(boxWidth)
+            $('.box').width(boxWidth)
         };
 
         //创建画布
@@ -261,7 +263,7 @@
             }
         };
 
-        var jig = new Jigsaw(wrap,url, size)
+        var jig = new Jigsaw(wrap, url, size)
         var saw
 
         function getImgURL() {
@@ -274,7 +276,7 @@
             if (this.files && this.files[0]) {
                 reader.onload = function(e) {
                     imgURL = e.target.result;
-                    saw = new Jigsaw(wrap,imgURL, size)
+                    saw = new Jigsaw(wrap, imgURL, size)
                 };
                 reader.readAsDataURL(this.files[0]);
             }
