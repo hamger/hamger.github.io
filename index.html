@@ -76,7 +76,7 @@
         //创建画布
         Jigsaw.prototype.createCanvas = function() {
             this.can = document.createElement('canvas'); 
-            this.can.id  =  'canvas';
+            this.can.setAttribute("id",'canvas')
             this.can.style.display = 'none';
             this.can.width = 100;
             this.can.height = 100;
