@@ -86,7 +86,6 @@
             this.ctx = this.canvas.getContext('2d')
             this.image = new Image()
             this.box = $('.box')
-            this.wrap = $('#wrap')
             this.parentOffsetleft = this.wrap.offset().left
             this.parentOffsettop = this.wrap.offset().top
             this.flag = false
@@ -262,7 +261,7 @@
             }
         };
 
-        var jig = new Jigsaw(url, size)
+        var jig = new Jigsaw(wrap,url, size)
         var saw
 
         function getImgURL() {
@@ -275,7 +274,7 @@
             if (this.files && this.files[0]) {
                 reader.onload = function(e) {
                     imgURL = e.target.result;
-                    saw = new Jigsaw(imgURL, sizes)
+                    saw = new Jigsaw(wrap,imgURL, size)
                 };
                 reader.readAsDataURL(this.files[0]);
             }
