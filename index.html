@@ -122,33 +122,34 @@
         //绑定事件
         Jigsaw.prototype.bind = function() {
             var self = this
-            var boxs = document.getElementsByClassName('box')
+            /*var boxs = document.getElementsByClassName('box')*/
             
-            boxs.addEventListener('mousedown',function(ev) {
+            this.box.on('mousedown',function(ev) {
                 self.oDiv = $(this)
                 self.down(ev)
             })
-            boxs.addEventListener('touchstart',function(ev) {
+           
+           /* boxs.addEventListener('touchstart',function(ev) {
                 self.oDiv = $(this)
                 self.down(ev)
             })
-
+*/
             $(document).on('mousemove', function(ev) {
                 if (self.flag) {
                     self.move(ev)
                 }
             })
-            document.addEventListener('touchmove',function(ev) {
+            /*document.addEventListener('touchmove',function(ev) {
                 if (self.flag) {
                     self.move(ev)
                 }
-            })
+            })*/
             $(document).on('mouseup', function(ev) {
                 self.up()
             })
-            document.addEventListener('touchend',function(ev) {
+            /*document.addEventListener('touchend',function(ev) {
                 self.up()
-            })
+            })*/
             
         };
         //根据PC端or移动端返回event
