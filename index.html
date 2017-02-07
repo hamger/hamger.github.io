@@ -148,7 +148,7 @@
         Jigsaw.prototype.bind = function() {
 
             var self = this
-            var boxs = document.getElementByClassName('box')
+            var boxs = document.getElementsByClassName('box')
 
             this.box.on('mousedown', function(ev) {
                 self.oDiv = $(this)
