@@ -262,6 +262,7 @@
         var url = 'head.jpg'
 
         var jig = new Jigsaw(url)
+        var saw
 
         function getImgURL() {
             var imgURL = ''
@@ -273,7 +274,7 @@
             if (this.files && this.files[0]) {
                 reader.onload = function(e) {
                     imgURL = e.target.result;
-                    var saw = new Jigsaw(imgURL)
+                    saw = new Jigsaw(imgURL)
                 };
                 reader.readAsDataURL(this.files[0]);
             }
