@@ -121,12 +121,14 @@
         };
         //绑定事件
         Jigsaw.prototype.bind = function() {
+            var self = this
             var boxs = document.getElementsByClassName('box')
-            boxs.on('mousedown', function(ev) {
+            
+            boxs.addEventListener('mousedown',function(ev) {
                 self.oDiv = $(this)
                 self.down(ev)
             })
-            boxs.on('touchstart', function(ev) {
+            boxs.addEventListener('touchstart',function(ev) {
                 self.oDiv = $(this)
                 self.down(ev)
             })
