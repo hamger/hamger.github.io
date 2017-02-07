@@ -45,7 +45,6 @@
         <div class="box"><img src="" alt=""></div>
         <div class="box"><img src="" alt=""></div>
     </div>
-    <!-- <canvas id="canvas" style="display: none" width="300" height="300"></canvas> -->
     <script>
     $(document).ready(function() {
         //创建构造函数
@@ -75,12 +74,13 @@
         };
         //创建画布
         Jigsaw.prototype.createCanvas = function() {
-            this.can = document.createElement('canvas'); 
-            this.can.setAttribute("id",'canvas')
-            this.can.style.display = 'none';
-            this.can.width = 100;
-            this.can.height = 100;
-            document.body.appendChild(this.can);
+            var can = document.createElement('canvas'); 
+            /*can.setAttribute("id",'canvas')*/
+            can.id = 'canvas'
+            can.style.display = 'none';
+            can.width = 100;
+            can.height = 100;
+            document.body.appendChild(can);
         };
         //随机数组
         Jigsaw.prototype.randomSort = function(arr) {
