@@ -9,6 +9,9 @@
     <script type="text/javascript" src="jquery.js"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <style>
+    #drap {
+        position: relative;
+    }
     #parent {
         width: 300px;
         height: 300px;
@@ -34,6 +37,7 @@
 </head>
 
 <body>
+<div id="drap">
     <div id="parent">
         <div class="box"><img src="" alt=""></div>
         <div class="box"><img src="" alt=""></div>
@@ -45,6 +49,8 @@
         <div class="box"><img src="" alt=""></div>
         <div class="box"><img src="" alt=""></div>
     </div>
+</div>
+    
     <input type="file" value="上传图片" id="selectPic" accept="image/*">
     <script>
     $(document).ready(function() {
@@ -152,6 +158,7 @@
 
             var self = this
             var boxs = document.getElementsByClassName('box')
+            var drap = document.getElementById('drap')
 
             this.box.on('mousedown', function(ev) {
                 self.oDiv = $(this)
@@ -169,23 +176,24 @@
                 self.down(ev)
             })*/
 
-            $(document).on('mousemove', function(ev) {
+     
+            drap.addEventListener('mousemove', function(ev) {
                 if (self.flag) {
                     self.move(ev)
                 }
             })
 
-            document.addEventListener('touchmove', function(ev) {
+            drap.addEventListener('touchmove', function(ev) {
                 if (self.flag) {
                     self.move(ev)
                 }
             })
 
-            $(document).on('mouseup', function(ev) {
+            drap.addEventListener('mouseup', function(ev) {
                 self.up()
             })
 
-            document.addEventListener('touchend', function(ev) {
+            drap.addEventListener('touchend', function(ev) {
                 self.up()
             })
         };
