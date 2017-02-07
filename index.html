@@ -6,8 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <title>拖拽拼图</title>
     <link rel="shortcut icon" type="image/x-icon" href="http://static.yangbai.me/images/favicon.ico">
-    <link rel="" type="" href="bootstarp.min.css">
-    <script type="text/javascript" src="jquery.js"></script>
+    <script type="text/javascript" src="zepto.js"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <style>
     #wrap {
@@ -35,16 +34,16 @@
 </head>
 
 <body>
-    <div class="container-fluid">
         <div id="wrap"></div>
-        <div class="row">
-            <button class="col-md-4 btn btn-info" type="button" id="three">3 x 3</button>
-            <button class="col-md-4 btn btn-wraning" type="button" id="four">4 x 4</button>
-            <button class="col-md-4 btn btn-danger" type="button" id="five">5 x 5</button>
+
+        <div id="options">
+            <div class="option" id="three">3 × 3</div>
+            <div class="option" id="four">4 × 4</div>
+            <div class="option" id='five'>5 × 5</div>
         </div>
 
         <input type="file" value="上传图片" id="selectPic" accept="image/*">
-    </div>
+
     <script>
     $(document).ready(function() {
         var url = 'head.jpg'
