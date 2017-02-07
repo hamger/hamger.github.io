@@ -64,11 +64,11 @@
         }
         //创建格子
         Jigsaw.prototype.createBox = function() {
-            for (var i = 0; i < size; i++) {
+            for (var i = 0; i < size*size; i++) {
                 wrap.append('<div class="box"><img src="" alt=""></div>')
             }
-            $('.box').height(boxWidth)
             $('.box').width(boxWidth)
+            $('.box').height(boxWidth)
         };
 
         //创建画布
