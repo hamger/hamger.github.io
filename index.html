@@ -52,10 +52,8 @@
         var wrap = $('#wrap')
         var documentWidth = window.screen.availWidth
         var wrapWidth = documentWidth * 0.92;
-        var boxWidth = wrapWidth / size
         if (documentWidth > 500) {
             wrapWidth = 300;
-            boxWidth = wrapWidth / size
         }
         $('#wrap').width(wrapWidth)
         $('#wrap').height(wrapWidth)
@@ -65,6 +63,7 @@
             this.wrap = wrap
             this.url = url
             this.size = size
+            this.boxWidth = wrapWidth / this.size
             this.createBox()
             this.createCanvas()
             this.init()
@@ -76,8 +75,8 @@
             for (var i = 0; i < this.size * this.size; i++) {
                 wrap.append('<div class="box"><img src="" alt=""></div>')
             }
-            $('.box').width(boxWidth)
-            $('.box').height(boxWidth)
+            $('.box').width(this.boxWidth)
+            $('.box').height(this.boxWidth)
         };
 
         //创建画布
@@ -86,8 +85,8 @@
             /*can.setAttribute("id",'canvas')*/
             can.id = 'canvas'
             can.style.display = 'none';
-            can.width = boxWidth;
-            can.height = boxWidth;
+            can.width = this.boxWidth;
+            can.height = this.boxWidth;
             document.body.appendChild(can);
         };
 
@@ -130,8 +129,8 @@
             for (var i = 0; i < this.size; i++) {
                 for (var j = 0; j < this.size; j++) {
                     this.box.eq(index).css({
-                        top: i * boxWidth + 'px',
-                        left: j * boxWidth + 'px'
+                        top: i * this.boxWidth + 'px',
+                        left: j * this.boxWidth + 'px'
                     });
                     index++;
                 }
@@ -149,7 +148,7 @@
             for (var i = 0; i < this.size; i++) {
                 for (var j = 0; j < this.size; j++) {
                     var w = this.image.width / this.size
-                    self.ctx.drawImage(this.image, w * j, w * i, w, w, 0, 0, boxWidth, boxWidth);
+                    self.ctx.drawImage(this.image, w * j, w * i, w, w, 0, 0, this.boxWidth, this.boxWidth);
                     self.box.eq(self.imgRandomArr[index]).find('img').attr({
                         'index': index,
                         'src': self.canvas.toDataURL('image/jpeg')
@@ -231,8 +230,8 @@
             var boxLeft = oEvent.pageX - this.boxX - this.parentOffsetleft;
             var boxTop = oEvent.pageY - this.boxY - this.parentOffsettop;
 
-            this.position.x = boxLeft + boxWidth / 2;
-            this.position.y = boxTop + boxWidth / 2;
+            this.position.x = boxLeft + this.boxWidth / 2;
+            this.position.y = boxTop + this.boxWidth / 2;
 
             this.oDiv.css({
                 left: boxLeft + 'px',
@@ -258,7 +257,7 @@
         };
         //根据坐标位置返回index
         Jigsaw.prototype.moveboxPosition = function(position) {
-            return Math.floor(position.y / boxWidth) * this.size + Math.floor(position.x / boxWidth);
+            return Math.floor(position.y / this.boxWidth) * this.size + Math.floor(position.x / this.boxWidth);
         };
         //检查拼图是否完成
         Jigsaw.prototype.check = function() {
@@ -272,8 +271,8 @@
             }
         };
 
-        var jig = new Jigsaw(wrap, url, size)
-
+        new Jigsaw(wrap, url, size)
+        // 得到本地图片url
         function getImgURL() {
             var reader = new FileReader()
             if (!reader) {
