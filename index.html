@@ -175,6 +175,7 @@
         Jigsaw.prototype.init = function() {
             this.canvas = document.getElementById('canvas')
             this.ctx = this.canvas.getContext('2d')
+            this.cxt.clearRect(0,0,this.boxWidth,this.boxWidth);  
             this.image = new Image()
             this.box = $('.box')
             this.parentOffsetleft = this.wrap.offset().left
@@ -225,7 +226,6 @@
         // 渲染图片
         Jigsaw.prototype.randomImage = function() {
             var self = this;
-            self.box.find('img').attr('src',' ');
             var index = 0;
             for (var i = 0; i < this.size; i++) {
                 for (var j = 0; j < this.size; j++) {
