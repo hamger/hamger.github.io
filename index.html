@@ -161,6 +161,7 @@
         }
         //创建格子
         Jigsaw.prototype.createBox = function() {
+            wrap.empty()
             for (var i = 0; i < this.size * this.size; i++) {
                 wrap.append('<div class="box"><img src="" alt=""></div>')
             }
@@ -233,6 +234,7 @@
         // 渲染图片
         Jigsaw.prototype.randomImage = function() {
             var self = this;
+            self.box.find('img').attr('src','');
             var index = 0;
             for (var i = 0; i < this.size; i++) {
                 for (var j = 0; j < this.size; j++) {
@@ -371,7 +373,6 @@
             if (this.files && this.files[0]) {
                 reader.onload = function(e) {
                     url = e.target.result;
-                    wrap.empty()
                     new Jigsaw(wrap, url, size)
                 };
                 reader.readAsDataURL(this.files[0]);
@@ -379,24 +380,19 @@
         }
 
         $('#three').click(function() {
-            wrap.empty()
             new Jigsaw(wrap, url, 3)
         })
         $('#four').click(function() {
-            wrap.empty()
             new Jigsaw(wrap, url, 4)
         })
         $('#five').click(function() {
-            wrap.empty()
             new Jigsaw(wrap, url, 5)
         })
 
         $('.dropdown-btn').click(function() {
             $('.dropdown-ul').toggle()
         })
-        $('.dropdown-ul li').click(function() {
-            $('.dropdown-ul').removeClass('open')
-        })
+
 /*
         $('.file').click(function() {
             document.getElementById('selectPic').addEventListener('change',
