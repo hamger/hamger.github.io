@@ -48,7 +48,8 @@
         height: 40px;
         margin: 0 auto;
         cursor: pointer;
-        border-radius: 5px;
+        line-height: 40px;
+        font-size: 20px;
         color: #262626;
         background-color: #f5f5f5;
         border: 1px solid #adadad;
@@ -72,13 +73,15 @@
         border-radius: 5px;
     }
     
-    .dropdown-ul li {
+    .dropdown-ul li:not(.divide) {
+        height: 30px;
+        line-height: 30px;
         cursor: pointer;
         color: #262626;
         background-color: #f5f5f5;
     }
     
-    .dropdown-ul li:hover {
+    .dropdown-ul li:not(.divide):hover {
         background-color: #e6e6e6;
     }
     
@@ -135,7 +138,6 @@
     <script>
     $(document).ready(function() {
         var url = 'head.jpg'
-        var size = 4
         var wrap = $('#wrap')
         var documentWidth = window.screen.availWidth
         var wrapWidth = documentWidth * 0.92;
@@ -358,7 +360,7 @@
             }
         };
 
-        new Jigsaw(wrap, url, size)
+        new Jigsaw(wrap, url, 3)
             // 得到本地图片url
         function getImgURL() {
             var reader = new FileReader()
