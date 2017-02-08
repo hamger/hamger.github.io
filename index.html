@@ -55,7 +55,7 @@
         border: 1px solid #adadad;
         border-radius: 5px;
     }
-
+    
     .dropdown-btn:hover {
         background-color: #e6e6e6;
     }
@@ -94,7 +94,7 @@
         height: 40px;
         margin: 5px auto;
         line-height: 40px;
-        text-align:center;
+        text-align: center;
         color: #262626;
         background-color: #f5f5f5;
         border: 1px solid #adadad;
@@ -120,7 +120,7 @@
 <body>
     <div id="wrap"></div>
     <div class="file">选择图片
-        <input type="file" value="上传图片" id="selectPic" accept="image/*" onchange="getImgURL()">
+        <input type="file" value="上传图片" id="selectPic" accept="image/*">
     </div>
     <div class="dropdown">
         <button class="dropdown-btn" type="button">
@@ -234,7 +234,7 @@
         // 渲染图片
         Jigsaw.prototype.randomImage = function() {
             var self = this;
-            self.box.find('img').attr('src','');
+            self.box.find('img').attr('src', '');
             var index = 0;
             for (var i = 0; i < this.size; i++) {
                 for (var j = 0; j < this.size; j++) {
@@ -393,13 +393,11 @@
             $('.dropdown-ul').toggle()
         })
 
-/*
-        $('.file').click(function() {
-            document.getElementById('selectPic').addEventListener('change',
-                getImgURL, false);
-        })*/
+        document.getElementById('selectPic').addEventListener('change',
+            getImgURL, false);
 
-        
+
+
     })
     </script>
 </body>
