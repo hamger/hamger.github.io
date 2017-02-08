@@ -125,7 +125,7 @@
             <li id='five'>5 × 5</li>
         </ul>
     </div>
-    <div class="file">重玩</div>
+    <div class="file" id="reset">重玩</div>
     <script>
     $(document).ready(function() {
         var url = 'head.jpg'
@@ -175,7 +175,7 @@
         //初始化数据
         Jigsaw.prototype.init = function() {
             this.canvas = document.getElementById('canvas')
-            this.ctx = this.canvas.getContext('2d')  
+            this.ctx = this.canvas.getContext('2d')
             this.image = new Image()
             this.box = $('.box')
             this.parentOffsetleft = this.wrap.offset().left
@@ -391,6 +391,16 @@
 
         $('.dropdown-btn').click(function() {
             $('.dropdown-ul').toggle()
+        })
+
+
+/*        $(document:not('.dropdown')).click(function() {
+            $('.dropdown-ul').hide()
+        })*/
+
+
+        $('#reset').click(function() {
+            new Jigsaw(wrap, url, size)
         })
 
         document.getElementById('selectPic').addEventListener('change',
