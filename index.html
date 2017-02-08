@@ -139,6 +139,7 @@
     $(document).ready(function() {
         var url = 'head.jpg'
         var wrap = $('#wrap')
+        var size = 3
         var documentWidth = window.screen.availWidth
         var wrapWidth = documentWidth * 0.92;
         if (documentWidth > 500) {
@@ -362,7 +363,7 @@
             }
         };
 
-        new Jigsaw(wrap, url, 3)
+        new Jigsaw(wrap, url, size)
             // 得到本地图片url
         function getImgURL() {
             var reader = new FileReader()
@@ -380,13 +381,16 @@
         }
 
         $('#three').click(function() {
-            new Jigsaw(wrap, url, 3)
+            size = 3
+            new Jigsaw(wrap, url, size)
         })
         $('#four').click(function() {
-            new Jigsaw(wrap, url, 4)
+            size = 4
+            new Jigsaw(wrap, url, size)
         })
         $('#five').click(function() {
-            new Jigsaw(wrap, url, 5)
+            size = 5
+            new Jigsaw(wrap, url, size)
         })
 
         $('.dropdown-btn').click(function() {
@@ -395,9 +399,6 @@
 
         document.getElementById('selectPic').addEventListener('change',
             getImgURL, false);
-
-
-
     })
     </script>
 </body>
