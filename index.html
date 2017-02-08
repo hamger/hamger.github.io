@@ -219,6 +219,7 @@
             }
             var self = this
             this.image.onload = function() {
+                self.w = self.image.width / self.size
                 self.randomImage();
             }
             this.image.src = this.url;
@@ -229,9 +230,8 @@
             var index = 0;
             for (var i = 0; i < this.size; i++) {
                 for (var j = 0; j < this.size; j++) {
-                    var w = this.image.width / this.size
-                    self.ctx.clearRect(0,0,this.boxWidth,this.boxWidth);
-                    self.ctx.drawImage(this.image, w * j, w * i, w, w, 0, 0, this.boxWidth, this.boxWidth);
+                    /*self.ctx.clearRect(0,0,this.boxWidth,this.boxWidth);*/
+                    self.ctx.drawImage(this.image, self.w * j, self.w * i, self.w, self.w, 0, 0, this.boxWidth, this.boxWidth);
                     self.box.eq(self.imgRandomArr[index]).find('img').attr({
                         'index': index,
                         'src': self.canvas.toDataURL('image/jpeg'),
