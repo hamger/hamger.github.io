@@ -19,7 +19,7 @@
         height: 300px;
         border: 1px solid #CDCDCD;
         position: relative;
-        margin: 40px auto;
+        margin: 20px auto;
         background-color: #F4F4F4;
     }
     
@@ -124,8 +124,7 @@
     </div>
     <div class="dropdown">
         <button class="dropdown-btn" type="button">
-            3 × 3
-            <span class="caret"></span>
+            <span class="text">3 × 3</span>
         </button>
         <ul class="dropdown-ul">
             <li id="three">3 × 3</li>
@@ -235,7 +234,7 @@
         // 渲染图片
         Jigsaw.prototype.randomImage = function() {
             var self = this;
-            self.box.find('img').attr('src', '');
+            self.box.find('img').attr('src',' ');
             var index = 0;
             for (var i = 0; i < this.size; i++) {
                 for (var j = 0; j < this.size; j++) {
@@ -382,14 +381,17 @@
 
         $('#three').click(function() {
             size = 3
+            $('.text').text('3 × 3')
             new Jigsaw(wrap, url, size)
         })
         $('#four').click(function() {
             size = 4
+            $('.text').text('4 × 4')
             new Jigsaw(wrap, url, size)
         })
         $('#five').click(function() {
             size = 5
+            $('.text').text('5 × 5')
             new Jigsaw(wrap, url, size)
         })
 
