@@ -100,6 +100,7 @@
         left: 0;
         right: 0;
         opacity: 0;
+        width: 80px;
     }
     
     .file:hover {
@@ -144,7 +145,7 @@
             this.wrap = wrap
             this.url = url
             this.size = size
-            this.boxWidth = wrapWidth / this.size
+            this.boxWidth = wrapWidth / size
             this.createBox()
             this.createCanvas()
             this.init()
@@ -228,9 +229,12 @@
         Jigsaw.prototype.randomImage = function() {
             var self = this;
             var index = 0;
+            this.ctx.fillStyle = "#000000";
+            this.ctx.beginPath();
+            this.ctx.fillRect(0, 0, this.boxWidth, this.boxWidth);
+            this.ctx.closePath();
             for (var i = 0; i < this.size; i++) {
                 for (var j = 0; j < this.size; j++) {
-                    /*self.ctx.clearRect(0,0,this.boxWidth,this.boxWidth);*/
                     self.ctx.drawImage(this.image, self.w * j, self.w * i, self.w, self.w, 0, 0, this.boxWidth, this.boxWidth);
                     self.box.eq(self.imgRandomArr[index]).find('img').attr({
                         'index': index,
@@ -357,7 +361,8 @@
         };
 
         new Jigsaw(wrap, url, size)
-            // 得到本地图片url
+
+        // 得到本地图片url
         function getImgURL() {
             var reader = new FileReader()
             if (!reader) {
@@ -394,9 +399,9 @@
         })
 
 
-/*        $(document:not('.dropdown')).click(function() {
-            $('.dropdown-ul').hide()
-        })*/
+        /*        $(document:not('.dropdown')).click(function() {
+                    $('.dropdown-ul').hide()
+                })*/
 
 
         $('#reset').click(function() {
