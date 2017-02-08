@@ -175,8 +175,7 @@
         //初始化数据
         Jigsaw.prototype.init = function() {
             this.canvas = document.getElementById('canvas')
-            this.ctx = this.canvas.getContext('2d')
-            this.ctx.clearRect(0,0,this.boxWidth,this.boxWidth);  
+            this.ctx = this.canvas.getContext('2d')  
             this.image = new Image()
             this.box = $('.box')
             this.parentOffsetleft = this.wrap.offset().left
@@ -231,6 +230,7 @@
             for (var i = 0; i < this.size; i++) {
                 for (var j = 0; j < this.size; j++) {
                     var w = this.image.width / this.size
+                    self.ctx.clearRect(0,0,this.boxWidth,this.boxWidth);
                     self.ctx.drawImage(this.image, w * j, w * i, w, w, 0, 0, this.boxWidth, this.boxWidth);
                     self.box.eq(self.imgRandomArr[index]).find('img').attr({
                         'index': index,
