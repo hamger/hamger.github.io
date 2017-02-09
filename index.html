@@ -164,6 +164,7 @@
 
         //创建画布
         Jigsaw.prototype.createCanvas = function() {
+            $('#canvas').remove()
             var can = document.createElement('canvas');
             /*can.setAttribute("id",'canvas')*/
             can.id = 'canvas'
@@ -229,10 +230,6 @@
         Jigsaw.prototype.randomImage = function() {
             var self = this;
             var index = 0;
-            this.ctx.fillStyle = "#000000";
-            this.ctx.beginPath();
-            this.ctx.fillRect(0, 0, this.boxWidth, this.boxWidth);
-            this.ctx.closePath();
             for (var i = 0; i < this.size; i++) {
                 for (var j = 0; j < this.size; j++) {
                     self.ctx.drawImage(this.image, self.w * j, self.w * i, self.w, self.w, 0, 0, this.boxWidth, this.boxWidth);
