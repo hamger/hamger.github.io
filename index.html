@@ -7,7 +7,8 @@
     <title>拖拽拼图</title>
     <link rel="shortcut icon" type="image/x-icon" href="http://static.yangbai.me/images/favicon.ico">
     <script type="text/javascript" src="zepto.js"></script>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" 
+    content=" width=device-width, height=device-height, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
     <style>
     * {
         margin: 0;
@@ -387,9 +388,20 @@
             $('.text').text('3 × 3')
             $('.dropdown-ul').hide()
             new Jigsaw(wrap, url, size)
-
         })
+        $('#three').tap(function  () {
+            size = 3
+            $('.text').text('3 × 3')
+            $('.dropdown-ul').hide()
+            new Jigsaw(wrap, url, size)
+        });
         $('#four').click(function() {
+            size = 4
+            $('.text').text('4 × 4')
+            $('.dropdown-ul').hide()
+            new Jigsaw(wrap, url, size)
+        })
+        $('#four').tap(function() {
             size = 4
             $('.text').text('4 × 4')
             $('.dropdown-ul').hide()
@@ -401,18 +413,25 @@
             $('.dropdown-ul').hide()
             new Jigsaw(wrap, url, size)
         })
+        $('#five').tap(function() {
+            size = 5
+            $('.text').text('5 × 5')
+            $('.dropdown-ul').hide()
+            new Jigsaw(wrap, url, size)
+        })
 
         $('.dropdown-btn').click(function() {
             $('.dropdown-ul').toggle()
         })
-
-
-        /*        $(document:not('.dropdown')).click(function() {
-                    $('.dropdown-ul').hide()
-                })*/
-
+        $('.dropdown-btn').tap(function() {
+            $('.dropdown-ul').toggle()
+        })
 
         $('#reset').click(function() {
+            new Jigsaw(wrap, url, size)
+        })
+        
+        $('#reset').tap(function() {
             new Jigsaw(wrap, url, size)
         })
 
