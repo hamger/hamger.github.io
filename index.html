@@ -389,31 +389,15 @@
             $('.dropdown-ul').hide()
             new Jigsaw(wrap, url, size)
         })
-        $('#three').tap(function  () {
-            size = 3
-            $('.text').text('3 × 3')
-            $('.dropdown-ul').hide()
-            new Jigsaw(wrap, url, size)
-        });
+
         $('#four').click(function() {
             size = 4
             $('.text').text('4 × 4')
             $('.dropdown-ul').hide()
             new Jigsaw(wrap, url, size)
         })
-        $('#four').tap(function() {
-            size = 4
-            $('.text').text('4 × 4')
-            $('.dropdown-ul').hide()
-            new Jigsaw(wrap, url, size)
-        })
+
         $('#five').click(function() {
-            size = 5
-            $('.text').text('5 × 5')
-            $('.dropdown-ul').hide()
-            new Jigsaw(wrap, url, size)
-        })
-        $('#five').tap(function() {
             size = 5
             $('.text').text('5 × 5')
             $('.dropdown-ul').hide()
@@ -423,15 +407,8 @@
         $('.dropdown-btn').click(function() {
             $('.dropdown-ul').toggle()
         })
-        $('.dropdown-btn').tap(function() {
-            $('.dropdown-ul').toggle()
-        })
 
         $('#reset').click(function() {
-            new Jigsaw(wrap, url, size)
-        })
-        
-        $('#reset').tap(function() {
             new Jigsaw(wrap, url, size)
         })
 
