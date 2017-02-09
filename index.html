@@ -27,40 +27,29 @@
         z-index: 0;
     }
     
-    .dropdown {
-        width: 80px;
-        margin: 0 auto;
-    }
-    
     .dropdown-btn {
         display: block;
         text-align: center;
-        width: 80px;
-        height: 40px;
-        margin: 0 auto;
+        height: 100%;
+        width: 100%;
         cursor: pointer;
         line-height: 40px;
         font-size: 20px;
-        color: #262626;
-        background-color: #f5f5f5;
-        border: 1px solid #adadad;
-        border-radius: 5px;
     }
     
     .dropdown-btn:hover {
-        background-color: #e6e6e6;
+        background-color: #4cb0f9;
     }
     
     .dropdown-ul {
-        margin-top: 5px;
+        margin-top: 55px;
         display: none;
         text-align: center;
-        width: 80px;
         margin: 0 auto;
         list-style: none;
-        color: #262626;
-        background-color: #f5f5f5;
-        border: 1px solid #adadad;
+        color: #fff;
+        background-color: #1B9AF7;
+        border: 1px solid #269abc;
         border-radius: 5px;
     }
     
@@ -68,27 +57,23 @@
         height: 30px;
         line-height: 30px;
         cursor: pointer;
-        color: #262626;
-        background-color: #f5f5f5;
     }
     
     .dropdown-ul li:not(.divide):hover {
-        background-color: #e6e6e6;
+        background-color: #4cb0f9;
     }
     
     .divide {
-        border-bottom: 1px solid #adadad;
+        border-bottom: 1px solid #269abc;
     }
     
     .file {
-        width: 80px;
         height: 40px;
-        margin: 5px auto;
         line-height: 40px;
         text-align: center;
-        color: #262626;
-        background-color: #f5f5f5;
-        border: 1px solid #adadad;
+        color: #fff;
+        background-color: #1B9AF7;
+        border: 1px solid #269abc;
         border-radius: 5px;
         position: relative;
     }
@@ -100,33 +85,50 @@
         left: 0;
         right: 0;
         opacity: 0;
-        width: 80px;
+        width: 100%;
     }
     
     .file:hover {
-        background-color: #e6e6e6;
+        background-color: #4cb0f9;
+    }
+    
+    .btns-bottom {
+        margin: 0 auto;
+        position: relative;
+    }
+    
+    .btn-bottom {
+        float: left;
     }
     </style>
 </head>
 
 <body>
     <div id="wrap"></div>
-    <div class="file">选择图片
-        <input type="file" value="上传图片" id="selectPic" accept="image/*">
+    <div class="btns-bottom">
+        <div class="btn-bottom">
+            <div class="file">选择图片
+                <input type="file" value="上传图片" id="selectPic" accept="image/*">
+            </div>
+        </div>
+        <div class="btn-bottom">
+            <div class="file">
+                <div class="dropdown-btn">
+                    <span class="text">3 × 3</span>
+                </div>
+                <ul class="dropdown-ul">
+                    <li id="three">3 × 3</li>
+                    <li class="divide"></li>
+                    <li id="four">4 × 4</li>
+                    <li class="divide"></li>
+                    <li id='five'>5 × 5</li>
+                </ul>
+            </div>
+        </div>
+        <div class="btn-bottom">
+            <div class="file" id="reset">重玩</div>
+        </div>
     </div>
-    <div class="dropdown">
-        <button class="dropdown-btn" type="button">
-            <span class="text">3 × 3</span>
-        </button>
-        <ul class="dropdown-ul">
-            <li id="three">3 × 3</li>
-            <li class="divide"></li>
-            <li id="four">4 × 4</li>
-            <li class="divide"></li>
-            <li id='five'>5 × 5</li>
-        </ul>
-    </div>
-    <div class="file" id="reset">重玩</div>
     <script>
     $(document).ready(function() {
         var url = 'head.jpg'
@@ -139,6 +141,12 @@
         }
         $('#wrap').width(wrapWidth)
         $('#wrap').height(wrapWidth)
+        $('.btns-bottom').width(wrapWidth)
+        $('.btn-bottom').width(wrapWidth / 3)
+        $('.file').css({
+            'width': wrapWidth / 4,
+            'margin': '0 auto'
+        })
 
         //创建构造函数
         function Jigsaw(wrap, url, size) {
@@ -166,7 +174,6 @@
         Jigsaw.prototype.createCanvas = function() {
             $('#canvas').remove()
             var can = document.createElement('canvas');
-            /*can.setAttribute("id",'canvas')*/
             can.id = 'canvas'
             can.style.display = 'none';
             can.width = this.boxWidth;
@@ -378,16 +385,20 @@
         $('#three').click(function() {
             size = 3
             $('.text').text('3 × 3')
+            $('.dropdown-ul').hide()
             new Jigsaw(wrap, url, size)
+
         })
         $('#four').click(function() {
             size = 4
             $('.text').text('4 × 4')
+            $('.dropdown-ul').hide()
             new Jigsaw(wrap, url, size)
         })
         $('#five').click(function() {
             size = 5
             $('.text').text('5 × 5')
+            $('.dropdown-ul').hide()
             new Jigsaw(wrap, url, size)
         })
 
