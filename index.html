@@ -7,8 +7,7 @@
     <title>拖拽拼图</title>
     <link rel="shortcut icon" type="image/x-icon" href="http://static.yangbai.me/images/favicon.ico">
     <script type="text/javascript" src="zepto.js"></script>
-    <meta name="viewport" 
-    content=" width=device-width, height=device-height, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+    <meta name="viewport" content=" width=device-width, height=device-height, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" />
     <style>
     * {
         margin: 0;
@@ -35,7 +34,7 @@
         width: 100%;
         cursor: pointer;
         line-height: 40px;
-        font-size: 20px;
+        font-size: 16px;
     }
     
     .dropdown-btn:hover {
@@ -101,6 +100,15 @@
     .btn-bottom {
         float: left;
     }
+    
+    .triangle {
+        display: inline-block;
+        width: 0;
+        height: 0;
+        border-top: 5px solid #fff;
+        border-left: 5px solid transparent;
+        border-right: 5px solid transparent;
+    }
     </style>
 </head>
 
@@ -116,6 +124,7 @@
             <div class="file">
                 <div class="dropdown-btn">
                     <span class="text">3 × 3</span>
+                    <div class="triangle"></div>
                 </div>
                 <ul class="dropdown-ul">
                     <li id="three">3 × 3</li>
