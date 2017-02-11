@@ -224,7 +224,7 @@
             }
             return arr
         };
-        // 渲染九宫格
+        // 渲染格子
         Jigsaw.prototype.render = function() {
             var index = 0;
             for (var i = 0; i < this.size; i++) {
@@ -238,7 +238,12 @@
             }
             var self = this
             this.image.onload = function() {
-                self.w = self.image.width / self.size
+                self.startPoint = Math.abs(self.image.width - self.image.height)/2
+                if (self.image.width > self.image.height) {
+                    self.w = self.image.height / self.size
+                } else {
+                    self.w = self.image.width / self.size
+                }
                 self.randomImage();
             }
             this.image.src = this.url;
@@ -249,7 +254,7 @@
             var index = 0;
             for (var i = 0; i < this.size; i++) {
                 for (var j = 0; j < this.size; j++) {
-                    self.ctx.drawImage(this.image, self.w * j, self.w * i, self.w, self.w, 0, 0, this.boxWidth, this.boxWidth);
+                    self.ctx.drawImage(this.image,self.startPoint + self.w * j,self.startPoint + self.w * i, self.w, self.w, 0, 0, this.boxWidth, this.boxWidth);
                     self.box.eq(self.imgRandomArr[index]).find('img').attr({
                         'index': index,
                         'src': self.canvas.toDataURL('image/jpeg'),
