@@ -13,11 +13,12 @@
         margin: 0;
         padding: 0
     }
-
+    
     #reveal {
         margin: 10px auto;
-        text-align:center;
+        text-align: center;
     }
+    
     #wrap {
         border: 1px solid #CDCDCD;
         position: relative;
@@ -245,12 +246,12 @@
             this.image.onload = function() {
                 if (self.image.width > self.image.height) {
                     self.w = self.image.height / self.size
-                    self.startY = 0 
-                    self.startX = Math.abs(self.image.width - self.image.height)/2
+                    self.startY = 0
+                    self.startX = Math.abs(self.image.width - self.image.height) / 2
                 } else {
                     self.w = self.image.width / self.size
-                    self.startX = 0 
-                    self.startY = Math.abs(self.image.width - self.image.height)/2
+                    self.startX = 0
+                    self.startY = Math.abs(self.image.width - self.image.height) / 2
                 }
                 self.randomImage();
             }
@@ -262,7 +263,7 @@
             var index = 0;
             for (var i = 0; i < this.size; i++) {
                 for (var j = 0; j < this.size; j++) {
-                    self.ctx.drawImage(this.image,self.startX + self.w * j,self.startY + self.w * i, self.w, self.w, 0, 0, this.boxWidth, this.boxWidth);
+                    self.ctx.drawImage(this.image, self.startX + self.w * j, self.startY + self.w * i, self.w, self.w, 0, 0, this.boxWidth, this.boxWidth);
                     self.box.eq(self.imgRandomArr[index]).find('img').attr({
                         'index': index,
                         'src': self.canvas.toDataURL('image/jpeg'),
@@ -383,9 +384,9 @@
                 resArr.push(element.getAttribute('index'));
             });
             if (resArr.join("") === self.imgArr.join("")) {
-                $('#reveal').text('拼图完成，真聪明！').css('color','#FA2F2F')
-            }else{
-                $('#reveal').text('拼图ing...').css('color','#000')
+                $('#reveal').text('拼图完成，真聪明！').css('color', '#FA2F2F')
+            } else {
+                $('#reveal').text('拼图ing...').css('color', '#000')
             }
         };
 
