@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>拖拽拼图</title>
+    <link rel="shortcut icon" type="image/x-icon" href="http://static.yangbai.me/images/favicon.ico">
+    <script src="zepto.js"></script>
+    <meta name="viewport" content=" width=device-width, height=device-height, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <style>
+    * {
+        margin: 0;
+        padding: 0
+    }
+    
+    #reveal {
+        margin: 10px auto;
+        text-align: center;
+    }
+    
+    #wrap {
+        border: 1px solid #CDCDCD;
+        position: relative;
+        margin: 10px auto;
+        background-color: #F4F4F4;
+    }
+    
+    .box {
+        position: absolute;
+        cursor: pointer;
+        z-index: 0;
+    }
+    
+    .dropdown-btn {
+        display: block;
+        text-align: center;
+        height: 100%;
+        width: 100%;
+        cursor: pointer;
+        line-height: 40px;
+        font-size: 16px;
+    }
+    
+    .dropdown-btn:hover {
+        background-color: #4cb0f9;
+    }
+    
+    .dropdown-ul {
+        margin-top: 55px;
+        display: none;
+        text-align: center;
+        margin: 0 auto;
+        list-style: none;
+        color: #fff;
+        background-color: #1B9AF7;
+        border: 1px solid #269abc;
+        border-radius: 5px;
+    }
+    
+    .dropdown-ul li:not(.divide) {
+        height: 30px;
+        line-height: 30px;
+        cursor: pointer;
+    }
+    
+    .dropdown-ul li:not(.divide):hover {
+        background-color: #4cb0f9;
+    }
+    
+    .divide {
+        border-bottom: 1px solid #269abc;
+    }
+    
+    .file {
+        height: 40px;
+        line-height: 40px;
+        text-align: center;
+        color: #fff;
+        background-color: #1B9AF7;
+        border: 1px solid #269abc;
+        border-radius: 5px;
+        position: relative;
+    }
+    
+    #selectPic {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        opacity: 0;
+        width: 100%;
+    }
+    
+    .file:hover {
+        background-color: #4cb0f9;
+    }
+    
+    .btns-bottom {
+        margin: 0 auto;
+        position: relative;
+    }
+    
+    .btn-bottom {
+        float: left;
+    }
+    
+    .triangle {
+        display: inline-block;
+        width: 0;
+        height: 0;
+        border-top: 5px solid #fff;
+        border-left: 5px solid transparent;
+        border-right: 5px solid transparent;
+    }
+    </style>
+</head>
+
+<body>
+    <div id="reveal">拼图ing...</div>
+    <div id="wrap"></div>
+    <div class="btns-bottom">
+        <div class="btn-bottom">
+            <div class="file">选择图片
+                <input type="file" value="上传图片" id="selectPic" accept="image/*">
+            </div>
+        </div>
+        <div class="btn-bottom">
+            <div class="file">
+                <div class="dropdown-btn">
+                    <span class="text">3 × 3</span>
+                    <div class="triangle"></div>
+                </div>
+                <ul class="dropdown-ul">
+                    <li id="three">3 × 3</li>
+                    <li class="divide"></li>
+                    <li id="four">4 × 4</li>
+                    <li class="divide"></li>
+                    <li id='five'>5 × 5</li>
+                </ul>
+            </div>
+        </div>
+        <div class="btn-bottom">
+            <div class="file" id="reset">重玩</div>
+        </div>
+    </div>
+    <script>
+    $(document).ready(function() {
+        var url = 'tuzi.jpg'
+        var wrap = $('#wrap')
+        var size = 3
+        var documentWidth = window.screen.availWidth
+        var wrapWidth = documentWidth * 0.92;
+
+        if (documentWidth > 500) {
+            wrapWidth = 300;
+        }
+        $('#wrap').width(wrapWidth)
+        $('#wrap').height(wrapWidth)
+        $('.btns-bottom').width(wrapWidth)
+        $('.btn-bottom').width(wrapWidth / 3)
+        $('.file').css({
+            'width': wrapWidth / 4,
+            'margin': '0 auto'
+        })
+
+        //创建构造函数
+        function Jigsaw(wrap, url, size) {
+            this.wrap = wrap
+            this.url = url
+            this.size = size
+            this.boxWidth = wrapWidth / size
+            this.createBox()
+            this.createCanvas()
+            this.init()
+            this.render()
+            this.bind()
+        }
+        //创建格子
+        Jigsaw.prototype.createBox = function() {
+            wrap.empty()
+            for (var i = 0; i < this.size * this.size; i++) {
+                wrap.append('<div class="box"><img src=""></div>')
+            }
+            $('.box').width(this.boxWidth)
+            $('.box').height(this.boxWidth)
+        };
+
+        //创建画布
+        Jigsaw.prototype.createCanvas = function() {
+            $('#canvas').remove()
+            var can = document.createElement('canvas');
+            can.id = 'canvas'
+            can.style.display = 'none';
+            can.width = this.boxWidth;
+            can.height = this.boxWidth;
+            document.body.appendChild(can);
+        };
+
+        //初始化数据
+        Jigsaw.prototype.init = function() {
+            this.canvas = document.getElementById('canvas')
+            this.ctx = this.canvas.getContext('2d')
+            this.image = new Image()
+            this.box = $('.box')
+            this.parentOffsetleft = this.wrap.offset().left
+            this.parentOffsettop = this.wrap.offset().top
+            this.flag = false
+            this.imgArr = [];
+            for (var i = 0; i < this.size * this.size; i++) {
+                this.imgArr.push(i)
+            }
+            this.imgRandomArr = this.randomSort(this.imgArr.slice(0))
+            this.position = {
+                x: 0,
+                y: 0
+            }
+        };
+
+        //随机数组
+        Jigsaw.prototype.randomSort = function(arr) {
+            var currentIndex = arr.length,
+                randomIndex, tempValue
+            while (currentIndex !== 0) {
+                randomIndex = Math.floor(Math.random() * currentIndex);
+                currentIndex--;
+                tempValue = arr[currentIndex]
+                arr[currentIndex] = arr[randomIndex]
+                arr[randomIndex] = tempValue
+            }
+            return arr
+        };
+        // 渲染格子
+        Jigsaw.prototype.render = function() {
+            var index = 0;
+            for (var i = 0; i < this.size; i++) {
+                for (var j = 0; j < this.size; j++) {
+                    this.box.eq(index).css({
+                        top: i * this.boxWidth + 'px',
+                        left: j * this.boxWidth + 'px'
+                    });
+                    index++;
+                }
+            }
+            var self = this
+            this.image.onload = function() {
+                if (self.image.width > self.image.height) {
+                    self.w = self.image.height / self.size
+                    self.startY = 0
+                    self.startX = Math.abs(self.image.width - self.image.height) / 2
+                } else {
+                    self.w = self.image.width / self.size
+                    self.startX = 0
+                    self.startY = Math.abs(self.image.width - self.image.height) / 2
+                }
+                self.randomImage();
+            }
+            this.image.src = this.url;
+        };
+        // 渲染图片
+        Jigsaw.prototype.randomImage = function() {
+            var self = this;
+            var index = 0;
+            for (var i = 0; i < this.size; i++) {
+                for (var j = 0; j < this.size; j++) {
+                    self.ctx.drawImage(this.image, self.startX + self.w * j, self.startY + self.w * i, self.w, self.w, 0, 0, this.boxWidth, this.boxWidth);
+                    self.box.eq(self.imgRandomArr[index]).find('img').attr({
+                        'index': index,
+                        'src': self.canvas.toDataURL('image/jpeg'),
+                        'width': '100%',
+                        'height': '100%'
+                    })
+                    index++;
+                }
+            }
+        };
+        //绑定事件
+        Jigsaw.prototype.bind = function() {
+
+            var self = this
+            var boxs = document.getElementsByClassName('box')
+
+            this.box.on('mousedown', function(ev) {
+                self.oDiv = $(this)
+                self.down(ev)
+            })
+
+            for (var i = 0; i < boxs.length; i++) {
+                boxs[i].addEventListener('touchstart', function(ev) {
+                    self.oDiv = $(this)
+                    self.down(ev)
+                })
+            }
+            /*boxs.addEventListener('touchstart', function(ev) {
+                self.oDiv = $(this)
+                self.down(ev)
+            })*/
+
+
+            document.addEventListener('mousemove', function(ev) {
+                if (self.flag) {
+                    self.move(ev)
+                }
+            })
+
+            document.addEventListener('touchmove', function(ev) {
+                if (self.flag) {
+                    self.move(ev)
+                }
+            })
+
+            document.addEventListener('mouseup', function(ev) {
+                self.up()
+            })
+
+            document.addEventListener('touchend', function(ev) {
+                self.up()
+            })
+        };
+        //根据PC端or移动端返回event
+        Jigsaw.prototype.isTouch = function(ev) {
+            var oEvent;
+            if (ev.touches) {
+                oEvent = event.touches[0];
+            } else {
+                oEvent = ev || event;
+            }
+            return oEvent
+        };
+        //按下时的事件程序
+        Jigsaw.prototype.down = function(ev) {
+            ev.preventDefault();
+            var oEvent = this.isTouch(ev);
+            this.flag = true
+            this.oDiv.css('zIndex', 1)
+            var oDivOffsetleft = this.oDiv.offset().left;
+            var oDivOffsettop = this.oDiv.offset().top;
+            this.boxX = oEvent.pageX - oDivOffsetleft; // 鼠标到被选div的横距离
+            this.boxY = oEvent.pageY - oDivOffsettop; // 鼠标到被选div的纵距离
+            this.oriboxLeft = this.oDiv.position().left
+            this.oriboxTop = this.oDiv.position().top
+        };
+        //移动时的事件程序
+        Jigsaw.prototype.move = function(ev) {
+            ev.preventDefault();
+            var oEvent = this.isTouch(ev);
+            var boxLeft = oEvent.pageX - this.boxX - this.parentOffsetleft;
+            var boxTop = oEvent.pageY - this.boxY - this.parentOffsettop;
+
+            this.position.x = boxLeft + this.boxWidth / 2;
+            this.position.y = boxTop + this.boxWidth / 2;
+
+            this.oDiv.css({
+                left: boxLeft + 'px',
+                top: boxTop + 'px'
+            })
+        };
+        //抬起时的事件程序
+        Jigsaw.prototype.up = function() {
+            this.flag = false
+            var positionIndex = this.moveboxPosition(this.position);
+            if (positionIndex in this.imgArr) {
+                var html = this.oDiv.html()
+                var html2 = this.box.eq(positionIndex).html()
+                this.box.eq(positionIndex).html(html)
+                this.oDiv.html(html2)
+            }
+            this.oDiv.css({
+                left: this.oriboxLeft + 'px',
+                top: this.oriboxTop + 'px',
+                zIndex: 0
+            })
+            this.check()
+        };
+        //根据坐标位置返回index
+        Jigsaw.prototype.moveboxPosition = function(position) {
+            return Math.floor(position.y / this.boxWidth) * this.size + Math.floor(position.x / this.boxWidth);
+        };
+        //检查拼图是否完成
+        Jigsaw.prototype.check = function() {
+            var resArr = [];
+            var self = this
+            $('#wrap img').each(function(index, element) {
+                resArr.push(element.getAttribute('index'));
+            });
+            if (resArr.join("") === self.imgArr.join("")) {
+                $('#reveal').text('拼图完成，真聪明！').css('color', '#FA2F2F')
+            } else {
+                $('#reveal').text('拼图ing...').css('color', '#000')
+            }
+        };
+
+        new Jigsaw(wrap, url, size)
+
+        // 得到本地图片url
+        function getImgURL() {
+            var reader = new FileReader()
+            if (!reader) {
+                alert('你的浏览器不支持FileReader')
+                return
+            }
+            if (this.files && this.files[0]) {
+                reader.onload = function(e) {
+                    url = e.target.result;
+                    new Jigsaw(wrap, url, size)
+                };
+                reader.readAsDataURL(this.files[0]);
+            }
+        }
+
+        $('#three').click(function() {
+            size = 3
+            $('.text').text('3 × 3')
+            $('.dropdown-ul').hide()
+            new Jigsaw(wrap, url, size)
+        })
+
+        $('#four').click(function() {
+            size = 4
+            $('.text').text('4 × 4')
+            $('.dropdown-ul').hide()
+            new Jigsaw(wrap, url, size)
+        })
+
+        $('#five').click(function() {
+            size = 5
+            $('.text').text('5 × 5')
+            $('.dropdown-ul').hide()
+            new Jigsaw(wrap, url, size)
+        })
+
+        $('.dropdown-btn').click(function() {
+            $('.dropdown-ul').toggle()
+        })
+
+        $('#reset').click(function() {
+            new Jigsaw(wrap, url, size)
+        })
+
+        document.getElementById('selectPic').addEventListener('change',
+            getImgURL, false);
+    })
+    </script>
+</body>
+
+</html>

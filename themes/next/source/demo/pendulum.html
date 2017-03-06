@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>弧形运动效果</title>
+    <style>
+    body {
+        margin: 0;
+        background: #111;
+        text-align: center;
+    }
+    
+    h1 {
+        font-size: 14px;
+        font-family: "Microsoft Yahei";
+        text-align: center;
+    }
+    
+    .stage {
+        width: 120px;
+        height: auto;
+        margin: 0 auto;
+        position: relative;
+        -webkit-transform-origin: center top;
+        -webkit-transform: rotate(-30deg);
+        -webkit-animation: sway 2.2s infinite alternate ease-in-out;
+    }
+    
+    .watch {
+        width: 100%;
+        height: auto;
+    }
+    
+    .seconds {
+        position: absolute;
+        width: 8%;
+        height: auto;
+        bottom: 11.5%;
+        left: 45.5%;
+        -webkit-transform-origin: center 72.4%;
+        -webkit-animation: second 60s infinite linear;
+    }
+    
+    @-webkit-keyframes second {
+        to {
+            -webkit-transform: rotate(355deg);
+        }
+    }
+    
+    @-webkit-keyframes sway {
+        to {
+            -webkit-transform: rotate(30deg);
+        }
+    }
+    </style>
+</head>
+
+<body>
+    <h1>请使用webkit内核标准浏览器查看效果</h1>
+    <div class="stage">
+        <img src="http://p0.qhimg.com/t0197c451833414523e.png" alt="钟表" class="watch" />
+        <img src="http://p9.qhimg.com/t0145f1ae8ad6753b05.png" alt="秒针" class="seconds">
+    </div>
+</body>
+
+</html>

@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>loading效果</title>
+	<style type="text/css">
+		body{
+		  color: #fff;
+		  background: #222;
+		}
+		h1{
+			font-size: 14px;
+			font-family: "Microsoft Yahei";
+			text-align: center;
+		}
+		.spinner{
+		  width:80px;
+		  height:50px;
+		  margin:100px auto;
+		  text-align:center;
+		}
+		.spinner > div{
+		  display:inline-block;
+		  width:6px;
+		  height:100%;
+		  background:green;
+		  -webkit-animation: strechdelay 1.2s infinite ease-in-out ;
+		}
+		.spinner .line2{
+		  -webkit-animation-delay:-1.1s;
+		}
+		.spinner .line3{
+		  -webkit-animation-delay:-1.0s;
+		}
+
+		.spinner .line4{
+		  -webkit-animation-delay:-0.9s;
+		}
+
+		.spinner .line5{
+		  -webkit-animation-delay:-0.8s;
+		}
+		@-webkit-keyframes strechdelay{
+		  0%,40%,100%{
+		    -webkit-transform:scaleY(.4);
+		  }
+		  20%{
+		    -webkit-transform:scaleY(1);
+		  }
+		}
+	</style>
+</head>
+<body>
+	<h1>请使用webkit内核标准浏览器查看效果</h1>
+	<div class="spinner">
+	  <div class="line1"></div>
+	  <div class="line2"></div>
+	  <div class="line3"></div>
+	  <div class="line4"></div>
+	  <div class="line5"></div>
+	</div>
+</body>
+</html>

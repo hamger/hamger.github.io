@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>css3 Hover</title>
+	<style type="text/css">
+    	.demo,.img,.border,.mask {
+    		width: 300px;
+    		height: 300px;
+    	}
+    	.img{
+			background-repeat: no-repeat;
+			background-size: cover;
+			background-position: center center;
+			border-radius: 50%;
+		}
+    	.demo {
+    		display: block;
+    		position: relative;
+    		margin: 50px auto;
+    	}
+    	.border{
+    		position: absolute;
+    		border: 10px solid #072256;
+    		border-left-color:#E07514; 
+    		border-top-color: #E07514;
+    		top:0;
+    		left:0;
+    		border-radius: 50%;
+    		transition: all .5s ease-in;
+    		box-sizing: border-box;
+		}
+		.mask{
+			position: absolute;
+			top: 0;
+			left: 0;
+			border-radius: 50%;
+			transition: all .5s ease-in;
+			color: rgba(255,255,255,0);
+		}
+		.demo:hover .mask{
+			background-color:rgba(0,0,0,0.5);
+			color:rgba(255,255,255,1);
+		}
+		.demo:hover .border{
+			transform:rotate(180deg);
+		}
+		.info {
+			position: absolute;
+			width:100%;
+			top: 50%;
+			left: 0;
+			text-align: center;
+			transform: translateY(-50%);
+		}
+	</style>
+
+</head>
+<body>
+	<a href="#" class="demo">
+		<div class="img" style="background-image:url(http://ww3.sinaimg.cn/mw690/9c7cd2cdjw1e60hntjcq2j211y0lcq5e.jpg)"></div>
+		<div class="mask">
+			<div class="info">
+				<h3>BEATIFUL DAY</h3>
+				<p>Description goes here</p>
+			</div>
+		</div>
+		<div class="border"></div>
+	</a>
+</body>
+</html>

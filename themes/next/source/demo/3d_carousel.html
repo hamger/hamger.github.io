@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>3Dcarousel</title>
+    <style>
+    #stage {
+        width: 900px;
+        min-height: 300px;
+        margin:10px auto;
+        background-color: #f0f0f0;
+        box-shadow: inset 0 0 3px rgba(0, 0, 0, .35);
+        -webkit-perspective: 800px;
+        -moz-perspective: 800px;
+        perspective: 800px;
+        -webkit-transition: top .5s;
+        position: relative;
+        top: 0
+    }
+
+    #stage_left {
+    	position: absolute;
+    	left: 0;
+    	top: 0;
+    	z-index: 2;
+    	width: 386px;
+    	height: 300px;
+    	background-color: rgba(0,0,0,0);
+    }
+    #stage_right {
+    	position: absolute;
+    	right: 0;
+    	top: 0;
+    	z-index: 2;
+    	width: 386px;
+    	height: 300px;
+    	background-color: rgba(0,0,0,0);
+    }
+    
+    #container {
+        width: 128px;
+        height: 150px;
+        margin-left: -64px;
+        -webkit-transition: -webkit-transform 1s;
+        -moz-transition: -moz-transform 1s;
+        transition: transform 1s;
+        -webkit-transform-style: preserve-3d;
+        -moz-transform-style: preserve-3d;
+        transform-style: preserve-3d;
+        position: absolute;
+        z-index: 1;
+        left: 50%;
+    }
+    
+    #container img {
+        width: 128px;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, .5);
+        -webkit-transition: opacity 1s, -webkit-transform 1s;
+        -moz-transition: opacity 1s, -moz-transform 1s;
+        transition: opacity 1s, transform 1s;
+        position: absolute;
+        bottom: -94px;
+    }
+    
+    img:nth-child(1) {
+        transform: rotateY( 0deg) translateZ(195px);
+    }
+    
+    img:nth-child(2) {
+        transform: rotateY( 40deg) translateZ(195px);
+    }
+    
+    img:nth-child(3) {
+        transform: rotateY( 80deg) translateZ(195px);
+    }
+    
+    img:nth-child(4) {
+        transform: rotateY( 120deg) translateZ(195px);
+    }
+    
+    img:nth-child(5) {
+        transform: rotateY( 160deg) translateZ(195px);
+    }
+    
+    img:nth-child(6) {
+        transform: rotateY( 200deg) translateZ(195px);
+    }
+    
+    img:nth-child(7) {
+        transform: rotateY( 240deg) translateZ(195px);
+    }
+    
+    img:nth-child(8) {
+        transform: rotateY( 280deg) translateZ(195px);
+    }
+    
+    img:nth-child(9) {
+        transform: rotateY( 320deg) translateZ(195px);
+    }
+    </style>
+</head>
+
+<body>
+    <div id="stage">
+    	<div id="stage_left"></div>
+    	<div id="stage_right"></div>
+        <div id="container">
+            <img class="piece" src="http://olislpb6q.bkt.clouddn.com/%200.jpg" alt="">
+            <img class="piece" src="http://olislpb6q.bkt.clouddn.com/%2010.jpg" alt="">
+            <img class="piece" src="http://olislpb6q.bkt.clouddn.com/%2011.jpg" alt="">
+            <img class="piece" src="http://olislpb6q.bkt.clouddn.com/%2012.jpg" alt="">
+            <img class="piece" src="http://olislpb6q.bkt.clouddn.com/%2013.jpg" alt="">
+            <img class="piece" src="http://olislpb6q.bkt.clouddn.com/%2014.jpg" alt="">
+            <img class="piece" src="http://olislpb6q.bkt.clouddn.com/%2015.jpg" alt="">
+            <img class="piece" src="http://olislpb6q.bkt.clouddn.com/%2016.jpg" alt="">
+            <img class="piece" src="http://olislpb6q.bkt.clouddn.com/%2017.jpg" alt="">
+        </div>
+    </div>
+    <script>
+    (function() {
+        if (typeof window.screenX === "number") {
+            // CSS transform变换应用
+            var transform = function(element, value, key) {
+                key = key || "Transform";
+                ["Moz", "O", "Ms", "Webkit", ""].forEach(function(prefix) {
+                    element.style[prefix + key] = value;
+                });
+            }
+
+            var $ = function(selector) {
+                return document.querySelector(selector);
+            }
+            var $$ = function(selector) {
+                return document.querySelectorAll(selector);
+            };
+            // 元素
+            var eleContainer = $("#container"),
+            	stage_left = $('#stage_left'),
+            	stage_right = $('#stage_right'),
+                indexPiece = 0;
+
+            stage_left.addEventListener("click", function() {
+                indexPiece++;
+                transform(eleContainer, "rotateY(" + (-1 * 40 * indexPiece) + "deg)");
+            });
+            stage_right.addEventListener("click", function() {
+                indexPiece--;
+                transform(eleContainer, "rotateY(" + (-1 * 40 * indexPiece) + "deg)");
+            });
+        } else {
+            alert("你好，养猪场不是飞机场，是开不了战斗机的！");
+        }
+    })();
+    </script>
+</body>
+
+</html>

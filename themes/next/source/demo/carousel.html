@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>carousel-jq</title>
+    <style>
+    * {
+        margin: 0;
+        padding: 0;
+        text-decoration: none;
+    }
+    
+    body {
+        padding: 20px;
+    }
+    
+    #container {
+        height: 400px;
+        width: 600px;
+        border: 3px solid #999;
+        position: relative;
+        overflow: hidden;
+    }
+    
+    #picList {
+        position: absolute;
+        width: 4200px;
+        height: 400px;
+        z-index: 1;
+    }
+    
+    #picList img {
+        height: 400px;
+        width: 600px;
+        z-index: 1;
+        float: left;
+    }
+    
+    .arrow {
+        cursor: pointer;
+        height: 40px;
+        width: 40px;
+        z-index: 2;
+        position: absolute;
+        top: 180px;
+        display: none;
+        background-color: rgba(0, 0, 0, .3);
+        font-size: 36px;
+        font-weight: bold;
+        line-height: 40px;
+        color: #fff;
+        text-align: center;
+    }
+    
+    #prev {
+        left: 20px;
+    }
+    
+    #next {
+        right: 20px;
+    }
+    
+    #container:hover .arrow {
+        display: block;
+    }
+    
+    .arrow:hover {
+        background-color: rgba(0, 0, 0, .7);
+    }
+    
+    #buttons {
+        position: absolute;
+        height: 22px;
+        width: 110px;
+        left: 245px;
+        bottom: 20px;
+        z-index: 2;
+    }
+    
+    #buttons span {
+        cursor: pointer;
+        display: block;
+        float: left;
+        height: 10px;
+        width: 10px;
+        margin: 5px;
+        border: 1px solid #FFF;
+        background: rgba(0, 0, 0, 0.3);
+        border-radius: 50%;
+    }
+    
+    #buttons .on {
+        background: #FF9900;
+    }
+    </style>
+</head>
+
+<body>
+    <div id="container">
+        <div id="picList" style="left:-600px">
+            <img src="http://olislpb6q.bkt.clouddn.com/bizhi5.jpg" alt="1" index="5">
+            <img src="http://olislpb6q.bkt.clouddn.com/bizhi1.jpg" alt="1" index="1">
+            <img src="http://olislpb6q.bkt.clouddn.com/bizhi2.jpg" alt="2" index="2">
+            <img src="http://olislpb6q.bkt.clouddn.com/bizhi3.jpg" alt="3" index="3">
+            <img src="http://olislpb6q.bkt.clouddn.com/bizhi4.jpg" alt="4" index="4">
+            <img src="http://olislpb6q.bkt.clouddn.com/bizhi5.jpg" alt="5" index="5">
+            <img src="http://olislpb6q.bkt.clouddn.com/bizhi1.jpg" alt="5" index="1">
+        </div>
+        <div id="buttons">
+            <span index="1" class='on'></span>
+            <span index="2"></span>
+            <span index="3"></span>
+            <span index="4"></span>
+            <span index="5"></span>
+        </div>
+        <a href="#" id="prev" class="arrow">&lt;</a>
+        <a href="#" id="next" class="arrow">&gt;</a>
+    </div>
+    <script type="text/javascript" src="http://libs.baidu.com/jquery/1.9.0/jquery.min.js"></script>
+    <script>
+    $(function() {
+        var container = $("#container");
+        var picList = $('#picList');
+        var buttons = $('#buttons span')
+        var prev = $('#prev');
+        var next = $('#next');
+        var index = 1;
+        var timer;
+
+        function animate(offset) {
+            var targetLeft = parseInt(picList.css('left')) + offset;
+
+            picList.animate({ left : targetLeft }, 500, function() {
+                    if (targetLeft > -600) {
+                        picList.css('left', -3000);
+                    }
+                    if (targetLeft < -3000) {
+                        picList.css('left', -600);
+                    }
+                });
+        }
+
+        function showButton() {
+            buttons.eq(index - 1).addClass('on').siblings().removeClass('on');
+        }
+
+        function play() {
+            timer = setTimeout(function() {
+                next.trigger('click');
+                play();
+            }, 3000);
+        }
+
+        function stop() {
+            clearTimeout(timer);
+        }
+
+        prev.on('click', function() {
+            if (picList.is(':animated')) {
+                return;
+            }
+            if (index == 1) {
+                index = 5;
+
+            } else {
+                index -= 1;
+            }
+            animate(600);
+            showButton();
+        })
+
+        next.on('click', function() {
+            if (picList.is(':animated')) {
+                return;
+            }
+            if (index == 5) {
+                index = 1;
+
+            } else {
+                index += 1;
+            }
+            animate(-600);
+            showButton();
+        })
+        
+
+        buttons.each(function() {
+            $(this).on("click", function() {
+                if (picList.is(":animated") || $(this).attr('class') == 'on'){
+                    return;
+                }
+                var myIndex = parseInt($(this).attr('index'));
+                var offset = -600 * (myIndex - index);
+                animate(offset);
+                index = myIndex;
+                showButton();
+            })
+        })
+
+        container.hover(stop, play);
+
+        play();
+    });
+    </script>
+</body>
+
+</html>
