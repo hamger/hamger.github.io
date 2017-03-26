@@ -1,34 +1,34 @@
 ---
-title: Vue.js学习记录2
+title: Vue.js基础2
 date: 2017-02-28 16:10:44
 tags: Vue.js
 ---
-组件的内容，接下来是vue组件的重要内容。
+继续组件的内容，接下来是 vue 组件的重要内容。
 
 #### 父子组件
 子组件只能在父组件中只用，写在html中的是父组件的标签。使用组件有三步：定义，注册，创建根实例。以下代码是很好的例子：
-```js
-    <div id="example">
-        <my-component></my-component>
-    </div>
-    ...
-	//定义组件 
-	var child = Vue.extend({
-		template: "<div>this is a child component!</div>"
-	})
-	var parent = Vue.extend({
-		template: "<div>this is a parent component! <child></child> </div>",
-		components: {
-			'child': child 
-		}
-	})
-	//注册组件
-	Vue.component('my-component',
-		parent)
-	//创建根实例
-	new Vue({
-		el:'#example'
-	})
+```html
+<div id="example">
+    <my-component></my-component>
+</div>
+<script>
+  //定义组件 
+  var child = Vue.extend({
+    template: "<div>this is a child component!</div>"
+  })
+  var parent = Vue.extend({
+    template: "<div>this is a parent component! <child></child></div>",
+    components: {
+      'child': child 
+    }
+  })
+  //注册组件
+  Vue.component('my-component', parent)
+  //创建根实例
+  new Vue({
+    el:'#example'
+  })
+</script>
 ```
 <!-- more -->
 

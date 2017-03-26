@@ -13,7 +13,6 @@ ECMAScript5为数组定义了5个迭代方法，每个方法都接受两个参�
 
 <!-- more -->
 实践出真知，以下代码是很好的例子
-
 ```js 
 	var     numbers = [1,2,3,4,5,4,3,2,1]
 	var everyResult = numbers.every(function (item,index,array) {

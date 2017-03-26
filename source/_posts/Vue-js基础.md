@@ -1,15 +1,14 @@
 ---
-title: Vue.js学习记录
+title: Vue.js基础
 date: 2017-02-28 16:04:04
-tags: 
-  - Vue.js
+tags: Vue.js
 ---
 ### 引言
-我第一次接触vue，是在一位朋友的推荐下去学习的，做为一枚小白，当时只知道jquery这个js框架，其它的都不了解，一开始接触vue的时候老实说我是一脸懵逼的，一下子还没从jQuery的思维中解脱出来，因此研究了好久的，过了一段时间后，再翻开vue的文档，总算是有些眉目了，现在记录下自己的理解吧，有写的不对的地方欢迎指正。这里只记录我认为比较重要的东西，要详细点的当然是看Vue文档啦。
+一开始接触vue的时候老实说我是一脸懵逼的，一下子还没从jQuery的思维中解脱出来，因此研究了好久的，过了一段时间后，再翻开vue的文档，总算是有些眉目了，现在记录下自己的理解吧，有写的不对的地方欢迎指正。这里只记录了我个人的理解，要详细的推荐[Vue官方文档](http://cn.vuejs.org/v2/guide/)。
 
 ### 我理解的vue核心思想
 
-1.视图参数化，数据驱动视图！
+1.视图参数化，数据驱动视图
 view(DOM节点)的属性被参数化，参数化的值被记录在Vue实例的data属性中，当通过methods中的函数改变data中的数据时，view也会发生变化，从而达到数据驱动视图的作用。
 <!-- more -->
 2.DOM结构组件化
@@ -35,8 +34,7 @@ v-model用在表单中，实现双向数据绑定。
 <div id="app">
   <p>input 元素：</p>
   <input v-model="message" placeholder="编辑我……">
-  <p>消息是: {{ message }}</p>
-    
+  <p>消息是: {{ message }}</p>    
   <p>textarea 元素：</p>
   <p style="white-space: pre">{{ message2 }}</p>
   <textarea v-model="message2" placeholder="多行文本输入……"></textarea>

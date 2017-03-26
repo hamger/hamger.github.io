@@ -23,7 +23,7 @@ transform 能够对元素进行移动、缩放、转动、拉长或拉伸。tran
 
 ### transform-origin
 另外，还有一个transform-origin属性，用来改变被转换元素的位置，一般和rotate()配合使用。
-```
+```css
 div
 {
 transform: rotate(45deg);
@@ -61,7 +61,7 @@ transform-origin的参数可以为：left、right、center、length、% 。
  transition-delay             | 规定过渡效果何时开始。默认是 0。          
 
 ### 实例
-```
+```css
 div
 {
 width:100px;
@@ -87,7 +87,7 @@ width:200px;
 
 ### @keyframes
 @keyframes 规则用于创建动画。在 @keyframes 中规定某项 CSS 样式，就能创建由当前样式逐渐改为新样式的动画效果。
-```
+```css
 @keyframes myfirst
 {
 from {background: red;}
@@ -113,7 +113,7 @@ to {background: yellow;}
 }
 ```
 @keyframes中也可以用具体的百分比
-```
+```css
 @keyframes myfirst
 {
 0%   {background: red;}
@@ -126,7 +126,7 @@ to {background: yellow;}
 通过规定至少以下两项 CSS3 动画属性，即可将动画绑定到选择器：
 * 规定动画的名称
 * 规定动画的时长
-```
+```css
 div
 {
 animation: myfirst 5s;
