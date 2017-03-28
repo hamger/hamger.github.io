@@ -27,4 +27,4 @@ mdfind -name 文件名
 ```
 和find一样请务必加上 -name 选项，不加就会搜出一大堆文件。
 
-我亲自试了一下这两个方法，速度上 mdfind 快 find 几条街，所以强烈推荐使用 mdfind 。但是使用`mdfind -name 文件名`和你用Spotlight终端一样是无法搜索被隐藏的文件的。如果你需要搜索隐藏文件，请在终端输入`sudo mdfind -name 文件名`。
+亲自试了一下这两个方法，速度上 mdfind 快 find 几条街，所以强烈推荐使用 mdfind 。但是使用`mdfind -name 文件名`和你用Spotlight终端一样是无法搜索被隐藏的文件的。如果你需要搜索隐藏文件，请在终端输入`sudo mdfind -name 文件名`。

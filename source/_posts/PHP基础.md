@@ -73,7 +73,7 @@ PHP 超级全局变量列表如下:
 一个常量由英文字母、下划线、和数字组成,但数字不能作为首字母出现。常量名不需要加 $ 修饰符。常量在定义后，默认是全局变量。
 设置常量，使用 define() 函数，函数语法如下：
 ```php
-bool define ( string $name , mixed $value [, bool $case_insensitive = false ] )
+define ( string $name , mixed $value [, bool $case_insensitive = false ] )
 ```
 该函数有三个参数:
 * name：必选参数，常量名称，即标志符。
@@ -87,4 +87,41 @@ echo 和 print 区别:
 * print 只允许输出一个字符串，返回值总为 1
 
 提示：echo 输出的速度比 print 快， echo 没有返回值，print有返回值1。
+
+## 函数
+PHP中的函数不支持重载。
+函数名、方法名、类名不区分大小写，但推荐使用与定义时相同的名字。
+任何的默认参数应该放在任何的非默认参数的** 右侧 **。
+自PHP5起，默认值可以通过引用传递。
+从函数返回一个引用，必须在函数声明和指派返回值给一个变量时都使用引用运算符 & ：
+```php
+<?php
+function & returns_reference ()
+{
+    return $someref ;
+}
+
+$newref =& returns_reference ();
+?>
+```
+### 可变函数
+PHP 支持可变函数的概念。这意味着如果一个变量名后有圆括号，PHP 将寻找与变量的值同名的函数，并且尝试执行它。
+```php
+<?php
+function  foo () {
+    echo  "In foo()<br />\n" ;
+}
+
+function  bar ( $arg  =  '' ) {
+    echo  "In bar(); argument was ' $arg '.<br />\n" ;
+}
+
+$func  =  'foo' ;
+$func ();         // This calls foo()
+
+$func  =  'bar' ;
+$func ( 'test' );   // This calls bar()
+?>
+```
+
 
