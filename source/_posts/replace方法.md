@@ -1,5 +1,5 @@
 ---
-title: replace()方法
+title: replace方法
 date: 2017-03-17 12:12:23
 tags: JavaScript
 ---
@@ -85,4 +85,86 @@ console.log(text)
 以上代码输出：
 ```
 Hello, my name is Tom, I am 28 years old. My job is doctor.
+```
+强化后的模板引擎如下：
+```js
+var data = [{
+    'name': 'Tom',
+    'age': 28,
+    'occupation': 'doctor',
+    'grade': {
+        'a': 'A',
+        'b': 'B',
+        'c': 'C'
+    },
+    'fruits': ['apple', 'banana', 'enanas']
+}, {
+    'name': 'Alice',
+    'age': 18,
+    'occupation': 'student',
+    'grade': {
+        'a': 'A',
+        'b': 'B',
+        'c': 'C'
+    },
+    'fruits': ['watermelon', 'orange', 'pear']
+}, {
+    'name': 'Haren',
+    'age': 32,
+    'occupation': 'teacher',
+    'grade': {
+        'a': 'A',
+        'b': 'B',
+        'c': 'C'
+    },
+    'fruits': ['apple', 'grape', 'pear']
+}]
+
+var tplA = 'NO <@1@> <@2@>, my name is <%name%>, I am <%age%> years old. My job is <%occupation%>.The Grade of My  test is <% grade.a %>. My favorite fruits are <%fruits%>.\n'
+var tplB = 'NO <@1@> <@2@>, my name is <%name%>, I am <%age%> years old. My job is <%occupation%>.The Grade of My  test is <% grade.b %>. My favorite fruits are <%fruits%>.\n'
+var tplC = 'NO <@1@> <@2@>, my name is <%name%>, I am <%age%> years old. My job is <%occupation%>.The Grade of My  test is <% grade.c %>. My favorite fruits are <%fruits%>.\n'
+
+var tpl = [tplA, tplB, tplC]
+
+function tplEngine(tpl, obj,variate1,variate2,separator) {
+    if (variate1 || variate1 === 0) {
+        var tpl = tpl.replace(/<@1@>/g, function(a, b) {
+            return variate1
+        })
+    }
+    if (variate2 || variate2 === 0) {
+        var tpl = tpl.replace(/<@2@>/g, function(a, b) {
+            return variate2
+        })
+    }
+    if (!separator && separator !== 0) {
+        separator = ','
+    }
+    var tpl = tpl.replace(/<%([^%>]+)?%>/g, function(a, b) {
+        var b = b.trim()
+        if (/\./.test(b)) {
+            var arr = b.split('.')
+            if (obj[arr[0]][arr[1]] instanceof Array) {
+                return obj[arr[0]][arr[1]].join(separator)
+            } else {
+                return obj[arr[0]][arr[1]]
+            }
+        } else {
+            if (obj[b] instanceof Array) {
+                return obj[b].join(separator)
+            } else {
+                return obj[b]
+            }
+        }
+    })
+    return tpl
+}
+var str = ''
+for (var i = 0; i < data.length; i++) {
+    for (var j = 0; j < 2; j++) {
+        str += tplEngine(tpl[i], data[i],i,j)
+    }
+}
+console.log(str)
+
 ```

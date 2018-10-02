@@ -16,6 +16,7 @@ console.log(arr.push('2')) // 5
 console.log(arr) // [1, 2, 4, 5, "2"]
 ```
 
+<!-- more -->
 ### 删除
 * pop()      删除并返回数组的最后一个元素。
 * shift()    删除并返回数组的第一个元素。
@@ -30,7 +31,6 @@ console.log(arr) // [1,2,4]
 * slice()    选取数组的的一部分，并返回一个新数组。不改变原数组。
 * splice()   从数组中删除、插入、替换元素，并返回删除的数组。改变原数组。
 
-<!-- more -->
 ### slice()
 语法 `array.slice(start, end)`
 返回从 start 到 end （** 不包括该元素 **）的数组。

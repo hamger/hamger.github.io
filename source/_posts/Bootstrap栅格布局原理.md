@@ -25,6 +25,7 @@ tags: Bootstrap
     width: 8.33333333%;
   }
 ```
+<!-- more -->
 列偏移是通过设置 margin-left 百分比值来实现的。
 ```css
   .col-md-offset-12 {

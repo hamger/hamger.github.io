@@ -4,13 +4,13 @@
 
 # Site
 title: Hanger's Blog
-subtitle: brief and important
+subtitle: learn more, share more
 description: Making a little bit progress every day
 author: Hanger
 language: zh-Hans
 timezone: 
 
-avatar: 'http://olislpb6q.bkt.clouddn.com/header.jpg'
+avatar: 'http://olislpb6q.bkt.clouddn.com/hg-head.png'
 
 # URL
 ## If your site is put in a subdirectory, set url as 'http://yoursite.com/child' and root as '/child/'
@@ -78,4 +78,4 @@ search:
   path: search.xml
   field: post
   format: html
-  limit: 10000  
+  limit: 10000

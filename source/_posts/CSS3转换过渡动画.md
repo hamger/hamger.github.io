@@ -7,6 +7,7 @@ CSS3中有三个属性：transform、transition、animation，一直容易搞混
 ## transform 转换
 transform 能够对元素进行移动、缩放、转动、拉长或拉伸。transform 分为2D转换和3D转换，由于目前浏览器对3D转换的支持度还不好，所以以下主要讲解2D转换。
 
+<!-- more -->
 ### 2D转换方法
 * translate(x,y) 移动，参数为像素值 
 	* translateX(n)
@@ -15,7 +16,6 @@ transform 能够对元素进行移动、缩放、转动、拉长或拉伸。tran
 * scale(x,y) 缩放，参数为倍数
 	* scaleX(n)
 	* scaleY(n)
-<!-- more -->
 * skew(x-angle,y-angle) 倾斜，参数为角度
 	* skewX(angle) 
 	* skewY(angle) 

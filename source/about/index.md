@@ -4,23 +4,37 @@ date: 2017-02-28 20:17:01
 comments: false
 ---
 ## 关于博客
-我开始写博客的时候是2017年2月份，至于当初为什么要写博客，完全是为了在自己的简历上添上那么一行，有助于找工作。现在，我只是把想写的东西记录下来，如果刚好对别人有用，那就算附加的了。技术博文力求简要，主要记录自己在意的内容，过长的篇幅是对读者耐心和消化力的极大考验，如果读者能在较短的时间内从我的博文中得到自己想要的，那我会很高兴。同时也希望在不久的将来，能从本博客中看到自己技术与心智的成长。
+本博客始于2017年2月28号，记录个人学习之路的点点滴滴，实现知识的巩固和积累。当某些记忆变淡了还可以回来温故知新，发现以前的不足及时修正，所以博文较大程度上来说是写给自己看的，如果我写的内容恰好对你有所帮助，那就算附加的了。技术博文力求简明扼要，倾向于记录常用的内容，常会是一块知识点的总结或是一些知识碎片。希望在不久的将来，能在博客中看到自己技术与心智的成长，共勉。
 
 ## 关于我
-我的名字是孟汉光，英文名 Hanger 。17届应届毕业生，本科中国计量大学。
-自学前端，喜欢酷炫的特效，追求逻辑清晰的代码，有过一段工作经历，目前正在寻找前端工程师的工作。
-性格开朗，易于相处，喜欢简单的生活方式，追求高效的行事风格，勤于思考与实践。
-火影海贼迷，同时也是三国杀游戏爱好者。
+我的名字是孟汉光，英文名Hanger，90后。
+野生程序猿，对技术充满热情，喜欢造轮子，也喜欢分享技术心得。
+性格开朗乐观，好交际易于相处，经常参加户外运动，勤于思考与实践。
+充满好奇心，乐于学习，愿意分享，享受 coding。
 
-### 照片
-[仅有的自拍](http://olislpb6q.bkt.clouddn.com/selfie.jpg)
+### 个人作品
+* 日期选择器 [ DEMO ](/demo/datepicker/datepicker.html)，[ 使用说明和源码 ](https://github.com/hamger/hg-datepicker)。
+* 地区选择器 [ DEMO ](/demo/citypicker/citypicker.html)，[ 使用说明和源码 ](https://github.com/hamger/hg-citypicker)。
+* 并列选择器 [ DEMO ](/demo/parapicker/parapicker.html)，[ 使用说明和源码 ](https://github.com/hamger/hg-parapicker)。
+* Vue 组件库 [ DEMO、使用说明和源码 ](https://github.com/hamger/hg-vcomponents)。
+* 记忆消消乐 [ DEMO ](/demo/memory-turnover/index.html)，[ 源码 ](https://github.com/hamger/memory-turnover)。
+* 2048 [ DEMO ](/demo/2048/2048.html)，[ 源码 ](https://github.com/hamger/2048)。
+* 拖拽拼图 [ DEMO ](/demo/jigsaw/jigsaw.html)，[ 源码 ](https://github.com/hamger/jigsaw)。
+<!-- * 焦点轮播图 [ DEMO ](/demo/carousel.html)，[ 源码 ](https://github.com/hamger/carousel-jq)。 -->
+* 3D轮播图 [ DEMO ](/demo/3d_carousel.html)，[ 源码 ](https://github.com/hamger/css3-skill/blob/master/3d_carousel.html)。
+<!-- * 移动端的图片画廊 [ DEMO ](/demo/slider.html)，[ 源码 ](https://github.com/hamger/slider)。 -->
+* Canvas手写板 [ DEMO ](/demo/handwriting/handwriting.html)，[ 源码 ](https://github.com/hamger/handwriting)。
 
-### 简历
-[我的在线简历](../resume/index.html)
+<!-- ### 照片
+[仅有的自拍](http://olislpb6q.bkt.clouddn.com/selfie.jpg) -->
+
+<!-- ### 简历
+[我的PDF简历](../resume/pdf.html) -->
+<!-- [我的在线简历](../resume/index.html) -->
 
 ### 外链
 [GitHub](https://github.com/hamger)
 [SegmentFault](https://segmentfault.com/u/mhg12300)
-[微博](http://weibo.com/p/1005055496798334/home)
+<!-- [微博](http://weibo.com/p/1005055496798334/home) -->
 <!-- [简书](http://www.jianshu.com/users/6c7e347da4e8/timeline) -->
 <!-- [知乎](https://www.zhihu.com/people/hamger) -->

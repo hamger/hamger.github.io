@@ -3,10 +3,10 @@ title: JS正则表达式
 date: 2017-03-16 10:49:25
 tags: RegExp
 ---
-## RegExp 对象
+### RegExp 对象
 RegExp(regular expression) 对象表示正则表达式，它是对字符串执行模式匹配的强大工具。
 
-## 创建 RegExp 对象
+### 创建 RegExp 对象
 ```js
 var reg = new RegExp(pattern,modifiers);
 var reg = /pattern/modifiers;
@@ -19,9 +19,8 @@ var reg = /pattern/modifiers;
 var reg = RegExp("^qq\.com$")
 var reg = / ^qq\.com$ /
 ```
-<!-- more -->
 
-## 修饰符
+### 修饰符
 
 修饰符 | 描述
 ----- | ---
@@ -29,7 +28,7 @@ i   | 	执行对大小写不敏感的匹配
 g   | 	执行全局匹配
 m   | 	执行多行匹配
 
-## 方括号 
+### 方括号 
 方括号用于查找某个范围内的字符：
 
 表达式 | 描述
@@ -48,7 +47,7 @@ var patt2 = /(Is|is)/g;
 console.log(str.match(patt2)); // Is,is,is
 ```
 
-## 元字符
+### 元字符
 元字符（Metacharacter）是拥有特殊含义的字符(以下省略部分生僻元字符)：
 
 元字符 | 描述
@@ -57,7 +56,7 @@ console.log(str.match(patt2)); // Is,is,is
 \w | 单词字符
 \W | 非单词字符
 \d | 数字字符
-\d | 非数字字符
+\D | 非数字字符
 \s | 空白字符
 \S | 非空白字符
 \b | 单词边界
@@ -68,7 +67,7 @@ console.log(str.match(patt2)); // Is,is,is
 \xdd | 以十六进制数 dd 规定的字符
 \uxxxx | 以十六进制数 xxxx 规定的 Unicode 字符
 
-## 量词
+### 量词
 量词 | 描述
 ---- | ----
 n+ | >=1(至少一个)
@@ -82,23 +81,4 @@ n$ | 结尾为 n 的字符串
 ^n | 开头为 n 的字符串
 ?=n | 其后紧接 n 的字符串
 ?!n	| 其后没有紧接 n 的字符串
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 

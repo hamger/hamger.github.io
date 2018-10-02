@@ -22,22 +22,19 @@ console.log(arr) // [0, 1, 10, 15, 5]
 ```
 但是这种效果一般都不是我们想要的，sort() 可以接受一个参数，该参数必须是函数，该函数接受两个参数。如果第一个参数应该位于第二个参数之前则返回负值，反之则改为正值。
 ```js
-function compare(value1, value2) {
-    if (value1 < value2) {
-        return -1 
-    } else if (value1 > value2) {
-        return 1
-    } else {
-        return 0
-    }
-}
-arr.sort(compare)
-console.log(arr) // [0, 1, 5, 10, 15]
+var arr=[5,100,6,3,-12];
+arr.sort(function(a,b) {
+    return a-b; // a-b 升序;b-a 降序
+});
+console.log(arr); // [-12, 3, 5, 6, 100]
 ```
-对于数值类型可以使用一个更简洁的方法
+可见，利用 sort() 方法可以用来求数组的极值，极值即为重排序后数组的第一项和最后一项。
+请注意，数组在原数组上进行排序，不生成副本。
+如果需要通过对象数组中的每项的某个属性值来排序，可以这样：
 ```js
-function compare(value1, value2) {
-    return value1 - value2 // 此为升序，降序则反减 
-}
+var arr=[{a:5},{a:100},{a:6}];
+arr.sort(function(a,b) {
+    return a.a-b.a;
+});
 ```
-值得一提的是，利用 sort() 方法可以用来求数组的极值，极值即为重排序后数组的第一项和最后一项。
+

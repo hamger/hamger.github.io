@@ -3,10 +3,10 @@
 # ---------------------------------------------------------------
 
 # Put your favicon.ico into `hexo-site/source/` directory.
-favicon: /favicon.ico
+favicon: "http://olislpb6q.bkt.clouddn.com/hg-head.png"
 
 # Set default keywords (Use a comma to separate)
-keywords: "Hexo, NexT"
+keywords: "hanger, blog"
 
 # Set rss to false to disable feed link.
 # Leave rss as empty to use site's feed link.
@@ -17,7 +17,7 @@ rss:
 #since: 2015
 
 # icon between year and author @Footer
-authoricon: heart
+authoricon: hearts
 
 # Footer `powered-by` and `theme-info` copyright
 copyright: true
@@ -135,7 +135,7 @@ font:
 social:
   #LinkLabel: Link
   GitHub: "https://github.com/hamger"
-  简书: "http://www.jianshu.com/users/6c7e347da4e8/timeline"
+  SegmentFault: "https://segmentfault.com/u/mhg12300"
 
 # Social Links Icons
 # Icon Mapping:
@@ -147,7 +147,7 @@ social_icons:
   # Icon Mappings.
   # KeyMapsToSocialItemKey: NameOfTheIconFromFontAwesome
   GitHub: github
-  jianshu: 
+  segmentfault: 
 
 
 # Sidebar Avatar
@@ -282,7 +282,7 @@ mathjax:
 #baidu_analytics:
 
 # Duoshuo ShortName
-duoshuo_shortname: hanger
+#duoshuo_shortname: hanger
 
 # Disqus
 #disqus_shortname:
@@ -297,9 +297,9 @@ duoshuo_shortname: hanger
 # You can get your uid from http://www.uyan.cc
 #youyan_uid: your uid
 
-# Support for LiveRe comments system.
-# You can get your uid from https://livere.com/insight/myCode (General web site)
-#livere_uid: your uid
+#Support for LiveRe comments system.
+#You can get your uid from https://livere.com/insight/myCode (General web site)
+livere_uid: 'MTAyMC8zNTM2My8xMTg5OQ=='
 
 # Baidu Share
 # Available value:
@@ -314,7 +314,7 @@ duoshuo_shortname: hanger
 #add_this_id:
 
 # Share
-#duoshuo_share: true
+# duoshuo_share: true
 
 # Google Webmaster tools verification setting
 # See: https://www.google.com/webmasters/
@@ -520,4 +520,9 @@ images: images
 
 # Theme version
 version: 5.1.0
+
+# Donate 文章末尾显示打赏按钮
+reward_comment: 我的梦想是被打赏包养~
+wechatpay: "http://olislpb6q.bkt.clouddn.com/%E5%BE%AE%E4%BF%A1.png"
+alipay: "http://olislpb6q.bkt.clouddn.com/%E6%94%AF%E4%BB%98%E5%AE%9D.jpg"
 
