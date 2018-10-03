@@ -14,7 +14,7 @@ npm install hexo-cli -g
 ```bash
 git pull origin hexo
 git add .
-git commit -m 'updade_181003'
+git commit -m '181003_fix01'
 git push origin hexo
 ```
 
