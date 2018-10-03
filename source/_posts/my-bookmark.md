@@ -15,6 +15,8 @@ tags: bookmark
 [廖雪峰](https://www.liaoxuefeng.com/)
 
 ### 其他
-[xclient Mac应用分享](http://xclient.info/?t=8f157bd9266e1943fde7be85019bcca78bdfdfdf)
+[xclient Mac应用分享](http://xclient.info/)
+[iconfont 矢量图标库](http://www.iconfont.cn/)
 [tinypng 图片压缩](https://tinypng.com/)
 [css-js 代码压缩](https://tool.css-js.com/)
+[qiniu 七牛云](https://portal.qiniu.com/)
