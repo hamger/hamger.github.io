@@ -14,19 +14,26 @@ $code-block {
   line-height: $line-height-code-block;
 }
 
-pre, code { font-family: $code-font-family; }
+pre, code {
+  font-family: $code-font-family;
+}
 
 code {
   padding: 2px 4px;
   word-wrap: break-word;
-  color: $code-foreground;
-  background: $code-background;
+  //color: $code-foreground;
+  //background: $code-background;
   border-radius: $code-border-radius;
   font-size $code-font-size;
+
+  color: #c7254e;
+  background: #f9f2f4;
+  border: 1px solid #d6d6d6;
 }
 
 pre {
   @extend $code-block;
+  padding: 10px;
 
   code {
     padding: 0;
@@ -68,7 +75,9 @@ pre {
       float: right;
       color: $highlight-foreground;
 
-      &:hover { border-bottom-color: $highlight-foreground; }
+      &:hover {
+        border-bottom-color: $highlight-foreground;
+      }
     }
   }
 
@@ -81,14 +90,16 @@ pre {
   }
 
   .code pre {
+    width: 100%
     padding-left: 10px
     padding-right: 10px
     background-color: $highlight-background
   }
 
-  .line { height: 20px; }
+  .line {
+    height: 20px;
+  }
 }
-
 
 .gutter {
   -webkit-user-select: none;
@@ -100,17 +111,29 @@ pre {
 .gist table {
   width: auto;
 
-  td { border: none; }
+  td {
+    border: none;
+  }
 }
 
 // For diff highlight
-pre .deletion { background: $highlight-deletion; }
-pre .addition { background: $highlight-addition; }
-pre .meta     { color: $highlight-purple; }
+pre .deletion {
+  background: $highlight-deletion;
+}
+
+pre .addition {
+  background: $highlight-addition;
+}
+
+pre .meta {
+  color: $highlight-purple;
+}
 
 pre {
 
-  .comment { color: $highlight-comment; }
+  .comment {
+    color: $highlight-comment;
+  }
 
   .variable
   .attribute

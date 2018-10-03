@@ -10,8 +10,16 @@
   }
 
   .post-body {
-    pre, .highlight {
-      padding: 10px;
+    pre {
+      .gutter pre {
+        padding-right: 10px;
+      }
+    }
+
+    .highlight {
+      margin-left: 0px;
+      margin-right: 0px;
+      padding: 0;
       .gutter pre {
         padding-right: 10px;
       }
@@ -42,7 +50,7 @@
       visibility: visible;
     }
   }
-  
+
   ul li { list-style: circle; }
 
   img {
@@ -53,4 +61,4 @@
   }
 }
 
-.posts-expand .fancybox img { margin: 0 auto; }
+.posts-expand .post-body .fancybox img { margin: 0 auto 25px; }
