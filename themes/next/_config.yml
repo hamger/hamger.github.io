@@ -70,7 +70,7 @@ canonical: true
 seo: true
 
 # If true, will add site-subtitle to index page, added in main hexo config.
-# subtitle: Subtitle
+subtitle: Making a little bit progress every day!!
 index_with_subtitle: false
 
 
@@ -96,13 +96,6 @@ menu:
 # Enable/Disable menu icons.
 menu_icons:
   enable: true
-
-# Local search
-local_search:
-  enable: true
-
-
-
 
 
 
@@ -405,9 +398,9 @@ valine:
 # You can get your uid from http://www.uyan.cc
 #youyan_uid: your uid
 
-# Support for LiveRe comments system.
+# Support for LiveRe comments system. 支持来比力评论
 # You can get your uid from https://livere.com/insight/myCode (General web site)
-livere_uid: 
+livere_uid: MTAyMC8zNTM2My8xMTg5OQ==
 
 # Gitment
 # Introduction: https://imsun.net/posts/gitment-introduction/
@@ -613,15 +606,15 @@ calendar:
 #     hits_empty: "We didn't find any results for the search: ${query}"
 #     hits_stats: "${hits} results found in ${time} ms"
 
-# # Local search
-# # Dependencies: https://github.com/flashlab/hexo-generator-search
-# local_search:
-#   enable: false
-#   # if auto, trigger search by changing input
-#   # if manual, trigger search by pressing enter key or search button
-#   trigger: auto
-#   # show top n results per article, show all results by setting to -1
-#   top_n_per_article: 1
+# Local search
+# Dependencies: https://github.com/flashlab/hexo-generator-search
+local_search:
+  enable: true
+  # if auto, trigger search by changing input
+  # if manual, trigger search by pressing enter key or search button
+  trigger: auto
+  # show top n results per article, show all results by setting to -1
+  top_n_per_article: 1
 
 
 # ---------------------------------------------------------------
