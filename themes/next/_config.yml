@@ -40,7 +40,7 @@ footer:
   since: 2016
 
   # Icon between year and copyright info.
-  icon: heart
+  icon: user
 
   # If not defined, will be used `author` from Hexo main config.
   copyright:
@@ -67,10 +67,10 @@ footer:
 canonical: true
 
 # Change headers hierarchy on site-subtitle (will be main site description) and on all post/pages titles for better SEO-optimization.
-seo: true
+seo: false
 
 # If true, will add site-subtitle to index page, added in main hexo config.
-subtitle: Making a little bit progress every day!!
+# subtitle: subtitle
 index_with_subtitle: false
 
 

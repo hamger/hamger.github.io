@@ -4,7 +4,8 @@
 
 # Site
 title: Hanger's Blog
-subtitle: learn more, share more
+subtitle:
+# subtitle: learn more, share more
 description: Making a little bit progress every day
 author: Hanger
 language: zh-Hans
@@ -78,4 +79,4 @@ search:
   path: search.xml
   field: post
   format: html
-  limit: 10000
+  limit: 5000
