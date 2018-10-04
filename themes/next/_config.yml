@@ -37,10 +37,10 @@ rss:
 footer:
   # Specify the date when the site was setup.
   # If not defined, current year will be used.
-  #since: 2015
+  since: 2016
 
   # Icon between year and copyright info.
-  icon: user
+  icon: heart
 
   # If not defined, will be used `author` from Hexo main config.
   copyright:
@@ -130,10 +130,10 @@ scheme: Muse
 # Key is the link label showing to end users.
 # Value before `||` delimeter is the target permalink.
 # Value after `||` delimeter is the name of FontAwesome icon. If icon (with or without delimeter) is not specified, globe icon will be loaded.
-#social:
-  #GitHub: https://github.com/yourname || github
-  #E-Mail: mailto:yourname@gmail.com || envelope
-  #Google: https://plus.google.com/yourname || google
+social:
+  GitHub: https://github.com/hamger || github
+  E-Mail: mailto:2313303800@qq.com|| envelope
+  Google: https://plus.google.com/hangermeng || google
   #Twitter: https://twitter.com/yourname || twitter
   #FB Page: https://www.facebook.com/yourname || facebook
   #VK Group: https://vk.com/yourname || vk
@@ -226,7 +226,7 @@ auto_excerpt:
   enable: false
   length: 150
 
-# Post meta display settings 文章头部信息显示
+# Post meta display settings 文章头部展示的信息
 post_meta:
   item_text: true
   created_at: true
@@ -235,12 +235,13 @@ post_meta:
 
 # Post wordcount display settings 文章字数是否显示
 # Dependencies: https://github.com/willin/hexo-wordcount
-# post_wordcount:
-#   item_text: true
-#   wordcount: true
-#   min2read: false
-#   totalcount: true
-#   separated_meta: true
+post_wordcount:
+  item_text: true
+  wordcount: true
+  min2read: false
+  totalcount: true
+  # 是否需要换行显示
+  separated_meta: false
 
 # Wechat Subscriber
 #wechat_subscriber:
@@ -249,10 +250,10 @@ post_meta:
   #description: ex. subscribe to my blog by scanning my public wechat account
 
 # Reward
-#reward_comment: Donate comment here
-#wechatpay: /images/wechatpay.jpg
-#alipay: /images/alipay.jpg
-#bitcoin: /images/bitcoin.png
+reward_comment: 我的梦想是被打赏包养~
+wechatpay: "http://olislpb6q.bkt.clouddn.com/%E5%BE%AE%E4%BF%A1.png"
+alipay: "http://olislpb6q.bkt.clouddn.com/%E6%94%AF%E4%BB%98%E5%AE%9D.jpg"
+# bitcoin: /images/bitcoin.png
 
 # Declare license on posts
 post_copyright:
@@ -284,7 +285,7 @@ custom_logo:
 # Available value:
 #    normal | night | night eighties | night blue | night bright
 # https://github.com/chriskempson/tomorrow-theme
-highlight_theme: normal
+highlight_theme: night eighties
 
 
 # ---------------------------------------------------------------
@@ -542,7 +543,7 @@ rating:
 # Show number of visitors to each article.
 # You can visit https://leancloud.cn get AppID and AppKey.
 leancloud_visitors:
-  enable: true
+  enable: false
   app_id: 
   app_key: 
 
@@ -560,19 +561,19 @@ firestore:
 # Get more information on http://ibruce.info/2015/04/04/busuanzi/
 busuanzi_count:
   # count values only if the other configs are false
-  enable: false
+  enable: true
   # custom uv span for the whole site
   site_uv: true
-  site_uv_header: <i class="fa fa-user"></i>
+  site_uv_header: <i class="fa fa-user"></i> 访问人数
   site_uv_footer:
   # custom pv span for the whole site
   site_pv: true
-  site_pv_header: <i class="fa fa-eye"></i>
-  site_pv_footer:
+  site_pv_header: <i class="fa fa-eye"></i> 访问总量
+  site_pv_footer: 次
   # custom pv span for one page only
   page_pv: true
-  page_pv_header: <i class="fa fa-file-o"></i>
-  page_pv_footer:
+  page_pv_header: <i class="fa fa-file-o"></i> 浏览量
+  page_pv_footer: 
 
 
 # Tencent analytics ID

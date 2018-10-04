@@ -21,7 +21,7 @@ comments: false
 * 2048 [ DEMO ](/demo/2048/2048.html)，[ 源码 ](https://github.com/hamger/2048)。
 * 拖拽拼图 [ DEMO ](/demo/jigsaw/jigsaw.html)，[ 源码 ](https://github.com/hamger/jigsaw)。
 <!-- * 焦点轮播图 [ DEMO ](/demo/carousel.html)，[ 源码 ](https://github.com/hamger/carousel-jq)。 -->
-* 3D轮播图 [ DEMO ](/demo/3d_carousel.html)，[ 源码 ](https://github.com/hamger/css3-skill/blob/master/3d_carousel.html)。
+<!-- * 3D轮播图 [ DEMO ](/demo/3d_carousel.html)，[ 源码 ](https://github.com/hamger/css3-skill/blob/master/3d_carousel.html)。 -->
 <!-- * 移动端的图片画廊 [ DEMO ](/demo/slider.html)，[ 源码 ](https://github.com/hamger/slider)。 -->
 * Canvas手写板 [ DEMO ](/demo/handwriting/handwriting.html)，[ 源码 ](https://github.com/hamger/handwriting)。
 

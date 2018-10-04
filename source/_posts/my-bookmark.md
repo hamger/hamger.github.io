@@ -8,6 +8,7 @@ tags: bookmark
 [webpack](https://webpack.docschina.org/configuration/)
 [TypeScript](https://www.tslang.cn/docs/handbook/interfaces.html)
 
+<!-- more -->
 ### 博客
 [阮一峰](http://www.ruanyifeng.com/blog/)
 [淘宝-fed](http://taobaofed.org/)

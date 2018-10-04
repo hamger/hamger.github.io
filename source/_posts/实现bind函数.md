@@ -36,7 +36,7 @@ Function.prototype.customBind = function(that) {
 };
 ```
 以上代码可以实现作用域绑定，但是无法支持调用函数的参数传递，也就是说`obj.test('obj2')`里传递的参数不会被处理，因此我们需要改进一下`customBind`函数：
-```
+```js
 Function.prototype.customBind = function(that) {
 	var _this = this, // _this 指向当前被调用的函数
 	slice = Array.prototype.slice,
@@ -48,7 +48,7 @@ Function.prototype.customBind = function(that) {
 };
 ```
 测试
-```
+```js
 var name = 'window';
 var test = function(a, b) {
     console.log('作用域绑定：' + this.name);
@@ -65,7 +65,7 @@ obj.test('obj2')
 // 调用函数传递的参数：obj2
 ```
 测试通过，所以js中的bind函数可以这样实现：
-```
+```js
 Function.prototype.bind = function(that) {
 	var _this = this, slice = Array.prototype.slice, args = slice.call(arguments, 1);
 	return function () {

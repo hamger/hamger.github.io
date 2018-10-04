@@ -19,6 +19,8 @@ tags: vscode
 | `option` + `↑`/`↓`               | 上下移动当前行                 |
 | `shift` + `command` + `v`        | Markdown 预览                  |
 
+<!-- more -->
+
 #### 光标
 
 | 快捷键                                           | 说明            |
