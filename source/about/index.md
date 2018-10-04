@@ -23,7 +23,7 @@ comments: false
 <!-- * 焦点轮播图 [ DEMO ](/demo/carousel.html)，[ 源码 ](https://github.com/hamger/carousel-jq)。 -->
 <!-- * 3D轮播图 [ DEMO ](/demo/3d_carousel.html)，[ 源码 ](https://github.com/hamger/css3-skill/blob/master/3d_carousel.html)。 -->
 <!-- * 移动端的图片画廊 [ DEMO ](/demo/slider.html)，[ 源码 ](https://github.com/hamger/slider)。 -->
-* Canvas手写板 [ DEMO ](/demo/handwriting/handwriting.html)，[ 源码 ](https://github.com/hamger/handwriting)。
+<!-- * Canvas手写板 [ DEMO ](/demo/handwriting/handwriting.html)，[ 源码 ](https://github.com/hamger/handwriting)。 -->
 
 <!-- ### 照片
 [仅有的自拍](http://olislpb6q.bkt.clouddn.com/selfie.jpg) -->
