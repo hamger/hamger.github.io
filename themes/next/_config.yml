@@ -67,7 +67,7 @@ footer:
 canonical: true
 
 # Change headers hierarchy on site-subtitle (will be main site description) and on all post/pages titles for better SEO-optimization.
-seo: false
+seo: true
 
 # If true, will add site-subtitle to index page, added in main hexo config.
 # subtitle: subtitle
@@ -126,7 +126,7 @@ scheme: Muse
 social:
   GitHub: https://github.com/hamger || github
   E-Mail: mailto:2313303800@qq.com|| envelope
-  Google: https://plus.google.com/hangermeng || google
+  # Google: https://plus.google.com/hangermeng || google
   #Twitter: https://twitter.com/yourname || twitter
   #FB Page: https://www.facebook.com/yourname || facebook
   #VK Group: https://vk.com/yourname || vk
