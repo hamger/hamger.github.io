@@ -6,11 +6,11 @@ tags: ReactNative
 学习 ReactNative 的第一步就是搭建开发环境，在搭建iOS开发环境中就遇到不少坑，以下假定你已经安装了node和Xcode。
 
 ### 安装 Yarn 和 React Native 命令行工具
-```
+```bash
 npm install -g yarn react-native-cli
 ```
 设置yarn的镜像源
-```
+```bash
 yarn config set registry https://registry.npm.taobao.org --global
 yarn config set disturl https://npm.taobao.org/dist --global
 ```
@@ -22,7 +22,7 @@ yarn config set disturl https://npm.taobao.org/dist --global
 
 <!-- more -->
 ### 运行ios项目
-```
+```bash
 react-native init MyApp --version 0.44.3
 cd MyApp
 react-native run-ios

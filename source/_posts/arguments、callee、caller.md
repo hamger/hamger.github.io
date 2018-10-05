@@ -32,7 +32,7 @@ arguments.callee 在哪一个函数中运行，它就代表哪一个函数。 �
 
 ## caller
 caller 是函数对象的一个属性，该属性保存着调用当前函数的函数。包含闭包，如果没有父函数，则为null。
-```
+```js
 //child是parent内的函数，并在parent内执行child
 function parent(){
    	function child(){  

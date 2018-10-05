@@ -42,7 +42,7 @@ kHz	| kilohertz, 千赫
 
 #### 角度(Degrees)
 角度范围从0~360度(deg)，正数表示顺时针旋转，负数则逆时针。
-```
+```css
 transform: rotate(365deg);
 transform: rotate(5deg);
 ```

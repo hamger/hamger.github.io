@@ -6,7 +6,7 @@ tags: JavaScript
 indexOf() 方法可返回某个指定的值在字符串或数组中**首次**出现的位置，**对象没有这个方法**。
 
 ### 语法
-```
+```js
 stringObject.indexOf(searchvalue,fromindex)
 ```
 * searchvalue	必需。规定需检索的字符串值。
@@ -18,7 +18,7 @@ stringObject.indexOf(searchvalue,fromindex)
 
 
 ### 应用拓展
-```
+```js
 let str2 = 'qwertyuioasdfghjke';
 console.log(str2.indexOf('wer')); // 1
 console.log(str2.indexOf('e')); // 2
@@ -34,12 +34,12 @@ console.log(arr2.indexOf(undefined)); // 4
 console.log(arr2.indexOf(null)); // 5
 ```
 indexOf() 可以用来确定数组中是否存在某个**基本类型的值**或者`null`, 从上面的例子可以发现，indexOf无法确定数组和对象的存在，因为
-```
+```js
 {} == {} // false
 [] == [] // false
 ```
 但是如果是**引用地址**就可以确定是否存在
-```
+```js
 let obj = {aa: 13};
 let arr = [12, 99];
 let arr2 = [obj, arr, 96, '55', undefined, null];

@@ -5,7 +5,7 @@ tags: sass
 ---
 ### Variables
 `sass`定义变量符号是`$`，`less`定义变量的符号是`@`。
-```
+```scss
 $bule: #2a8ee3 !global; // 全局变量
 $borderDirection: top !default; // 默认值
 $baseFontSize: 12px;
@@ -17,7 +17,7 @@ body{
     font:#{$baseFontSize}/#{$baseLineHeight};
 }
 ```
-```
+```scss
 $linkColor: #08c #333 !default;//第一个值为默认值，第二个鼠标滑过值
 a{
   color:nth($linkColor,1);
@@ -26,7 +26,7 @@ a{
   }
 }
 ```
-```
+```scss
 //sass style
 $headings: (h1: 2em, h2: 1.5em, h3: 1.2em);
 @each $header, $size in $headings {
@@ -49,7 +49,7 @@ h3 {
 
 <!-- more -->
 ### Mixins
-```
+```scss
 @mixin border-radius($radius: 5px) {
   border-radius: $radius;
 }
@@ -57,7 +57,7 @@ h3 {
 ```
 
 ### Extend
-```
+```scss
 // %定义占位符选择器，不调用则不会有任何多余的css文件
 %message-shared {
   border: 1px solid #ccc;
@@ -76,7 +76,7 @@ h3 {
 ```
 
 ### Function
-```
+```scss
 $baseFontSize:      10px;
 $gray:              #ccc;        
 @function pxToRem($px) {
@@ -93,6 +93,6 @@ body{
 ```
 
 ### Import
-```
+```scss
 @import 'reset'; // 导入 reset.scss
 ```

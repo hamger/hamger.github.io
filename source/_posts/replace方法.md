@@ -16,11 +16,7 @@ newvalue | 必须。规定了替换文本或生成替换文本的函数。
 ```js
 var str="Mr Blue has a blue house and a blue car";
 var n=str.replace(/blue/gi, "red");
-console.log(n)
-```
-输出结果为：
-```
-Mr red has a red house and a red car
+console.log(n) // Mr red has a red house and a red car
 ```
 
 <!-- more -->
@@ -53,11 +49,8 @@ function tplEngine(tpl) {
 }
 tplEngine(tpl)
 console.log(para)
-```
-以上代码输出如下结果：
-```
-第一个参数：<%name%>, 第二个参数：name，第三个参数：18, 第四个参数：Hello, my name is <%name%>, I am <%age%> years old.
-第一个参数：<%age%>, 第二个参数：age，第三个参数：33, 第四个参数：Hello, my name is <%name%>, I am <%age%> years old.
+// 第一个参数：<%name%>, 第二个参数：name，第三个参数：18, 第四个参数：Hello, my name is <%name%>, I am <%age%> years old.
+// 第一个参数：<%age%>, 第二个参数：age，第三个参数：33, 第四个参数：Hello, my name is <%name%>, I am <%age%> years old.
 ```
 这样每个参数对应的值就很明显了，并且我们还可以看到：如果 searchvalue 是正则表达式，并且其为全局匹配模式，那么该函数将被多次调用，每次匹配都会被调用。
 
@@ -81,10 +74,7 @@ function tplEngine(tpl, data) {
 
 var text = tplEngine(tpl, data)
 console.log(text)
-```
-以上代码输出：
-```
-Hello, my name is Tom, I am 28 years old. My job is doctor.
+// Hello, my name is Tom, I am 28 years old. My job is doctor.
 ```
 强化后的模板引擎如下：
 ```js
@@ -166,5 +156,4 @@ for (var i = 0; i < data.length; i++) {
     }
 }
 console.log(str)
-
 ```

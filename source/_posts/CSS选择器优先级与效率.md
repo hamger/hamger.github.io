@@ -41,7 +41,7 @@ p { color: green; }
 * 元素`style=""`属性的优先级高于以上两种样式
 * `!important` 优先级高于以上两种样式
 * `!important` 在IE6中的BUG：在同一组CSS属性中, !important不起作用。
-```
+```css
 #selector{color:blue !important;color:green;}
 ```
 

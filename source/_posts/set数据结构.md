@@ -4,17 +4,17 @@ date: 2018-03-01 18:17:55
 tags: JavaScript
 ---
 ES6 提供了新的数据结构 Set。它类似于数组，但是成员的值都是唯一的，没有重复的值。Set 本身是一个构造函数，用来生成 Set 数据结构。
-```
+```js
 const s = new Set([1, 2, 3, 4, 4]); // [[1, 2, 3, 4]
 ```
 由此可以导出一种简单的数组去重方法
-```
+```js
 function dedupe(arr) {
     return [...new Set(arr)]
 }
 ```
 `Array.from`方法可以将 Set 结构转为数组，所以数组去重也可以这么写
-```
+```js
 function dedupe(arr) {
   return Array.from(new Set(arr));
 }
@@ -29,7 +29,7 @@ function dedupe(arr) {
 * clear() 清除所有成员，没有返回值。
 
 <!-- more -->
-```
+```js
 s.add(1).add(2).add(2);
 s.size // 2
 s.has(1) // true
@@ -46,7 +46,7 @@ s.has(2) // false
 * forEach() 使用回调函数遍历每个成员
 
 需要特别指出的是，Set的遍历顺序就是插入顺序。这个特性有时非常有用，比如使用 Set 保存一个回调函数列表，调用时就能保证按照添加顺序调用。由于 Set 结构没有键名，只有键值（或者说键名和键值是同一个值），所以keys方法和values方法的行为完全一致。
-```
+```js
 let set = new Set([{name: 'red'}, 'green', ['blue', 'yellow']]);
 
 for (let item of set.keys()) {

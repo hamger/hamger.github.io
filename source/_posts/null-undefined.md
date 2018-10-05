@@ -12,12 +12,12 @@ undefined和null在if语句中，都会被自动转为false，相等运算符甚
 > undefined:  表示一个变量声明了但没有被赋值
 
 <!-- more -->
-```
+```js
 typeof undefined //"undefined"
 typeof null //"object"
 ```
 **注意**：在验证null时，一定要使用`===`，因为`==`无法区别 null 和 undefined
-```
+```js
 null == undefined // true
 null === undefined // false
 ```

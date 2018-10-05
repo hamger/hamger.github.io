@@ -6,7 +6,7 @@ tags: webpack
 阅读了 webpack 打包后的文件，对其打包原理做一个简短的理解。
 
 首先新建一个文件夹，执行命令行`npm i webpack`安装 webpack，然后配置`webpack.config.js`
-```
+```js
 module.exports = {
   entry: {
     bundle: './index.js'
@@ -20,20 +20,20 @@ module.exports = {
 ```
 <!-- more -->
 创建 index.js ，内容如下
-```
+```js
 var aText = require("./a.js");
 var bText = require("./b.js");
 var str = 'This is Moudle Index. I depends (' + aText +') and ('+ bText + ').';
 document.write(str);
 ```
 创建 a.js ，内容如下
-```
+```js
 var bText = require("./b.js");
 var str = 'This is Moudle A. I depends (' + bText + ').';
 module.exports = str;
 ```
 创建 b.js ，内容如下
-```
+```js
 module.exports = "This is Moudle B.";
 ```
 然后在该目录下执行命令行`webpack`，通过阅读生成的 bundle.js ，我模仿它编写了一个更简单的函数

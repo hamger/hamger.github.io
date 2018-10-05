@@ -5,7 +5,7 @@ tags: less
 ---
 ### Variables
 `less`定义变量的符号是`@`，`sass`定义变量符号是`$`。
-```
+```less
 @images: "../img";
 body {
   color: #444;
@@ -28,7 +28,7 @@ body {
 
 ### Mixins
 `less`的`mixin`比`sass`更简洁。  
-```
+```less
 .a, #b {color: red;}
 .mixin-class {
   .a; // 等价于 .a();
@@ -37,7 +37,7 @@ body {
   #b();
 }
 ```
-```
+```less
 .my-mixin { // 会输出在 css 中
   color: black;
 }
@@ -49,7 +49,7 @@ body {
   .my-other-mixin;
 }
 ```
-```
+```less
 .border-radius(@radius: 5px) {
   border-radius: @radius;
 }
@@ -66,7 +66,7 @@ body {
 ```
 
 ### Extend
-```
+```less
 .a:extend(.b) {}
 // the above block does the same thing as the below block
 .a {
@@ -80,6 +80,6 @@ body {
 ```
 
 ### Import
-```
+```less
 @import 'reset'; // reset.less
 ```

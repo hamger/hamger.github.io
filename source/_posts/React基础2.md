@@ -14,35 +14,35 @@ React 组件 API 中有以下7个常用方法:
 * 判断组件挂载状态：isMounted
 
 #### setState
-```
+```js
 setState(nextState[, callback])
 ```
 * nextState：一个对象。将要设置的新状态，该状态会和当前的state合并
 * callback：回调函数。该函数会在setState设置成功，且组件重新渲染后调用
 
 #### replaceState
-```
+```js
 replaceState(nextState[, callback])
 ```
 * nextState：一个对象。将要设置的新状态，该状态会替换当前的state。
 * callback：回调函数。该函数会在replaceState设置成功，且组件重新渲染后调用。
 
 #### setProps
-```
+```js
 setProps(nextProps[, callback])
 ```
 * nextProps：一个对象。将要设置的新属性，该状态会和当前的props合并
 * callback：回调函数。该函数会在setProps设置成功，且组件重新渲染后调用
 
 #### replaceProps
-```
+```js
 replaceProps(nextProps[, callback])
 ```
 * nextProps：一个对象。将要设置的新属性，该属性会替换当前的props。
 * callback：回调函数。该函数会在replaceProps设置成功，且组件重新渲染后调用。
 
 #### forceUpdate
-```
+```js
 forceUpdate([callback])
 ```
 * callback：回调函数。该函数会在组件render()方法调用后调用。
@@ -51,13 +51,13 @@ forceUpdate()方法会使组件和子组件调用自身的render()方法重新�
 
 一般来说，应该尽量避免使用forceUpdate()，而仅从this.props和this.state中读取状态并由React触发render()调用。
 #### findDOMNode
-```
+```js
 DOMElement findDOMNode()
 ```
 如果组件已经挂载到DOM中，该方法返回对应的本地浏览器 DOM 元素。当render返回null 或 false时，this.findDOMNode()也会返回null。
 
 #### isMounted
-```
+```js
 bool isMounted()
 ```
 返回值：true或false，表示组件是否已挂载到DOM中。可以使用该方法保证了setState()和forceUpdate()在异步场景下的调用不会出错。
@@ -81,7 +81,7 @@ bool isMounted()
 具体见[官方文档(中文)](https://doc.react-china.org/)
 
 #### 生命周期的实例
-```
+```js
 var Button = React.createClass({
   getInitialState: function() {
     return {

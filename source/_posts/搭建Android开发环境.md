@@ -7,7 +7,7 @@ tags: ReactNative
 
 ### 坑一
 运行`react-native run-android`后报错
-```
+```bash
 * What went wrong:
 A problem occurred evaluating project ':app'.  
 > SDK location not found. Define location with sdk.dir in the local.properties file or with an ANDROID_HOME environment variable.
@@ -23,7 +23,7 @@ A problem occurred evaluating project ':app'.
 <!-- more -->
 ### 坑二
 在解决了坑一后，运行`react-native run-android`，你可能会遇到如下错误
-```
+```bash
 * What went wrong:
 Execution failed for task ':app:installDebug'.
 > com.android.builder.testing.api.DeviceException: No connected devices!

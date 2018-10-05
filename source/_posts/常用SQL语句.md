@@ -5,21 +5,21 @@ tags: SQL
 ---
 SQL 是用于访问和处理数据库的标准的计算机语言。**SQL 语句不区分大小写**。注意在命名表的时候**不要用MySQL的关键字**（[关键字一览表](https://www.cnblogs.com/wuyifu/p/5949764.html)），否则插入数据的时候就报错。
 ### SELECT - 从数据库中提取数据
-```
+```sql
 // 查询整个表
 SELECT * FROM table_name;
 // 查询指定列
 SELECT column_name, column_name2
 FROM table_name;
 // 查询作者是 hanger 的文章，并按发布时间降序排序(默认升序 aes)
-select * from articles where author = 'hanger' order by publish_time desc`
+select * from articles where author = 'hanger' order by publish_time desc
 // "Websites" 表中选取所有网站，并按照 "country" 和 "alexa" 列排序
 SELECT * FROM Websites
 ORDER BY country,alexa;
 // DISTINCT 使查询结果去除重复值
 SELECT DISTINCT column_name, column_name
 FROM table_name;
-// Websites" 表中选取 alexa 排名大于 "15" 且国家为 "CN" 或 "USA" 的所有网站
+// "Websites" 表中选取 alexa 排名大于 "15" 且国家为 "CN" 或 "USA" 的所有网站
 SELECT * FROM Websites
 WHERE alexa > 15
 AND (country='CN' OR country='USA');
@@ -45,7 +45,7 @@ LIKE |  搜索某种模式
 IN | 指定针对某个列的多个可能值
 
 ### INSERT INTO - 向数据库中插入新数据
-```
+```sql
 // 无需指定要插入数据的列名(按列顺序插入数据)
 INSERT INTO table_name
 VALUES (value1,value2,value3,...);
@@ -55,7 +55,7 @@ VALUES (value1,value2,value3,...);
 ```
 
 ### UPDATE - 更新数据库中的数据
-```
+```sql
 // 把 "菜鸟教程" 的 alexa 排名更新为 5000，country 改为 USA
 UPDATE Websites 
 SET alexa='5000', country='USA' 
@@ -64,7 +64,7 @@ WHERE name='菜鸟教程';
 **警告！**在更新记录时要格外小心！在上面的实例中，如果省略了`WHERE`，执行后将`Websites`表中所有数据的`alexa`改为`5000`，`country`改为`USA`！
 
 ### DELETE - 从数据库中删除数据
-```
+```sql
 // 删除指定行
 DELETE FROM table_name
 WHERE some_column=some_value;
@@ -74,7 +74,7 @@ DELETE * FROM table_name;
 ```
 
 ### CREATE - 创建数据库、表、索引
-```
+```sql
 // 创建数据库
 CREATE DATABASE dbname;
 // 创建 persons 表

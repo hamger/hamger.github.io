@@ -23,7 +23,7 @@ enctype	| 见下方说明 | 规定在发送表单数据之前如何对其进行�
 * framename：指定action的Url在指定的 iframe 中打开
 
 利用 target 可以实现表单提交不刷新，让 form 表单的 target 属性等于 iframe 的 name 属性
-```
+```html
 <form action="http://localhost:8085/api/uploadimg" method="POST" enctype="multipart/form-data" target="nm_iframe">
   <input type="file" name="imgfile" multiple>
   <input type="submit" value="提交">

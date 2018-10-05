@@ -17,7 +17,7 @@ SVG 代码在`<svg></svg>`内，这是根元素。`width`和`height`属性可设
 <!-- more -->
 
 ### SVG 矩形 - `<rect>`
-```
+```html
 <svg xmlns="http://www.w3.org/2000/svg" version="1.1">
   <rect x="50" y="20" rx="20" ry="20" width="150" height="150"
   style="fill:red;stroke:black;stroke-width:5;opacity:0.5"/>
@@ -38,7 +38,7 @@ rx | 定义水平圆角大小
 ry | 定义垂直圆角大小 
 
 ### SVG 圆形 - `<circle>`
-```
+```html
 <svg xmlns="http://www.w3.org/2000/svg" version="1.1">
   <circle cx="100" cy="50" r="40" stroke="black"
   stroke-width="2" fill="red"/>
@@ -50,7 +50,7 @@ cx/cy | 定义圆点的x和y坐标，默认圆心(0, 0)
 r | 定义圆的半径
 
 ### SVG 椭圆 - `<ellipse>`
-```
+```html
 <svg xmlns="http://www.w3.org/2000/svg" version="1.1">
   <ellipse cx="300" cy="80" rx="100" ry="50"
   style="fill:yellow;stroke:purple;stroke-width:2"/>
@@ -63,7 +63,7 @@ rx | 定义椭圆的水平半径
 ry | 定义椭圆的垂直半径
 
 ### SVG 直线 - `<line>`
-```
+```html
 <svg xmlns="http://www.w3.org/2000/svg" version="1.1">
   <line x1="0" y1="0" x2="200" y2="200" 
   style="stroke:rgb(255,0,0);stroke-width:2"/>
@@ -75,7 +75,7 @@ x1/y1 | 定义直线起点
 x2/y2 | 定义直线终点
 
 ### SVG Stroke 属性
-```
+```html
 <svg xmlns="http://www.w3.org/2000/svg" version="1.1">
   <g fill="none" stroke="black" stroke-width="4">
     <path stroke-dasharray="5,5" d="M5 20 l215 0" />

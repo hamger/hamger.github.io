@@ -4,7 +4,7 @@ date: 2018-03-01 18:20:26
 tags: JavaScript
 ---
 ES6 提供了 Map 数据结构。它类似于对象，也是键值对的集合，但是“键”的范围不限于字符串，各种类型的值（包括对象）都可以当作键。也就是说，Object 结构提供了“字符串—值”的对应，Map 结构提供了“值—值”的对应，是一种更完善的 Hash 结构实现。
-```
+```js
 const map = new Map([
   ['name', '张三'],
   ['title', 'Author']
@@ -28,7 +28,7 @@ Map 的键实际上是跟内存地址绑定的，只要内存地址不一样，�
 * clear() clear方法清除所有成员，没有返回值。
 
 <!-- more -->
-```
+```js
 map.set('foo', true)
 map.set('bar', false)
 map.delete('foo')
@@ -44,7 +44,7 @@ map.size // 0
 * forEach() 遍历 Map 的所有成员。
 
 需要特别注意的是，Map 的遍历顺序就是插入顺序。
-```
+```js
 const map = new Map([
   ['F', 'no'],
   ['T',  'yes'],
@@ -84,7 +84,7 @@ for (let [key, value] of map) {
 ```
 
 Map 结构转为数组结构，比较快速的方法是使用扩展运算符`...`。
-```
+```js
 const map = new Map([
   [1, 'one'],
   [2, 'two'],

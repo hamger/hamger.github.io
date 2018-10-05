@@ -36,11 +36,11 @@ cmd + k + b | 开关侧边栏
 下载插件之前，你需要先添加 Package Control 
 安装过程: 使用快捷键 control + ` 或者菜单栏选择 View > Show Console
 * Sublime Text3 在控制台输入
-```
+```bash
 import urllib.request,os; pf = 'Package Control.sublime-package'; ipp = sublime.installed_packages_path(); urllib.request.install_opener( urllib.request.build_opener( urllib.request.ProxyHandler()) ); open(os.path.join(ipp, pf), 'wb').write(urllib.request.urlopen( 'http://sublime.wbond.net/' + pf.replace(' ','%20')).read())
 ```
 * Sublime Text2 在控制台输入
-```
+```bash
 import urllib2,os; pf='Package Control.sublime-package'; ipp = sublime.installed_packages_path(); os.makedirs( ipp ) if not os.path.exists(ipp) else None; urllib2.install_opener( urllib2.build_opener( urllib2.ProxyHandler( ))); open( os.path.join( ipp, pf), 'wb' ).write( urllib2.urlopen( 'http://sublime.wbond.net/' +pf.replace( ' ','%20' )).read()); print( 'Please restart Sublime Text to finish installation')
 ```
 

@@ -7,7 +7,7 @@ tags: Vue.js
 
 ### 制定一个小目标
 首先我们搭建一个简单的例子，并希望引入`Banner`组件就可以实现 banner 效果。
-```
+```html
 <template>
   <div>
     <banner>
@@ -39,7 +39,7 @@ export default {
 <!-- more -->
 ### 创建组件结构
 编写 banner 组件的第一步就是搭建组件基础的 HTML 和 CSS 。使用如下样式，可以使子元素自动撑开父元素宽度，这样就不需要计算父元素的宽度了。
-```
+```html
 <template>
     <div class="view" :style="{height: height}">
       <div ref="wrap" class="wrap">
@@ -67,9 +67,9 @@ export default {
 
 ### 编写js代码
 控制运动的核心是改变父元素的`transform: translate3d(${disX}px, 0, 0)`
-```
+```html
 <template>
-  <div class="view">
+  <div ref="bannerView"  class="view">
     <div ref="wrap" class="wrap"
       @touchstart="_touchstart"
       @touchmove="_touchmove"
@@ -116,8 +116,8 @@ export default {
   mounted () {
     // 获得总共有多少个子元素
     this.itemAmount = this.$slots.item.length;
-    // 获得子元素的宽度
-    this.itemWidth = this.$slots.item[0].elm.offsetWidth;
+    // 获得外部容器的宽度，即子元素的宽度
+    this.itemWidth = this.$refs.bannerView.clientWidth;
   }
 };
 </script>

@@ -5,7 +5,7 @@ tags: JavaScript
 ---
 exec() 方法用于检索字符串中的正则表达式的匹配。
 
-```
+```js
 RegExpObject.exec(string)
 ```
 参数 | 描述

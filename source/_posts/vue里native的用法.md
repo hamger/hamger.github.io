@@ -8,7 +8,7 @@ tags: Vue.js
 解决方法是使用`native`
 
 原代码：
-```
+```html
 <router-link  v-for="(item, index) in pageMenuList" :to="{ path: item.listLink }" @mouseover="overTag(index)" @mouseout="outTag(index)">{{item.listTitle}}
     <i class="contain_tab_close" v-show="selected==index"></i>
 </router-link>
@@ -18,7 +18,7 @@ tags: Vue.js
 如果在想要在`router-link`上添加事件的话需要`@click.native`这样写。
 
 所以如果要事件有效的话，应改成如下：
-```
+```html
 <router-link  v-for="(item, index) in pageMenuList" :to="{ path: item.listLink }" @mouseover.native="overTag(index)" @mouseout.native="outTag(index)">{{item.listTitle}}
     <i class="contain_tab_close" v-show="selected==index"></i>
 </router-link>

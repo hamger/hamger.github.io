@@ -7,7 +7,7 @@ tags: Vue.js
 
 ## 搭建项目
 为了快速搭建一个项目，我们使用vue-cli（`npm install -g vue-cli`）来创建。
-```
+```bash
 vue init webpack hg-vcomponents
 cd hg-vcomponents
 npm install
@@ -38,14 +38,14 @@ npm install
 ```
 
 > src/components/index.js
-```
+```js
 import HollowArrow from './HollowArrow/hollow-arrow.vue';
 export {
   HollowArrow
 };
 ```
 > src/examples/index.vue
-```
+```html
 <template>
   <div>
     <div class="tab"><router-link to="/arrows">箭头组件</router-link></div>
@@ -59,7 +59,7 @@ export default {
 </script>
 ```
 > src/router/index.js
-```
+```js
 import Vue from 'vue';
 import Router from 'vue-router';
 const Index = () => import('@/examples/index.vue'); // 所有的组件测试案例入口页面
@@ -83,7 +83,7 @@ export default new Router({
 
 ### 开发与生产
 通过设置`build/webpack.base.conf.js`，使`build`时打包`components`文件夹里的内容
-```
+```js
 entry: {
     app: process.env.NODE_ENV === 'production'
       ? './src/components/index.js' // 生产模式下导入文件
@@ -98,7 +98,7 @@ entry: {
 
 ### props
 vue父组件通过`props`向子组件传递数据
-```
+```html
 <div id="hg-to-top" :style="{height: height}"></div>
 ...
 props: {
@@ -111,7 +111,7 @@ props: {
 
 ### slot 
 vue父组件通过`slot`向子组件传递`template`
-```
+```html
 <div id="hg-to-top">
   <slot>
     <span class="hg-to-top-arrows"></span>
@@ -124,7 +124,7 @@ vue父组件通过`slot`向子组件传递`template`
 
 ### 测试
 开发一个组件的同时会需要进行本地测试，在`examples`下新建`arrows.vue`用来测试组件
-```
+```html
 <template>
   <div>
     <hollow-arrow :direction="'left'"></hollow-arrow>
@@ -143,17 +143,17 @@ export default {
 ## 上传NPM
 开发的组件希望被更多的人使用，这时就需要上传NPM。
 > 修改`package.json`配置
-```
+```json
 "private": false, // 因为组件包是公用的，所以 private 为 false
 "main": "dist/hg-vcomponents.min.js", // 导出文件名，即 import 引入的文件
 ```
 > 登录npm后，在根目录输入命令
-```
+```bash
 npm version patch
 npm publish
 ```
 现在你可以使用`npm install hg-vconponents`下载自己的组件库了，并通过如下方式引入
-```
+```js
 import 'hg-vcomponents/dist/hg-vcomponents.min.css';
 import { HollowArrow } from 'hg-vcomponents';
 ```

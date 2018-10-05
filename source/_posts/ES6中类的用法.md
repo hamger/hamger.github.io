@@ -4,7 +4,7 @@ date: 2018-02-28 20:29:45
 tags: ES6
 ---
 ES6引入了Class（类）这个概念,作为对象的模板,通过class关键字,可以定义类。class不存在变量提升。
-```
+```js
 let methodName = "getInfo"; 
 class Person{  
     // constructor方法是类的构造函数是默认方法
