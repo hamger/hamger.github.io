@@ -53,7 +53,6 @@ $(canvas)
           y = item.y,
           i = parseInt(index, 10) + 1;
         ctx.fillText("p" + i, x, y + 20);
-        // ctx.fillText("p" + i + ": (" + x + ", " + y + ")", 10, i * 20);
         $("#view")
           .children()
           .eq(i - 1)
@@ -112,7 +111,6 @@ $(canvas)
         ctx.font = "16px Microsoft YaHei";
         ctx.fillStyle = "#696969";
         ctx.fillText("p" + num, x, y + 20);
-        // ctx.fillText("p" + num + ": (" + x + ", " + y + ")", 10, num * 20);
         $("#view").append("<div>p" + num + ": (" + x + ", " + y + ")</div>");
         ctx.beginPath();
         ctx.arc(x, y, 4, 0, Math.PI * 2, false);
@@ -184,11 +182,9 @@ function drawnode(nodes) {
     var x = item.x,
       y = item.y;
     if (_nodes.length === num) {
-      // 画布左上角显示各点的坐标
       ctx.font = "16px Microsoft YaHei";
       var i = parseInt(index, 10) + 1;
       ctx.fillText("p" + i, x, y + 20);
-      // ctx.fillText("p" + i + ": (" + x + ", " + y + ")", 10, i * 20);
     }
     ctx.beginPath();
     ctx.arc(x, y, 4, 0, Math.PI * 2, false);
