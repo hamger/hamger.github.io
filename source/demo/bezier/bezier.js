@@ -14,8 +14,8 @@ var clickon = 0; //鼠标按下时间戳
 var clickoff = 0; //鼠标抬起
 var w = document.documentElement.clientWidth || document.body.clientWidth;
 var h = document.documentElement.clientHeight || document.body.clientHeight;
-canvas.width = w - 150
-canvas.height = h - 64
+canvas.width = w - 150;
+canvas.height = h - 64;
 $(canvas)
   .mousedown(function(e) {
     isDrag = true;
@@ -54,7 +54,10 @@ $(canvas)
           i = parseInt(index, 10) + 1;
         ctx.fillText("p" + i, x, y + 20);
         // ctx.fillText("p" + i + ": (" + x + ", " + y + ")", 10, i * 20);
-        $('#view').children().eq(i-1).html("<div>p" + i + ": (" + x + ", " + y + ")</div>")
+        $("#view")
+          .children()
+          .eq(i - 1)
+          .html("<div>p" + i + ": (" + x + ", " + y + ")</div>");
         ctx.beginPath();
         ctx.arc(x, y, 4, 0, Math.PI * 2, false);
         ctx.fill();
@@ -110,7 +113,7 @@ $(canvas)
         ctx.fillStyle = "#696969";
         ctx.fillText("p" + num, x, y + 20);
         // ctx.fillText("p" + num + ": (" + x + ", " + y + ")", 10, num * 20);
-        $('#view').append("<div>p" + num + ": (" + x + ", " + y + ")</div>")
+        $("#view").append("<div>p" + num + ": (" + x + ", " + y + ")</div>");
         ctx.beginPath();
         ctx.arc(x, y, 4, 0, Math.PI * 2, false);
         ctx.fill();
@@ -131,38 +134,35 @@ $(canvas)
     }
   });
 $("#print").click(function() {
-  if (!num) return;
-  if (!isPrinting) {
-    isPrinted = true;
-    drawBezier(ctx, clickNodes);
-  }
+  if (!num || isPrinting) return;
+  isPrinted = true;
+  drawBezier(ctx, clickNodes);
 });
 $("#cancel").click(function() {
-  if (!num) return;
-  if (!isPrinting) {
-    clickNodes.pop()
-    num--
-    $('#view').children().eq(num).remove()
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-    drawnode(clickNodes);
-  }
+  if (!num || isPrinted || isPrinting) return;
+  clickNodes.pop();
+  num--;
+  $("#view")
+    .children()
+    .eq(num)
+    .remove();
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  drawnode(clickNodes);
 });
 $("#clear").click(function() {
-  if (!isPrinting) {
-    isPrinted = false;
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-    clickNodes = [];
-    bezierNodes = [];
-    t = 0;
-    num = 0;
-    $("#points").text('')
-    $("#view").empty()
-  }
+  if (isPrinting) return;
+  isPrinted = false;
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  clickNodes = [];
+  bezierNodes = [];
+  t = 0;
+  num = 0;
+  $("#points").text("");
+  $("#view").empty();
 });
 $("#output").click(function() {
-    if (!isPrinting) {
-        $("#points").text(JSON.stringify(clickNodes))
-    }
+  if (isPrinting) return;
+  $("#points").text(JSON.stringify(clickNodes));
 });
 function drawBezier(ctx, origin_nodes) {
   if (t > 1) {
