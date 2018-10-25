@@ -3,7 +3,7 @@ title: Mac下命令行
 date: 2017-04-02 10:55:57
 tags: Mac
 ---
-本博文记录自己用到过 Mac 命令行，会保持更新。
+记录下一些常用的 Mac 命令行。
 
 ## 关于man命令
 在命令行中输入 `man command-name` 会返回一个该条命令的使用指南，非常详细。
@@ -14,8 +14,8 @@ tags: Mac
 ---- | --- | ----
 mkdir | 创建一个目录 | mkdir dir1
 rmdir | 删除一个空目录 | rmdir dir1
+mv | 重命名一个目录/文件 | mvdir dir1 dir2
 rm -r | 删除一个目录 | rm -r dir1
-mvdir | 移动/重命名一个目录 | mvdir dir1 dir2
 cd | 切换到指定目录 | cd dirPath
 ls | 显示目录内容 | ls (dir1)
 pwd | 显示目录路径 | pwd
@@ -23,38 +23,18 @@ pwd | 显示目录路径 | pwd
 ## 文件操作
 命令 | 描述 | 用法 
 ---- | --- | ----
-> | 创建/覆盖文件 | > file1
->> | 创建/追加文件 | >> file1
+> | 创建/覆盖文件（回车进入文件编辑，编辑的内容会**覆盖**原文件内容，`ctrl`+`c`退出并保存编辑） | > file1
+>> | 创建/追加文件（回车进入文件编辑，编辑的内容会**追加**到原文件下一行，`ctrl`+`c`退出并保存编辑） | >> file1
 cat | 显示文件内容 | cat flie1
 more | 分屏显示文件内容 | more file1
 cp | 复制文件或目录 | cp file1 file2
 rm | 删除一个文件 | rm file1
-mv | 移动/重命名一个文件 | mv file1 file2
 flie | 显示文件类型 | file fiel1
 open | 用默认程序打开文件 | open fiel1
 nano | 默认编辑器打开文件 | nano fiel1
-vim | 用Vim编辑文件 | vim file1
+vim | 使用[Vim](https://hamger.github.io/2018/10/18/vim使用总结/)编辑文件 | vim file1
 
 <!-- more -->
-## 在Vim中的命令
-命令 | 描述 
----- | --- 
-a | 在光标下一个字符处插入
-gg | 将光标快速移动到文件首
-G | 将光标快速移动到文件尾
-0(零) | 将光标快速移动到行首
-$ | 将光标快速移动到行尾
-/内容 | 查找内容，按n跳到下一项
-u | 撤销，回到上一步操作
-:行号 | 定位到指定行
-:w | 保存
-:q | 未保存直接退出
-:wq 或 :x | 保存并退出
-:wq! 或 :x! | 强制保存并退出
-:w! | 强制保存
-:q! | 强制退出
-:syntax on/off | 开启/关闭语法高亮
-
 ## 其他操作
 命令 | 描述 | 用法 
 ---- | --- | ----
