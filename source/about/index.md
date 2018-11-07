@@ -13,13 +13,13 @@ comments: false
 充满好奇心，乐于学习，愿意分享，享受 coding。
 
 ### 个人作品
-* 日期选择器 [ DEMO ](/demo/datepicker/datepicker.html)，[ 使用说明和源码 ](https://github.com/hamger/hg-datepicker)。
-* 地区选择器 [ DEMO ](/demo/citypicker/citypicker.html)，[ 使用说明和源码 ](https://github.com/hamger/hg-citypicker)。
-* 并列选择器 [ DEMO ](/demo/parapicker/parapicker.html)，[ 使用说明和源码 ](https://github.com/hamger/hg-parapicker)。
-* Vue 组件库 [ DEMO、使用说明和源码 ](https://github.com/hamger/hg-vcomponents)。
+* 日期选择器 [ DEMO ](https://hamger.github.io/hg-datepicker/)，[ 文档&源码 ](https://github.com/hamger/hg-datepicker)。
+* 地区选择器 [ DEMO ](https://hamger.github.io/hg-citypicker/)，[ 文档&源码 ](https://github.com/hamger/hg-citypicker)。
+* 并列选择器 [ DEMO ](https://hamger.github.io/hg-parapicker/)，[ 文档&源码 ](https://github.com/hamger/hg-parapicker)。
+* Vue 组件库 [ DEMO、文档&源码 ](https://github.com/hamger/hg-vcomponents)。
 * 记忆消消乐 [ DEMO ](/demo/memory-turnover/index.html)，[ 源码 ](https://github.com/hamger/memory-turnover)。
 * 2048 [ DEMO ](/demo/2048/2048.html)，[ 源码 ](https://github.com/hamger/2048)。
-* 拖拽拼图 [ DEMO ](/demo/jigsaw/jigsaw.html)，[ 源码 ](https://github.com/hamger/jigsaw)。
+<!-- * 拖拽拼图 [ DEMO ](/demo/jigsaw/jigsaw.html)，[ 源码 ](https://github.com/hamger/jigsaw)。 -->
 <!-- * 焦点轮播图 [ DEMO ](/demo/carousel.html)，[ 源码 ](https://github.com/hamger/carousel-jq)。 -->
 <!-- * 3D轮播图 [ DEMO ](/demo/3d_carousel.html)，[ 源码 ](https://github.com/hamger/css3-skill/blob/master/3d_carousel.html)。 -->
 <!-- * 移动端的图片画廊 [ DEMO ](/demo/slider.html)，[ 源码 ](https://github.com/hamger/slider)。 -->
