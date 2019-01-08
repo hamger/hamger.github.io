@@ -3,13 +3,12 @@ title: webkit渲染机制
 date: 2018-04-08 21:04:53
 tags: other
 ---
-![webkit渲染流程图](http://olislpb6q.bkt.clouddn.com/webkitflow.png)
-<!-- more -->
 #### 从输入URL到DOM
 1. 用户输入URL，webkit调用其资源加载器加载对应的网页
 2. 网页被交给HTML解释器,经历以下解析变成DOM结构：Bytes → Characters → Tokens → Nodes → Object Model。如果节点需要依赖其他资源：图片、css、视频等，调用资源加载器异步加载他们，期间不阻碍DOM树的构建
 3. 如果遇到js标签，调用js引擎解释并执行，js可能会修改DOM树结构，所以会阻碍DOM树的构建。网页中依赖的js资源加载完成后，触发DOMContentLoad事件
 
+<!-- more -->
 DOM树上挂载的是DOM节点，页面上的每个HTML元素都存储成为一个DOM节点，比如body, div等。DOM树的根节点为Document节点。Render树上挂载的对象称为RenderObject，一般情况下DOM树上的每个节点对应RenderObject树上的一个节点，但是也有例外，比如某个DOM节点设置为None时，在Render树上就没有相对应的RenderObject。RenderObject对象实际上是DOM节点一个虚拟的输出，它知道如何控制DOM节点的绘制。
 
 #### 从DOM到屏幕

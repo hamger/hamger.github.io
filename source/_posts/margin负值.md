@@ -50,8 +50,6 @@ margin 为负值是符合 W3C 标准的，完全没有兼容性问题，另外�
         <div class="li3">list3</div>
     </div>
 ```
-效果图如下
-![效果图](http://olislpb6q.bkt.clouddn.com/%E6%B5%AE%E5%8A%A8%E8%B4%9F%E8%BE%B9%E8%B7%9D.png)
 
 ### 绝对定位
 绝对定位的元素定义的top、right、bottom、left等值是元素自身的边界到最近的已定位的祖先元素的距离，这个元素自身的边界指的就是 margin 定义的边界，如果margin为负则它的边界是向里收的。利用这点，就有了经典的利用绝对定位来居中的方法。
