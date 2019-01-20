@@ -22,7 +22,7 @@ Person.prototype.constructor === Person
 
 <!-- more -->
 ## \_\_proto\_\_
-每一个** new出来的实例 **都有一个隐式的\_\_proto\_\_属性，指向它们的构造函数的原型，即
+每一个 new 出来的实例都有一个隐式的\_\_proto\_\_属性，指向**它们的构造函数的原型**，即
 ```js
 person1.__proto__ === Person.prototype
 ```
@@ -30,18 +30,18 @@ person1.__proto__ === Person.prototype
 ```js
 person1.__proto__.constructor === Person
 ```
+
+## prototype 和 \_\_proto\_\_ 的区别
+prototype 是函数才有的属性，\_\_proto\_\_ 是对象都有的属性（不是一个规范属性，只是部分浏览器实现了此属性，对应的标准属性是 `[[Prototype]]`）
+
 ## 图片说明
 ![关系图](http://upload-images.jianshu.io/upload_images/599584-8194e8e27cd76271.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
 
-## Object和Function的关系
+## Object 和 Function 的关系
 `Object`是`Function`的实例对象, `Function.prototype`是`Object`的实例对象。
 ```js
 Object.__proto__ === Function.prototype
 Function.prototype.__proto__ === Object.prototype
-```
-根据上式我们还可以得到：
-```js
-Function.__proto__.__proto__ === Object.prototype
 ```
 
 ## 原型继承
