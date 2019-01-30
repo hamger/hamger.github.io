@@ -77,7 +77,7 @@ module.exports = "This is Moudle B.";
   }),
   /* 2 */
   (function(module, exports, __webpack_require__) {
-      var bText = `__webpack_require__(0)`;
+      var bText = __webpack_require__(0);
       var str = 'This is Moudle A. I depends (' + bText + ').';
       module.exports = str;
   })
