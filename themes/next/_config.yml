@@ -244,8 +244,8 @@ post_wordcount:
 
 # Reward
 reward_comment: 我的梦想是被打赏包养~
-wechatpay: "http://olislpb6q.bkt.clouddn.com/%E5%BE%AE%E4%BF%A1.png"
-alipay: "http://olislpb6q.bkt.clouddn.com/%E6%94%AF%E4%BB%98%E5%AE%9D.jpg"
+wechatpay: "/images/wechat.jpeg"
+alipay: "/images/alipay.jpeg"
 # bitcoin: /images/bitcoin.png
 
 # Declare license on posts
