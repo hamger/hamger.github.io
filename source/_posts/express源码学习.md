@@ -40,6 +40,8 @@ app.listen(3000, "localhost");
 
 Express 代理了`http.createServer(requestHandler)`中的`requestHandler`，并使用注册后的中间件和路由，匹配响应传来的用户请求。
 
+<!-- more -->
+
 ### 代码梳理
 
 下面是一个简单的 Express 使用案例。
@@ -203,6 +205,7 @@ exports.init = function(app) {
 ### next
 
 #### 非路由中间件的 next 函数
+
 next 函数内部有个 while 循环，每次循环都会从 stack 中拿出一个 layer，这个 layer 中包含了路由和中间件信息，然后就会用 layer 和请求的 path 进行匹配，如果匹配成功就会执行 layer.handle_request，调用中间件函数。但如果匹配失败，就会循环下一个 layer 对象。
 
 ```js
@@ -262,8 +265,11 @@ function next(err) {
   }
 }
 ```
+
 #### 路由中间件的 next 函数
-路由中间件的 next 函数比较简单，因为它只负责传递多个中间件（这些中间件都已经使用 app.use 注册在同一个路由下）的控制权，如果调用next("route")，则会跳过当前路由的其它中间件，直接将控制权交给下一个路由。
+
+路由中间件的 next 函数比较简单，因为它只负责传递多个中间件（这些中间件都已经使用 app.use 注册在同一个路由下）的控制权，如果调用 next("route")，则会跳过当前路由的其它中间件，直接将控制权交给下一个路由。
+
 ```js
 // router/route.js
 function next(err) {
@@ -293,7 +299,9 @@ function next(err) {
   }
 }
 ```
+
 `next(err)`将控制权传递到错误处理中间件，当调用`next(err)`时，实质是调用`layer.handle_error`，如果 fn 的参数不足 4 个，认为不是一个标准的错误处理中间件，则继续调用`next(err)`，直到参数达到 4 个，执行错误处理中间件。
+
 ```js
 // router/layer.js
 Layer.prototype.handle_error = function handle_error(error, req, res, next) {
