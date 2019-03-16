@@ -178,6 +178,16 @@ proto.use = function use(fn) {
 一个 Layer 对象包含一个路径和回调，它会把路径正则表达式化，在响应请求时用来匹配路径。在`app.lazyrouter`方法里添加了一个中间件`middleware.init(this)`，重新设置了 req 和 res 的原型，增加了许多方法，详见`request.js`和`response.js`。
 
 ```js
+// request.js
+var req = Object.create(http.IncomingMessage.prototype);
+```
+
+```js
+// response.js
+var res = Object.create(http.ServerResponse.prototype);
+```
+
+```js
 // middleware/init.js
 
 exports.init = function(app) {
