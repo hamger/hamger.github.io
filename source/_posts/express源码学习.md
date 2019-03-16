@@ -9,16 +9,16 @@ tags: Node.js
 ```
 . lib
 ├── middleware  -------------- 中间件
-    ├── init.js   ------------ 初始化
-    └── query.js  ------------ 组件使用说明
+    ├── init.js   ------------ 增强 req 对象和 res 对象
+    └── query.js  ------------ 添加 req.query
 ├── router  ------------------ 路由
-    ├── index.js  ------------ 路由入口
+    ├── index.js  ------------ Router 构造器
     ├── layer.js  ------------ 中间件和路由的抽象
-    └── route.js  ------------ router.route 方法
-├── application.js  ---------- app
+    └── route.js  ------------ 实现 router.route
+├── application.js  ---------- app 对象拓展
 ├── express.js  -------------- 项目入口
-├── request.js --------------- req 对象增强
-├── response.js  ------------- res 对象增强
+├── request.js --------------- req 对象拓展
+├── response.js  ------------- res 对象拓展
 ├── utils.js  ---------------- 工具集
 └── view.js  ----------------- 模板引擎
 ```
