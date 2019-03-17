@@ -1,5 +1,4 @@
 ---
-title: About
 date: 2017-02-28 20:17:01
 comments: false
 ---

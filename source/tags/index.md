@@ -1,5 +1,4 @@
 ---
-title: tags
 date: 2017-02-28 16:08:04
 type: "tags"
 ---
