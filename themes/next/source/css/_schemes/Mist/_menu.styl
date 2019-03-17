@@ -5,9 +5,12 @@
   float: right;
 }
 
+.menu-item-active a {
+  background: #e1e1e1;
+}
 
 .menu {
-  float: right;
+  //float: right;
   margin: 8px 0 0 0;
 
   +mobile() {
@@ -20,11 +23,30 @@
   .menu-item {
     margin: 0;
     +mobile() { display: block; }
+
+    .badge {
+      display: inline-block;
+      padding: 1px 4px;
+      margin-left: 5px;
+      font-weight: 700;
+      line-height: 1;
+      color: $black-light;
+      text-align: center;
+      white-space: nowrap;
+      background-color: #fff;
+      border-radius: 10px;
+      text-shadow: 1px 1px 0px rgba(0,0,0,0.1);
+      +mobile() {
+        float: right;
+        margin: 0.35em 0 0 0;
+      }
+    }
+
   }
 
-  .menu-item a {
+  .menu-item a,
+  .menu-item span.exturl {
     padding: 0 10px;
-    background: none;
     border: none;
     border-radius: 2px;
     transition-property: background;
@@ -33,7 +55,11 @@
       text-align: left;
     }
 
-    &:hover { background: #e1e1e1; }
+    &:hover {
+      @extend .menu-item-active a;
+    }
+
+    disable-touch-hover();
   }
 
   a::before {

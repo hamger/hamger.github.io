@@ -10,7 +10,8 @@
 @import "_search.styl";
 @import "_posts-expanded";
 @import "sidebar/sidebar-blogroll";
-
+// Import _posts if want to justify text-align on mobile.
+// @import "../Pisces/_posts";
 
 // Components
 // --------------------------------------------------
@@ -21,7 +22,6 @@
 }
 
 .headband { display: none; }
-
 
 // Search
 // --------------------------------------------------
@@ -37,13 +37,11 @@
   }
 }
 
-
 // Page - Container
 // --------------------------------------------------
 .container .main-inner {
   +mobile() { width: auto; }
 }
-
 
 // Page - Post details
 // --------------------------------------------------
@@ -55,7 +53,6 @@
 
   .post-meta { margin-bottom: 60px; }
 }
-
 
 // Pagination
 // --------------------------------------------------

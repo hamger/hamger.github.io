@@ -1,40 +1,47 @@
 ---
-title: about
+title: About
 date: 2017-02-28 20:17:01
 comments: false
 ---
+
 ## 关于博客
-本博客始于2017年2月28号，记录个人学习之路的点点滴滴，实现知识的巩固和积累。当某些记忆变淡了还可以回来温故知新，发现以前的不足及时修正，所以现阶段博文较大程度上来说是写给自己看的，如果我写的内容恰好对你有所帮助，那就算附加的了。希望在不久的将来，能在博客中看到自己技术与心智的成长，共勉。
+
+本博客始于 2017 年 2 月 28 日，记录个人学习之路的点点滴滴，实现知识的巩固和积累。当某些记忆变淡了还可以回来温故知新，发现以前的不足及时修正，所以现阶段博文较大程度上来说是写给自己看的，如果我写的内容恰好对你有所帮助，那就算附加的了。
+希望在不久的将来，能在博客中看到自己技术与心智的成长，共勉。
 
 ## 关于我
-我的名字是孟汉光，英文名Hanger，90后。
+
+我的名字是孟汉光，英文名 Hanger，90 后。
 野生程序猿，对技术充满热情，喜欢造轮子，也喜欢分享技术心得。
 性格开朗乐观，好交际易于相处，经常参加户外运动，勤于思考与实践。
 充满好奇心，乐于学习，愿意分享，享受 coding。
 
 ### 个人作品
-* 日期选择器 [ DEMO ](https://hamger.github.io/hg-datepicker/)，[ 文档&源码 ](https://github.com/hamger/hg-datepicker)。
-* 地区选择器 [ DEMO ](https://hamger.github.io/hg-citypicker/)，[ 文档&源码 ](https://github.com/hamger/hg-citypicker)。
-* 并列选择器 [ DEMO ](https://hamger.github.io/hg-parapicker/)，[ 文档&源码 ](https://github.com/hamger/hg-parapicker)。
-* Vue 组件库 [ DEMO、文档&源码 ](https://github.com/hamger/hg-vcomponents)。
-* 记忆消消乐 [ DEMO ](/demo/memory-turnover/index.html)，[ 源码 ](https://github.com/hamger/memory-turnover)。
-* 2048 [ DEMO ](/demo/2048/2048.html)，[ 源码 ](https://github.com/hamger/2048)。
-<!-- * 拖拽拼图 [ DEMO ](/demo/jigsaw/jigsaw.html)，[ 源码 ](https://github.com/hamger/jigsaw)。 -->
-<!-- * 焦点轮播图 [ DEMO ](/demo/carousel.html)，[ 源码 ](https://github.com/hamger/carousel-jq)。 -->
-<!-- * 3D轮播图 [ DEMO ](/demo/3d_carousel.html)，[ 源码 ](https://github.com/hamger/css3-skill/blob/master/3d_carousel.html)。 -->
-<!-- * 移动端的图片画廊 [ DEMO ](/demo/slider.html)，[ 源码 ](https://github.com/hamger/slider)。 -->
-<!-- * Canvas手写板 [ DEMO ](/demo/handwriting/handwriting.html)，[ 源码 ](https://github.com/hamger/handwriting)。 -->
 
-<!-- ### 照片
-[仅有的自拍](http://olislpb6q.bkt.clouddn.com/selfie.jpg) -->
-
-<!-- ### 简历
-[我的PDF简历](../resume/pdf.html) -->
-<!-- [我的在线简历](../resume/index.html) -->
+- [vue-immutable](https://github.com/hamger/vue-immutable)：一个 vue 插件，优化 vue 对全局常量的处理，减少不必要的数据观察。
+- [cvs](https://github.com/hamger/cvs)：一个基于 canvas 的 2D 基础绘图框架，简化 canvas 绘图。
+- [word-counter](https://github.com/hamger/word-counter)：一个用来统计英文原著中单词出现概率的工具，使用 python 编写。
+- [data-dirver](https://github.com/hamger/data-dirver)：实现 JavaScript 数据响应的解决方案。
+- [hg-virtual-dom](https://github.com/hamger/hg-virtual-dom)：减少手动 DOM 操作的解决方案。
+- [hg-jslibrary](https://github.com/hamger/hg-jslibrary)：个人 JavaScript 函数库，收纳了许多非常实用的函数。
+- [werewolfkill-recorder](https://github.com/hamger/werewolfkill-recorder)：使用 react 写的一个狼人杀记录器，便利面杀时记录票型。
+- [annotate-webpack-plugin](https://github.com/hamger/annotate-webpack-plugin)：一个用于添加文档注释的 webpack 插件。
+- [mhg-cli](https://github.com/hamger/mhg-cli)：一个用于快速创建项目初始模板的脚手架。
+- [mhg-templates](https://github.com/hamger/mhg-templates)：为 mhg-cli 提供不同项目类型的模板。
+- [hg-datepicker](https://github.com/hamger/hg-datepicker)：一款移动端的日期选择器插件。
+- [hg-citypicker](https://github.com/hamger/hg-citypicker)：一款移动端的地区选择器插件。
+- [hg-parapicker](https://github.com/hamger/hg-parapicker)：一款移动端的并列选择器插件。
+- [hg-vcomponents](https://github.com/hamger/hg-vcomponents)：收纳常用小组件的的 Vue 组件库。
+- [memory-turnover](https://github.com/hamger/memory-turnover)：一款锻炼记忆力的翻牌消消乐游戏。
 
 ### 外链
+
 [GitHub](https://github.com/hamger)
 [SegmentFault](https://segmentfault.com/u/mhg12300)
-<!-- [微博](http://weibo.com/p/1005055496798334/home) -->
-<!-- [简书](http://www.jianshu.com/users/6c7e347da4e8/timeline) -->
-<!-- [知乎](https://www.zhihu.com/people/hamger) -->
+
+<!-- [我的简历](https://hamger.github.io/hg-resume/) -->
+
+### 联系方式
+
+邮箱：2313303800@qq.com
+微信：mhg23133
