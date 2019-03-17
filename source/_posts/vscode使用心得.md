@@ -59,4 +59,4 @@ tags: vscode
 
 ### 其他
 
-- 在 vscode 中按下`shift`+`command`+`p`，输入`code`，选择安装 code 命令，重启终端。就可以通过命令行`code xxx`，打开指定文件或文件夹（使用`code -h`查看所有命令）。
+- 在 vscode 中按下`shift`+`command`+`p`，输入`code`，选择`install 'code' command in PATH`，之后就可以通过命令行`code xxx`，打开指定文件或文件夹（使用`code -h`查看所有命令）。

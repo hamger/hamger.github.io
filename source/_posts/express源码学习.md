@@ -1,10 +1,10 @@
 ---
-title: express源码学习
+title: Express源码学习
 date: 2019-03-16 10:07:10
 tags: Node.js
 ---
 
-打开 [express 的源码](https://github.com/expressjs/express)，目录结构很清晰，阅读时建议对照源码。
+打开 [Express4 的源码](https://github.com/expressjs/express)，目录结构很清晰，阅读时建议对照源码。
 
 ```
 . lib
