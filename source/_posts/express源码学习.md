@@ -210,7 +210,7 @@ exports.init = function(app) {
 #### 响应请求阶段
 
 1. app.handle 实质上是调用了自身 router 的 handle
-2. router.handle 遍历 router 维护的 stack 数组，找到匹配路径的 layer 对象。对于中间件 layer（ayer.route 为 undefined），匹配成功后就执行中间件函数；对于路由 layer（layer.route 不是 undefined），匹配成功后还需要匹配 http method 才能执行路由函数。
+2. router.handle 遍历 router 维护的 stack 数组，找到匹配路径的 layer 对象。对于中间件 layer（layer.route 为 undefined），匹配成功后就执行中间件函数；对于路由 layer（layer.route 不是 undefined），匹配成功后还需要匹配 http method 才能执行路由函数。
 
 ### next
 
