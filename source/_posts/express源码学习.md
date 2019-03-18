@@ -212,16 +212,61 @@ exports.init = function(app) {
 1. app.handle 实质上是调用了自身 router 的 handle
 2. router.handle 遍历 router 维护的 stack 数组，找到匹配路径的 layer 对象。对于中间件 layer（layer.route 为 undefined），匹配成功后就执行中间件函数；对于路由 layer（layer.route 不是 undefined），匹配成功后还需要匹配 http method 才能执行路由函数。
 
-### next
+```js
+// router/index.js
+proto.handle = function handle(req, res, out) {
+  var self = this;
 
-#### 非路由中间件的 next 函数
+  var idx = 0;
+  var protohost = getProtohost(req.url) || "";
+  var removed = "";
+  var slashAdded = false;
+  var paramcalled = {};
+
+  // store options for OPTIONS request
+  // only used if OPTIONS request
+  var options = [];
+
+  // middleware and routes
+  var stack = self.stack;
+
+  // manage inter-router variables
+  var parentParams = req.params;
+  var parentUrl = req.baseUrl || "";
+  var done = restore(out, req, "baseUrl", "next", "params");
+
+  // setup next layer
+  req.next = next;
+
+  // for options requests, respond with a default if nothing else responds
+  if (req.method === "OPTIONS") {
+    done = wrap(done, function(old, err) {
+      if (err || options.length === 0) return old(err);
+      sendOptionsResponse(res, options, old);
+    });
+  }
+
+  // setup basic req values
+  req.baseUrl = parentUrl;
+  req.originalUrl = req.originalUrl || req.url;
+
+  next();
+
+  function next(err) {
+    // ... 在下面介绍
+  }
+};
+```
 
 next 函数内部有个 while 循环，每次循环都会从 stack 中拿出一个 layer，这个 layer 中包含了路由和中间件信息，然后就会用 layer 和请求的 path 进行匹配，如果匹配成功就会执行 layer.handle_request，调用中间件函数。但如果匹配失败，就会循环下一个 layer 对象。
 
 ```js
 // router.js/index.js
+// ... 省略部分代码
 function next(err) {
-  // ... 省略部分代码
+  // 拿到当前的访问路径
+  var path = getPathname(req);
+
   // find next matching layer
   var layer;
   var match;
@@ -229,26 +274,17 @@ function next(err) {
 
   while (match !== true && idx < stack.length) {
     layer = stack[idx++];
+
+    // 进行路径匹配，匹配返回 true，不匹配返回 false
     match = matchLayer(layer, path);
     route = layer.route;
-
-    if (typeof match !== "boolean") {
-      // hold on to layerError
-      layerError = layerError || match;
-    }
 
     if (match !== true) {
       continue;
     }
 
     if (!route) {
-      // process non-route handlers normally
-      continue;
-    }
-
-    if (layerError) {
-      // routes do not match with a pending error
-      match = false;
+      // 正常处理非路由中间件
       continue;
     }
 
