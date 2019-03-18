@@ -189,7 +189,6 @@ var res = Object.create(http.ServerResponse.prototype);
 
 ```js
 // middleware/init.js
-
 exports.init = function(app) {
   return function expressInit(req, res, next) {
     if (app.enabled("x-powered-by")) res.setHeader("X-Powered-By", "Express");
@@ -209,8 +208,7 @@ exports.init = function(app) {
 
 #### 响应请求阶段
 
-1. app.handle 实质上是调用了自身 router 的 handle
-2. router.handle 遍历 router 维护的 stack 数组，找到匹配路径的 layer 对象。对于中间件 layer（layer.route 为 undefined），匹配成功后就执行中间件函数；对于路由 layer（layer.route 不是 undefined），匹配成功后还需要匹配 http method 才能执行路由函数。
+`app.handle` 实质上是调用了自身 router 的 handle，`router.handle` 遍历 router 维护的 stack 数组，找到匹配路径的 layer 对象。对于中间件 layer（`layer.route` 为 `undefined`），匹配成功后就执行中间件函数；对于路由 layer（`layer.route` 不是 `undefined`），匹配成功后还需要匹配 http method 才能执行路由函数。
 
 ```js
 // router/index.js
@@ -261,7 +259,7 @@ proto.handle = function handle(req, res, out) {
 next 函数内部有个 while 循环，每次循环都会从 stack 中拿出一个 layer，这个 layer 中包含了路由和中间件信息，然后就会用 layer 和请求的 path 进行匹配，如果匹配成功就会执行 layer.handle_request，调用中间件函数。但如果匹配失败，就会循环下一个 layer 对象。
 
 ```js
-// router.js/index.js
+// router/index.js
 // ... 省略部分代码
 function next(err) {
   // 拿到当前的访问路径
@@ -312,44 +310,126 @@ function next(err) {
 }
 ```
 
-#### 路由中间件的 next 函数
+### 路由中间件
 
-路由中间件的 next 函数比较简单，因为它只负责传递多个中间件（这些中间件都已经使用 app.use 注册在同一个路由下）的控制权，如果调用 next("route")，则会跳过当前路由的其它中间件，直接将控制权交给下一个路由。
+当请求来时，会执行 handle，循环 stack，发现 path 相同且 method 相同，则调用对应 callback。当路由不断增多，stack 数组会不断增大，匹配效率必然下降，为了提高效率，express 引入了 route ，也就是路由中间件。
+
+```js
+// 一个案例
+var route = app
+  .route("/list")
+  .get((req, res) => {
+    res.end("hello get");
+  })
+  .post((req, res) => {
+    res.end("hello post");
+  })
+  .put((req, res) => {
+    res.end("hello put");
+  })
+  .delete((req, res) => {
+    res.end("hello delete");
+  });
+app.use("/", routers);
+```
+
+`app.route`在`application.js`中被定义，内部调用了 router 的 route 方法。
+
+```js
+// router/index.js
+var Route = require("./route");
+
+proto.route = function route(path) {
+  var route = new Route(path);
+  // 把 route 里面的 dispatch 方法作为 Layer 的处理函数
+  var layer = new Layer(
+    path,
+    {
+      sensitive: this.caseSensitive,
+      strict: this.strict,
+      end: true
+    },
+    route.dispatch.bind(route)
+  );
+
+  layer.route = route;
+
+  this.stack.push(layer);
+  // 返回route实例，用于链式调用，注册 method 方法
+  return route;
+};
+```
+
+当 layer 的路径匹配成功，就会交给 route 来匹配 method，route 存放了所有注册的方法名，可以快速匹配是否有注册该方法，如果有则执行回调函数。
 
 ```js
 // router/route.js
-function next(err) {
-  // signal to exit route
-  if (err && err === "route") {
+Route.prototype.dispatch = function dispatch(req, res, done) {
+  var idx = 0;
+  var stack = this.stack;
+  if (stack.length === 0) {
     return done();
   }
 
-  // signal to exit router
-  if (err && err === "router") {
-    return done(err);
+  var method = req.method.toLowerCase();
+  if (method === "head" && !this.methods["head"]) {
+    method = "get";
   }
 
-  var layer = stack[idx++];
-  if (!layer) {
-    return done(err);
-  }
+  req.route = this;
 
-  if (layer.method && layer.method !== method) {
-    return next(err);
-  }
+  next();
 
-  if (err) {
-    layer.handle_error(err, req, res, next);
-  } else {
-    layer.handle_request(req, res, next);
+  function next(err) {
+    // 处理退出 route 信号
+    if (err && err === "route") {
+      return done();
+    }
+
+    // 处理退出 router 信号
+    if (err && err === "router") {
+      return done(err);
+    }
+
+    // 通过递归调用 next，遍历 stack
+    var layer = stack[idx++];
+    if (!layer) {
+      return done(err);
+    }
+
+    if (layer.method && layer.method !== method) {
+      return next(err);
+    }
+
+    if (err) {
+      layer.handle_error(err, req, res, next);
+    } else {
+      layer.handle_request(req, res, next);
+    }
   }
-}
+};
 ```
 
 `next(err)`将控制权传递到错误处理中间件，当调用`next(err)`时，实质是调用`layer.handle_error`，如果 fn 的参数不足 4 个，认为不是一个标准的错误处理中间件，则继续调用`next(err)`，直到参数达到 4 个，执行错误处理中间件。
 
 ```js
 // router/layer.js
+Layer.prototype.handle_request = function handle(req, res, next) {
+  var fn = this.handle; // 回调函数
+
+  if (fn.length > 3) {
+    // 形参数量大于 3，则认为不是一个标准的 requestHandler，调用 next 去查找下一个 layer
+    return next();
+  }
+
+  try {
+    // 执行标准的 requestHandler
+    fn(req, res, next);
+  } catch (err) {
+    next(err);
+  }
+};
+
 Layer.prototype.handle_error = function handle_error(error, req, res, next) {
   var fn = this.handle; // 中间件函数
 
