@@ -16,6 +16,8 @@ tags: Node.js
 
 底层原理同 express，即代理`http.createServer(requestHandler)`中的`requestHandler`，使用中间件来处理请求。
 
+<!-- more -->
+
 ### 代码梳理
 
 `application.js`中构造了 app 对象，初始化 context 属性 ，定义了 listen、use 等方法。
