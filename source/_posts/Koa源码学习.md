@@ -102,7 +102,34 @@ function compose(middleware) {
 }
 ```
 
-中间件内去调用 `next` 方法就是调用 `dispatch(i + 1)`，即执行下一个中间件（入栈），以此类推执行到最后一个中间件（所有中间件入栈）。当最后一个中间件执行完毕，出栈，然后执行前一个中间件的处理函数，以此类推执行到第一个中间件出栈。这就有了 koa 的洋葱模型。
+中间件内去调用 next 方法就是调用`dispatch(i + 1)`，即执行下一个中间件（入栈），以此类推执行到最后一个中间件（所有中间件入栈）。当最后一个中间件执行完毕，出栈，然后执行前一个中间件的处理函数，以此类推执行到第一个中间件出栈。
+其实就是执行层层嵌套的函数，这个和 express 一样，但是 koa 的中间件模式为洋葱型，express 为直线型。这因为考虑异步中间件的情况，koa 的 next 方法会返回一个 promise 实例，因此使用`await next()`可以用同步的写法处理异步中间件。express 的 next 方法只是遍历 stack 找出并执行匹配的中间件，而没有返回 promise 实例，所以无法使用`async/await`特性，在处理异步中间件时，只能是线性的。
+
+```js
+// 一个 koa 洋葱模型的例子
+const Koa = require("koa");
+const app = new Koa();
+
+app.use(async (ctx, next) => {
+  const start = Date.now();
+  await next();
+  const ms = Date.now() - start;
+  ctx.set("X-Response-Time", `${ms}ms`);
+});
+
+app.use(async (ctx, next) => {
+  const start = Date.now();
+  await next();
+  const ms = Date.now() - start;
+  console.log(`${ctx.method} ${ctx.url} - ${ms}`);
+});
+
+app.use(async ctx => {
+  ctx.body = "Hello World";
+});
+
+app.listen(3000);
+```
 
 #### 案例
 
