@@ -44,7 +44,7 @@ class Application extends Emitter {
     return server.listen(...args);
   }
   callback() {
-    // 这里的 compose 函数把所有的中间件变成一个函数，后续介绍
+    // compose 函数把所有的中间件变成一个函数，后续介绍
     const fn = compose(this.middleware);
 
     // 调用 Emitter 中的 listenerCount 判断是否有error事件的监听器
