@@ -455,3 +455,92 @@ Layer.prototype.handle_error = function handle_error(error, req, res, next) {
   }
 };
 ```
+
+### 模板渲染
+
+下面是使用模板引擎的写法。
+
+```js
+// 指定模板文件所在目录
+app.set("views", "./views");
+// 指定要使用的模板引擎
+app.set("view engine", "pug");
+app.get("/", function(req, res) {
+  res.render("home", { title: "Hey", message: "Hello there!" });
+});
+```
+
+`res.render`实际调用的是`app.render`，内部创建 View 实例，并调用`view.render(options, callback)`。
+
+```js
+// response.js
+res.render = function render(view, options, callback) {
+  var app = this.req.app;
+  var opts = options || {};
+  var done = callback;
+  //  ...省略部分代码
+  // default callback to respond
+  done =
+    done ||
+    function(err, str) {
+      if (err) return req.next(err);
+      self.send(str);
+    };
+
+  // render
+  app.render(view, opts, done);
+};
+```
+
+```js
+// application.js
+app.render = function render(name, options, callback) {
+  var cache = this.cache;
+  var done = callback;
+  var engines = this.engines;
+  var opts = options;
+  var renderOptions = {};
+  var view;
+  //  ...省略部分代码
+  if (!view) {
+    var View = this.get("view");
+
+    view = new View(name, {
+      defaultEngine: this.get("view engine"),
+      root: this.get("views"),
+      engines: engines
+    });
+
+    // prime the cache
+    if (renderOptions.cache) {
+      cache[name] = view;
+    }
+  }
+
+  // render
+  tryRender(view, renderOptions, done);
+};
+
+function tryRender(view, options, callback) {
+  try {
+    view.render(options, callback);
+  } catch (err) {
+    callback(err);
+  }
+}
+```
+
+```js
+// view.js
+function View(name, options) {
+  //  ...省略部分代码
+  // 保存模板引擎
+  this.engine = opts.engines[this.ext];
+  // 拿到绝对路径
+  this.path = this.lookup(fileName);
+}
+View.prototype.render = function render(options, callback) {
+  // 调用模板引擎的函数，调用完就执行 callback
+  this.engine(this.path, options, callback);
+};
+```
