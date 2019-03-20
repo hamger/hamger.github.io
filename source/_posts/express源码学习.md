@@ -107,6 +107,17 @@ function createApplication() {
 }
 ```
 
+```js
+// application.js
+app.init = function init() {
+  this.cache = {}; // 存储缓存的对象
+  this.engines = {}; // 存储模板引擎中扩展名和渲染函数的对应关系
+  this.settings = {}; // 存储 app.set 和 app.get 处理的对象
+  // 设置默认的配置项
+  this.defaultConfiguration();
+};
+```
+
 #### second step
 
 app.get 方法在 `application.js` 中被定义。
