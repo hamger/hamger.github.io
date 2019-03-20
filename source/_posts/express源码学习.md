@@ -534,9 +534,22 @@ function tryRender(view, options, callback) {
 // view.js
 function View(name, options) {
   //  ...省略部分代码
-  // 保存模板引擎
+  var opts = options || {};
+  this.ext = extname(name);
+  // 如果对应后缀的模板引擎没有被注册
+  if (!opts.engines[this.ext]) {
+    var mod = this.ext.substr(1)
+    // 使用 require() 去加载没有被注册的模板引擎
+    var fn = require(mod).__express
+    if (typeof fn !== 'function') {
+      throw new Error('Module "' + mod + '" does not provide a view engine.')
+    }
+    // 注册模板引擎
+    opts.engines[this.ext] = fn
+  }
+  // 保存需要的模板引擎
   this.engine = opts.engines[this.ext];
-  // 拿到绝对路径
+  // 拿到文件的绝对路径
   this.path = this.lookup(fileName);
 }
 View.prototype.render = function render(options, callback) {
