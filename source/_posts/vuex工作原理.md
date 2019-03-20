@@ -4,7 +4,7 @@ date: 2019-01-14 11:03:07
 tags: Vue.js
 ---
 
-vuex 中的 store 本质就是没有 template 的隐藏着的 vue 组件。
+vuex 中的 store 本质就是没有 template 的隐藏着的 vue 组件，所有配置的 state、actions、mutations 以及 getters 都是其组件的属性，所有的操作都是对这个组件进行的。
 
 vuex 仅仅是作为 vue 的一个插件而存在，不像 Redux、MobX 等库可以应用于所有框架，vuex 只能使用在 vue 上，很大的程度是因为其高度依赖于 vue 的 computed 依赖检测系统以及其插件系统。
 
