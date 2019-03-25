@@ -158,12 +158,11 @@ app.lazyrouter = function lazyrouter() {
 };
 ```
 
-在`router/index.js`中定义了`proto.use`方法， 这是`app.use`的实质。
-
 ```js
 // router/index.js
 var Layer = require("./layer");
 
+// app.use 的实质
 proto.use = function use(fn) {
   // ... 省略部分代码
   for (var i = 0; i < callbacks.length; i++) {
@@ -538,14 +537,14 @@ function View(name, options) {
   this.ext = extname(name);
   // 如果对应后缀的模板引擎没有被注册
   if (!opts.engines[this.ext]) {
-    var mod = this.ext.substr(1)
+    var mod = this.ext.substr(1);
     // 使用 require() 去加载没有被注册的模板引擎
-    var fn = require(mod).__express
-    if (typeof fn !== 'function') {
-      throw new Error('Module "' + mod + '" does not provide a view engine.')
+    var fn = require(mod).__express;
+    if (typeof fn !== "function") {
+      throw new Error('Module "' + mod + '" does not provide a view engine.');
     }
     // 注册模板引擎
-    opts.engines[this.ext] = fn
+    opts.engines[this.ext] = fn;
   }
   // 保存需要的模板引擎
   this.engine = opts.engines[this.ext];
