@@ -18,6 +18,7 @@ comments: false
 
 ### 个人作品
 
+- [hg-react-slot](https://github.com/hamger/hg-react-slot)：插槽的 react 实现。
 - [vue-immutable](https://github.com/hamger/vue-immutable)：一个 vue 插件，优化 vue 对全局常量的处理，减少不必要的数据观察。
 - [cvs](https://github.com/hamger/cvs)：一个基于 canvas 的 2D 基础绘图框架，简化 canvas 绘图。
 - [word-counter](https://github.com/hamger/word-counter)：一个用来统计英文原著中单词出现概率的工具，使用 python 编写。
