@@ -29,4 +29,4 @@ tags: git
 
 > `git checkout`可以缩写为`gco` 
 
-> `HEAD` 指向最近一次提交的 commit
+> `HEAD` 指向当前分支，`HEAD^n`表示当前分支的第n个父提交，`HEAD~n`表示当前分支的第n个父提交，用于第一父母存在歧义的情况下
