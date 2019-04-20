@@ -26,7 +26,8 @@ tags: git
 | git log                     | 显示当前分支的版本历史                                        |
 | git reflog                  | 显示当前分支的最近几次提交                                    |
 | git diff HEAD               | 显示工作区与当前分支最新 commit 之间的差异                    |
+| git push origin [branch]    | 上传本地指定分支到远程仓库                                    |
 
-> `git checkout`可以缩写为`gco` 
+> `git checkout`可以缩写为`gco`
 
-> `HEAD` 指向当前分支，`HEAD^n`表示当前分支的第n个父提交，`HEAD~n`表示当前分支的第n个父提交，用于第一父母存在歧义的情况下
+> `HEAD` 指向当前分支，`HEAD^n`表示当前分支的第 n 个父提交，`HEAD~n`表示当前分支的第 n 个父提交，用于第一父母存在歧义的情况下
