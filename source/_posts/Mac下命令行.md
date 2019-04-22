@@ -35,22 +35,6 @@ nano | 默认编辑器打开文件 | nano fiel1
 vim | 使用[Vim](https://hamger.github.io/2018/10/18/vim使用总结/)编辑文件 | vim file1
 
 <!-- more -->
-## 其他操作
-命令 | 描述 | 用法 
----- | --- | ----
-sudo | 进入管理员模式('super user do') | sudo -s 
-exit | 退出管理员模式 | exit
-ps | 显示进程 | ps -u 
-kill | 终止进程 | kill -9 30142
-clear 或 ctrl+L  | 清屏 | clear 
-alias | 给某个命令定义别名 | alias del=rm -i
-unalias | 取消对某个别名的定义 | unalias del
-find | 查找 | find -name '*.html'
-history | 列出最近执行过的（n条）命令 | history (n)
-chown | 更改某个目录或文件的用户名和用户组 | chown root:root file1/dir1
-chmod | 修改某个目录或文件的访问权限 | chmod [who] [+ &#124;-&#124;=] [mode] file1/dir1
-who | 列出当前登入的所有用户 | who
-whoami | 列出当前操作的用户 | whoami
 
 ## chmod
 用来修改某个目录或文件的访问权限。
@@ -77,3 +61,22 @@ whoami | 列出当前操作的用户 | whoami
 * u 与文件属主拥有一样的权限。
 * g 与和文件属主同组的用户拥有一样的权限。
 
+
+## 其他操作
+命令 | 描述 | 用法 
+---- | --- | ----
+sudo | 进入管理员模式('super user do') | sudo -s 
+exit | 退出管理员模式 | exit
+ps | 显示进程 | ps -u 
+kill | 终止进程 | kill -9 30142
+clear 或 ctrl+L  | 清屏 | clear 
+alias | 给某个命令定义别名 | alias del=rm -i
+unalias | 取消对某个别名的定义 | unalias del
+find | 查找 | find -name '*.html'
+history | 列出最近执行过的（n条）命令 | history (n)
+chown | 更改某个目录或文件的用户名和用户组 | chown root:root file1/dir1
+chmod | 修改某个目录或文件的访问权限 | chmod [who] [+ &#124;-&#124;=] [mode] file1/dir1
+who | 列出当前登入的所有用户 | who
+whoami | 列出当前操作的用户 | whoami
+lsof | 查看端口的占用情况 | lsof -i :[port]
+kill | 杀掉进程 | kill -9 [pid]
