@@ -18,6 +18,7 @@ tags: git
 | git branch [branch-name]    | 新建一个分支，但依然停留在当前分支                            |
 | git branch -d [branch-name] | 删除分支                                                      |
 | git checkout -b [branch]    | 新建一个分支，并切换到该分支                                  |
+| git push origin [local_branch]:[remote_branch]  | 将本地分支推送到远程                      |
 | git checkout [branch-name]  | 切换到指定分支，并更新工作区                                  |
 | git checkout -              | 切换到上一个分支                                              |
 | git checkout [file]         | 恢复暂存区的指定文件到工作区                                  |
