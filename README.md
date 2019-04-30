@@ -3,6 +3,7 @@
 Welcome to [my blog](https://hamger.github.io/)
 
 ## Install
+
 ```bash
 git clone -b hexo https://github.com/hamger/hamger.github.io.git blog
 cd blog
@@ -11,6 +12,7 @@ npm install hexo-cli -g
 ```
 
 ### update repository
+
 ```bash
 git pull origin hexo
 git add .
