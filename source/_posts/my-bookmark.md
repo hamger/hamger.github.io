@@ -16,6 +16,7 @@ tags: bookmark
 
 <!-- more -->
 ### 其他
+[jsbin 在线页面代码测试](https://jsbin.com/?html,output)
 [xclient Mac应用分享](http://xclient.info/)
 [iconfont 矢量图标库](http://www.iconfont.cn/)
 [tinypng 图片压缩](https://tinypng.com/)
