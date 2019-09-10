@@ -80,3 +80,9 @@ search:
   field: post
   format: html
   limit: 5000
+
+# Algolia Search API Key
+algolia:
+  applicationID: 'ZV0EGDRD8C'
+  apiKey: '01ab18713b33dcc47e43484208996a80'
+  indexName: 'hexo_hamger'
