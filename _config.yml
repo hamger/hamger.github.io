@@ -72,8 +72,11 @@ theme: next
 ## Docs: https://hexo.io/docs/deployment.html
 deploy:
   type: git
-  repo: git@github.com:hamger/hamger.github.io.git
-  branch: master
+  # repo: git@github.com:hamger/hamger.github.io.git
+  # branch: master
+  repo:
+    github: git@github.com:hamger/hamger.github.io.git,master
+	  coding: git@e.coding.net:hamger/hamger.git,master
 
 search:
   path: search.xml
