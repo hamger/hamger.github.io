@@ -29,4 +29,4 @@ console.log(str.match(/(\d+)s/g))
 // ["1s", "2s", "3s"]
 ```
 
-注意：在全局检索模式下，match() 即不提供与子表达式匹配的文本的信息，也不声明每个匹配子串的位置。如果您需要这些全局检索的信息，可以使用 [RegExp.exec()](https://hamger.github.io/2018/05/10/exec%E6%96%B9%E6%B3%95/#more)。
+注意：在全局检索模式下，match() 即不提供与子表达式匹配的文本的信息，也不声明每个匹配子串的位置。如果您需要这些全局检索的信息，可以使用 [RegExp.exec()](https://hangermeng.top/2018/05/10/exec%E6%96%B9%E6%B3%95/#more)。

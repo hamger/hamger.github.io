@@ -15,7 +15,7 @@ avatar: "http://olislpb6q.bkt.clouddn.com/hg-head.png"
 
 # URL
 ## If your site is put in a subdirectory, set url as 'http://yoursite.com/child' and root as '/child/'
-url: https://hamger.github.io/
+url: https://hangermeng.top/
 root: /
 permalink: :year/:month/:day/:title/
 permalink_defaults:

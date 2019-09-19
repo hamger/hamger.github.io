@@ -40,7 +40,7 @@ comments: false
 [GitHub](https://github.com/hamger)
 [SegmentFault](https://segmentfault.com/u/mhg12300)
 
-<!-- [我的简历](https://hamger.github.io/hg-resume/) -->
+<!-- [我的简历](https://hangermeng.top/hg-resume/) -->
 
 ### 联系方式
 

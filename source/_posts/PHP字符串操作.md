@@ -4,7 +4,7 @@ date: 2017-04-09 10:09:22
 tags: PHP
 ---
 ## 定义字符串
-PHP中定义字符串有三种方式(其中单引号和双引号的区别请详见[这里](https://hamger.github.io/2017/03/27/PHP%E5%8D%95%E5%8F%8C%E5%BC%95%E5%8F%B7%E5%8C%BA%E5%88%AB/))：
+PHP中定义字符串有三种方式(其中单引号和双引号的区别请详见[这里](https://hangermeng.top/2017/03/27/PHP%E5%8D%95%E5%8F%8C%E5%BC%95%E5%8F%B7%E5%8C%BA%E5%88%AB/))：
 * 单引号 `$hello = 'hello world';`
 * 双引号 `$hello = "hello world";`
 * heredoc语法结构

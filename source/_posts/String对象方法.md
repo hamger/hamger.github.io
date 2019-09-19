@@ -3,7 +3,7 @@ title: String对象方法
 date: 2017-03-16 08:10:54
 tags: JavaScript
 ---
-讨论完[Array对象的方法](https://hamger.github.io/2017/03/14/Array%E5%AF%B9%E8%B1%A1%E6%96%B9%E6%B3%95/)，再来讨论一下String对象的方法，两者拥有部分相似的方法：concat()、indexOf()、lastIndexOf()、slice()、valueOf()。这里不再赘述。
+讨论完[Array对象的方法](https://hangermeng.top/2017/03/14/Array%E5%AF%B9%E8%B1%A1%E6%96%B9%E6%B3%95/)，再来讨论一下String对象的方法，两者拥有部分相似的方法：concat()、indexOf()、lastIndexOf()、slice()、valueOf()。这里不再赘述。
 
 ### 提取字符串
 * substr()  语法`string.substr(start,length)`。如果start是负数，那么该参数声明从字符串的尾部开始算起的位置。如果 length 为 0 或负数，将返回一个空字符串。
@@ -57,8 +57,8 @@ regexp | 该参数可以是需要在 string 中检索的子串，也可以是需
 
 返回 string 中第一个与 regexp 相匹配的子串的起始位置。如果没有找到任何匹配的子串，则返回 -1。要执行忽略大小写的检索，请追加标志 i。search() 方法不执行全局匹配，它将忽略标志 g。它同时忽略 regexp 的 lastIndex 属性，并且总是从字符串的开始进行检索，这意味着它总是返回 string 的第一个匹配的位置。
 
-* match() 查找正则表达式的匹配，返回一个数组。详见[match方法](https://hamger.github.io/2018/05/10/match%E6%96%B9%E6%B3%95/)。
-* replace() 在字符串中查找匹配的子串，并替换之。详见[replace方法](https://hamger.github.io/2017/03/17/replace%E6%96%B9%E6%B3%95/)。
+* match() 查找正则表达式的匹配，返回一个数组。详见[match方法](https://hangermeng.top/2018/05/10/match%E6%96%B9%E6%B3%95/)。
+* replace() 在字符串中查找匹配的子串，并替换之。详见[replace方法](https://hangermeng.top/2017/03/17/replace%E6%96%B9%E6%B3%95/)。
 
 
 

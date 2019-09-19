@@ -62,7 +62,7 @@ console.log(str.match(patt2)); // Is,is,is
 \b | 单词边界
 \B | 非单词边界
 \n | 换行符
-\r | 回车符(与换行符的区别请戳[这里](https://hamger.github.io/2017/03/10/%E6%8D%A2%E8%A1%8C%E7%AC%A6%E5%92%8C%E5%9B%9E%E8%BD%A6%E7%AC%A6%E7%9A%84%E5%8C%BA%E5%88%AB/))
+\r | 回车符(与换行符的区别请戳[这里](https://hangermeng.top/2017/03/10/%E6%8D%A2%E8%A1%8C%E7%AC%A6%E5%92%8C%E5%9B%9E%E8%BD%A6%E7%AC%A6%E7%9A%84%E5%8C%BA%E5%88%AB/))
 \xxx | 以八进制数 xxx 规定的字符
 \xdd | 以十六进制数 dd 规定的字符
 \uxxxx | 以十六进制数 xxxx 规定的 Unicode 字符

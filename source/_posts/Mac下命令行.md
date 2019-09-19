@@ -32,7 +32,7 @@ rm | 删除一个文件 | rm file1
 flie | 显示文件类型 | file fiel1
 open | 用默认程序打开文件 | open fiel1
 nano | 默认编辑器打开文件 | nano fiel1
-vim | 使用[Vim](https://hamger.github.io/2018/10/18/vim使用总结/)编辑文件 | vim file1
+vim | 使用[Vim](https://hangermeng.top/2018/10/18/vim使用总结/)编辑文件 | vim file1
 
 <!-- more -->
 

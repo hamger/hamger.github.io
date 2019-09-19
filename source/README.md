@@ -1,3 +1,3 @@
 # Blog
 
-Welcome to [my blog](https://hamger.github.io/)
+Welcome to [my blog](https://hangermeng.top/)
