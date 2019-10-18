@@ -68,7 +68,7 @@ vim | 使用[Vim](https://hangermeng.top/2018/10/18/vim使用总结/)编辑文�
 sudo | 进入管理员模式('super user do') | sudo -s 
 exit | 退出管理员模式 | exit
 ps | 显示进程 | ps -u 
-kill | 终止进程 | kill -9 30142
+kill | 终止进程 | kill -9 [pid]
 clear 或 ctrl+L  | 清屏 | clear 
 alias | 给某个命令定义别名 | alias del=rm -i
 unalias | 取消对某个别名的定义 | unalias del
@@ -79,4 +79,3 @@ chmod | 修改某个目录或文件的访问权限 | chmod [who] [+ &#124;-&#124
 who | 列出当前登入的所有用户 | who
 whoami | 列出当前操作的用户 | whoami
 lsof | 查看端口的占用情况 | lsof -i :[port]
-kill | 杀掉进程 | kill -9 [pid]
