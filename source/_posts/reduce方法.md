@@ -51,5 +51,6 @@ function compose(...funcs) {
     if (funcs.length === 1) return funcs[0]
     return funcs.reduce((a, b) => (...args) => a(b(...args)))
 }
-compose(fn1,fn2,fn3) // fn1(fn2(fn3))
+const func = compose(fn1,fn2,fn3) // (i) => fn1(fn2(fn3(i)))
+func(5) // ((5 % 2) + 2) * 2 = 6
 ```
