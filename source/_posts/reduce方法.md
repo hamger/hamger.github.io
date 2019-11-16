@@ -9,14 +9,14 @@ reduce() 是 ECMAScript5 规范中出现的数组方法。一般而言，可以�
 ```js
 array.reduce(function(total, currentValue, currentIndex, arr), initialValue)
 ```
-参数 | 描述
---- | ---
-function(total,currentValue, index,arr) | 必需。用于执行每个数组元素的函数。
-total | 必需。初始值, 或者计算结束后的返回值。
-currentValue |  必需。当前元素
-currentIndex | 可选。当前元素的索引
-arr | 可选。当前元素所属的数组对象。
-initialValue | 可选。传递给函数的初始值
+| 参数                                    | 描述                                   |
+|-----------------------------------------|----------------------------------------|
+| function(total,currentValue, index,arr) | 必需。用于执行每个数组元素的函数。     |
+| total                                   | 必需。初始值, 或者计算结束后的返回值。 |
+| currentValue                            | 必需。当前元素                         |
+| currentIndex                            | 可选。当前元素的索引                   |
+| arr                                     | 可选。当前元素所属的数组对象。         |
+| initialValue                            | 可选。传递给函数的初始值               |
 
 ### 例子
 ```js
@@ -43,4 +43,13 @@ var data = {
 	}
 }
 'num.a'.split('.').reduce((obj, name) => obj[name], data) // 12
+```
+也可以用于函数式编程
+```js
+function compose(...funcs) {
+    if (funcs.length === 0) return arg => arg
+    if (funcs.length === 1) return funcs[0]
+    return funcs.reduce((a, b) => (...args) => a(b(...args)))
+}
+compose(fn1,fn2,fn3) // fn1(fn2(fn3))
 ```
