@@ -18,7 +18,7 @@ var obj2 = new Object();
 
 ## prototype 、constructor
 
-** 每个函数 **默认会有一个`protoype`属性指向它的原型对象，
+** 每个函数 **默认会有一个`prototype`属性指向它的原型对象，
 该原型对象会有一个`constructor`的属性，该属性包含一个指针，指向`prototype`属性所在函数，即
 
 ```js
