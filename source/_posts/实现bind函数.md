@@ -87,3 +87,12 @@ Function.prototype.bind = function(that) {
   };
 };
 ```
+如果使用ES6的写法会更加简单：
+```js
+Function.prototype.bind = function (that, ...arg) {
+    var _this = this
+    return function name(...inArg) {
+       return _this.apply(that, arg.concat(inArg))
+    }
+}
+```
