@@ -76,7 +76,8 @@ deploy:
   # branch: master
   repo:
     github: git@github.com:hamger/hamger.github.io.git,master
-	  coding: git@git.dev.tencent.com:hamger/hamger.git,master
+	  coding: git@e.coding.net:hamger/hamger.git,master
+    
 
 search:
   path: search.xml
