@@ -40,11 +40,7 @@ obj1.__proto__.constructor === Object // true
 
 `prototype` 是**函数**才有的属性，`__proto__` 是**对象和函数**都有的属性（不是一个规范属性，只是部分浏览器实现了此属性，对应的标准属性是 `[[Prototype]]`）
 
-## 图片说明
-
-![关系图](http://upload-images.jianshu.io/upload_images/599584-8194e8e27cd76271.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
-
-## Object 和 Function 的关系
+### Object 和 Function 的关系
 
 `Object`是`Function`的实例对象, `Function.prototype`是`Object`的实例对象。**Object本质是函数，Function本质是对象**。
 
@@ -53,7 +49,7 @@ Object.__proto__ === Function.prototype;
 Function.prototype.__proto__ === Object.prototype;
 ```
 
-## 原型继承
+### 原型继承
 
 利用 js 的原型，可以实现继承。
 
@@ -78,3 +74,16 @@ Box.prototype.__proto__ === Object.prototype; // true
 Object.prototype.__proto__ === null; // true
 ```
 除了`Object`的原型对象`Object.prototype`的`__proto__`指向`null`，其他内置函数对象的原型对象（例如：`Array.prototype`）和自定义构造函数的`__proto__`都指向Object.prototype, 因为原型对象本身是普通对象。
+
+ES5 有了 `Object.create()`，让我们更便捷地使用原型继承，`Object.getPrototypeOf`、`Object.setPrototypeOf` 可以更自由地操控原型链。
+```js
+function Box() {}
+function Box2() {}
+function Box3() {}
+
+Box2.prototype = Object.create(Box.prototype)
+Box3.prototype = Object.create(Box2.prototype)
+
+console.log(Box3.prototype.__proto__ === Box2.prototype) // true
+console.log(Box2.prototype.__proto__ === Box.prototype) // true
+```

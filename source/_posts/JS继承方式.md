@@ -61,13 +61,21 @@ Cat.prototype = new Animal();
 ### 寄生组合继承
 核心：通过寄生方式，砍掉父类的实例属性，这样，在调用两次父类的构造的时候，就不会初始化两次实例方法/属性，避免的组合继承的缺点。
 ```js
+// 实例属性
 function Cat(name){
   Animal.call(this);
   this.name = name || 'Tom';
 }
+// 公有属性
 (function(){
   var Super = function(){};
   Super.prototype = Animal.prototype;
   Cat.prototype = new Super();
+  Cat.prototype.constructor = Cat;
 })();
 ```
+其实上述共有属性的继承方式也就是模仿Object.create()的原理，所以也可以写成：
+```js
+cat.prototype = Object.create(Animal.prototype, {constructor:{ value: Cat }})
+```
+
