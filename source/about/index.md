@@ -38,11 +38,7 @@ comments: false
 ### 外链
 
 [GitHub](https://github.com/hamger)
-[SegmentFault](https://segmentfault.com/u/mhg12300)
-
-<!-- [我的简历](https://hangermeng.top/hg-resume/) -->
 
 ### 联系方式
 
 邮箱：2313303800@qq.com
-微信：mhg23133
