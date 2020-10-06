@@ -7,9 +7,9 @@ tags: Vue.js
 vue 中的 computed 属性的值只有当内部依赖的 data 属性变化时才会重新求值，这是怎么做到的呢。假设传入以下 computed ：
 ```js
 computed: {
-    ab: function(){
-        return this.a + 1;
-    }
+  ab: function(){
+    return this.a + 1;
+  }
 }
 ```
 以下是 vue 初始化的操作：
@@ -31,7 +31,7 @@ export function initState (vm: Component) {
 }
 ```
 <!-- more -->
-initComputed 做到的事情是实例化 Watcher 以及挂载将属性挂载到实例上：
+initComputed 做到的事情是实例化 Watcher 以及将属性挂载到实例上：
 ```js
 function initComputed (vm: Component, computed: Object) {
   //声明一个watchers，同时挂载到Vue实例上
@@ -162,7 +162,7 @@ function evaluate () {
 }
 ```
 调用`this.get()`会进行依赖收集，最后返回计算属性的值，此时终于获取到了计算属性的值。这里为什么要将`this.dirty`设为`false`呢，是为了实现计算属性基于它的依赖进行缓存的，也就依赖没变时，不重新计算，而是使用缓存。
-回顾以下代码，在第一次获取值后，`watch.lazy`始终为`false`，也就永远不会执行`watcher.evaluate()`，所以这个计算属性永远不会重新求值，一直使用上一次获得的值。
+回顾以下代码，在第一次获取值后，`watcher.lazy`始终为`false`，也就永远不会执行`watcher.evaluate()`，所以这个计算属性永远不会重新求值，一直使用上一次获得的值。
 ```js
 if (watcher.dirty) {
   watcher.evaluate()
@@ -193,7 +193,7 @@ render () {
   return <div>{this.ab}</div>
 }
 ```
-当执行 render 函数时，此时`Dep.target`指向`渲染watcher`，`targetStack = [渲染watcher]`，执行`this.a + 1`，读取到了`this.a`，触发`a`的`get`，此时`Dep.target`指向`计算watcher`，`targetStack = [渲染watcher，计算watcher]`，`a`会调用`dep.depend()`收集`计算watcher`作为依赖，
+当执行 render 函数时，此时`Dep.target`指向`渲染watcher`，`targetStack = [渲染watcher]`，执行`this.a + 1`，读取到了`this.a`，触发`a`的`get`方法，此时`Dep.target`指向`计算watcher`，`targetStack = [渲染watcher，计算watcher]`，调用`dep.depend()`收集`计算watcher`作为依赖，
 ```js
 // dep.depend()
 depend () {
@@ -219,8 +219,9 @@ depend () {
   subs: [ ab的计算watcher ]
 }
 ```
-此时求值结束，回到`计算watcher`的`getter`函数：
+此时求值结束，回到`计算watcher`的`get`方法：
 ```js
+// watcher.get
 get () {
   pushTarget(this)
   let value
@@ -231,11 +232,10 @@ get () {
     // `计算watcher`出栈，此时`Dep.target`指向`渲染watcher`，`targetStack = [渲染watcher]`。
     popTarget()
   }
-  // 返回计算结果，此时对于 ab 属性的 get 访问还没结束。
   return value
 }
 ```
-进入 ab 属性的 的`getter`函数
+进入`this.ab`的`getter`函数：
 ```js
 Object.defineProperty(vm, 'ab', { 
   get() {
