@@ -185,7 +185,7 @@ update () {
 ### 计算属性的依赖变更如何触发渲染
 
 如果计算属性在模板或 render 函数中被使用，在触发`计算watcher.update()`后，会触发`渲染watcher.update()`，此时取`this.ab`，会得到重新计算后的值。
-这里你可以会有一个疑问，怎么保证`渲染watcher.update()`在`计算watcher.update()`后执行呢，因为如果在之前执行得到的`this.ab`会是旧值（因为此时`watcher.dirty`还为`false`）。这涉及到全局的 `Dep.target` 状态是用一个栈 `targetStack` 来保存。
+但怎么保证`渲染watcher.update()`在`计算watcher.update()`后执行呢，因为如果在之前执行得到的`this.ab`会是旧值（因为此时`watcher.dirty`还为`false`）。这涉及到全局的 `Dep.target` 状态是用一个栈 `targetStack` 来保存。
 
 假设在 render 函数中使用了`this.ab`：
 ```js
