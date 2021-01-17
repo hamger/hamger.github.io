@@ -7,8 +7,8 @@ Welcome to [my blog](https://hangermeng.top/)
 ```bash
 git clone -b hexo https://github.com/hamger/hamger.github.io.git blog
 cd blog
-npm install
-npm install hexo-cli -g
+yarn
+yarn global add hexo-cli
 ```
 
 ### update repository
