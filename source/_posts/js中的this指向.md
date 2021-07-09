@@ -31,7 +31,7 @@ this永远指向最后调用它的对象（其上一级对象）；
 ```js
 function fn()  
 {  
-    this.user = 'Hanger';  
+    this.user = 'Hank';  
     return {};  
 }
 var a = new fn;  
@@ -39,11 +39,11 @@ console.log(a.user); //undefined
 
 function fn()  
 {  
-    this.user = 'Hanger';  
+    this.user = 'Hank';  
     return undefined;
 }
 var a = new fn;  
-console.log(a.user); //Hanger
+console.log(a.user); //Hank
 ```
 如果返回值是一个对象(非 null )，那么this指向的就是那个返回的对象，如果返回值不是一个对象那么this还是指向函数的实例。
 

@@ -12,7 +12,7 @@ TypeScript 和 ES6 有一些相同的地方，这里不再赘述。
 ```typescript
 let isDone: boolean = false;
 let age: number = 37;
-let sentence: string = `Hello, my name is Hanger.`
+let sentence: string = `Hello, my name is Hank.`
 let list: number[] = [1, 2, 3];
 let list: Array<number> = [1, 2, 3];
 let u: undefined = undefined;
