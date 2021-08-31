@@ -36,8 +36,8 @@ hexo s
 
 > update blog
 ```bash
-hexo d
+npm run d
 ```
-if without preview just `hexo g -d`
+update blog need node version is `12.16.2`, if not, execute `npm run n`.
 
 [more hexo command](https://hexo.io/zh-cn/docs/commands.html)

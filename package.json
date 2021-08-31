@@ -5,7 +5,8 @@
   "scripts": {
     "a": "hexo algolia",
     "n": "n 12.16.2",
-    "d": "node ./checkver.js && hexo g -d"
+    "d": "node ./checkver.js && hexo g -d",
+    "push": "git add . && git commit -m 'update' && git push"
   },
   "hexo": {
     "version": "3.9.0"
