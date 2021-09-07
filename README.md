@@ -38,4 +38,6 @@ npm run d
 ```
 update blog need node version is `12.16.2`, if not, execute `npm run n`.
 
+before `npm run n` make sure `n` is installed, if not, execute `npm i n`.
+
 [more hexo command](https://hexo.io/zh-cn/docs/commands.html)
