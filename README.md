@@ -15,9 +15,7 @@ yarn global add hexo-cli
 
 ```bash
 git pull origin hexo
-git add .
-git commit -m '181003_fix01'
-git push origin hexo
+npm run push
 ```
 
 ### update blog
