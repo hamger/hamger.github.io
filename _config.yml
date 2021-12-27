@@ -77,7 +77,6 @@ deploy:
   repo:
     github: git@github.com:hamger/hamger.github.io.git,master
 	  coding: git@e.coding.net:Hanger/blog/blog.git,master
-    
 
 search:
   path: search.xml
