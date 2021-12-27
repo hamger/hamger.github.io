@@ -1,4 +1,5 @@
 ---
+name: Türk
 title:
   archive: Arşiv
   category: Kategori
@@ -24,28 +25,20 @@ post:
   modified: Değiştirildi
   edit: Bu gönderiyi düzenle
   in: İçinde
-  more: daha fazla
   read_more: Daha fazla oku
   untitled: Başlıksız
   sticky: Sabit
-  toc_empty: Bu gönderinin içindekiler kısmı yok
   views: Görünümler
-  comments_count: Yorumlar
   related_posts: İlgili Gönderiler
-  copy_button: Kopyala
-  copy_success: Kopyalandı
-  copy_failure: Kopyalanamadı
   copyright:
     author: Gönderiyi yazan
     link: Gönderi bağlantısı
+    post_author: Written by
+    post_link: This article originally appeared on
     license_title: Telif Hakkı Bildirimi
     license_content: "Bu blogdaki tüm makaleler aksi belirtilmediği sürece %s altında lisanslıdır."
-page:
-  totally: Toplamda
-  tags: etiketler
 footer:
   powered: "%s tarafından desteklenmektedir"
-  theme: Tema
   total_views: Toplam görüntülenme
   total_visitors: Toplam Ziyaretçi
 counter:
@@ -63,11 +56,13 @@ counter:
     other: "Toplamda %d gönderi."
 state:
   posts: gönderiler
-  pages: sayfalar
   tags: etiketler
   categories: kategoriler
 search:
   placeholder: Aranıyor...
+  empty: "We didn't find any results for the search: %s"
+  hits_time: "%s results found in %s ms"
+  hits: "%s results found"
 cheers:
   um: Um..
   ok: Tamam
@@ -84,15 +79,19 @@ reward:
   donate: Bağış
   wechatpay: WeChat Pay
   alipay: Alipay
+  paypal: PayPal
   bitcoin: Bitcoin
-gitmentbutton: Gitment'ın yorumlarını göster
+follow_me:
+  welcome: Diğer yayıncılık kanallarıma hoşgeldiniz
 accessibility:
   nav_toggle: Gezinti çubuğunu değiştir
   prev_page: Önceki sayfa
   next_page: Sonraki sayfa
+  back_to_top: Back to top
+  select_lang: Select language
 symbols_count_time:
   count: Makalede sayılan semboller
-  count_total: Sayılan toplan semboller
+  count_total: Sayılan toplam semboller
   time: Okuma Süresi
-  time_total: Toplmada Okuma Süresi
+  time_total: Toplamda Okuma Süresi
   time_minutes: dk.

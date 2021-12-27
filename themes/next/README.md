@@ -1,150 +1,168 @@
-<div align="right">Language: :us:
-<a title="Chinese" href="docs/zh-CN/README.md">:cn:</a>
-<a title="Russian" href="docs/ru/README.md">:ru:</a></div>
+<div align="right">
+  Language:
+  🇺🇸
+  <a title="Chinese" href="docs/zh-CN/README.md">🇨🇳</a>
+  <a title="Russian" href="docs/ru/README.md">🇷🇺</a>
+</div>
 
-# <div align="center"><a title="Go to homepage" href="https://theme-next.org"><img align="center" width="56" height="56" src="https://raw.githubusercontent.com/theme-next/hexo-theme-next/master/source/images/logo.svg?sanitize=true"></a> e x T</div>
+![NexT preview](https://user-images.githubusercontent.com/16272760/99784261-872d3200-2b56-11eb-807c-869042d1f6e8.png)
 
-<p align="center">«NexT» is a high quality elegant <a href="http://hexo.io">Hexo</a> theme. It is crafted from scratch, with love.</p>
+<a title="NexT website" href="https://theme-next.js.org"><img align="right" alt="NexT logo" width="100" height="100" src="https://raw.githubusercontent.com/next-theme/hexo-theme-next/master/source/images/logo.svg"></a>
 
-<p align="center">
-  <a href="https://www.codacy.com/app/theme-next/hexo-theme-next?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=theme-next/hexo-theme-next&amp;utm_campaign=Badge_Grade"><img src="https://api.codacy.com/project/badge/Grade/72f7fe7609c2438a92069f448e5a341a" title="Project Grade"></a>
-  <a href="https://travis-ci.org/theme-next/hexo-theme-next?branch=master"><img src="https://travis-ci.org/theme-next/hexo-theme-next.svg?branch=master" title="Travis CI [Linux]"></a>
-  <a href="https://crwd.in/theme-next"><img src="https://d322cqt584bo4o.cloudfront.net/theme-next/localized.svg" title="Add or improve translation in few seconds!"></a>
-  <a href="https://github.com/theme-next/hexo-theme-next/issues"><img src="http://isitmaintained.com/badge/open/theme-next/hexo-theme-next.svg" title="Percentage of issues still open"></a>
-  <a href="https://github.com/theme-next/hexo-theme-next/issues"><img src="http://isitmaintained.com/badge/resolution/theme-next/hexo-theme-next.svg" title="Average time to resolve an issue"></a>
-  <a href="https://github.com/theme-next/hexo-theme-next/releases"><img src="https://badge.fury.io/gh/theme-next%2Fhexo-theme-next.svg"></a>
-  <a href="http://hexo.io"><img src="https://img.shields.io/badge/hexo-%3E%3D%203.5.0-blue.svg"></a>
-  <a href="https://github.com/theme-next/hexo-theme-next/blob/master/LICENSE.md"><img src="https://img.shields.io/badge/license-%20AGPL-blue.svg"></a>
-</p>
+# NexT
+
+> «NexT» is a high quality elegant [Hexo](https://hexo.io) theme. It is crafted from scratch with love.
+
+[![NPM version](https://img.shields.io/npm/v/hexo-theme-next?color=red&logo=npm&style=flat-square)](https://www.npmjs.com/package/hexo-theme-next)
+[![Required Hexo version](https://img.shields.io/badge/hexo-%3E=5.3.0-blue?style=flat-square&logo=hexo)](https://hexo.io)
+[![License](https://img.shields.io/badge/license-%20AGPL-orange?style=flat-square&logo=gnu)](https://github.com/next-theme/hexo-theme-next/blob/master/LICENSE.md)
+[![Build Status](https://img.shields.io/github/workflow/status/next-theme/hexo-theme-next/Linter?label=test&logo=github&style=flat-square)](https://github.com/next-theme/hexo-theme-next/actions?query=workflow%3ALinter)
+[![Build Status](https://img.shields.io/github/workflow/status/next-theme/hexo-theme-next/Tester?logo=github&style=flat-square)](https://github.com/next-theme/hexo-theme-next/actions?query=workflow%3ATester)
+[![Coverage Status](https://img.shields.io/coveralls/github/next-theme/hexo-theme-next?logo=coveralls&style=flat-square)](https://coveralls.io/github/next-theme/hexo-theme-next)
+[![jsDelivr hits](https://img.shields.io/jsdelivr/npm/hm/hexo-theme-next?logo=jsdelivr&logoColor=white&style=flat-square)](https://www.jsdelivr.com/package/npm/hexo-theme-next)
 
 ## Live Preview
 
-* :heart_decoration: Muse scheme: [LEAFERx](https://leaferx.online) | [Alex LEE](http://saili.science) | [Miaia](https://11.tt)
-* :six_pointed_star: Mist scheme: [Jeff](https://blog.zzbd.org) | [uchuhimo](http://uchuhimo.me) | [xirong](http://www.ixirong.com)
-* :pisces: Pisces scheme: [Vi](http://notes.iissnan.com) | [Acris](https://acris.me) | [Jiaxi He](http://jiaxi.io)
-* :gemini: Gemini scheme: [Ivan.Nginx](https://almostover.ru) | [Raincal](https://raincal.com) | [Dandy](https://dandyxu.me)
-
-More «NexT» examples [here](https://github.com/iissnan/hexo-theme-next/issues/119).
+<p align="center">
+  💟 <a href="https://theme-next.js.org/muse/">Muse</a> | 🔯 <a href="https://theme-next.js.org/mist/">Mist</a> | ♓️ <a href="https://theme-next.js.org/pisces/">Pisces</a> | ♊️ <a href="https://theme-next.js.org">Gemini</a>
+<br>
+<br>
+  More «NexT» examples <a href="https://github.com/next-theme/awesome-next#live-preview">here</a>.
+</p>
 
 ## Installation
 
-Simplest way to install is by cloning whole repository:
+If you're using Hexo 5.0 or later, the simplest way to install is through npm:
 
-   ```sh
-   $ cd hexo
-   $ git clone https://github.com/theme-next/hexo-theme-next themes/next
-   ```
+```sh
+$ cd hexo-site
+$ npm install hexo-theme-next
+```
 
-Or you can see [detailed installation instructions][docs-installation-url] if you want any other variant.
+Or you can clone the entire repository:
+
+```sh
+$ cd hexo-site
+$ git clone https://github.com/next-theme/hexo-theme-next themes/next
+```
+
+See [detailed installation instructions][docs-installation-url] if you want any other variant.
+
+After the installation, open Hexo config file and set `theme` variable to `next`.
+
+```yml
+theme: next
+```
+
+## Configuration
+
+At present, NexT encourages users to use the [Alternate Theme Config][docs-configuration-url] to configure NexT. And it's easy to customize the layout or style of NexT using [Custom Files][docs-custom-files-url].
+
+It is not recommended to directly modify any files in the NexT theme. Because this may cause errors (e.g. merge conflicts), and the modified files may be discarded when upgrading the theme.
+
+However, you can bypass merge conflicts (error message like **«Commit your changes or stash them before you can merge»**) by using the `Commit`, `Stash` or `Reset` commands for local changes. See [here](https://stackoverflow.com/a/15745424/5861495) how to do it.
 
 ## Plugins
 
-In NexT config now you can find dependencies on each module which was moved to external repositories which can be found by [main organization link](https://github.com/theme-next).
+Plugins extend and expand the functionality of NexT. There are two types of plugins: core plugins and third-party plugins. The core plugins are required by the basic functions of NexT. Third-party plugins provide a large number of optional features.
 
-For example, you want to use `fancybox` in your site. Go to NexT config and see:
+Configuring these plugins is very easy. For example, if you want to enable `pjax` on your site, just set `pjax` to `true` in NexT config file:
 
 ```yml
-# Fancybox
-# Dependencies: https://github.com/theme-next/theme-next-fancybox
-fancybox: false
+# Easily enable fast Ajax navigation on your website.
+# For more information: https://github.com/next-theme/pjax
+pjax: true
 ```
 
-Then turn on `fancybox` and go to «Dependencies» link with installation instructions of this module.
+### Configure CDN
 
-### Exceptions
+Third-party plugins are loaded from [jsDelivr](https://www.jsdelivr.com) CDN by default. We also provide other optional CDNs, including the famous [UNPKG](https://unpkg.com) and [CDNJS](https://cdnjs.com).
 
-If you use cdn for any plugins, you need to replace your cdn link.
-
-For example, you want to use `fancybox` and you configured a cdn link. Go to NexT config and see:
+For example, if you want to use `unpkg` instead of `jsdelivr` as the default CDN provider, you need to edit the following settings in NexT config file:
 
 ```yml
 vendors:
   # ...
   # Some contents...
   # ...
-  fancybox: # Set or update fancybox cdn url.
-  fancybox_css: # Set or update fancybox cdn url.
+  plugins: unpkg
 ```
-
-Instead of defining [main organization link](https://github.com/theme-next) for updates.
 
 ## Update
 
-You can update to latest master branch by the following command:
+A new version of NexT will be released every month. Please read the [release notes][docs-release-url] before updating the theme. You can update NexT by the following command.
+
+Install the latest version throuth npm:
+
+```sh
+$ cd hexo-site
+$ npm install hexo-theme-next@latest
+```
+
+Or update to the latest master branch:
 
 ```sh
 $ cd themes/next
 $ git pull
 ```
 
-And if you see any error message during update (something like **«Commit your changes or stash them before you can merge»**), recommended to learn [Hexo data files][docs-data-files-url] feature.\
-Howbeit, you can bypass update errors by `Commit`, `Stash` or `Discard` local changes. See [here](https://stackoverflow.com/a/15745424/5861495) how to do it.
-
-**If you want to update from v5.1.x to v6.0.x, read [here][docs-update-5-1-x-url].**
-
-## Known Bugs
-
-For those who also encounter **«[Error: Cannot find module 'hexo-util'](https://github.com/iissnan/hexo-theme-next/issues/1490)»**, please check your NPM version.
-
-* `> 3`: Still not work? Please remove `node_modules` directory and reinstall using `npm install`.
-* `< 3`: Please add `hexo-util` explicitly via `npm install --save-dev hexo-util` to you site package deps.
-
-## Contributing
-
-Contribution is welcome, feel free to open an issue and fork. Waiting for your pull request.
+**If you want to update from v5.x / v7.x to the latest version, read [this][docs-upgrade-url].**
 
 ## Feedback
 
-* Ask a question on [Stack Overflow][stack-url].
-* Request a new feature on [GitHub][contributing-url].
+* Visit the [Awesome NexT][awesome-next-url] list to share plugins and tutorials with other users.
+* Join our [GitHub discussions][discussions-url] / [Gitter][gitter-url] chats.
+* [Add or improve translation][i18n-url] in few seconds.
+* Report a bug in [GitHub Issues][issues-bug-url].
+* Request a new feature on [GitHub][issues-feat-url].
 * Vote for [popular feature requests][feat-req-vote-url].
-* Report a bug in [GitHub Issues][issues-url].
-* Join to our [Gitter][gitter-url] / [Riot][riot-url] / [Telegram][t-chat-url] chats.
-* Follow us with [Telegram Channel][t-news-url] for latest news.
 
-## Third party applications
+## Contributing
 
-* :triangular_flag_on_post: <a title="Hexo Markdown Editor" href="https://github.com/zhuzhuyule/HexoEditor" target="_blank">HexoEditor</a>
+We welcome you to join the development of NexT. Please see [contributing document][contributing-document-url]. 🤗
 
-[browser-image]: https://img.shields.io/badge/browser-%20chrome%20%7C%20firefox%20%7C%20opera%20%7C%20safari%20%7C%20ie%20%3E%3D%209-lightgrey.svg
-[browser-url]: https://www.browserstack.com
-
-[stack-url]: https://stackoverflow.com/questions/tagged/theme-next
-[contributing-url]: https://github.com/theme-next/hexo-theme-next/blob/master/.github/CONTRIBUTING.md
-[feat-req-vote-url]: https://github.com/theme-next/hexo-theme-next/issues?q=is%3Aopen+is%3Aissue+label%3Afeature-request+sort%3Areactions-%2B1-desc
-[issues-url]: https://github.com/theme-next/hexo-theme-next/issues
-
-[gitter-url]: https://gitter.im/theme-next
-[riot-url]: https://riot.im/app/#/room/#NexT:matrix.org
-[t-chat-url]: https://t.me/theme_next
-[t-news-url]: https://t.me/theme_next_news
-
-<!--[rel-image]: https://img.shields.io/github/release/theme-next/hexo-theme-next.svg-->
-<!--[rel-image]: https://badge.fury.io/gh/theme-next%2Fhexo-theme-next.svg-->
-<!--[mnt-image]: https://img.shields.io/maintenance/yes/2018.svg-->
-
-[download-latest-url]: https://github.com/theme-next/hexo-theme-next/archive/master.zip
-[releases-latest-url]: https://github.com/theme-next/hexo-theme-next/releases/latest
-<!--[releases-url]: https://github.com/theme-next/hexo-theme-next/releases-->
-[tags-url]: https://github.com/theme-next/hexo-theme-next/tags
-[commits-url]: https://github.com/theme-next/hexo-theme-next/commits/master
-
-[docs-installation-url]: https://github.com/theme-next/hexo-theme-next/blob/master/docs/INSTALLATION.md
-[docs-data-files-url]: https://github.com/theme-next/hexo-theme-next/blob/master/docs/DATA-FILES.md
-[docs-update-5-1-x-url]: https://github.com/theme-next/hexo-theme-next/blob/master/docs/UPDATE-FROM-5.1.X.md
+Also, we welcome Issue or PR to our [official-plugins][official-plugins-url].
 
 ## Contributors
 
-Thanks goes to these wonderful people ([emoji key](https://github.com/kentcdodds/all-contributors#emoji-key)):
+[![Contributors][contributors-image]][contributors-url]
 
-<!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
-<!-- prettier-ignore -->
-| [<img src="https://avatars2.githubusercontent.com/u/16944225?v=4" width="100px;"/><br /><sub><b>Ivan.Nginx</b></sub>](https://almostover.ru)<br />[🐛](https://github.com/theme-next/hexo-theme-next/issues?q=author%3Aivan-nginx "Bug reports") [💻](https://github.com/theme-next/hexo-theme-next/commits?author=ivan-nginx "Code") [📖](https://github.com/theme-next/hexo-theme-next/commits?author=ivan-nginx "Documentation") [🤔](#ideas-ivan-nginx "Ideas, Planning, & Feedback") [📝](#blog-ivan-nginx "Blogposts") [👀](#review-ivan-nginx "Reviewed Pull Requests") [⚠️](https://github.com/theme-next/hexo-theme-next/commits?author=ivan-nginx "Tests") [🌍](#translation-ivan-nginx "Translation") | [<img src="https://avatars3.githubusercontent.com/u/8521181?v=4" width="100px;"/><br /><sub><b>Alex LEE</b></sub>](http://saili.science)<br />[🐛](https://github.com/theme-next/hexo-theme-next/issues?q=author%3Asli1989 "Bug reports") [💻](https://github.com/theme-next/hexo-theme-next/commits?author=sli1989 "Code") [📖](https://github.com/theme-next/hexo-theme-next/commits?author=sli1989 "Documentation") [👀](#review-sli1989 "Reviewed Pull Requests") [⚠️](https://github.com/theme-next/hexo-theme-next/commits?author=sli1989 "Tests") [🌍](#translation-sli1989 "Translation") | [<img src="https://avatars1.githubusercontent.com/u/980449?v=4" width="100px;"/><br /><sub><b>Tsanie Lily</b></sub>](https://tsanie.us)<br />[🐛](https://github.com/theme-next/hexo-theme-next/issues?q=author%3Atsanie "Bug reports") [💻](https://github.com/theme-next/hexo-theme-next/commits?author=tsanie "Code") [📖](https://github.com/theme-next/hexo-theme-next/commits?author=tsanie "Documentation") [👀](#review-tsanie "Reviewed Pull Requests") [⚠️](https://github.com/theme-next/hexo-theme-next/commits?author=tsanie "Tests") [🌍](#translation-tsanie "Translation") | [<img src="https://avatars1.githubusercontent.com/u/12459199?v=4" width="100px;"/><br /><sub><b>Wafer Li</b></sub>](https://wafer.li)<br />[🐛](https://github.com/theme-next/hexo-theme-next/issues?q=author%3Awafer-li "Bug reports") [💻](https://github.com/theme-next/hexo-theme-next/commits?author=wafer-li "Code") [📖](https://github.com/theme-next/hexo-theme-next/commits?author=wafer-li "Documentation") [👀](#review-wafer-li "Reviewed Pull Requests") [⚠️](https://github.com/theme-next/hexo-theme-next/commits?author=wafer-li "Tests") [🌍](#translation-wafer-li "Translation") | [<img src="https://avatars2.githubusercontent.com/u/20595509?v=4" width="100px;"/><br /><sub><b>Lawrence Ye</b></sub>](https://leaferx.online)<br />[🐛](https://github.com/theme-next/hexo-theme-next/issues?q=author%3ALEAFERx "Bug reports") [💻](https://github.com/theme-next/hexo-theme-next/commits?author=LEAFERx "Code") [📖](https://github.com/theme-next/hexo-theme-next/commits?author=LEAFERx "Documentation") [👀](#review-LEAFERx "Reviewed Pull Requests") [⚠️](https://github.com/theme-next/hexo-theme-next/commits?author=LEAFERx "Tests") [🌍](#translation-LEAFERx "Translation") | [<img src="https://avatars1.githubusercontent.com/u/9370547?v=4" width="100px;"/><br /><sub><b>maple</b></sub>](https://blog.maple3142.net/)<br />[🐛](https://github.com/theme-next/hexo-theme-next/issues?q=author%3Amaple3142 "Bug reports") [💻](https://github.com/theme-next/hexo-theme-next/commits?author=maple3142 "Code") [📖](https://github.com/theme-next/hexo-theme-next/commits?author=maple3142 "Documentation") [👀](#review-maple3142 "Reviewed Pull Requests") [⚠️](https://github.com/theme-next/hexo-theme-next/commits?author=maple3142 "Tests") [🌍](#translation-maple3142 "Translation") | [<img src="https://avatars1.githubusercontent.com/u/6279478?v=4" width="100px;"/><br /><sub><b>Raincal</b></sub>](https://raincal.com)<br />[🐛](https://github.com/theme-next/hexo-theme-next/issues?q=author%3ARaincal "Bug reports") [💻](https://github.com/theme-next/hexo-theme-next/commits?author=Raincal "Code") [📖](https://github.com/theme-next/hexo-theme-next/commits?author=Raincal "Documentation") [👀](#review-Raincal "Reviewed Pull Requests") [⚠️](https://github.com/theme-next/hexo-theme-next/commits?author=Raincal "Tests") |
-| :---: | :---: | :---: | :---: | :---: | :---: | :---: |
-| [<img src="https://avatars1.githubusercontent.com/u/7333266?v=4" width="100px;"/><br /><sub><b>Rainy</b></sub>](https://rainylog.com)<br />[🐛](https://github.com/theme-next/hexo-theme-next/issues?q=author%3Ageekrainy "Bug reports") [💻](https://github.com/theme-next/hexo-theme-next/commits?author=geekrainy "Code") [📖](https://github.com/theme-next/hexo-theme-next/commits?author=geekrainy "Documentation") [👀](#review-geekrainy "Reviewed Pull Requests") [⚠️](https://github.com/theme-next/hexo-theme-next/commits?author=geekrainy "Tests") [🌍](#translation-geekrainy "Translation") | [<img src="https://avatars0.githubusercontent.com/u/34574198?v=4" width="100px;"/><br /><sub><b>李皓奇</b></sub>](https://liolok.github.io/)<br />[🐛](https://github.com/theme-next/hexo-theme-next/issues?q=author%3Aliolok "Bug reports") [💻](https://github.com/theme-next/hexo-theme-next/commits?author=liolok "Code") [📖](https://github.com/theme-next/hexo-theme-next/commits?author=liolok "Documentation") [👀](#review-liolok "Reviewed Pull Requests") [⚠️](https://github.com/theme-next/hexo-theme-next/commits?author=liolok "Tests") | [<img src="https://avatars2.githubusercontent.com/u/10877162?v=4" width="100px;"/><br /><sub><b>Nine</b></sub>](http://ioliu.cn)<br />[🐛](https://github.com/theme-next/hexo-theme-next/issues?q=author%3AxCss "Bug reports") [💻](https://github.com/theme-next/hexo-theme-next/commits?author=xCss "Code") [📖](https://github.com/theme-next/hexo-theme-next/commits?author=xCss "Documentation") [👀](#review-xCss "Reviewed Pull Requests") [⚠️](https://github.com/theme-next/hexo-theme-next/commits?author=xCss "Tests") | [<img src="https://avatars0.githubusercontent.com/u/12930377?v=4" width="100px;"/><br /><sub><b>Clooooode</b></sub>](https://github.com/jackey8616)<br />[🐛](https://github.com/theme-next/hexo-theme-next/issues?q=author%3Ajackey8616 "Bug reports") [💻](https://github.com/theme-next/hexo-theme-next/commits?author=jackey8616 "Code") [📖](https://github.com/theme-next/hexo-theme-next/commits?author=jackey8616 "Documentation") | [<img src="https://avatars3.githubusercontent.com/u/13825126?v=4" width="100px;"/><br /><sub><b>Xu Song</b></sub>](https://github.com/xu-song)<br />[🐛](https://github.com/theme-next/hexo-theme-next/issues?q=author%3Axu-song "Bug reports") [💻](https://github.com/theme-next/hexo-theme-next/commits?author=xu-song "Code") [📖](https://github.com/theme-next/hexo-theme-next/commits?author=xu-song "Documentation") | [<img src="https://avatars3.githubusercontent.com/u/10931391?v=4" width="100px;"/><br /><sub><b>Jack Sullivan</b></sub>](https://github.com/HuntedCodes)<br />[🐛](https://github.com/theme-next/hexo-theme-next/issues?q=author%3AHuntedCodes "Bug reports") [💻](https://github.com/theme-next/hexo-theme-next/commits?author=HuntedCodes "Code") [📖](https://github.com/theme-next/hexo-theme-next/commits?author=HuntedCodes "Documentation") | [<img src="https://avatars1.githubusercontent.com/u/24768249?v=4" width="100px;"/><br /><sub><b>dpyzo0o</b></sub>](https://github.com/dpyzo0o)<br />[🐛](https://github.com/theme-next/hexo-theme-next/issues?q=author%3Adpyzo0o "Bug reports") [💻](https://github.com/theme-next/hexo-theme-next/commits?author=dpyzo0o "Code") [📖](https://github.com/theme-next/hexo-theme-next/commits?author=dpyzo0o "Documentation") |
-| [<img src="https://avatars1.githubusercontent.com/u/11242146?v=4" width="100px;"/><br /><sub><b>zhuzhuxia</b></sub>](http://zhuzhuyule.com)<br />[🐛](https://github.com/theme-next/hexo-theme-next/issues?q=author%3Azhuzhuyule "Bug reports") [💻](https://github.com/theme-next/hexo-theme-next/commits?author=zhuzhuyule "Code") [📖](https://github.com/theme-next/hexo-theme-next/commits?author=zhuzhuyule "Documentation") | [<img src="https://avatars0.githubusercontent.com/u/25771340?v=4" width="100px;"/><br /><sub><b>kuleyu</b></sub>](https://kuleyu-hugo.netlify.com/)<br />[🐛](https://github.com/theme-next/hexo-theme-next/issues?q=author%3Akuleyu "Bug reports") [💻](https://github.com/theme-next/hexo-theme-next/commits?author=kuleyu "Code") [📖](https://github.com/theme-next/hexo-theme-next/commits?author=kuleyu "Documentation") | [<img src="https://avatars2.githubusercontent.com/u/16662357?v=4" width="100px;"/><br /><sub><b>jdhao</b></sub>](http://jdhao.github.io)<br />[🐛](https://github.com/theme-next/hexo-theme-next/issues?q=author%3Ajdhao "Bug reports") [💻](https://github.com/theme-next/hexo-theme-next/commits?author=jdhao "Code") [📖](https://github.com/theme-next/hexo-theme-next/commits?author=jdhao "Documentation") | [<img src="https://avatars1.githubusercontent.com/u/18282328?v=4" width="100px;"/><br /><sub><b>AlbertGao</b></sub>](http://www.albertgao.xyz)<br />[🐛](https://github.com/theme-next/hexo-theme-next/issues?q=author%3AAlbert-Gao "Bug reports") [💻](https://github.com/theme-next/hexo-theme-next/commits?author=Albert-Gao "Code") [📖](https://github.com/theme-next/hexo-theme-next/commits?author=Albert-Gao "Documentation") | [<img src="https://avatars0.githubusercontent.com/u/11273093?v=4" width="100px;"/><br /><sub><b>YoshinoriN</b></sub>](https://yoshinorin.net/)<br />[🐛](https://github.com/theme-next/hexo-theme-next/issues?q=author%3AYoshinoriN "Bug reports") [💻](https://github.com/theme-next/hexo-theme-next/commits?author=YoshinoriN "Code") [📖](https://github.com/theme-next/hexo-theme-next/commits?author=YoshinoriN "Documentation") | [<img src="https://avatars3.githubusercontent.com/u/25344334?v=4" width="100px;"/><br /><sub><b>Qi Zhao</b></sub>](https://zhaoqi99.github.io/)<br />[🐛](https://github.com/theme-next/hexo-theme-next/issues?q=author%3AZhaoQi99 "Bug reports") [💻](https://github.com/theme-next/hexo-theme-next/commits?author=ZhaoQi99 "Code") [📖](https://github.com/theme-next/hexo-theme-next/commits?author=ZhaoQi99 "Documentation") | [<img src="https://avatars2.githubusercontent.com/u/6239652?v=4" width="100px;"/><br /><sub><b>Henry Zhu</b></sub>](https://changchen.me/)<br />[🐛](https://github.com/theme-next/hexo-theme-next/issues?q=author%3Adaya0576 "Bug reports") [💻](https://github.com/theme-next/hexo-theme-next/commits?author=daya0576 "Code") [📖](https://github.com/theme-next/hexo-theme-next/commits?author=daya0576 "Documentation") |
-| [<img src="https://avatars1.githubusercontent.com/u/8132652?v=4" width="100px;"/><br /><sub><b>CxyFreedom</b></sub>](https://github.com/cxyfreedom)<br />[🐛](https://github.com/theme-next/hexo-theme-next/issues?q=author%3Acxyfreedom "Bug reports") [💻](https://github.com/theme-next/hexo-theme-next/commits?author=cxyfreedom "Code") [📖](https://github.com/theme-next/hexo-theme-next/commits?author=cxyfreedom "Documentation") | [<img src="https://avatars1.githubusercontent.com/u/13927774?v=4" width="100px;"/><br /><sub><b>KaitoHH</b></sub>](https://kaitohh.com/)<br />[🐛](https://github.com/theme-next/hexo-theme-next/issues?q=author%3AKaitoHH "Bug reports") [💻](https://github.com/theme-next/hexo-theme-next/commits?author=KaitoHH "Code") [📖](https://github.com/theme-next/hexo-theme-next/commits?author=KaitoHH "Documentation") | [<img src="https://avatars2.githubusercontent.com/u/35387985?v=4" width="100px;"/><br /><sub><b>赵俊</b></sub>](http://www.zhaojun.im)<br />[🐛](https://github.com/theme-next/hexo-theme-next/issues?q=author%3Azhaojun1998 "Bug reports") [💻](https://github.com/theme-next/hexo-theme-next/commits?author=zhaojun1998 "Code") [📖](https://github.com/theme-next/hexo-theme-next/commits?author=zhaojun1998 "Documentation") | [<img src="https://avatars2.githubusercontent.com/u/13059924?v=4" width="100px;"/><br /><sub><b>zyhang</b></sub>](https://github.com/izyhang)<br />[🐛](https://github.com/theme-next/hexo-theme-next/issues?q=author%3Aizyhang "Bug reports") [💻](https://github.com/theme-next/hexo-theme-next/commits?author=izyhang "Code") [📖](https://github.com/theme-next/hexo-theme-next/commits?author=izyhang "Documentation") | [<img src="https://avatars2.githubusercontent.com/u/18529307?v=4" width="100px;"/><br /><sub><b>Xiaolong Yang</b></sub>](https://xiaolony.github.io)<br />[🐛](https://github.com/theme-next/hexo-theme-next/issues?q=author%3AXiaolonY "Bug reports") [💻](https://github.com/theme-next/hexo-theme-next/commits?author=XiaolonY "Code") [📖](https://github.com/theme-next/hexo-theme-next/commits?author=XiaolonY "Documentation") | [<img src="https://avatars1.githubusercontent.com/u/15226118?v=4" width="100px;"/><br /><sub><b>花蛄</b></sub>](https://github.com/yzca)<br />[🐛](https://github.com/theme-next/hexo-theme-next/issues?q=author%3Ayzca "Bug reports") [💻](https://github.com/theme-next/hexo-theme-next/commits?author=yzca "Code") [📖](https://github.com/theme-next/hexo-theme-next/commits?author=yzca "Documentation") | [<img src="https://avatars2.githubusercontent.com/u/1683936?v=4" width="100px;"/><br /><sub><b>hengyunabc</b></sub>](http://hengyunabc.github.io/)<br />[🐛](https://github.com/theme-next/hexo-theme-next/issues?q=author%3Ahengyunabc "Bug reports") [💻](https://github.com/theme-next/hexo-theme-next/commits?author=hengyunabc "Code") [📖](https://github.com/theme-next/hexo-theme-next/commits?author=hengyunabc "Documentation") |
-| [<img src="https://avatars2.githubusercontent.com/u/6104460?v=4" width="100px;"/><br /><sub><b>Fisher Chang</b></sub>](http://bluefisher.github.io)<br />[🐛](https://github.com/theme-next/hexo-theme-next/issues?q=author%3ABlueFisher "Bug reports") [💻](https://github.com/theme-next/hexo-theme-next/commits?author=BlueFisher "Code") [📖](https://github.com/theme-next/hexo-theme-next/commits?author=BlueFisher "Documentation") | [<img src="https://avatars2.githubusercontent.com/u/4521477?v=4" width="100px;"/><br /><sub><b>Chanson Shen</b></sub>](http://chansonshen.com/)<br />[🐛](https://github.com/theme-next/hexo-theme-next/issues?q=author%3Ashenchsh "Bug reports") [💻](https://github.com/theme-next/hexo-theme-next/commits?author=shenchsh "Code") [📖](https://github.com/theme-next/hexo-theme-next/commits?author=shenchsh "Documentation") | [<img src="https://avatars2.githubusercontent.com/u/842383?v=4" width="100px;"/><br /><sub><b>Thomas Yang</b></sub>](http://ywjno.com)<br />[🐛](https://github.com/theme-next/hexo-theme-next/issues?q=author%3Aywjno "Bug reports") [💻](https://github.com/theme-next/hexo-theme-next/commits?author=ywjno "Code") [📖](https://github.com/theme-next/hexo-theme-next/commits?author=ywjno "Documentation") | [<img src="https://avatars3.githubusercontent.com/u/8149261?v=4" width="100px;"/><br /><sub><b>Legendary Nacar</b></sub>](http://legendarynacar.github.io)<br />[🌍](#translation-legendarynacar "Translation") | [<img src="https://avatars0.githubusercontent.com/u/19174234?v=4" width="100px;"/><br /><sub><b>rikusen0335</b></sub>](https://github.com/Rikusen0335)<br />[🌍](#translation-Rikusen0335 "Translation") |
-<!-- ALL-CONTRIBUTORS-LIST:END -->
+## Thanks
 
-This project follows the [all-contributors](https://github.com/kentcdodds/all-contributors) specification. Contributions of any kind welcome!
+«NexT» send special thanks to these great services that sponsor our core infrastructure:
+
+<a href="https://github.com"><img height="40" src="https://github.githubassets.com/images/modules/logos_page/GitHub-Logo.png"></a>
+
+> GitHub allows us to host the Git repository and run the test suite.
+
+<a href="https://www.netlify.com"><img height="40" src="https://www.netlify.com/img/press/logos/full-logo-light.svg"></a>
+
+> Netlify allows us to distribute the documentation.
+
+<a href="https://crowdin.com"><img height="40" src="https://support.crowdin.com/assets/logos/crowdin-logo-small-black.svg"></a>
+
+> Crowdin allows us to translate conveniently the documentation.
+
+<a href="https://www.jsdelivr.com"><img height="40" src="https://raw.githubusercontent.com/jsdelivr/jsdelivr-media/master/default/svg/jsdelivr-logo-horizontal.svg"></a>
+
+> Thanks jsDelivr for providing public CDN service.
+
+[docs-installation-url]: https://theme-next.js.org/docs/getting-started/installation.html
+[docs-configuration-url]: https://theme-next.js.org/docs/getting-started/configuration.html
+[docs-custom-files-url]: https://theme-next.js.org/docs/advanced-settings/custom-files.html
+[docs-release-url]: https://github.com/next-theme/hexo-theme-next/releases
+[docs-upgrade-url]: https://theme-next.js.org/docs/getting-started/upgrade.html
+
+[awesome-next-url]: https://github.com/next-theme/awesome-next
+[discussions-url]: https://github.com/next-theme/hexo-theme-next/discussions
+[gitter-url]: https://gitter.im/hexo-next
+[i18n-url]: https://crowdin.com/project/hexo-theme-next
+
+[issues-bug-url]: https://github.com/next-theme/hexo-theme-next/issues/new?assignees=&labels=Bug&template=bug-report.md
+[issues-feat-url]: https://github.com/next-theme/hexo-theme-next/issues/new?assignees=&labels=Feature+Request&template=feature-request.md
+[feat-req-vote-url]: https://github.com/next-theme/hexo-theme-next/issues?q=is%3Aopen+is%3Aissue+label%3A%22Feature+Request%22
+
+[contributing-document-url]: https://github.com/next-theme/hexo-theme-next/blob/master/.github/CONTRIBUTING.md
+[official-plugins-url]: https://github.com/next-theme
+[contributors-image]: https://raw.githubusercontent.com/next-theme/contributors/master/contributors.svg
+[contributors-url]: https://github.com/next-theme/hexo-theme-next/blob/master/docs/AUTHORS.md

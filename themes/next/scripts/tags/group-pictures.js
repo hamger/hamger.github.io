@@ -1,28 +1,18 @@
 /**
- * group-pictures.js
- *
- * Usage:
- *
- * {% grouppicture [group]-[layout] %}{% endgrouppicture %}
- * {% gp [group]-[layout] %}{% endgp %}
- *
- * [group]  : Total number of pictures to add in the group.
- * [layout] : Default picture under the group to show.
+ * group-pictures.js | https://theme-next.js.org/docs/tag-plugins/group-pictures
  */
-
-/* global hexo */
 
 'use strict';
 
-var LAYOUTS = {
+const LAYOUTS = {
   2: {
     1: [1, 1],
     2: [2]
   },
   3: {
-    1: [3],
-    2: [1, 2],
-    3: [2, 1]
+    1: [1, 2],
+    2: [2, 1],
+    3: [3]
   },
   4: {
     1: [1, 2, 1],
@@ -80,19 +70,19 @@ var LAYOUTS = {
 };
 
 function groupBy(group, data) {
-  var r = [];
-  for (var i = 0; i < group.length; i++) {
-    r.push(data.slice(0, group[i]));
-    data = data.slice(group[i]);
+  const r = [];
+  for (const count of group) {
+    r.push(data.slice(0, count));
+    data = data.slice(count);
   }
   return r;
 }
 
-var templates = {
+const templates = {
 
   dispatch: function(pictures, group, layout) {
-    var rule = LAYOUTS[group] ? LAYOUTS[group][layout] : null;
-    return rule ? this.getHTML(groupBy(rule, pictures)) : templates.defaults(pictures);
+    const rule = LAYOUTS[group] ? LAYOUTS[group][layout] : null;
+    return rule ? this.getHTML(groupBy(rule, pictures)) : this.defaults(pictures);
   },
 
   /**
@@ -105,11 +95,11 @@ var templates = {
    * @param pictures
    */
   defaults: function(pictures) {
-    var ROW_SIZE = 3;
-    var rows = pictures.length / (ROW_SIZE + 1);
-    var pictureArr = [];
+    const ROW_SIZE = 3;
+    const rows = pictures.length / ROW_SIZE;
+    const pictureArr = [];
 
-    for (var i = 0; i < rows; i++) {
+    for (let i = 0; i < rows; i++) {
       pictureArr.push(pictures.slice(i * ROW_SIZE, (i + 1) * ROW_SIZE));
     }
 
@@ -117,42 +107,26 @@ var templates = {
   },
 
   getHTML: function(rows) {
-    var rowHTML = '';
-
-    for (var i = 0; i < rows.length; i++) {
-      rowHTML += this.getRowHTML(rows[i]);
-    }
-
-    return `<div class="group-picture-container">${rowHTML}</div>`;
-  },
-
-  getRowHTML: function(pictures) {
-    return `<div class="group-picture-row">${this.getColumnHTML(pictures)}</div>`;
+    return rows.map(row => {
+      return `<div class="group-picture-row">${this.getColumnHTML(row)}</div>`;
+    }).join('');
   },
 
   getColumnHTML: function(pictures) {
-    var columns = [];
-    var columnWidth = 100 / pictures.length;
-    var columnStyle = `style="width: ${columnWidth}%;"`;
-
-    for (var i = 0; i < pictures.length; i++) {
-      columns.push(`<div class="group-picture-column" ${columnStyle}>${pictures[i]}</div>`);
-    }
-    return columns.join('');
+    return pictures.map(picture => {
+      return `<div class="group-picture-column">${picture}</div>`;
+    }).join('');
   }
 };
 
-function groupPicture(args, content) {
+module.exports = ctx => function(args, content) {
   args = args[0].split('-');
-  var group = parseInt(args[0], 10);
-  var layout = parseInt(args[1], 10);
+  const group = parseInt(args[0], 10);
+  const layout = parseInt(args[1], 10);
 
-  content = hexo.render.renderSync({text: content, engine: 'markdown'});
+  content = ctx.render.renderSync({ text: content, engine: 'markdown' });
 
-  var pictures = content.match(/<img[\s\S]*?>/g);
+  const pictures = content.match(/(<a[^>]*>((?!<\/a)(.|\n))+<\/a>)|(<img[^>]+>)/g);
 
   return `<div class="group-picture">${templates.dispatch(pictures, group, layout)}</div>`;
-}
-
-hexo.extend.tag.register('grouppicture', groupPicture, {ends: true});
-hexo.extend.tag.register('gp', groupPicture, {ends: true});
+};

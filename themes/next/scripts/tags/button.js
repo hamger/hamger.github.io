@@ -1,35 +1,23 @@
 /**
- * button.js | https://theme-next.org/docs/tag-plugins/button/
+ * button.js | https://theme-next.js.org/docs/tag-plugins/button
  */
-
-/* global hexo */
 
 'use strict';
 
-function postButton(args) {
+module.exports = ctx => function(args) {
   args = args.join(' ').split(',');
-  var url   = args[0];
-  var text  = args[1] || '';
-  var icon  = args[2] || '';
-  var title = args[3] || '';
+  const url   = args[0];
+  const text  = (args[1] || '').trim();
+  let icon    = (args[2] || '').trim();
+  const title = (args[3] || '').trim();
 
   if (!url) {
-    hexo.log.warn('URL can NOT be empty');
+    ctx.log.warn('URL can NOT be empty.');
+  }
+  if (icon.length > 0) {
+    if (!icon.startsWith('fa')) icon = 'fa fa-' + icon;
+    icon = `<i class="${icon}"></i>`;
   }
 
-  text = text.trim();
-  icon = icon.trim();
-  title = title.trim();
-
-  var result = [`<a class="btn" href="${url}"`];
-  title.length > 0 && result.push(` title="${title}"`);
-  result.push('>');
-  icon.length > 0 && result.push(`<i class="fa fa-${icon}"></i>`);
-  text.length > 0 && result.push(text);
-  result.push('</a>');
-
-  return result.join('');
-}
-
-hexo.extend.tag.register('button', postButton, { ends: false });
-hexo.extend.tag.register('btn', postButton, { ends: false });
+  return `<a class="btn" href="${url}"${title.length > 0 ? ` title="${title}"` : ''}>${icon}${text}</a>`;
+};
