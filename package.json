@@ -3,13 +3,13 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "d": "hexo g -d",
-    "a": "hexo algolia",
+    "d": "hexo g -d && yarn run push",
     "push": "git add . && git commit -m 'update' && git push",
     "build": "hexo generate",
-    "clean": "hexo clean",
     "deploy": "hexo deploy",
-    "server": "hexo server"
+    "server": "hexo server",
+    "a": "hexo algolia",
+    "clean": "hexo clean"
   },
   "hexo": {
     "version": "6.0.0"
