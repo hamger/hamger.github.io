@@ -3,8 +3,8 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "d": "hexo g -d && yarn run push",
-    "push": "git add . && git commit -m 'update' && git push",
+    "d": "hexo g -d && yarn run update",
+    "update": "git add . && git commit -m 'update' && git push",
     "build": "hexo generate",
     "deploy": "hexo deploy",
     "server": "hexo server",
