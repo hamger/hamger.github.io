@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.0.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.4/css/all.min.css" integrity="sha256-mUZM63G8m73Mcidfrv5E+Y61y7a12O5mW4ezU3bxqW4=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"hangermeng.top","root":"/","images":"/images","scheme":"Muse","darkmode":false,"version":"8.8.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"},"algolia":{"appID":"ZV0EGDRD8C","apiKey":"01ab18713b33dcc47e43484208996a80","indexName":"hexo_hamger","hits":{"per_page":10}}}</script><script src="/js/config.js"></script>
+<meta name="description" content="模板回溯算法可以用来解决子集、排列、组合问题，主要形式是从一堆选项中挑选出符合要求的组合，基础模板如下： 1234567891011121314151617# 假设这样一个场景：去食堂的打菜，需要把满足条件的菜的组合放到桌子上def dining(nums):  desk &#x3D; []  # dish: 餐盘，menu: 菜单  def backtrack(dish, menu):    if (满足">
+<meta property="og:type" content="article">
+<meta property="og:title" content="回溯算法">
+<meta property="og:url" content="https://hangermeng.top/2021/08/30/%E5%9B%9E%E6%BA%AF%E7%AE%97%E6%B3%95/index.html">
+<meta property="og:site_name" content="Hank&#39;s Blog">
+<meta property="og:description" content="模板回溯算法可以用来解决子集、排列、组合问题，主要形式是从一堆选项中挑选出符合要求的组合，基础模板如下： 1234567891011121314151617# 假设这样一个场景：去食堂的打菜，需要把满足条件的菜的组合放到桌子上def dining(nums):  desk &#x3D; []  # dish: 餐盘，menu: 菜单  def backtrack(dish, menu):    if (满足">
+<meta property="og:locale">
+<meta property="article:published_time" content="2021-08-30T09:33:20.000Z">
+<meta property="article:modified_time" content="2022-02-10T09:38:19.405Z">
+<meta property="article:author" content="Hank">
+<meta property="article:tag" content="algorithm">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://hangermeng.top/2021/08/30/%E5%9B%9E%E6%BA%AF%E7%AE%97%E6%B3%95/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-Hans","comments":true,"permalink":"https://hangermeng.top/2021/08/30/%E5%9B%9E%E6%BA%AF%E7%AE%97%E6%B3%95/","path":"2021/08/30/回溯算法/","title":"回溯算法"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>回溯算法 | Hank's Blog</title>
+  
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Hank's Blog</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">耕种思考的自留地</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu">
+        <li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a></li>
+        <li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a></li>
+        <li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a></li>
+        <li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container"></div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container">
+  <div class="algolia-stats"><hr></div>
+  <div class="algolia-hits"></div>
+  <div class="algolia-pagination"></div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%A8%A1%E6%9D%BF"><span class="nav-number">1.</span> <span class="nav-text">模板</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%BA%94%E7%94%A8"><span class="nav-number">2.</span> <span class="nav-text">应用</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AD%90%E9%9B%86"><span class="nav-number">2.1.</span> <span class="nav-text">子集</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%BB%84%E5%90%88"><span class="nav-number">2.2.</span> <span class="nav-text">组合</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%85%A8%E6%8E%92%E5%88%97"><span class="nav-number">2.3.</span> <span class="nav-text">全排列</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8F%98%E5%BD%A2"><span class="nav-number">3.</span> <span class="nav-text">变形</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%B8%8D%E5%8C%85%E5%90%AB%E9%87%8D%E5%A4%8D%E5%85%83%E7%B4%A0%E7%9A%84%E6%83%85%E5%86%B5"><span class="nav-number">3.1.</span> <span class="nav-text">不包含重复元素的情况</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BC%98%E5%8C%96"><span class="nav-number">3.2.</span> <span class="nav-text">优化</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BB%83%E4%B9%A0%E9%A2%98"><span class="nav-number">4.</span> <span class="nav-text">练习题</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Hank"
+      src="/images/avatar.jpg">
+  <p class="site-author-name" itemprop="name">Hank</p>
+  <div class="site-description" itemprop="description">Learning progress and good health</div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">125</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">35</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author site-overview-item animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/hamger" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;hamger" rel="noopener" target="_blank"><i class="github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:2313303800@qq.com" title="E-Mail → mailto:2313303800@qq.com" rel="noopener" target="_blank"><i class="envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="https://hangermeng.top/2021/08/30/%E5%9B%9E%E6%BA%AF%E7%AE%97%E6%B3%95/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="Hank">
+      <meta itemprop="description" content="Learning progress and good health">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hank's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          回溯算法
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2021-08-30 17:33:20" itemprop="dateCreated datePublished" datetime="2021-08-30T17:33:20+08:00">2021-08-30</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2022-02-10 17:38:19" itemprop="dateModified" datetime="2022-02-10T17:38:19+08:00">2022-02-10</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <h3 id="模板"><a href="#模板" class="headerlink" title="模板"></a>模板</h3><p>回溯算法可以用来解决子集、排列、组合问题，主要形式是从一堆选项中挑选出符合要求的组合，基础模板如下：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 假设这样一个场景：去食堂的打菜，需要把满足条件的菜的组合放到桌子上</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">dining</span>(<span class="params">nums</span>):</span></span><br><span class="line">  desk = []</span><br><span class="line">  <span class="comment"># dish: 餐盘，menu: 菜单</span></span><br><span class="line">  <span class="function"><span class="keyword">def</span> <span class="title">backtrack</span>(<span class="params">dish, menu</span>):</span></span><br><span class="line">    <span class="keyword">if</span> (满足结束条件):</span><br><span class="line">      <span class="comment"># 把菜的组合放到桌子上, dish 需要拷贝</span></span><br><span class="line">      desk.append(dish[:])</span><br><span class="line">    <span class="keyword">for</span> val <span class="keyword">in</span> menu:</span><br><span class="line">      <span class="comment"># 做选择（把一个菜放入餐盘）</span></span><br><span class="line">      dish.append(val)</span><br><span class="line">      <span class="comment"># 根据题目，调整新菜单的值</span></span><br><span class="line">      backtrack(dish, 新菜单)</span><br><span class="line">      <span class="comment"># 撤销选择（把一个菜取出餐盘）</span></span><br><span class="line">      dish.pop()</span><br><span class="line">  backtrack([], nums)</span><br><span class="line">  <span class="keyword">return</span> desk</span><br></pre></td></tr></table></figure>
+
+<p>解空间结构：常用的有两种，子集树（零一背包问题）和排列树（货郎问题）</p>
+<ul>
+<li>子集树：从n个元素的集合S中找出满足某种性质的子集时，复杂度 O(2^n)</li>
+<li>排列树：从n个元素的集合S中找出满足某种性质的排列时，复杂度 O(n!)</li>
+</ul>
+<span id="more"></span>
+
+<h3 id="应用"><a href="#应用" class="headerlink" title="应用"></a>应用</h3><h4 id="子集"><a href="#子集" class="headerlink" title="子集"></a>子集</h4><p><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/subsets/">LeetCode 78 题</a></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">subsets</span>(<span class="params">self, nums: <span class="type">List</span>[<span class="built_in">int</span>]</span>) -&gt; <span class="type">List</span>[<span class="type">List</span>[<span class="built_in">int</span>]]:</span></span><br><span class="line">        desk = []</span><br><span class="line">        <span class="function"><span class="keyword">def</span> <span class="title">trackBack</span>(<span class="params">dish, menu</span>):</span></span><br><span class="line">            <span class="keyword">if</span> (dish <span class="keyword">not</span> <span class="keyword">in</span> desk):</span><br><span class="line">                desk.append(dish[:])</span><br><span class="line"></span><br><span class="line">            <span class="keyword">for</span> idx, val <span class="keyword">in</span> <span class="built_in">enumerate</span>(menu):</span><br><span class="line">                dish.append(val)</span><br><span class="line">                trackBack(dish, menu[(idx+<span class="number">1</span>):])</span><br><span class="line">                dish.pop()</span><br><span class="line"></span><br><span class="line">        trackBack([], nums)</span><br><span class="line">        <span class="keyword">return</span> desk</span><br></pre></td></tr></table></figure>
+
+<h4 id="组合"><a href="#组合" class="headerlink" title="组合"></a>组合</h4><p><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/combinations/">LeetCode 77 题</a></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">combine</span>(<span class="params">self, n: <span class="built_in">int</span>, k: <span class="built_in">int</span></span>) -&gt; <span class="type">List</span>[<span class="type">List</span>[<span class="built_in">int</span>]]:</span></span><br><span class="line">        desk = []</span><br><span class="line">        <span class="function"><span class="keyword">def</span> <span class="title">backtrack</span>(<span class="params">dish, menu</span>):</span></span><br><span class="line">            <span class="keyword">if</span> (<span class="built_in">len</span>(dish) == k):</span><br><span class="line">                desk.append(dish[:])</span><br><span class="line">                <span class="keyword">return</span></span><br><span class="line"></span><br><span class="line">            <span class="keyword">for</span> val <span class="keyword">in</span> menu:</span><br><span class="line">                dish.append(val)</span><br><span class="line">                trackBack(dish, menu[(idx+<span class="number">1</span>):])</span><br><span class="line">                dish.pop()</span><br><span class="line"></span><br><span class="line">        backtrack([], <span class="built_in">range</span>(<span class="number">1</span>, n + <span class="number">1</span>))</span><br><span class="line">        <span class="keyword">return</span> desk</span><br></pre></td></tr></table></figure>
+
+<h4 id="全排列"><a href="#全排列" class="headerlink" title="全排列"></a>全排列</h4><p><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/permutations/">LeetCode 46 题</a></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">permute</span>(<span class="params">self, nums: <span class="type">List</span>[<span class="built_in">int</span>]</span>) -&gt; <span class="type">List</span>[<span class="type">List</span>[<span class="built_in">int</span>]]:</span></span><br><span class="line">        desk = []</span><br><span class="line">        long = <span class="built_in">len</span>(nums)</span><br><span class="line">        <span class="function"><span class="keyword">def</span> <span class="title">backtrack</span>(<span class="params">dish, menu</span>):</span></span><br><span class="line">            <span class="keyword">if</span> dish <span class="keyword">not</span> <span class="keyword">in</span> desk <span class="keyword">and</span> <span class="built_in">len</span>(dish) == long:</span><br><span class="line">                desk.append(dish[:])</span><br><span class="line">            <span class="keyword">for</span> idx, val <span class="keyword">in</span> <span class="built_in">enumerate</span>(menu):</span><br><span class="line">                dish.append(val)</span><br><span class="line">                backtrack(dish, menu[:idx] + menu[idx + <span class="number">1</span>:])</span><br><span class="line">                dish.pop()</span><br><span class="line">        backtrack([], nums)</span><br><span class="line">        <span class="keyword">return</span> desk</span><br></pre></td></tr></table></figure>
+
+<h3 id="变形"><a href="#变形" class="headerlink" title="变形"></a>变形</h3><p>根据不同的题型，回溯算法中变化的部分是<strong>结束条件</strong>和<strong>新菜单</strong>。</p>
+<p>新菜单指的是，每次可选项的集合，根据不同的题目，新菜单是不一样的。</p>
+<h4 id="不包含重复元素的情况"><a href="#不包含重复元素的情况" class="headerlink" title="不包含重复元素的情况"></a>不包含重复元素的情况</h4><p>如果解集<strong>忽略子项的排序差异</strong>，则新菜单为：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">newmenu = menu[(idx+<span class="number">1</span>):]</span><br></pre></td></tr></table></figure>
+
+<p>如果解集<strong>不忽略子项的排序差异</strong> ，则新菜单为：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">menu[:idx] + menu[idx + <span class="number">1</span>:]</span><br></pre></td></tr></table></figure>
+
+<h4 id="优化"><a href="#优化" class="headerlink" title="优化"></a>优化</h4><p>回溯算法是一种穷举的算法，会遍历所有的情况，我们可以通过<strong>剪枝</strong>来跳过一些不合符要求的遍历。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">dining</span>(<span class="params">nums</span>):</span></span><br><span class="line">  desk = []</span><br><span class="line">  <span class="function"><span class="keyword">def</span> <span class="title">backtrack</span>(<span class="params">dish, menu</span>):</span></span><br><span class="line">    <span class="keyword">if</span> (满足结束条件):</span><br><span class="line">      desk.append(dish[:])</span><br><span class="line">    <span class="keyword">for</span> val <span class="keyword">in</span> menu:</span><br><span class="line">      <span class="comment"># 在此进行剪枝，跳过不符合要求的情况</span></span><br><span class="line">      <span class="keyword">if</span> (满足剪枝条件):</span><br><span class="line">        <span class="keyword">continue</span></span><br><span class="line">      dish.append(val)</span><br><span class="line">      backtrack(dish, 新菜单)</span><br><span class="line">      dish.pop()</span><br><span class="line">  backtrack([], nums)</span><br><span class="line">  <span class="keyword">return</span> desk</span><br></pre></td></tr></table></figure>
+
+<h3 id="练习题"><a href="#练习题" class="headerlink" title="练习题"></a>练习题</h3><p>编号为 Leecode 题号</p>
+<ol start="46">
+<li>全排列（中等）</li>
+<li>全排列 II（中等</li>
+<li>组合总和（中等）</li>
+<li>组合总和 II（中等）</li>
+<li>组合（中等）</li>
+<li>子集（中等）</li>
+<li>子集 II（中等）：剪枝技巧同 47 题、39 题、40 题；</li>
+<li>第 k 个排列（中等）</li>
+<li>复原 IP 地址（中等）</li>
+</ol>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/algorithm/" rel="tag"># algorithm</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2020/10/05/vue%E4%B8%ADcomputed%E7%9A%84%E5%AE%9E%E7%8E%B0/" rel="prev" title="vue中computed的实现">
+                  <i class="fa fa-chevron-left"></i> vue中computed的实现
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2021/08/31/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/" rel="next" title="动态规划">
+                  动态规划 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Hank</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" rel="noopener" target="_blank">NexT.Muse</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script>
+
+  
+<script src="https://cdn.jsdelivr.net/npm/algoliasearch@4.11.0/dist/algoliasearch-lite.umd.js" integrity="sha256-48AZ24Ct05NAMLT7hvYgeW1X350OgEcZvHd6Ih6xwOA=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/instantsearch.js@4.33.2/dist/instantsearch.production.min.js" integrity="sha256-0B5Q7I/DVd8yp8JYLzbpELEonNBlVe7NLixMCLEnlBU=" crossorigin="anonymous"></script><script src="/js/third-party/search/algolia-search.js"></script>
+
+
+
+
+
+  
+
+
+
+
+
+</body>
+</html>

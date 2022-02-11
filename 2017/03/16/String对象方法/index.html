@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.0.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.4/css/all.min.css" integrity="sha256-mUZM63G8m73Mcidfrv5E+Y61y7a12O5mW4ezU3bxqW4=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"hangermeng.top","root":"/","images":"/images","scheme":"Muse","darkmode":false,"version":"8.8.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"},"algolia":{"appID":"ZV0EGDRD8C","apiKey":"01ab18713b33dcc47e43484208996a80","indexName":"hexo_hamger","hits":{"per_page":10}}}</script><script src="/js/config.js"></script>
+<meta name="description" content="讨论完Array对象的方法，再来讨论一下String对象的方法，两者拥有部分相似的方法：concat()、indexOf()、lastIndexOf()、slice()、valueOf()。这里不再赘述。 提取字符串 substr()  语法string.substr(start,length)。如果start是负数，那么该参数声明从字符串的尾部开始算起的位置。如果 length 为 0 或负数，">
+<meta property="og:type" content="article">
+<meta property="og:title" content="String对象方法">
+<meta property="og:url" content="https://hangermeng.top/2017/03/16/String%E5%AF%B9%E8%B1%A1%E6%96%B9%E6%B3%95/index.html">
+<meta property="og:site_name" content="Hank&#39;s Blog">
+<meta property="og:description" content="讨论完Array对象的方法，再来讨论一下String对象的方法，两者拥有部分相似的方法：concat()、indexOf()、lastIndexOf()、slice()、valueOf()。这里不再赘述。 提取字符串 substr()  语法string.substr(start,length)。如果start是负数，那么该参数声明从字符串的尾部开始算起的位置。如果 length 为 0 或负数，">
+<meta property="og:locale">
+<meta property="article:published_time" content="2017-03-16T00:10:54.000Z">
+<meta property="article:modified_time" content="2022-02-10T09:38:19.391Z">
+<meta property="article:author" content="Hank">
+<meta property="article:tag" content="JavaScript">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://hangermeng.top/2017/03/16/String%E5%AF%B9%E8%B1%A1%E6%96%B9%E6%B3%95/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-Hans","comments":true,"permalink":"https://hangermeng.top/2017/03/16/String%E5%AF%B9%E8%B1%A1%E6%96%B9%E6%B3%95/","path":"2017/03/16/String对象方法/","title":"String对象方法"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>String对象方法 | Hank's Blog</title>
+  
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Hank's Blog</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">耕种思考的自留地</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu">
+        <li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a></li>
+        <li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a></li>
+        <li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a></li>
+        <li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container"></div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container">
+  <div class="algolia-stats"><hr></div>
+  <div class="algolia-hits"></div>
+  <div class="algolia-pagination"></div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%8F%90%E5%8F%96%E5%AD%97%E7%AC%A6%E4%B8%B2"><span class="nav-number">1.</span> <span class="nav-text">提取字符串</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AD%97%E7%AC%A6%E4%B8%B2%E8%BD%AC%E6%95%B0%E7%BB%84"><span class="nav-number">2.</span> <span class="nav-text">字符串转数组</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8E%BB%E9%99%A4%E7%A9%BA%E6%A0%BC"><span class="nav-number">3.</span> <span class="nav-text">去除空格</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A4%A7%E5%B0%8F%E5%86%99%E8%BD%AC%E6%8D%A2"><span class="nav-number">4.</span> <span class="nav-text">大小写转换</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%A3%80%E7%B4%A2%E5%AD%97%E7%AC%A6%E4%B8%8E%E8%BD%AC%E7%A0%81"><span class="nav-number">5.</span> <span class="nav-text">检索字符与转码</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AD%97%E7%AC%A6%E4%B8%B2%E6%9F%A5%E6%89%BE%E4%B8%8E%E6%9B%BF%E6%8D%A2"><span class="nav-number">6.</span> <span class="nav-text">字符串查找与替换</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Hank"
+      src="/images/avatar.jpg">
+  <p class="site-author-name" itemprop="name">Hank</p>
+  <div class="site-description" itemprop="description">Learning progress and good health</div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">125</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">35</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author site-overview-item animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/hamger" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;hamger" rel="noopener" target="_blank"><i class="github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:2313303800@qq.com" title="E-Mail → mailto:2313303800@qq.com" rel="noopener" target="_blank"><i class="envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="https://hangermeng.top/2017/03/16/String%E5%AF%B9%E8%B1%A1%E6%96%B9%E6%B3%95/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="Hank">
+      <meta itemprop="description" content="Learning progress and good health">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hank's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          String对象方法
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2017-03-16 08:10:54" itemprop="dateCreated datePublished" datetime="2017-03-16T08:10:54+08:00">2017-03-16</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2022-02-10 17:38:19" itemprop="dateModified" datetime="2022-02-10T17:38:19+08:00">2022-02-10</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <p>讨论完<a href="https://hangermeng.top/2017/03/14/Array%E5%AF%B9%E8%B1%A1%E6%96%B9%E6%B3%95/">Array对象的方法</a>，再来讨论一下String对象的方法，两者拥有部分相似的方法：concat()、indexOf()、lastIndexOf()、slice()、valueOf()。这里不再赘述。</p>
+<h3 id="提取字符串"><a href="#提取字符串" class="headerlink" title="提取字符串"></a>提取字符串</h3><ul>
+<li>substr()  语法<code>string.substr(start,length)</code>。如果start是负数，那么该参数声明从字符串的尾部开始算起的位置。如果 length 为 0 或负数，将返回一个空字符串。</li>
+<li>substring()  语法<code>string.substring(start,end)</code>。使用 start 和 end 两者中的较小值作为子字符串的起始点。如果 start 或 end 为 NaN 或者负数，那么将其替换为0。</li>
+</ul>
+<p>substr()、substring()、slice() 三者都不改变原数组或字符串的值。</p>
+<span id="more"></span>
+<h3 id="字符串转数组"><a href="#字符串转数组" class="headerlink" title="字符串转数组"></a>字符串转数组</h3><ul>
+<li>split() 把字符串分割为字符串数组。语法<code>string.split(separator,limit)</code>。返回的数组中的字串不包括 separator 自身。</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>separator</td>
+<td>可选。字符串或正则表达式，从该参数指定的地方分割 string Object。</td>
+</tr>
+<tr>
+<td>limit</td>
+<td>可选。该参数可指定返回的数组的最大长度。如果设置了该参数，返回的子串不会多于这个参数指定的数组。如果没有设置该参数，整个字符串都会被分割，不考虑它的长度。</td>
+</tr>
+</tbody></table>
+<p><code>split(&quot;&quot;)</code> 会将 stringObject 中的每个字符之间都分割。<br><code>split()</code> 会返回完整的字符串，即不做处理。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> str=<span class="string">&quot;How are you doing today?&quot;</span>;</span><br><span class="line"><span class="keyword">var</span> n=str.split(<span class="string">&quot; &quot;</span>); <span class="comment">// 注意这里的分隔符是空格</span></span><br><span class="line"><span class="built_in">console</span>.log(n) <span class="comment">// [&quot;How&quot;, &quot;are&quot;, &quot;you&quot;, &quot;doing&quot;, &quot;today?&quot;]</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="去除空格"><a href="#去除空格" class="headerlink" title="去除空格"></a>去除空格</h3><ul>
+<li>trim() 去除字符串两边的空白，不改变原字符串。</li>
+</ul>
+<p>注意到该方法只能去除两边的空白，实际工作中我们可能还需要将多个空格合并为一个空格，需要自己拓展：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">String</span>.prototype.ResetBlank = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123; </span><br><span class="line">  <span class="keyword">var</span> regEx = <span class="regexp">/\s+/g</span>; </span><br><span class="line">  <span class="keyword">return</span> <span class="built_in">this</span>.replace(regEx, <span class="string">&#x27; &#x27;</span>); </span><br><span class="line">&#125;; </span><br></pre></td></tr></table></figure>
+
+<h3 id="大小写转换"><a href="#大小写转换" class="headerlink" title="大小写转换"></a>大小写转换</h3><ul>
+<li>toLowerCase() 把字符串转换为小写。</li>
+<li>toUpperCase() 把字符串转换为大写。</li>
+</ul>
+<h3 id="检索字符与转码"><a href="#检索字符与转码" class="headerlink" title="检索字符与转码"></a>检索字符与转码</h3><ul>
+<li>charAt() 返回在指定位置的字符。</li>
+<li>charCodeAt() 返回在指定的位置的字符的 Unicode 编码。</li>
+<li>formCharCode() 将 Unicode 编码转为字符。</li>
+</ul>
+<h3 id="字符串查找与替换"><a href="#字符串查找与替换" class="headerlink" title="字符串查找与替换"></a>字符串查找与替换</h3><ul>
+<li>search() 查找正则表达式的匹配项的位置，返回一个数值。语法 <code>string.search(regexp)</code></li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>regexp</td>
+<td>该参数可以是需要在 string 中检索的子串，也可以是需要检索的 RegExp 对象。</td>
+</tr>
+</tbody></table>
+<p>返回 string 中第一个与 regexp 相匹配的子串的起始位置。如果没有找到任何匹配的子串，则返回 -1。要执行忽略大小写的检索，请追加标志 i。search() 方法不执行全局匹配，它将忽略标志 g。它同时忽略 regexp 的 lastIndex 属性，并且总是从字符串的开始进行检索，这意味着它总是返回 string 的第一个匹配的位置。</p>
+<ul>
+<li>match() 查找正则表达式的匹配，返回一个数组。详见<a href="https://hangermeng.top/2018/05/10/match%E6%96%B9%E6%B3%95/">match方法</a>。</li>
+<li>replace() 在字符串中查找匹配的子串，并替换之。详见<a href="https://hangermeng.top/2017/03/17/replace%E6%96%B9%E6%B3%95/">replace方法</a>。</li>
+</ul>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/JavaScript/" rel="tag"># JavaScript</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2017/03/15/CSS%E9%80%89%E6%8B%A9%E5%99%A8%E4%BC%98%E5%85%88%E7%BA%A7%E4%B8%8E%E6%95%88%E7%8E%87/" rel="prev" title="CSS选择器优先级与效率">
+                  <i class="fa fa-chevron-left"></i> CSS选择器优先级与效率
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2017/03/16/JS%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/" rel="next" title="JS正则表达式">
+                  JS正则表达式 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Hank</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" rel="noopener" target="_blank">NexT.Muse</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script>
+
+  
+<script src="https://cdn.jsdelivr.net/npm/algoliasearch@4.11.0/dist/algoliasearch-lite.umd.js" integrity="sha256-48AZ24Ct05NAMLT7hvYgeW1X350OgEcZvHd6Ih6xwOA=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/instantsearch.js@4.33.2/dist/instantsearch.production.min.js" integrity="sha256-0B5Q7I/DVd8yp8JYLzbpELEonNBlVe7NLixMCLEnlBU=" crossorigin="anonymous"></script><script src="/js/third-party/search/algolia-search.js"></script>
+
+
+
+
+
+  
+
+
+
+
+
+</body>
+</html>

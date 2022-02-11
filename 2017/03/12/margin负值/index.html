@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.0.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.4/css/all.min.css" integrity="sha256-mUZM63G8m73Mcidfrv5E+Y61y7a12O5mW4ezU3bxqW4=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"hangermeng.top","root":"/","images":"/images","scheme":"Muse","darkmode":false,"version":"8.8.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"},"algolia":{"appID":"ZV0EGDRD8C","apiKey":"01ab18713b33dcc47e43484208996a80","indexName":"hexo_hamger","hits":{"per_page":10}}}</script><script src="/js/config.js"></script>
+<meta name="description" content="margin 为负值是符合 W3C 标准的，完全没有兼容性问题，另外需要一提的是 padding 和 border 不支持负值。存在就是有意义的，那么负边距究竟有什么样的作用？  在普通文档流中的效果那些没有脱离文档流的元素，其在页面中的位置是跟随者文档流的变化而变化的。看下面这幅图：现在我们把上图中的块状元素、行内元素以及inline-block元素都设一个负边距 margin:-10px; 看">
+<meta property="og:type" content="article">
+<meta property="og:title" content="margin负值">
+<meta property="og:url" content="https://hangermeng.top/2017/03/12/margin%E8%B4%9F%E5%80%BC/index.html">
+<meta property="og:site_name" content="Hank&#39;s Blog">
+<meta property="og:description" content="margin 为负值是符合 W3C 标准的，完全没有兼容性问题，另外需要一提的是 padding 和 border 不支持负值。存在就是有意义的，那么负边距究竟有什么样的作用？  在普通文档流中的效果那些没有脱离文档流的元素，其在页面中的位置是跟随者文档流的变化而变化的。看下面这幅图：现在我们把上图中的块状元素、行内元素以及inline-block元素都设一个负边距 margin:-10px; 看">
+<meta property="og:locale">
+<meta property="og:image" content="http://images.cnblogs.com/cnblogs_com/2050/201208/201208131525098932.png">
+<meta property="og:image" content="http://images.cnblogs.com/cnblogs_com/2050/201208/201208131525134914.png">
+<meta property="og:image" content="http://images.cnblogs.com/cnblogs_com/2050/201208/20120813152515780.png">
+<meta property="og:image" content="http://images.cnblogs.com/cnblogs_com/2050/201208/201208131525179959.png">
+<meta property="article:published_time" content="2017-03-12T01:54:18.000Z">
+<meta property="article:modified_time" content="2022-02-10T09:38:19.398Z">
+<meta property="article:author" content="Hank">
+<meta property="article:tag" content="CSS">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://images.cnblogs.com/cnblogs_com/2050/201208/201208131525098932.png">
+
+
+<link rel="canonical" href="https://hangermeng.top/2017/03/12/margin%E8%B4%9F%E5%80%BC/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-Hans","comments":true,"permalink":"https://hangermeng.top/2017/03/12/margin%E8%B4%9F%E5%80%BC/","path":"2017/03/12/margin负值/","title":"margin负值"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>margin负值 | Hank's Blog</title>
+  
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Hank's Blog</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">耕种思考的自留地</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu">
+        <li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a></li>
+        <li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a></li>
+        <li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a></li>
+        <li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container"></div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container">
+  <div class="algolia-stats"><hr></div>
+  <div class="algolia-hits"></div>
+  <div class="algolia-pagination"></div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%9C%A8%E6%99%AE%E9%80%9A%E6%96%87%E6%A1%A3%E6%B5%81%E4%B8%AD%E7%9A%84%E6%95%88%E6%9E%9C"><span class="nav-number">1.</span> <span class="nav-text">在普通文档流中的效果</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AF%B9%E5%85%83%E7%B4%A0%E5%AE%BD%E5%BA%A6%E7%9A%84%E5%BD%B1%E5%93%8D"><span class="nav-number">2.</span> <span class="nav-text">对元素宽度的影响</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AF%B9%E6%B5%AE%E5%8A%A8%E5%92%8C%E7%BB%9D%E5%AF%B9%E5%AE%9A%E4%BD%8D%E5%85%83%E7%B4%A0%E7%9A%84%E5%BD%B1%E5%93%8D"><span class="nav-number">3.</span> <span class="nav-text">对浮动和绝对定位元素的影响</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B5%AE%E5%8A%A8%E5%AE%9A%E4%BD%8D"><span class="nav-number">3.1.</span> <span class="nav-text">浮动定位</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BB%9D%E5%AF%B9%E5%AE%9A%E4%BD%8D"><span class="nav-number">3.2.</span> <span class="nav-text">绝对定位</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%9E%E9%99%85%E5%BA%94%E7%94%A8"><span class="nav-number">4.</span> <span class="nav-text">实际应用</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%A4%E6%A0%8F%E7%AD%89%E9%AB%98%E5%B8%83%E5%B1%80"><span class="nav-number">4.1.</span> <span class="nav-text">两栏等高布局</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%97%E8%A1%A8%E5%8E%BB%E8%BE%B9"><span class="nav-number">4.2.</span> <span class="nav-text">列表去边</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Hank"
+      src="/images/avatar.jpg">
+  <p class="site-author-name" itemprop="name">Hank</p>
+  <div class="site-description" itemprop="description">Learning progress and good health</div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">125</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">35</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author site-overview-item animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/hamger" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;hamger" rel="noopener" target="_blank"><i class="github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:2313303800@qq.com" title="E-Mail → mailto:2313303800@qq.com" rel="noopener" target="_blank"><i class="envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="https://hangermeng.top/2017/03/12/margin%E8%B4%9F%E5%80%BC/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="Hank">
+      <meta itemprop="description" content="Learning progress and good health">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hank's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          margin负值
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2017-03-12 09:54:18" itemprop="dateCreated datePublished" datetime="2017-03-12T09:54:18+08:00">2017-03-12</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2022-02-10 17:38:19" itemprop="dateModified" datetime="2022-02-10T17:38:19+08:00">2022-02-10</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <p>margin 为负值是符合 W3C 标准的，完全没有兼容性问题，另外需要一提的是 padding 和 border 不支持负值。存在就是有意义的，那么负边距究竟有什么样的作用？ </p>
+<h2 id="在普通文档流中的效果"><a href="#在普通文档流中的效果" class="headerlink" title="在普通文档流中的效果"></a>在普通文档流中的效果</h2><p>那些没有脱离文档流的元素，其在页面中的位置是跟随者文档流的变化而变化的。看下面这幅图：<br><img src="http://images.cnblogs.com/cnblogs_com/2050/201208/201208131525098932.png" alt="未设置负边距的文档流"><br>现在我们把上图中的块状元素、行内元素以及inline-block元素都设一个负边距 margin:-10px; 看看会发生什么：<br><img src="http://images.cnblogs.com/cnblogs_com/2050/201208/201208131525134914.png" alt="设置负边距的文档流"><br>注意到根据文档流的渲染顺序，前面的元素的会被后面的元素覆盖10px，另外顶部的块状元素也向上隐藏了10px。<br>由此可知，在文档流中，元素的最终边界是由margin决定的，margin为负的时候就相当于元素的边界向里收，文档流只认这个边界，不会管元素的实际尺寸是多少。</p>
+<span id="more"></span>
+
+<h2 id="对元素宽度的影响"><a href="#对元素宽度的影响" class="headerlink" title="对元素宽度的影响"></a>对元素宽度的影响</h2><p>如果一个元素未设置宽度(或者width:auto)，负边距能增加元素的宽度。<br>比如下图的黑灰色部分是一个块状元素，它没有设定宽度。它被包裹在一个宽度为400px,且水平居中的父元素中。<br><img src="http://images.cnblogs.com/cnblogs_com/2050/201208/20120813152515780.png" alt="未设置宽度"><br>现在给这个元素的设一个 margin-right:-100px;<br><img src="http://images.cnblogs.com/cnblogs_com/2050/201208/201208131525179959.png" alt="设置负边距"></p>
+<h2 id="对浮动和绝对定位元素的影响"><a href="#对浮动和绝对定位元素的影响" class="headerlink" title="对浮动和绝对定位元素的影响"></a>对浮动和绝对定位元素的影响</h2><p>浮动元素或者绝对定位的元素会根据元素的边界来定位，而这个边界是由 margin 值来决定的，因此 margin 值的改变会影响元素的位置。</p>
+<h3 id="浮动定位"><a href="#浮动定位" class="headerlink" title="浮动定位"></a>浮动定位</h3><p>利用浮动元素的负边距，可以实现将写在后面的某个元素前置显示。</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"> <span class="tag">&lt;<span class="name">style</span>&gt;</span><span class="css"></span></span><br><span class="line"><span class="css"> <span class="selector-class">.ul</span> &gt; <span class="selector-tag">div</span> &#123;</span></span><br><span class="line"><span class="css"> 	<span class="attribute">width</span>: <span class="number">300px</span>;</span></span><br><span class="line"><span class="css">     <span class="attribute">height</span>: <span class="number">300px</span>;</span></span><br><span class="line"><span class="css">     <span class="attribute">float</span>: left;</span></span><br><span class="line"><span class="css"> &#125;</span></span><br><span class="line"><span class="css"> <span class="selector-class">.li1</span> &#123;       </span></span><br><span class="line"><span class="css">     <span class="attribute">background-color</span>: <span class="number">#B7FF7C</span>;       </span></span><br><span class="line"><span class="css"> &#125;    </span></span><br><span class="line"><span class="css"> <span class="selector-class">.li2</span> &#123;</span></span><br><span class="line"><span class="css">     <span class="attribute">background-color</span>: <span class="number">#F9715F</span>;</span></span><br><span class="line"><span class="css"> &#125;    </span></span><br><span class="line"><span class="css"> <span class="selector-class">.li3</span> &#123;</span></span><br><span class="line"><span class="css">     <span class="attribute">background-color</span>: <span class="number">#83F2FB</span>;</span></span><br><span class="line"><span class="css">     <span class="attribute">margin-left</span>: -<span class="number">450px</span>;</span></span><br><span class="line"><span class="css"> &#125;</span></span><br><span class="line"><span class="css"> </span><span class="tag">&lt;/<span class="name">style</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;ul&quot;</span>&gt;</span></span><br><span class="line">     <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;li1&quot;</span>&gt;</span>list1<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">     <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;li2&quot;</span>&gt;</span>list2<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">     <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;li3&quot;</span>&gt;</span>list3<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"> <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="绝对定位"><a href="#绝对定位" class="headerlink" title="绝对定位"></a>绝对定位</h3><p>绝对定位的元素定义的top、right、bottom、left等值是元素自身的边界到最近的已定位的祖先元素的距离，这个元素自身的边界指的就是 margin 定义的边界，如果margin为负则它的边界是向里收的。利用这点，就有了经典的利用绝对定位来居中的方法。</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">div</span> &#123;</span><br><span class="line">    <span class="attribute">position</span>: relative;  </span><br><span class="line">    <span class="attribute">width</span>:<span class="number">500px</span>;</span><br><span class="line">    <span class="attribute">height</span>:<span class="number">300px</span>;</span><br><span class="line">    <span class="attribute">top</span>: <span class="number">50%</span>;</span><br><span class="line">    <span class="attribute">left</span>: <span class="number">50%</span>;</span><br><span class="line">    <span class="attribute">margin</span>: -<span class="number">150px</span> <span class="number">0</span> <span class="number">0</span> -<span class="number">250px</span>; <span class="comment">/* 外边距为自身宽高的一半 */</span></span><br><span class="line">    <span class="attribute">background-color</span>: pink;   </span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="实际应用"><a href="#实际应用" class="headerlink" title="实际应用"></a>实际应用</h2><h3 id="两栏等高布局"><a href="#两栏等高布局" class="headerlink" title="两栏等高布局"></a>两栏等高布局</h3><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">style</span>&gt;</span><span class="css"></span></span><br><span class="line"><span class="css"><span class="selector-class">.box</span> &#123;</span></span><br><span class="line"><span class="css">    <span class="attribute">overflow</span>: hidden;</span></span><br><span class="line"><span class="css">&#125;</span></span><br><span class="line"><span class="css"></span></span><br><span class="line"><span class="css"><span class="selector-class">.list1</span>,</span></span><br><span class="line"><span class="css"><span class="selector-class">.list2</span> &#123;</span></span><br><span class="line"><span class="css">    <span class="attribute">width</span>: <span class="number">300px</span>;</span></span><br><span class="line"><span class="css">    <span class="attribute">float</span>: left;</span></span><br><span class="line"><span class="css">    <span class="attribute">margin-bottom</span>: -<span class="number">1000px</span>;</span></span><br><span class="line"><span class="css">    <span class="attribute">padding-bottom</span>: <span class="number">1000px</span>;</span></span><br><span class="line"><span class="css">&#125;</span></span><br><span class="line"><span class="css"></span></span><br><span class="line"><span class="css"><span class="selector-class">.list1</span> &#123;</span></span><br><span class="line"><span class="css">    <span class="attribute">background-color</span>: <span class="number">#B7FF7C</span>;</span></span><br><span class="line"><span class="css">&#125;</span></span><br><span class="line"><span class="css"></span></span><br><span class="line"><span class="css"><span class="selector-class">.list2</span> &#123;</span></span><br><span class="line"><span class="css">    <span class="attribute">background-color</span>: <span class="number">#F9715F</span>;</span></span><br><span class="line"><span class="css">&#125;</span></span><br><span class="line"><span class="css"></span><span class="tag">&lt;/<span class="name">style</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;box&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;list1&quot;</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">p</span>&gt;</span>左列<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">p</span>&gt;</span>左列<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">p</span>&gt;</span>左列<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;list2&quot;</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">p</span>&gt;</span>右列<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">p</span>&gt;</span>右列<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="列表去边"><a href="#列表去边" class="headerlink" title="列表去边"></a>列表去边</h3><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">style</span>&gt;</span><span class="css"></span></span><br><span class="line"><span class="css"><span class="selector-class">.box</span> &#123;</span></span><br><span class="line"><span class="css">    <span class="attribute">width</span>: <span class="number">1200px</span>;</span></span><br><span class="line"><span class="css">    <span class="attribute">margin</span>: auto;</span></span><br><span class="line"><span class="css">    <span class="attribute">background-color</span>: <span class="number">#FEB91E</span>;</span></span><br><span class="line"><span class="css">&#125;</span></span><br><span class="line"><span class="css"></span></span><br><span class="line"><span class="css"><span class="selector-class">.ul</span> &#123;</span></span><br><span class="line"><span class="css">    <span class="attribute">overflow</span>: hidden;</span></span><br><span class="line"><span class="css">    <span class="attribute">margin-right</span>: -<span class="number">20px</span>; // 增大了容器宽度</span></span><br><span class="line"><span class="css">&#125;</span></span><br><span class="line"><span class="css"></span></span><br><span class="line"><span class="css"><span class="selector-class">.li</span> &#123;</span></span><br><span class="line"><span class="css">    <span class="attribute">width</span>: <span class="number">386.66px</span>; // 计算后的宽度</span></span><br><span class="line"><span class="css">    <span class="attribute">height</span>: <span class="number">300px</span>;</span></span><br><span class="line"><span class="css">    <span class="attribute">margin-right</span>: <span class="number">20px</span>;</span></span><br><span class="line"><span class="css">    <span class="attribute">background-color</span>: <span class="number">#B7FF7C</span>;</span></span><br><span class="line"><span class="css">    <span class="attribute">float</span>: left;</span></span><br><span class="line"><span class="css">&#125;</span></span><br><span class="line"><span class="css"></span><span class="tag">&lt;/<span class="name">style</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;box&quot;</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;ul&quot;</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;li&quot;</span>&gt;</span>list1<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;li&quot;</span>&gt;</span>list2<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;li&quot;</span>&gt;</span>list3<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/CSS/" rel="tag"># CSS</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2017/03/11/URL%E7%9A%84%E8%8E%B7%E5%8F%96%E5%92%8C%E7%BB%84%E8%A3%85/" rel="prev" title="URL的获取和组装">
+                  <i class="fa fa-chevron-left"></i> URL的获取和组装
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2017/03/12/%E6%B8%85%E9%99%A4%E6%B5%AE%E5%8A%A8/" rel="next" title="清除浮动">
+                  清除浮动 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Hank</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" rel="noopener" target="_blank">NexT.Muse</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script>
+
+  
+<script src="https://cdn.jsdelivr.net/npm/algoliasearch@4.11.0/dist/algoliasearch-lite.umd.js" integrity="sha256-48AZ24Ct05NAMLT7hvYgeW1X350OgEcZvHd6Ih6xwOA=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/instantsearch.js@4.33.2/dist/instantsearch.production.min.js" integrity="sha256-0B5Q7I/DVd8yp8JYLzbpELEonNBlVe7NLixMCLEnlBU=" crossorigin="anonymous"></script><script src="/js/third-party/search/algolia-search.js"></script>
+
+
+
+
+
+  
+
+
+
+
+
+</body>
+</html>

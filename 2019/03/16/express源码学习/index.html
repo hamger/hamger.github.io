@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.0.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.4/css/all.min.css" integrity="sha256-mUZM63G8m73Mcidfrv5E+Y61y7a12O5mW4ezU3bxqW4=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"hangermeng.top","root":"/","images":"/images","scheme":"Muse","darkmode":false,"version":"8.8.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"},"algolia":{"appID":"ZV0EGDRD8C","apiKey":"01ab18713b33dcc47e43484208996a80","indexName":"hexo_hamger","hits":{"per_page":10}}}</script><script src="/js/config.js"></script>
+<meta name="description" content="打开 Express4 的源码，目录结构很清晰，阅读时建议对照源码。 1234567891011121314. lib├── middleware  -------------- 中间件    ├── init.js   ------------ 增强 req 对象和 res 对象    └── query.js  ------------ 添加 req.query├── router  ----">
+<meta property="og:type" content="article">
+<meta property="og:title" content="express源码学习">
+<meta property="og:url" content="https://hangermeng.top/2019/03/16/express%E6%BA%90%E7%A0%81%E5%AD%A6%E4%B9%A0/index.html">
+<meta property="og:site_name" content="Hank&#39;s Blog">
+<meta property="og:description" content="打开 Express4 的源码，目录结构很清晰，阅读时建议对照源码。 1234567891011121314. lib├── middleware  -------------- 中间件    ├── init.js   ------------ 增强 req 对象和 res 对象    └── query.js  ------------ 添加 req.query├── router  ----">
+<meta property="og:locale">
+<meta property="article:published_time" content="2019-03-16T02:07:10.000Z">
+<meta property="article:modified_time" content="2022-02-10T09:38:19.396Z">
+<meta property="article:author" content="Hank">
+<meta property="article:tag" content="Node.js">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://hangermeng.top/2019/03/16/express%E6%BA%90%E7%A0%81%E5%AD%A6%E4%B9%A0/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-Hans","comments":true,"permalink":"https://hangermeng.top/2019/03/16/express%E6%BA%90%E7%A0%81%E5%AD%A6%E4%B9%A0/","path":"2019/03/16/express源码学习/","title":"express源码学习"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>express源码学习 | Hank's Blog</title>
+  
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Hank's Blog</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">耕种思考的自留地</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu">
+        <li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a></li>
+        <li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a></li>
+        <li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a></li>
+        <li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container"></div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container">
+  <div class="algolia-stats"><hr></div>
+  <div class="algolia-hits"></div>
+  <div class="algolia-pagination"></div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%BA%95%E5%B1%82%E5%8E%9F%E7%90%86"><span class="nav-number">1.</span> <span class="nav-text">底层原理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BB%A3%E7%A0%81%E6%A2%B3%E7%90%86"><span class="nav-number">2.</span> <span class="nav-text">代码梳理</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#third-step"><span class="nav-number">2.1.</span> <span class="nav-text">third step</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#first-step"><span class="nav-number">2.2.</span> <span class="nav-text">first step</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#second-step"><span class="nav-number">2.3.</span> <span class="nav-text">second step</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%93%8D%E5%BA%94%E8%AF%B7%E6%B1%82%E9%98%B6%E6%AE%B5"><span class="nav-number">2.4.</span> <span class="nav-text">响应请求阶段</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%B7%AF%E7%94%B1%E4%B8%AD%E9%97%B4%E4%BB%B6"><span class="nav-number">3.</span> <span class="nav-text">路由中间件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%A8%A1%E6%9D%BF%E6%B8%B2%E6%9F%93"><span class="nav-number">4.</span> <span class="nav-text">模板渲染</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Hank"
+      src="/images/avatar.jpg">
+  <p class="site-author-name" itemprop="name">Hank</p>
+  <div class="site-description" itemprop="description">Learning progress and good health</div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">125</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">35</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author site-overview-item animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/hamger" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;hamger" rel="noopener" target="_blank"><i class="github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:2313303800@qq.com" title="E-Mail → mailto:2313303800@qq.com" rel="noopener" target="_blank"><i class="envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="https://hangermeng.top/2019/03/16/express%E6%BA%90%E7%A0%81%E5%AD%A6%E4%B9%A0/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="Hank">
+      <meta itemprop="description" content="Learning progress and good health">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hank's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          express源码学习
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2019-03-16 10:07:10" itemprop="dateCreated datePublished" datetime="2019-03-16T10:07:10+08:00">2019-03-16</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2022-02-10 17:38:19" itemprop="dateModified" datetime="2022-02-10T17:38:19+08:00">2022-02-10</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <p>打开 <a target="_blank" rel="noopener" href="https://github.com/expressjs/express">Express4 的源码</a>，目录结构很清晰，阅读时建议对照源码。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">. lib</span><br><span class="line">├── middleware  -------------- 中间件</span><br><span class="line">    ├── init.js   ------------ 增强 req 对象和 res 对象</span><br><span class="line">    └── query.js  ------------ 添加 req.query</span><br><span class="line">├── router  ------------------ 路由</span><br><span class="line">    ├── index.js  ------------ Router 构造器</span><br><span class="line">    ├── layer.js  ------------ 中间件和路由的抽象</span><br><span class="line">    └── route.js  ------------ 实现 router.route</span><br><span class="line">├── application.js  ---------- app 对象拓展</span><br><span class="line">├── express.js  -------------- 项目入口</span><br><span class="line">├── request.js --------------- req 对象拓展</span><br><span class="line">├── response.js  ------------- res 对象拓展</span><br><span class="line">├── utils.js  ---------------- 工具集</span><br><span class="line">└── view.js  ----------------- 模板引擎</span><br></pre></td></tr></table></figure>
+
+<h3 id="底层原理"><a href="#底层原理" class="headerlink" title="底层原理"></a>底层原理</h3><p>Express 框架建立在 node.js 内置的 http 模块上，http 模块生成服务器的原始代码如下。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> http = <span class="built_in">require</span>(<span class="string">&quot;http&quot;</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> app = http.createServer(<span class="function"><span class="keyword">function</span>(<span class="params">request, response</span>) </span>&#123;</span><br><span class="line">  response.writeHead(<span class="number">200</span>, &#123; <span class="string">&quot;Content-Type&quot;</span>: <span class="string">&quot;text/plain&quot;</span> &#125;);</span><br><span class="line">  response.end(<span class="string">&quot;Hello world!&quot;</span>);</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">app.listen(<span class="number">3000</span>, <span class="string">&quot;localhost&quot;</span>);</span><br></pre></td></tr></table></figure>
+
+<p>Express 代理了<code>http.createServer(requestHandler)</code>中的<code>requestHandler</code>，并使用注册后的中间件和路由，匹配响应传来的用户请求。</p>
+<span id="more"></span>
+
+<h3 id="代码梳理"><a href="#代码梳理" class="headerlink" title="代码梳理"></a>代码梳理</h3><p>下面是一个简单的 Express 使用案例。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> express = <span class="built_in">require</span>(<span class="string">&quot;express&quot;</span>);</span><br><span class="line"><span class="comment">// first step</span></span><br><span class="line"><span class="keyword">var</span> app = express();</span><br><span class="line"></span><br><span class="line"><span class="comment">// second step</span></span><br><span class="line">app.get(<span class="string">&quot;/&quot;</span>, <span class="function"><span class="keyword">function</span>(<span class="params">req, res</span>) </span>&#123;</span><br><span class="line">  res.send(<span class="string">&quot;Hello world!&quot;</span>);</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="comment">// third step</span></span><br><span class="line">app.listen(<span class="number">3000</span>);</span><br></pre></td></tr></table></figure>
+
+<h4 id="third-step"><a href="#third-step" class="headerlink" title="third step"></a>third step</h4><p>app.listen 方法在 <code>application.js</code> 中被定义。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// application.js</span></span><br><span class="line">app.listen = <span class="function"><span class="keyword">function</span> <span class="title">listen</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> server = http.createServer(<span class="built_in">this</span>);</span><br><span class="line">  <span class="keyword">return</span> server.listen.apply(server, <span class="built_in">arguments</span>);</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>启动一个服务，并指定监听端口，这里的关键是<code>http.createServer(this)</code>中的<code>this</code>（也就是<code>app</code>），即<code>http.createServer(requestHandler)</code>中的<code>requestHandler</code>，<code>this</code>应该是一个函数<code>(request, response) =&gt; &#123;&#125;</code>，下面介绍 express 如何改造这个函数。</p>
+<h4 id="first-step"><a href="#first-step" class="headerlink" title="first step"></a>first step</h4><p>express 方法就是 <code>express.js</code> 中的 createApplication 方法，该方法返回了一个函数，即<code>requestHandler</code>。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// express.js</span></span><br><span class="line"><span class="keyword">var</span> proto = <span class="built_in">require</span>(<span class="string">&quot;./application&quot;</span>);</span><br><span class="line"><span class="keyword">var</span> req = <span class="built_in">require</span>(<span class="string">&quot;./request&quot;</span>);</span><br><span class="line"><span class="keyword">var</span> res = <span class="built_in">require</span>(<span class="string">&quot;./response&quot;</span>);</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">createApplication</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> app = <span class="function"><span class="keyword">function</span>(<span class="params">req, res, next</span>) </span>&#123;</span><br><span class="line">    app.handle(req, res, next);</span><br><span class="line">  &#125;;</span><br><span class="line">  mixin(app, EventEmitter.prototype, <span class="literal">false</span>);</span><br><span class="line">  <span class="comment">// 混入 application 中的属性，其中包括 app.handle 、app.init、app.get、app.listen</span></span><br><span class="line">  mixin(app, proto, <span class="literal">false</span>);</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 暴露增强后的 req 对象，会在 middleware/init.js 中被用到</span></span><br><span class="line">  app.request = <span class="built_in">Object</span>.create(req, &#123;</span><br><span class="line">    <span class="attr">app</span>: &#123; <span class="attr">configurable</span>: <span class="literal">true</span>, <span class="attr">enumerable</span>: <span class="literal">true</span>, <span class="attr">writable</span>: <span class="literal">true</span>, <span class="attr">value</span>: app &#125;</span><br><span class="line">  &#125;);</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 暴露增强后的 res 对象，会在 middleware/init.js 中被用到</span></span><br><span class="line">  app.response = <span class="built_in">Object</span>.create(res, &#123;</span><br><span class="line">    <span class="attr">app</span>: &#123; <span class="attr">configurable</span>: <span class="literal">true</span>, <span class="attr">enumerable</span>: <span class="literal">true</span>, <span class="attr">writable</span>: <span class="literal">true</span>, <span class="attr">value</span>: app &#125;</span><br><span class="line">  &#125;);</span><br><span class="line">  <span class="comment">// app.init 内部调用 app.defaultConfiguration ，初始化配置项</span></span><br><span class="line">  app.init();</span><br><span class="line">  <span class="keyword">return</span> app;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// application.js</span></span><br><span class="line">app.init = <span class="function"><span class="keyword">function</span> <span class="title">init</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="built_in">this</span>.cache = &#123;&#125;; <span class="comment">// 存储缓存的对象</span></span><br><span class="line">  <span class="built_in">this</span>.engines = &#123;&#125;; <span class="comment">// 存储模板引擎中扩展名和渲染函数的对应关系</span></span><br><span class="line">  <span class="built_in">this</span>.settings = &#123;&#125;; <span class="comment">// 存储 app.set 和 app.get 处理的对象</span></span><br><span class="line">  <span class="comment">// 设置默认的配置项</span></span><br><span class="line">  <span class="built_in">this</span>.defaultConfiguration();</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<h4 id="second-step"><a href="#second-step" class="headerlink" title="second step"></a>second step</h4><p>app.get 方法在 <code>application.js</code> 中被定义。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// application.js</span></span><br><span class="line"><span class="keyword">var</span> methods = <span class="built_in">require</span>(<span class="string">&quot;methods&quot;</span>);</span><br><span class="line"><span class="keyword">var</span> Router = <span class="built_in">require</span>(<span class="string">&quot;./router&quot;</span>);</span><br><span class="line"><span class="keyword">var</span> middleware = <span class="built_in">require</span>(<span class="string">&quot;./middleware/init&quot;</span>);</span><br><span class="line"><span class="keyword">var</span> query = <span class="built_in">require</span>(<span class="string">&quot;./middleware/query&quot;</span>);</span><br><span class="line"></span><br><span class="line">methods.forEach(<span class="function"><span class="keyword">function</span>(<span class="params">method</span>) </span>&#123;</span><br><span class="line">  app[method] = <span class="function"><span class="keyword">function</span>(<span class="params">path</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (method === <span class="string">&quot;get&quot;</span> &amp;&amp; <span class="built_in">arguments</span>.length === <span class="number">1</span>) &#123;</span><br><span class="line">      <span class="comment">// app.get(setting)</span></span><br><span class="line">      <span class="keyword">return</span> <span class="built_in">this</span>.set(path);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="built_in">this</span>.lazyrouter();</span><br><span class="line"></span><br><span class="line">    <span class="keyword">var</span> route = <span class="built_in">this</span>._router.route(path);</span><br><span class="line">    route[method].apply(route, slice.call(<span class="built_in">arguments</span>, <span class="number">1</span>));</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">this</span>;</span><br><span class="line">  &#125;;</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="comment">// lazily adds the base router if it has not yet been added.</span></span><br><span class="line">app.lazyrouter = <span class="function"><span class="keyword">function</span> <span class="title">lazyrouter</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">if</span> (!<span class="built_in">this</span>._router) &#123;</span><br><span class="line">    <span class="built_in">this</span>._router = <span class="keyword">new</span> Router(&#123;</span><br><span class="line">      <span class="attr">caseSensitive</span>: <span class="built_in">this</span>.enabled(<span class="string">&quot;case sensitive routing&quot;</span>),</span><br><span class="line">      <span class="attr">strict</span>: <span class="built_in">this</span>.enabled(<span class="string">&quot;strict routing&quot;</span>)</span><br><span class="line">    &#125;);</span><br><span class="line"></span><br><span class="line">    <span class="built_in">this</span>._router.use(query(<span class="built_in">this</span>.get(<span class="string">&quot;query parser fn&quot;</span>)));</span><br><span class="line">    <span class="built_in">this</span>._router.use(middleware.init(<span class="built_in">this</span>));</span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// router/index.js</span></span><br><span class="line"><span class="keyword">var</span> Layer = <span class="built_in">require</span>(<span class="string">&quot;./layer&quot;</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// app.use 的实质</span></span><br><span class="line">proto.use = <span class="function"><span class="keyword">function</span> <span class="title">use</span>(<span class="params">fn</span>) </span>&#123;</span><br><span class="line">  <span class="comment">// ... 省略部分代码</span></span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; callbacks.length; i++) &#123;</span><br><span class="line">    <span class="keyword">var</span> fn = callbacks[i];</span><br><span class="line">    <span class="keyword">var</span> layer = <span class="keyword">new</span> Layer(</span><br><span class="line">      path,</span><br><span class="line">      &#123;</span><br><span class="line">        <span class="attr">sensitive</span>: <span class="built_in">this</span>.caseSensitive,</span><br><span class="line">        <span class="attr">strict</span>: <span class="literal">false</span>,</span><br><span class="line">        <span class="attr">end</span>: <span class="literal">false</span></span><br><span class="line">      &#125;,</span><br><span class="line">      fn</span><br><span class="line">    );</span><br><span class="line">    layer.route = <span class="literal">undefined</span>;</span><br><span class="line">    <span class="comment">// 将 layer 对象推入 stack 中管理</span></span><br><span class="line">    <span class="built_in">this</span>.stack.push(layer);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">return</span> <span class="built_in">this</span>;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>一个 Layer 对象包含一个路径和回调，它会把路径正则表达式化，在响应请求时用来匹配路径。在<code>app.lazyrouter</code>方法里添加了一个中间件<code>middleware.init(this)</code>，重新设置了 req 和 res 的原型，增加了许多方法，详见<code>request.js</code>和<code>response.js</code>。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// request.js</span></span><br><span class="line"><span class="keyword">var</span> req = <span class="built_in">Object</span>.create(http.IncomingMessage.prototype);</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// response.js</span></span><br><span class="line"><span class="keyword">var</span> res = <span class="built_in">Object</span>.create(http.ServerResponse.prototype);</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// middleware/init.js</span></span><br><span class="line"><span class="built_in">exports</span>.init = <span class="function"><span class="keyword">function</span>(<span class="params">app</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="function"><span class="keyword">function</span> <span class="title">expressInit</span>(<span class="params">req, res, next</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (app.enabled(<span class="string">&quot;x-powered-by&quot;</span>)) res.setHeader(<span class="string">&quot;X-Powered-By&quot;</span>, <span class="string">&quot;Express&quot;</span>);</span><br><span class="line">    req.res = res;</span><br><span class="line">    res.req = req;</span><br><span class="line">    req.next = next;</span><br><span class="line"></span><br><span class="line">    setPrototypeOf(req, app.request);</span><br><span class="line">    setPrototypeOf(res, app.response);</span><br><span class="line"></span><br><span class="line">    res.locals = res.locals || <span class="built_in">Object</span>.create(<span class="literal">null</span>);</span><br><span class="line"></span><br><span class="line">    next();</span><br><span class="line">  &#125;;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<h4 id="响应请求阶段"><a href="#响应请求阶段" class="headerlink" title="响应请求阶段"></a>响应请求阶段</h4><p><code>app.handle</code> 实质上是调用了自身 router 的 handle，<code>router.handle</code> 遍历 router 维护的 stack 数组，找到匹配路径的 layer 对象。对于中间件 layer（<code>layer.route</code> 为 <code>undefined</code>），匹配成功后就执行中间件函数；对于路由 layer（<code>layer.route</code> 不是 <code>undefined</code>），匹配成功后还需要匹配 http method 才能执行路由函数。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// router/index.js</span></span><br><span class="line">proto.handle = <span class="function"><span class="keyword">function</span> <span class="title">handle</span>(<span class="params">req, res, out</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> self = <span class="built_in">this</span>;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">var</span> idx = <span class="number">0</span>;</span><br><span class="line">  <span class="keyword">var</span> protohost = getProtohost(req.url) || <span class="string">&quot;&quot;</span>;</span><br><span class="line">  <span class="keyword">var</span> removed = <span class="string">&quot;&quot;</span>;</span><br><span class="line">  <span class="keyword">var</span> slashAdded = <span class="literal">false</span>;</span><br><span class="line">  <span class="keyword">var</span> paramcalled = &#123;&#125;;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// store options for OPTIONS request</span></span><br><span class="line">  <span class="comment">// only used if OPTIONS request</span></span><br><span class="line">  <span class="keyword">var</span> options = [];</span><br><span class="line"></span><br><span class="line">  <span class="comment">// middleware and routes</span></span><br><span class="line">  <span class="keyword">var</span> stack = self.stack;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// manage inter-router variables</span></span><br><span class="line">  <span class="keyword">var</span> parentParams = req.params;</span><br><span class="line">  <span class="keyword">var</span> parentUrl = req.baseUrl || <span class="string">&quot;&quot;</span>;</span><br><span class="line">  <span class="keyword">var</span> done = restore(out, req, <span class="string">&quot;baseUrl&quot;</span>, <span class="string">&quot;next&quot;</span>, <span class="string">&quot;params&quot;</span>);</span><br><span class="line"></span><br><span class="line">  <span class="comment">// setup next layer</span></span><br><span class="line">  req.next = next;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// for options requests, respond with a default if nothing else responds</span></span><br><span class="line">  <span class="keyword">if</span> (req.method === <span class="string">&quot;OPTIONS&quot;</span>) &#123;</span><br><span class="line">    done = wrap(done, <span class="function"><span class="keyword">function</span>(<span class="params">old, err</span>) </span>&#123;</span><br><span class="line">      <span class="keyword">if</span> (err || options.length === <span class="number">0</span>) <span class="keyword">return</span> old(err);</span><br><span class="line">      sendOptionsResponse(res, options, old);</span><br><span class="line">    &#125;);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// setup basic req values</span></span><br><span class="line">  req.baseUrl = parentUrl;</span><br><span class="line">  req.originalUrl = req.originalUrl || req.url;</span><br><span class="line"></span><br><span class="line">  next();</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">function</span> <span class="title">next</span>(<span class="params">err</span>) </span>&#123;</span><br><span class="line">    <span class="comment">// ... 在下面介绍</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>next 函数内部有个 while 循环，每次循环都会从 stack 中拿出一个 layer，这个 layer 中包含了路由和中间件信息，然后就会用 layer 和请求的 path 进行匹配，如果匹配成功就会执行 layer.handle_request，调用中间件函数。但如果匹配失败，就会循环下一个 layer 对象。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// router/index.js</span></span><br><span class="line"><span class="comment">// ... 省略部分代码</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">next</span>(<span class="params">err</span>) </span>&#123;</span><br><span class="line">  <span class="comment">// 拿到当前的访问路径</span></span><br><span class="line">  <span class="keyword">var</span> path = getPathname(req);</span><br><span class="line"></span><br><span class="line">  <span class="comment">// find next matching layer</span></span><br><span class="line">  <span class="keyword">var</span> layer;</span><br><span class="line">  <span class="keyword">var</span> match;</span><br><span class="line">  <span class="keyword">var</span> route;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">while</span> (match !== <span class="literal">true</span> &amp;&amp; idx &lt; stack.length) &#123;</span><br><span class="line">    layer = stack[idx++];</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 进行路径匹配，匹配返回 true，不匹配返回 false</span></span><br><span class="line">    match = matchLayer(layer, path);</span><br><span class="line">    route = layer.route;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (match !== <span class="literal">true</span>) &#123;</span><br><span class="line">      <span class="keyword">continue</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (!route) &#123;</span><br><span class="line">      <span class="comment">// 正常处理非路由中间件</span></span><br><span class="line">      <span class="keyword">continue</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">var</span> method = req.method;</span><br><span class="line">    <span class="keyword">var</span> has_method = route._handles_method(method);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// build up automatic options response</span></span><br><span class="line">    <span class="keyword">if</span> (!has_method &amp;&amp; method === <span class="string">&quot;OPTIONS&quot;</span>) &#123;</span><br><span class="line">      appendMethods(options, route._options());</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// don&#x27;t even bother matching route</span></span><br><span class="line">    <span class="keyword">if</span> (!has_method &amp;&amp; method !== <span class="string">&quot;HEAD&quot;</span>) &#123;</span><br><span class="line">      match = <span class="literal">false</span>;</span><br><span class="line">      <span class="keyword">continue</span>;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="comment">// ... 省略部分代码</span></span><br><span class="line">  <span class="comment">// this should be done for the layer</span></span><br><span class="line">  <span class="keyword">if</span> (err) &#123;</span><br><span class="line">    layer.handle_error(err, req, res, next);</span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    layer.handle_request(req, res, next);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="路由中间件"><a href="#路由中间件" class="headerlink" title="路由中间件"></a>路由中间件</h3><p>当请求来时，会执行 handle，循环 stack，发现 path 相同且 method 相同，则调用对应 callback。当路由不断增多，stack 数组会不断增大，匹配效率必然下降，为了提高效率，express 引入了 route ，也就是路由中间件。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 一个案例</span></span><br><span class="line"><span class="keyword">var</span> route = app</span><br><span class="line">  .route(<span class="string">&quot;/list&quot;</span>)</span><br><span class="line">  .get(<span class="function">(<span class="params">req, res</span>) =&gt;</span> &#123;</span><br><span class="line">    res.end(<span class="string">&quot;hello get&quot;</span>);</span><br><span class="line">  &#125;)</span><br><span class="line">  .post(<span class="function">(<span class="params">req, res</span>) =&gt;</span> &#123;</span><br><span class="line">    res.end(<span class="string">&quot;hello post&quot;</span>);</span><br><span class="line">  &#125;)</span><br><span class="line">  .put(<span class="function">(<span class="params">req, res</span>) =&gt;</span> &#123;</span><br><span class="line">    res.end(<span class="string">&quot;hello put&quot;</span>);</span><br><span class="line">  &#125;)</span><br><span class="line">  .delete(<span class="function">(<span class="params">req, res</span>) =&gt;</span> &#123;</span><br><span class="line">    res.end(<span class="string">&quot;hello delete&quot;</span>);</span><br><span class="line">  &#125;);</span><br><span class="line">app.use(<span class="string">&quot;/&quot;</span>, routers);</span><br></pre></td></tr></table></figure>
+
+<p><code>app.route</code>在<code>application.js</code>中被定义，内部调用了 router 的 route 方法。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// router/index.js</span></span><br><span class="line"><span class="keyword">var</span> Route = <span class="built_in">require</span>(<span class="string">&quot;./route&quot;</span>);</span><br><span class="line"></span><br><span class="line">proto.route = <span class="function"><span class="keyword">function</span> <span class="title">route</span>(<span class="params">path</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> route = <span class="keyword">new</span> Route(path);</span><br><span class="line">  <span class="comment">// 把 route 里面的 dispatch 方法作为 Layer 的处理函数</span></span><br><span class="line">  <span class="keyword">var</span> layer = <span class="keyword">new</span> Layer(</span><br><span class="line">    path,</span><br><span class="line">    &#123;</span><br><span class="line">      <span class="attr">sensitive</span>: <span class="built_in">this</span>.caseSensitive,</span><br><span class="line">      <span class="attr">strict</span>: <span class="built_in">this</span>.strict,</span><br><span class="line">      <span class="attr">end</span>: <span class="literal">true</span></span><br><span class="line">    &#125;,</span><br><span class="line">    route.dispatch.bind(route)</span><br><span class="line">  );</span><br><span class="line"></span><br><span class="line">  layer.route = route;</span><br><span class="line"></span><br><span class="line">  <span class="built_in">this</span>.stack.push(layer);</span><br><span class="line">  <span class="comment">// 返回route实例，用于链式调用，注册 method 方法</span></span><br><span class="line">  <span class="keyword">return</span> route;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>当 layer 的路径匹配成功，就会交给 route 来匹配 method，route 存放了所有注册的方法名，可以快速匹配是否有注册该方法，如果有则执行回调函数。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// router/route.js</span></span><br><span class="line">Route.prototype.dispatch = <span class="function"><span class="keyword">function</span> <span class="title">dispatch</span>(<span class="params">req, res, done</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> idx = <span class="number">0</span>;</span><br><span class="line">  <span class="keyword">var</span> stack = <span class="built_in">this</span>.stack;</span><br><span class="line">  <span class="keyword">if</span> (stack.length === <span class="number">0</span>) &#123;</span><br><span class="line">    <span class="keyword">return</span> done();</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">var</span> method = req.method.toLowerCase();</span><br><span class="line">  <span class="keyword">if</span> (method === <span class="string">&quot;head&quot;</span> &amp;&amp; !<span class="built_in">this</span>.methods[<span class="string">&quot;head&quot;</span>]) &#123;</span><br><span class="line">    method = <span class="string">&quot;get&quot;</span>;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  req.route = <span class="built_in">this</span>;</span><br><span class="line"></span><br><span class="line">  next();</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">function</span> <span class="title">next</span>(<span class="params">err</span>) </span>&#123;</span><br><span class="line">    <span class="comment">// 处理退出 route 信号</span></span><br><span class="line">    <span class="keyword">if</span> (err &amp;&amp; err === <span class="string">&quot;route&quot;</span>) &#123;</span><br><span class="line">      <span class="keyword">return</span> done();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 处理退出 router 信号</span></span><br><span class="line">    <span class="keyword">if</span> (err &amp;&amp; err === <span class="string">&quot;router&quot;</span>) &#123;</span><br><span class="line">      <span class="keyword">return</span> done(err);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 通过递归调用 next，遍历 stack</span></span><br><span class="line">    <span class="keyword">var</span> layer = stack[idx++];</span><br><span class="line">    <span class="keyword">if</span> (!layer) &#123;</span><br><span class="line">      <span class="keyword">return</span> done(err);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (layer.method &amp;&amp; layer.method !== method) &#123;</span><br><span class="line">      <span class="keyword">return</span> next(err);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (err) &#123;</span><br><span class="line">      layer.handle_error(err, req, res, next);</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      layer.handle_request(req, res, next);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p><code>next(err)</code>将控制权传递到错误处理中间件，当调用<code>next(err)</code>时，实质是调用<code>layer.handle_error</code>，如果 fn 的参数不足 4 个，认为不是一个标准的错误处理中间件，则继续调用<code>next(err)</code>，直到参数达到 4 个，执行错误处理中间件。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// router/layer.js</span></span><br><span class="line">Layer.prototype.handle_request = <span class="function"><span class="keyword">function</span> <span class="title">handle</span>(<span class="params">req, res, next</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> fn = <span class="built_in">this</span>.handle; <span class="comment">// 回调函数</span></span><br><span class="line"></span><br><span class="line">  <span class="keyword">if</span> (fn.length &gt; <span class="number">3</span>) &#123;</span><br><span class="line">    <span class="comment">// 形参数量大于 3，则认为不是一个标准的 requestHandler，调用 next 去查找下一个 layer</span></span><br><span class="line">    <span class="keyword">return</span> next();</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">try</span> &#123;</span><br><span class="line">    <span class="comment">// 执行标准的 requestHandler</span></span><br><span class="line">    fn(req, res, next);</span><br><span class="line">  &#125; <span class="keyword">catch</span> (err) &#123;</span><br><span class="line">    next(err);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line">Layer.prototype.handle_error = <span class="function"><span class="keyword">function</span> <span class="title">handle_error</span>(<span class="params">error, req, res, next</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> fn = <span class="built_in">this</span>.handle; <span class="comment">// 中间件函数</span></span><br><span class="line"></span><br><span class="line">  <span class="keyword">if</span> (fn.length !== <span class="number">4</span>) &#123;</span><br><span class="line">    <span class="keyword">return</span> next(error);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">try</span> &#123;</span><br><span class="line">    fn(error, req, res, next);</span><br><span class="line">  &#125; <span class="keyword">catch</span> (err) &#123;</span><br><span class="line">    next(err);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<h3 id="模板渲染"><a href="#模板渲染" class="headerlink" title="模板渲染"></a>模板渲染</h3><p>下面是使用模板引擎的写法。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 指定模板文件所在目录</span></span><br><span class="line">app.set(<span class="string">&quot;views&quot;</span>, <span class="string">&quot;./views&quot;</span>);</span><br><span class="line"><span class="comment">// 指定要使用的模板引擎</span></span><br><span class="line">app.set(<span class="string">&quot;view engine&quot;</span>, <span class="string">&quot;pug&quot;</span>);</span><br><span class="line">app.get(<span class="string">&quot;/&quot;</span>, <span class="function"><span class="keyword">function</span>(<span class="params">req, res</span>) </span>&#123;</span><br><span class="line">  res.render(<span class="string">&quot;home&quot;</span>, &#123; <span class="attr">title</span>: <span class="string">&quot;Hey&quot;</span>, <span class="attr">message</span>: <span class="string">&quot;Hello there!&quot;</span> &#125;);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<p><code>res.render</code>实际调用的是<code>app.render</code>，内部创建 View 实例，并调用<code>view.render(options, callback)</code>。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// response.js</span></span><br><span class="line">res.render = <span class="function"><span class="keyword">function</span> <span class="title">render</span>(<span class="params">view, options, callback</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> app = <span class="built_in">this</span>.req.app;</span><br><span class="line">  <span class="keyword">var</span> opts = options || &#123;&#125;;</span><br><span class="line">  <span class="keyword">var</span> done = callback;</span><br><span class="line">  <span class="comment">//  ...省略部分代码</span></span><br><span class="line">  <span class="comment">// default callback to respond</span></span><br><span class="line">  done =</span><br><span class="line">    done ||</span><br><span class="line">    <span class="function"><span class="keyword">function</span>(<span class="params">err, str</span>) </span>&#123;</span><br><span class="line">      <span class="keyword">if</span> (err) <span class="keyword">return</span> req.next(err);</span><br><span class="line">      self.send(str);</span><br><span class="line">    &#125;;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// render</span></span><br><span class="line">  app.render(view, opts, done);</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// application.js</span></span><br><span class="line">app.render = <span class="function"><span class="keyword">function</span> <span class="title">render</span>(<span class="params">name, options, callback</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> cache = <span class="built_in">this</span>.cache;</span><br><span class="line">  <span class="keyword">var</span> done = callback;</span><br><span class="line">  <span class="keyword">var</span> engines = <span class="built_in">this</span>.engines;</span><br><span class="line">  <span class="keyword">var</span> opts = options;</span><br><span class="line">  <span class="keyword">var</span> renderOptions = &#123;&#125;;</span><br><span class="line">  <span class="keyword">var</span> view;</span><br><span class="line">  <span class="comment">//  ...省略部分代码</span></span><br><span class="line">  <span class="keyword">if</span> (!view) &#123;</span><br><span class="line">    <span class="keyword">var</span> View = <span class="built_in">this</span>.get(<span class="string">&quot;view&quot;</span>);</span><br><span class="line"></span><br><span class="line">    view = <span class="keyword">new</span> View(name, &#123;</span><br><span class="line">      <span class="attr">defaultEngine</span>: <span class="built_in">this</span>.get(<span class="string">&quot;view engine&quot;</span>),</span><br><span class="line">      <span class="attr">root</span>: <span class="built_in">this</span>.get(<span class="string">&quot;views&quot;</span>),</span><br><span class="line">      <span class="attr">engines</span>: engines</span><br><span class="line">    &#125;);</span><br><span class="line"></span><br><span class="line">    <span class="comment">// prime the cache</span></span><br><span class="line">    <span class="keyword">if</span> (renderOptions.cache) &#123;</span><br><span class="line">      cache[name] = view;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// render</span></span><br><span class="line">  tryRender(view, renderOptions, done);</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">tryRender</span>(<span class="params">view, options, callback</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">try</span> &#123;</span><br><span class="line">    view.render(options, callback);</span><br><span class="line">  &#125; <span class="keyword">catch</span> (err) &#123;</span><br><span class="line">    callback(err);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// view.js</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">View</span>(<span class="params">name, options</span>) </span>&#123;</span><br><span class="line">  <span class="comment">//  ...省略部分代码</span></span><br><span class="line">  <span class="keyword">var</span> opts = options || &#123;&#125;;</span><br><span class="line">  <span class="built_in">this</span>.ext = extname(name);</span><br><span class="line">  <span class="comment">// 如果对应后缀的模板引擎没有被注册</span></span><br><span class="line">  <span class="keyword">if</span> (!opts.engines[<span class="built_in">this</span>.ext]) &#123;</span><br><span class="line">    <span class="keyword">var</span> mod = <span class="built_in">this</span>.ext.substr(<span class="number">1</span>);</span><br><span class="line">    <span class="comment">// 使用 require() 去加载没有被注册的模板引擎</span></span><br><span class="line">    <span class="keyword">var</span> fn = <span class="built_in">require</span>(mod).__express;</span><br><span class="line">    <span class="keyword">if</span> (<span class="keyword">typeof</span> fn !== <span class="string">&quot;function&quot;</span>) &#123;</span><br><span class="line">      <span class="keyword">throw</span> <span class="keyword">new</span> <span class="built_in">Error</span>(<span class="string">&#x27;Module &quot;&#x27;</span> + mod + <span class="string">&#x27;&quot; does not provide a view engine.&#x27;</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 注册模板引擎</span></span><br><span class="line">    opts.engines[<span class="built_in">this</span>.ext] = fn;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="comment">// 保存需要的模板引擎</span></span><br><span class="line">  <span class="built_in">this</span>.engine = opts.engines[<span class="built_in">this</span>.ext];</span><br><span class="line">  <span class="comment">// 拿到文件的绝对路径</span></span><br><span class="line">  <span class="built_in">this</span>.path = <span class="built_in">this</span>.lookup(fileName);</span><br><span class="line">&#125;</span><br><span class="line">View.prototype.render = <span class="function"><span class="keyword">function</span> <span class="title">render</span>(<span class="params">options, callback</span>) </span>&#123;</span><br><span class="line">  <span class="comment">// 调用模板引擎的函数，调用完就执行 callback</span></span><br><span class="line">  <span class="built_in">this</span>.engine(<span class="built_in">this</span>.path, options, callback);</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Node-js/" rel="tag"># Node.js</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2019/03/11/Promise%E5%AE%9E%E7%8E%B0/" rel="prev" title="Promise实现">
+                  <i class="fa fa-chevron-left"></i> Promise实现
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2019/03/19/Koa%E6%BA%90%E7%A0%81%E5%AD%A6%E4%B9%A0/" rel="next" title="Koa源码学习">
+                  Koa源码学习 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Hank</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" rel="noopener" target="_blank">NexT.Muse</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script>
+
+  
+<script src="https://cdn.jsdelivr.net/npm/algoliasearch@4.11.0/dist/algoliasearch-lite.umd.js" integrity="sha256-48AZ24Ct05NAMLT7hvYgeW1X350OgEcZvHd6Ih6xwOA=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/instantsearch.js@4.33.2/dist/instantsearch.production.min.js" integrity="sha256-0B5Q7I/DVd8yp8JYLzbpELEonNBlVe7NLixMCLEnlBU=" crossorigin="anonymous"></script><script src="/js/third-party/search/algolia-search.js"></script>
+
+
+
+
+
+  
+
+
+
+
+
+</body>
+</html>

@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.0.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.4/css/all.min.css" integrity="sha256-mUZM63G8m73Mcidfrv5E+Y61y7a12O5mW4ezU3bxqW4=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"hangermeng.top","root":"/","images":"/images","scheme":"Muse","darkmode":false,"version":"8.8.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"},"algolia":{"appID":"ZV0EGDRD8C","apiKey":"01ab18713b33dcc47e43484208996a80","indexName":"hexo_hamger","hits":{"per_page":10}}}</script><script src="/js/config.js"></script>
+<meta name="description" content="列表推导式1[表达式 for 迭代变量 in 可迭代对象 [if 条件表达式]]  例子12345678910111213141516171819bb &#x3D; [0] * 3print(bb)# [0, 0, 0]m &#x3D; range(3)a_list &#x3D; [x * x for x in m]print(a_list)# [0, 1, 4]m, n &#x3D; 3, 4 dist &#x3D; [[0] * m for">
+<meta property="og:type" content="article">
+<meta property="og:title" content="python 学习笔记">
+<meta property="og:url" content="https://hangermeng.top/2021/09/13/python-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/index.html">
+<meta property="og:site_name" content="Hank&#39;s Blog">
+<meta property="og:description" content="列表推导式1[表达式 for 迭代变量 in 可迭代对象 [if 条件表达式]]  例子12345678910111213141516171819bb &#x3D; [0] * 3print(bb)# [0, 0, 0]m &#x3D; range(3)a_list &#x3D; [x * x for x in m]print(a_list)# [0, 1, 4]m, n &#x3D; 3, 4 dist &#x3D; [[0] * m for">
+<meta property="og:locale">
+<meta property="article:published_time" content="2021-09-13T08:03:38.000Z">
+<meta property="article:modified_time" content="2022-02-10T09:38:19.399Z">
+<meta property="article:author" content="Hank">
+<meta property="article:tag" content="python">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://hangermeng.top/2021/09/13/python-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-Hans","comments":true,"permalink":"https://hangermeng.top/2021/09/13/python-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/","path":"2021/09/13/python-学习笔记/","title":"python 学习笔记"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>python 学习笔记 | Hank's Blog</title>
+  
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Hank's Blog</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">耕种思考的自留地</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu">
+        <li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a></li>
+        <li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a></li>
+        <li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a></li>
+        <li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container"></div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container">
+  <div class="algolia-stats"><hr></div>
+  <div class="algolia-hits"></div>
+  <div class="algolia-pagination"></div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%97%E8%A1%A8%E6%8E%A8%E5%AF%BC%E5%BC%8F"><span class="nav-number">1.</span> <span class="nav-text">列表推导式</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BE%8B%E5%AD%90"><span class="nav-number">1.1.</span> <span class="nav-text">例子</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%95%B0%E5%AD%97%E5%8F%96%E6%95%B4"><span class="nav-number">2.</span> <span class="nav-text">数字取整</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#nums1-A-%E5%92%8C-nums1-A"><span class="nav-number">3.</span> <span class="nav-text">nums1 &#x3D; A 和 nums1[:] &#x3D; A</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Hank"
+      src="/images/avatar.jpg">
+  <p class="site-author-name" itemprop="name">Hank</p>
+  <div class="site-description" itemprop="description">Learning progress and good health</div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">125</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">35</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author site-overview-item animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/hamger" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;hamger" rel="noopener" target="_blank"><i class="github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:2313303800@qq.com" title="E-Mail → mailto:2313303800@qq.com" rel="noopener" target="_blank"><i class="envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="https://hangermeng.top/2021/09/13/python-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="Hank">
+      <meta itemprop="description" content="Learning progress and good health">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hank's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          python 学习笔记
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2021-09-13 16:03:38" itemprop="dateCreated datePublished" datetime="2021-09-13T16:03:38+08:00">2021-09-13</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2022-02-10 17:38:19" itemprop="dateModified" datetime="2022-02-10T17:38:19+08:00">2022-02-10</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <h3 id="列表推导式"><a href="#列表推导式" class="headerlink" title="列表推导式"></a>列表推导式</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[表达式 <span class="keyword">for</span> 迭代变量 <span class="keyword">in</span> 可迭代对象 [<span class="keyword">if</span> 条件表达式]]</span><br></pre></td></tr></table></figure>
+
+<h4 id="例子"><a href="#例子" class="headerlink" title="例子"></a>例子</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">bb = [<span class="number">0</span>] * <span class="number">3</span></span><br><span class="line"><span class="built_in">print</span>(bb)</span><br><span class="line"><span class="comment"># [0, 0, 0]</span></span><br><span class="line"></span><br><span class="line">m = <span class="built_in">range</span>(<span class="number">3</span>)</span><br><span class="line">a_list = [x * x <span class="keyword">for</span> x <span class="keyword">in</span> m]</span><br><span class="line"><span class="built_in">print</span>(a_list)</span><br><span class="line"><span class="comment"># [0, 1, 4]</span></span><br><span class="line"></span><br><span class="line">m, n = <span class="number">3</span>, <span class="number">4</span> </span><br><span class="line">dist = [[<span class="number">0</span>] * m <span class="keyword">for</span> _ <span class="keyword">in</span> <span class="built_in">range</span>(n)]</span><br><span class="line"><span class="built_in">print</span>(dist)</span><br><span class="line"><span class="comment"># [[0, 0, 0], [0, 0, 0], [0, 0, 0], [0, 0, 0]]</span></span><br><span class="line"></span><br><span class="line">zeroes_pos = [(i, j) <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(m) <span class="keyword">for</span> j <span class="keyword">in</span> <span class="built_in">range</span>(n)]</span><br><span class="line"><span class="built_in">print</span>(zeroes_pos)</span><br><span class="line"><span class="comment"># [(0, 0), (0, 1), (0, 2), (0, 3), (1, 0), (1, 1), (1, 2), (1, 3), (2, 0), (2, 1), (2, 2), (2, 3)]</span></span><br><span class="line"><span class="built_in">print</span>([(i, j) <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(m) <span class="keyword">for</span> j <span class="keyword">in</span> <span class="built_in">range</span>(n) <span class="keyword">if</span> (i + j) % <span class="number">2</span> == <span class="number">0</span>])</span><br><span class="line"><span class="comment"># [(0, 0), (0, 2), (1, 1), (1, 3), (2, 0), (2, 2)]</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="数字取整"><a href="#数字取整" class="headerlink" title="数字取整"></a>数字取整</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> math</span><br><span class="line">a = <span class="number">3.5</span></span><br><span class="line"><span class="comment"># 取整整数位</span></span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">int</span>(a))</span><br><span class="line"></span><br><span class="line"><span class="comment"># 四舍五入</span></span><br><span class="line"><span class="built_in">print</span>(<span class="built_in">round</span>(a))</span><br><span class="line"></span><br><span class="line"><span class="comment"># 向下取整</span></span><br><span class="line"><span class="built_in">print</span>(math.floor(a))</span><br><span class="line"></span><br><span class="line"><span class="comment"># 向上取整</span></span><br><span class="line"><span class="built_in">print</span>(math.ceil(a))</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>math 包含的方法： <a target="_blank" rel="noopener" href="https://docs.python.org/zh-cn/3.8/library/math.html">https://docs.python.org/zh-cn/3.8/library/math.html</a></p>
+</blockquote>
+<h3 id="nums1-A-和-nums1-A"><a href="#nums1-A-和-nums1-A" class="headerlink" title="nums1 = A 和 nums1[:] = A"></a>nums1 = A 和 nums1[:] = A</h3><p><code>nums1 = A</code>:更改 nums1 这一变量名所指向的对象。让 nums1 变量指向 A 所指向的对象</p>
+<p><code>nums1[:] = A</code>:对 nums1 指向的对象赋值。把 A 变量指向的对象的值逐个 copy 到 nums1 指向的对象中并覆盖 nums1 指向的对象的原来值。</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/python/" rel="tag"># python</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2021/08/31/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/" rel="prev" title="动态规划">
+                  <i class="fa fa-chevron-left"></i> 动态规划
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2021/12/30/%E7%BD%AA%E4%B8%8E%E7%BD%9A-%E5%B0%8F%E8%AE%B0/" rel="next" title="<罪与罚>小记">
+                  <罪与罚>小记 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Hank</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" rel="noopener" target="_blank">NexT.Muse</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script>
+
+  
+<script src="https://cdn.jsdelivr.net/npm/algoliasearch@4.11.0/dist/algoliasearch-lite.umd.js" integrity="sha256-48AZ24Ct05NAMLT7hvYgeW1X350OgEcZvHd6Ih6xwOA=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/instantsearch.js@4.33.2/dist/instantsearch.production.min.js" integrity="sha256-0B5Q7I/DVd8yp8JYLzbpELEonNBlVe7NLixMCLEnlBU=" crossorigin="anonymous"></script><script src="/js/third-party/search/algolia-search.js"></script>
+
+
+
+
+
+  
+
+
+
+
+
+</body>
+</html>

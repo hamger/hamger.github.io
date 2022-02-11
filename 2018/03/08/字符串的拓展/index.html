@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.0.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.4/css/all.min.css" integrity="sha256-mUZM63G8m73Mcidfrv5E+Y61y7a12O5mW4ezU3bxqW4=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"hangermeng.top","root":"/","images":"/images","scheme":"Muse","darkmode":false,"version":"8.8.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"},"algolia":{"appID":"ZV0EGDRD8C","apiKey":"01ab18713b33dcc47e43484208996a80","indexName":"hexo_hamger","hits":{"per_page":10}}}</script><script src="/js/config.js"></script>
+<meta name="description" content="ES6 加强了对 Unicode 的支持，并且扩展了字符串对象。ES6 为字符串添加了遍历器接口，使得字符串可以被for...of循环遍历。 123456for (let codePoint of &amp;#x27;foo&amp;#x27;) &amp;#123;  console.log(codePoint)&amp;#125;&#x2F;&#x2F; &quot;f&quot;&#x2F;&#x2F; &quot;o&quot;&#x2F;&#x2F; &quot;o&quot;">
+<meta property="og:type" content="article">
+<meta property="og:title" content="字符串的拓展">
+<meta property="og:url" content="https://hangermeng.top/2018/03/08/%E5%AD%97%E7%AC%A6%E4%B8%B2%E7%9A%84%E6%8B%93%E5%B1%95/index.html">
+<meta property="og:site_name" content="Hank&#39;s Blog">
+<meta property="og:description" content="ES6 加强了对 Unicode 的支持，并且扩展了字符串对象。ES6 为字符串添加了遍历器接口，使得字符串可以被for...of循环遍历。 123456for (let codePoint of &amp;#x27;foo&amp;#x27;) &amp;#123;  console.log(codePoint)&amp;#125;&#x2F;&#x2F; &quot;f&quot;&#x2F;&#x2F; &quot;o&quot;&#x2F;&#x2F; &quot;o&quot;">
+<meta property="og:locale">
+<meta property="article:published_time" content="2018-03-08T14:58:01.000Z">
+<meta property="article:modified_time" content="2022-02-10T09:38:19.405Z">
+<meta property="article:author" content="Hank">
+<meta property="article:tag" content="ES6">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://hangermeng.top/2018/03/08/%E5%AD%97%E7%AC%A6%E4%B8%B2%E7%9A%84%E6%8B%93%E5%B1%95/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-Hans","comments":true,"permalink":"https://hangermeng.top/2018/03/08/%E5%AD%97%E7%AC%A6%E4%B8%B2%E7%9A%84%E6%8B%93%E5%B1%95/","path":"2018/03/08/字符串的拓展/","title":"字符串的拓展"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>字符串的拓展 | Hank's Blog</title>
+  
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Hank's Blog</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">耕种思考的自留地</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu">
+        <li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a></li>
+        <li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a></li>
+        <li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a></li>
+        <li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container"></div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container">
+  <div class="algolia-stats"><hr></div>
+  <div class="algolia-hits"></div>
+  <div class="algolia-pagination"></div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#charAt"><span class="nav-number">1.</span> <span class="nav-text">charAt()</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#repeat"><span class="nav-number">2.</span> <span class="nav-text">repeat()</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#padStart-padEnd"><span class="nav-number">3.</span> <span class="nav-text">padStart(), padEnd()</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#includes-startsWith-endsWith"><span class="nav-number">4.</span> <span class="nav-text">includes(), startsWith(), endsWith()</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Hank"
+      src="/images/avatar.jpg">
+  <p class="site-author-name" itemprop="name">Hank</p>
+  <div class="site-description" itemprop="description">Learning progress and good health</div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">125</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">35</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author site-overview-item animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/hamger" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;hamger" rel="noopener" target="_blank"><i class="github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:2313303800@qq.com" title="E-Mail → mailto:2313303800@qq.com" rel="noopener" target="_blank"><i class="envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="https://hangermeng.top/2018/03/08/%E5%AD%97%E7%AC%A6%E4%B8%B2%E7%9A%84%E6%8B%93%E5%B1%95/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="Hank">
+      <meta itemprop="description" content="Learning progress and good health">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hank's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          字符串的拓展
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2018-03-08 22:58:01" itemprop="dateCreated datePublished" datetime="2018-03-08T22:58:01+08:00">2018-03-08</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2022-02-10 17:38:19" itemprop="dateModified" datetime="2022-02-10T17:38:19+08:00">2022-02-10</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <p>ES6 加强了对 Unicode 的支持，并且扩展了字符串对象。<br>ES6 为字符串添加了遍历器接口，使得字符串可以被<code>for...of</code>循环遍历。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="keyword">let</span> codePoint <span class="keyword">of</span> <span class="string">&#x27;foo&#x27;</span>) &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(codePoint)</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// &quot;f&quot;</span></span><br><span class="line"><span class="comment">// &quot;o&quot;</span></span><br><span class="line"><span class="comment">// &quot;o&quot;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="charAt"><a href="#charAt" class="headerlink" title="charAt()"></a>charAt()</h3><p>ES5 对字符串对象提供<code>arAt</code>方法，返回字符串给定位置的字符。该方法不能识别码点大于<code>0xFFFF</code>的字符。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">&#x27;abc&#x27;</span>.charAt(<span class="number">0</span>) <span class="comment">// &quot;a&quot;</span></span><br><span class="line"><span class="string">&#x27;𠮷&#x27;</span>.charAt(<span class="number">0</span>) <span class="comment">// &quot;\uD842&quot;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="repeat"><a href="#repeat" class="headerlink" title="repeat()"></a>repeat()</h3><p>repeat方法返回一个新字符串，表示将原字符串重复n次。参数如果是小数，会被取整。参数不能是小于等于<code>-1</code>的负数或<code>Infinity</code>。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">&#x27;x&#x27;</span>.repeat(<span class="number">3</span>) <span class="comment">// &quot;xxx&quot;</span></span><br><span class="line"><span class="string">&#x27;hello&#x27;</span>.repeat(<span class="number">2</span>) <span class="comment">// &quot;hellohello&quot;</span></span><br><span class="line"><span class="string">&#x27;na&#x27;</span>.repeat(-<span class="number">0.9</span>) <span class="comment">// &quot;&quot;</span></span><br><span class="line"><span class="string">&#x27;na&#x27;</span>.repeat(<span class="number">2.9</span>) <span class="comment">// &quot;nana&quot;</span></span><br></pre></td></tr></table></figure>
+<span id="more"></span>
+<h3 id="padStart-padEnd"><a href="#padStart-padEnd" class="headerlink" title="padStart(), padEnd()"></a>padStart(), padEnd()</h3><p>ES2017 引入了字符串补全长度的功能。如果某个字符串不够指定长度，会在头部或尾部补全。<code>padStart()</code>用于头部补全，<code>padEnd()</code>用于尾部补全。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">&#x27;x&#x27;</span>.padStart(<span class="number">5</span>, <span class="string">&#x27;ab&#x27;</span>) <span class="comment">// &#x27;ababx&#x27;</span></span><br><span class="line"><span class="string">&#x27;xxx&#x27;</span>.padStart(<span class="number">2</span>, <span class="string">&#x27;ab&#x27;</span>) <span class="comment">// &#x27;xxx&#x27;</span></span><br><span class="line"><span class="string">&#x27;x&#x27;</span>.padEnd(<span class="number">4</span>, <span class="string">&#x27;ab&#x27;</span>) <span class="comment">// &#x27;xaba&#x27;</span></span><br><span class="line"><span class="string">&#x27;x&#x27;</span>.padEnd(<span class="number">4</span>) <span class="comment">// &#x27;x   &#x27;  省略第二个参数，会用空格补全</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="includes-startsWith-endsWith"><a href="#includes-startsWith-endsWith" class="headerlink" title="includes(), startsWith(), endsWith()"></a>includes(), startsWith(), endsWith()</h3><p>传统上，JavaScript 只有indexOf方法，可以用来确定一个字符串是否包含在另一个字符串中。ES6 又提供了三种新方法。</p>
+<ul>
+<li>includes()：返回布尔值，表示是否找到了参数字符串。</li>
+<li>startsWith()：返回布尔值，表示参数字符串是否在原字符串的头部。</li>
+<li>endsWith()：返回布尔值，表示参数字符串是否在原字符串的尾部。<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> s = <span class="string">&#x27;Hello world!&#x27;</span>;</span><br><span class="line">s.startsWith(<span class="string">&#x27;Hello&#x27;</span>) <span class="comment">// true</span></span><br><span class="line">s.endsWith(<span class="string">&#x27;!&#x27;</span>) <span class="comment">// true</span></span><br><span class="line">s.includes(<span class="string">&#x27;o&#x27;</span>) <span class="comment">// true</span></span><br></pre></td></tr></table></figure></li>
+</ul>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/ES6/" rel="tag"># ES6</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2018/03/08/%E5%8F%98%E9%87%8F%E7%9A%84%E6%9E%90%E6%9E%84%E8%B5%8B%E5%80%BC/" rel="prev" title="变量的析构赋值">
+                  <i class="fa fa-chevron-left"></i> 变量的析构赋值
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2018/03/09/React%E5%9F%BA%E7%A1%80/" rel="next" title="React基础">
+                  React基础 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Hank</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" rel="noopener" target="_blank">NexT.Muse</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script>
+
+  
+<script src="https://cdn.jsdelivr.net/npm/algoliasearch@4.11.0/dist/algoliasearch-lite.umd.js" integrity="sha256-48AZ24Ct05NAMLT7hvYgeW1X350OgEcZvHd6Ih6xwOA=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/instantsearch.js@4.33.2/dist/instantsearch.production.min.js" integrity="sha256-0B5Q7I/DVd8yp8JYLzbpELEonNBlVe7NLixMCLEnlBU=" crossorigin="anonymous"></script><script src="/js/third-party/search/algolia-search.js"></script>
+
+
+
+
+
+  
+
+
+
+
+
+</body>
+</html>

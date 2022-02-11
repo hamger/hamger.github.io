@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.0.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.4/css/all.min.css" integrity="sha256-mUZM63G8m73Mcidfrv5E+Y61y7a12O5mW4ezU3bxqW4=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"hangermeng.top","root":"/","images":"/images","scheme":"Muse","darkmode":false,"version":"8.8.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"},"algolia":{"appID":"ZV0EGDRD8C","apiKey":"01ab18713b33dcc47e43484208996a80","indexName":"hexo_hamger","hits":{"per_page":10}}}</script><script src="/js/config.js"></script>
+<meta name="description" content="vue 中的 computed 属性的值只有当内部依赖的 data 属性变化时才会重新求值，这是怎么做到的呢。假设传入以下 computed ： 12345computed: &amp;#123;  ab: function()&amp;#123;    return this.a + 1;  &amp;#125;&amp;#125; 以下是 vue 初始化的操作： 123456789101112131415export fun">
+<meta property="og:type" content="article">
+<meta property="og:title" content="vue中computed的实现">
+<meta property="og:url" content="https://hangermeng.top/2020/10/05/vue%E4%B8%ADcomputed%E7%9A%84%E5%AE%9E%E7%8E%B0/index.html">
+<meta property="og:site_name" content="Hank&#39;s Blog">
+<meta property="og:description" content="vue 中的 computed 属性的值只有当内部依赖的 data 属性变化时才会重新求值，这是怎么做到的呢。假设传入以下 computed ： 12345computed: &amp;#123;  ab: function()&amp;#123;    return this.a + 1;  &amp;#125;&amp;#125; 以下是 vue 初始化的操作： 123456789101112131415export fun">
+<meta property="og:locale">
+<meta property="article:published_time" content="2020-10-05T12:18:28.000Z">
+<meta property="article:modified_time" content="2022-02-10T09:38:19.402Z">
+<meta property="article:author" content="Hank">
+<meta property="article:tag" content="Vue.js">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://hangermeng.top/2020/10/05/vue%E4%B8%ADcomputed%E7%9A%84%E5%AE%9E%E7%8E%B0/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-Hans","comments":true,"permalink":"https://hangermeng.top/2020/10/05/vue%E4%B8%ADcomputed%E7%9A%84%E5%AE%9E%E7%8E%B0/","path":"2020/10/05/vue中computed的实现/","title":"vue中computed的实现"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>vue中computed的实现 | Hank's Blog</title>
+  
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Hank's Blog</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">耕种思考的自留地</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu">
+        <li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a></li>
+        <li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a></li>
+        <li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a></li>
+        <li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container"></div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container">
+  <div class="algolia-stats"><hr></div>
+  <div class="algolia-hits"></div>
+  <div class="algolia-pagination"></div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%AE%A1%E7%AE%97%E5%B1%9E%E6%80%A7%E7%9A%84%E4%BE%9D%E8%B5%96%E5%8F%98%E6%9B%B4%E5%A6%82%E4%BD%95%E8%A7%A6%E5%8F%91%E6%B8%B2%E6%9F%93"><span class="nav-number">1.</span> <span class="nav-text">计算属性的依赖变更如何触发渲染</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%80%BB%E7%BB%93"><span class="nav-number">2.</span> <span class="nav-text">总结</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Hank"
+      src="/images/avatar.jpg">
+  <p class="site-author-name" itemprop="name">Hank</p>
+  <div class="site-description" itemprop="description">Learning progress and good health</div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">125</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">35</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author site-overview-item animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/hamger" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;hamger" rel="noopener" target="_blank"><i class="github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:2313303800@qq.com" title="E-Mail → mailto:2313303800@qq.com" rel="noopener" target="_blank"><i class="envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="https://hangermeng.top/2020/10/05/vue%E4%B8%ADcomputed%E7%9A%84%E5%AE%9E%E7%8E%B0/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="Hank">
+      <meta itemprop="description" content="Learning progress and good health">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hank's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          vue中computed的实现
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2020-10-05 20:18:28" itemprop="dateCreated datePublished" datetime="2020-10-05T20:18:28+08:00">2020-10-05</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2022-02-10 17:38:19" itemprop="dateModified" datetime="2022-02-10T17:38:19+08:00">2022-02-10</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <p>vue 中的 computed 属性的值只有当内部依赖的 data 属性变化时才会重新求值，这是怎么做到的呢。假设传入以下 computed ：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">computed: &#123;</span><br><span class="line">  <span class="attr">ab</span>: <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="built_in">this</span>.a + <span class="number">1</span>;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>以下是 vue 初始化的操作：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="function"><span class="keyword">function</span> <span class="title">initState</span> (<span class="params">vm: Component</span>) </span>&#123;</span><br><span class="line">  vm._watchers = []</span><br><span class="line">  <span class="keyword">const</span> opts = vm.$options</span><br><span class="line">  <span class="keyword">if</span> (opts.props) initProps(vm, opts.props)</span><br><span class="line">  <span class="keyword">if</span> (opts.methods) initMethods(vm, opts.methods)</span><br><span class="line">  <span class="keyword">if</span> (opts.data) &#123;</span><br><span class="line">    initData(vm)</span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    observe(vm._data = &#123;&#125;, <span class="literal">true</span> <span class="comment">/* asRootData */</span>)</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">if</span> (opts.computed) initComputed(vm, opts.computed)</span><br><span class="line">  <span class="keyword">if</span> (opts.watch &amp;&amp; opts.watch !== nativeWatch) &#123;</span><br><span class="line">    initWatch(vm, opts.watch)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<span id="more"></span>
+<p>initComputed 做到的事情是实例化 Watcher 以及将属性挂载到实例上：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">initComputed</span> (<span class="params">vm: Component, computed: <span class="built_in">Object</span></span>) </span>&#123;</span><br><span class="line">  <span class="comment">//声明一个watchers，同时挂载到Vue实例上</span></span><br><span class="line">  <span class="keyword">const</span> watchers = vm._computedWatchers = <span class="built_in">Object</span>.create(<span class="literal">null</span>)</span><br><span class="line">  <span class="comment">//是否是服务器渲染</span></span><br><span class="line">  <span class="keyword">const</span> isSSR = isServerRendering()</span><br><span class="line"></span><br><span class="line">  <span class="comment">//遍历传入的computed</span></span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">const</span> key <span class="keyword">in</span> computed) &#123;</span><br><span class="line">    <span class="comment">//userDef是computed对象中的每一个方法</span></span><br><span class="line">    <span class="keyword">const</span> userDef = computed[key]</span><br><span class="line">    <span class="keyword">const</span> getter = <span class="keyword">typeof</span> userDef === <span class="string">&#x27;function&#x27;</span> ? userDef : userDef.get</span><br><span class="line">    <span class="keyword">if</span> (process.env.NODE_ENV !== <span class="string">&#x27;production&#x27;</span> &amp;&amp; getter == <span class="literal">null</span>) &#123;</span><br><span class="line">      warn(</span><br><span class="line">        <span class="string">`Getter is missing for computed property &quot;<span class="subst">$&#123;key&#125;</span>&quot;.`</span>,</span><br><span class="line">        vm</span><br><span class="line">      )</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">//如果不是服务端渲染的，就创建一个Watcher实例</span></span><br><span class="line">    <span class="keyword">if</span> (!isSSR) &#123;</span><br><span class="line">      <span class="comment">// 关键代码，之后会提到</span></span><br><span class="line">      watchers[key] = <span class="keyword">new</span> Watcher( </span><br><span class="line">        vm,</span><br><span class="line">        getter || noop,</span><br><span class="line">        noop,</span><br><span class="line">        &#123; <span class="attr">lazy</span>: <span class="literal">true</span> &#125; <span class="comment">// 关键参数</span></span><br><span class="line">      )</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (!(key <span class="keyword">in</span> vm)) &#123;</span><br><span class="line">      <span class="comment">//如果computed中的key没有在vm中，通过defineComputed挂载上去</span></span><br><span class="line">      defineComputed(vm, key, userDef) <span class="comment">// 关键代码，之后会提到</span></span><br><span class="line">    &#125; <span class="keyword">else</span> <span class="keyword">if</span> (process.env.NODE_ENV !== <span class="string">&#x27;production&#x27;</span>) &#123;</span><br><span class="line">      <span class="comment">//后面都是警告computed中的key重名的</span></span><br><span class="line">      <span class="keyword">if</span> (key <span class="keyword">in</span> vm.$data) &#123;</span><br><span class="line">        warn(<span class="string">`The computed property &quot;<span class="subst">$&#123;key&#125;</span>&quot; is already defined in data.`</span>, vm)</span><br><span class="line">      &#125; <span class="keyword">else</span> <span class="keyword">if</span> (vm.$options.props &amp;&amp; key <span class="keyword">in</span> vm.$options.props) &#123;</span><br><span class="line">        warn(<span class="string">`The computed property &quot;<span class="subst">$&#123;key&#125;</span>&quot; is already defined as a prop.`</span>, vm)</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>可以看到 Watcher 构造器接受了一个参数 <code>&#123; lazy: true &#125;</code>，下边进入 Watcher 介绍该参数起的作用</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 以下为关键代码</span></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="class"><span class="keyword">class</span> <span class="title">Watcher</span> </span>&#123;</span><br><span class="line">  <span class="title">constructor</span> (<span class="params"></span></span><br><span class="line"><span class="params">    vm: Component,</span></span><br><span class="line"><span class="params">    expOrFn: string | <span class="built_in">Function</span>,</span></span><br><span class="line"><span class="params">    cb: <span class="built_in">Function</span>,</span></span><br><span class="line"><span class="params">    options?: ?<span class="built_in">Object</span>,</span></span><br><span class="line"><span class="params">    isRenderWatcher?: boolean</span></span><br><span class="line"><span class="params">  </span>) &#123;</span><br><span class="line">    <span class="built_in">this</span>.vm = vm</span><br><span class="line">    vm._watchers.push(<span class="built_in">this</span>)</span><br><span class="line">    <span class="keyword">if</span> (options) &#123;</span><br><span class="line">      <span class="built_in">this</span>.deep = !!options.deep</span><br><span class="line">      <span class="built_in">this</span>.user = !!options.user</span><br><span class="line">      <span class="built_in">this</span>.lazy = !!options.lazy</span><br><span class="line">      <span class="built_in">this</span>.sync = !!options.sync</span><br><span class="line">      1efore = options.before</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      <span class="built_in">this</span>.deep = <span class="built_in">this</span>.user = <span class="built_in">this</span>.lazy = <span class="built_in">this</span>.sync = <span class="literal">false</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">this</span>.dirty = <span class="built_in">this</span>.lazy <span class="comment">// for lazy watchers</span></span><br><span class="line">    <span class="comment">// 此处省略代码...</span></span><br><span class="line">    <span class="comment">// 当 lazy 为 true 时，不计算值，返回 undefined</span></span><br><span class="line">    <span class="built_in">this</span>.value = <span class="built_in">this</span>.lazy ? <span class="literal">undefined</span> : <span class="built_in">this</span>.get()</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>此时开头假设的<code>this.ab</code>的值为<code>undefined</code>，这里可以看到<strong>计算属性在初始化的时候不计算其值</strong>。然后代码执行到<code>defineComputed(vm, key, userDef)</code>：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 以下为关键代码</span></span><br><span class="line"><span class="keyword">export</span> <span class="function"><span class="keyword">function</span> <span class="title">defineComputed</span> (<span class="params"></span></span></span><br><span class="line"><span class="params"><span class="function">  target: any,</span></span></span><br><span class="line"><span class="params"><span class="function">  key: string,</span></span></span><br><span class="line"><span class="params"><span class="function">  userDef: <span class="built_in">Object</span> | <span class="built_in">Function</span></span></span></span><br><span class="line"><span class="params"><span class="function"></span>) </span>&#123;</span><br><span class="line">  <span class="comment">// 不是服务端渲染就使用环境</span></span><br><span class="line">  <span class="keyword">const</span> shouldCache = !isServerRendering()</span><br><span class="line">  <span class="keyword">if</span> (<span class="keyword">typeof</span> userDef === <span class="string">&#x27;function&#x27;</span>) &#123;</span><br><span class="line">    <span class="comment">// 处理 userDef 为函数的情况</span></span><br><span class="line">    sharedPropertyDefinition.get = shouldCache</span><br><span class="line">    ? createComputedGetter(key)</span><br><span class="line">    : createGetterInvoker(userDef)</span><br><span class="line">    sharedPropertyDefinition.set = noop</span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    <span class="comment">// 处理 userDef 为对象的情况</span></span><br><span class="line">    sharedPropertyDefinition.get = userDef.get</span><br><span class="line">    ? shouldCache &amp;&amp; userDef.cache !== <span class="literal">false</span></span><br><span class="line">      ? createComputedGetter(key)</span><br><span class="line">      : createGetterInvoker(userDef.get)</span><br><span class="line">    : noop</span><br><span class="line">    sharedPropertyDefinition.set = userDef.set || noop</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="built_in">Object</span>.defineProperty(target, key, sharedPropertyDefinition)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>在<code>createComputedGetter</code>中用到了<code>watcher.dirty</code>，而其初始值由前面传入的参数<code>&#123; lazy: true &#125;</code>决定。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">createComputedGetter</span> (<span class="params">key</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="function"><span class="keyword">function</span> <span class="title">computedGetter</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">const</span> watcher = <span class="built_in">this</span>._computedWatchers &amp;&amp; <span class="built_in">this</span>._computedWatchers[key]</span><br><span class="line">    <span class="keyword">if</span> (watcher) &#123;</span><br><span class="line">      <span class="comment">// watcher.dirty 为 true ，调用 watcher.evaluate()</span></span><br><span class="line">      <span class="keyword">if</span> (watcher.dirty) &#123;</span><br><span class="line">        watcher.evaluate()</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="keyword">if</span> (Dep.target) &#123;</span><br><span class="line">        <span class="comment">// 依赖收集，很关键，保证依赖变更时重新求值</span></span><br><span class="line">        watcher.depend()</span><br><span class="line">      &#125;</span><br><span class="line">      <span class="keyword">return</span> watcher.value</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>然后执行<code>Object.defineProperty(target, key, sharedPropertyDefinition)</code>，代码执行到这里其实是把计算属性的 setter 和 getter 创建好了。所以，<strong>计算属性如果未被消费不会计算值</strong>，其值始终是 <code>undefined</code>。</p>
+<p>当计算属性被用到时（例如在 render 或 methods 中），此时会触发<code>computedGetter</code>，进而执行<code>evaluate</code>：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">evaluate</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="built_in">this</span>.value = <span class="built_in">this</span>.get()</span><br><span class="line">  <span class="built_in">this</span>.dirty = <span class="literal">false</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>调用<code>this.get()</code>会进行依赖收集，最后返回计算属性的值，此时终于获取到了计算属性的值。这里为什么要将<code>this.dirty</code>设为<code>false</code>呢，是为了实现计算属性基于它的依赖进行缓存的，也就依赖没变时，不重新计算，而是使用缓存。<br>回顾以下代码，在第一次获取值后，<code>watcher.lazy</code>始终为<code>false</code>，也就永远不会执行<code>watcher.evaluate()</code>，所以这个计算属性永远不会重新求值，一直使用上一次获得的值。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (watcher.dirty) &#123;</span><br><span class="line">  watcher.evaluate()</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>那什么时候会重新求值呢，当<code>watcher.dirty</code>为<code>true</code>时，怎么改变这个值呢，当依赖变更的时候，即在<code>watcher.update()</code>中：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">update () &#123;</span><br><span class="line">  <span class="keyword">if</span> (<span class="built_in">this</span>.lazy) &#123;</span><br><span class="line">    <span class="built_in">this</span>.dirty = <span class="literal">true</span></span><br><span class="line">  &#125; <span class="keyword">else</span> <span class="keyword">if</span> (<span class="built_in">this</span>.sync) &#123;</span><br><span class="line">    <span class="built_in">this</span>.run()</span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    queueWatcher(<span class="built_in">this</span>)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>以开头的假设为例，当<code>this.a</code>改变时，将触发<code>dep.notify()</code>，然后执行该<code>dep</code>中所有 <code>watcher</code>的<code>update</code>方法，其中就包括<code>this.ab</code>的<code>watcher.update()</code>（这个<code>watcher</code>是在前面的<code>watcher.depend()</code>中添加的），此时<code>watcher.dirty</code>会被改变为<code>true</code>，因此当再次取<code>this.ab</code>的值时，会重新计算。</p>
+<h3 id="计算属性的依赖变更如何触发渲染"><a href="#计算属性的依赖变更如何触发渲染" class="headerlink" title="计算属性的依赖变更如何触发渲染"></a>计算属性的依赖变更如何触发渲染</h3><p>如果计算属性在模板或 render 函数中被使用，在触发<code>计算watcher.update()</code>后，会触发<code>渲染watcher.update()</code>，此时取<code>this.ab</code>，会得到重新计算后的值。<br>但怎么保证<code>渲染watcher.update()</code>在<code>计算watcher.update()</code>后执行呢，因为如果在之前执行得到的<code>this.ab</code>会是旧值（因为此时<code>watcher.dirty</code>还为<code>false</code>）。这涉及到全局的 <code>Dep.target</code> 状态是用一个栈 <code>targetStack</code> 来保存。</p>
+<p>假设在 render 函数中使用了<code>this.ab</code>：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">render () &#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="xml"><span class="tag">&lt;<span class="name">div</span>&gt;</span>&#123;this.ab&#125;<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>当执行 render 函数时，此时<code>Dep.target</code>指向<code>渲染watcher</code>，<code>targetStack = [渲染watcher]</code>，执行<code>this.a + 1</code>，读取到了<code>this.a</code>，触发<code>a</code>的<code>get</code>方法，此时<code>Dep.target</code>指向<code>计算watcher</code>，<code>targetStack = [渲染watcher，计算watcher]</code>，调用<code>dep.depend()</code>收集<code>计算watcher</code>作为依赖，</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// dep.depend()</span></span><br><span class="line">depend () &#123;</span><br><span class="line">  <span class="keyword">if</span> (Dep.target) &#123; <span class="comment">// 此时`Dep.target`指向`计算watcher`</span></span><br><span class="line">    Dep.target.addDep(<span class="built_in">this</span>)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>经历了这样的一个收集的流程后，此时的一些状态：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// ab 的计算watcher</span></span><br><span class="line">&#123;</span><br><span class="line">  <span class="attr">deps</span>: [ a的dep ],</span><br><span class="line">  <span class="attr">dirty</span>: <span class="literal">false</span>, <span class="comment">// 求值完了 所以是false</span></span><br><span class="line">  <span class="attr">value</span>: <span class="number">2</span>,</span><br><span class="line">  <span class="attr">getter</span>: ƒ ab(),</span><br><span class="line">  <span class="attr">lazy</span>: <span class="literal">true</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// a的dep</span></span><br><span class="line">&#123;</span><br><span class="line">  <span class="attr">subs</span>: [ ab的计算watcher ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>此时求值结束，回到<code>计算watcher</code>的<code>get</code>方法：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// watcher.get</span></span><br><span class="line">get () &#123;</span><br><span class="line">  pushTarget(<span class="built_in">this</span>)</span><br><span class="line">  <span class="keyword">let</span> value</span><br><span class="line">  <span class="keyword">const</span> vm = <span class="built_in">this</span>.vm</span><br><span class="line">  <span class="keyword">try</span> &#123;</span><br><span class="line">    value = <span class="built_in">this</span>.getter.call(vm, vm)</span><br><span class="line">  &#125; <span class="keyword">finally</span> &#123;</span><br><span class="line">    <span class="comment">// `计算watcher`出栈，此时`Dep.target`指向`渲染watcher`，`targetStack = [渲染watcher]`。</span></span><br><span class="line">    popTarget()</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> value</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>进入<code>this.ab</code>的<code>getter</code>函数：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">Object</span>.defineProperty(vm, <span class="string">&#x27;ab&#x27;</span>, &#123; </span><br><span class="line">  <span class="function"><span class="title">get</span>(<span class="params"></span>)</span> &#123;</span><br><span class="line">    <span class="keyword">if</span> (watcher.dirty) &#123;</span><br><span class="line">      watcher.evaluate()</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">if</span> (Dep.target) &#123; <span class="comment">// 此时`Dep.target`指向`渲染watcher`</span></span><br><span class="line">      watcher.depend()</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> watcher.value</span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// watcher.depend</span></span><br><span class="line">depend () &#123;</span><br><span class="line">  <span class="keyword">let</span> i = <span class="built_in">this</span>.deps.length</span><br><span class="line">  <span class="keyword">while</span> (i--) &#123;</span><br><span class="line">    <span class="built_in">this</span>.deps[i].depend()</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>因为 <code>ab 的计算watcher</code> 的 deps 里保存了 <code>a</code> 的 dep，因此又会调用 <code>a</code> 的 <code>dep.depend()</code>，会把<code>渲染watcher</code> 存放进自身的 subs 中，最后<code>a</code>的 dep 如下：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="attr">subs</span>: [ ab的计算watcher，渲染watcher ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>一切初始化已经完成，若改变<code>a</code>的值，将触发 <code>a</code> 的 <code>dep.notify</code>：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">notify () &#123;</span><br><span class="line">  <span class="keyword">const</span> subs = <span class="built_in">this</span>.subs.slice()</span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">0</span>, l = subs.length; i &lt; l; i++) &#123;</span><br><span class="line">    subs[i].update()</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>以上代码依次调用了<code>计算watcher.update()</code>和<code>渲染watcher.update()</code>，保证<code>渲染watcher.update()</code>在<code>计算watcher.update()</code>后执行，此时 render 函数中能获取到最新的计算属性的值。</p>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><ul>
+<li>通过改变<code>this.dirty</code>的值来实现缓存，当<code>this.dirty === true</code>时，再次访问才会执行<code>watcher.evaluate()</code>获得新值。</li>
+<li>计算属性的依赖变更时触发<code>计算watcher.update()</code>，执行<code>this.dirty = true</code>，使得再次获取计算属性值时被重新计算。</li>
+</ul>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Vue-js/" rel="tag"># Vue.js</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2020/09/02/js%E5%8F%98%E9%87%8F%E6%8F%90%E5%8D%87/" rel="prev" title="js变量提升">
+                  <i class="fa fa-chevron-left"></i> js变量提升
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2021/08/30/%E5%9B%9E%E6%BA%AF%E7%AE%97%E6%B3%95/" rel="next" title="回溯算法">
+                  回溯算法 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Hank</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" rel="noopener" target="_blank">NexT.Muse</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script>
+
+  
+<script src="https://cdn.jsdelivr.net/npm/algoliasearch@4.11.0/dist/algoliasearch-lite.umd.js" integrity="sha256-48AZ24Ct05NAMLT7hvYgeW1X350OgEcZvHd6Ih6xwOA=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/instantsearch.js@4.33.2/dist/instantsearch.production.min.js" integrity="sha256-0B5Q7I/DVd8yp8JYLzbpELEonNBlVe7NLixMCLEnlBU=" crossorigin="anonymous"></script><script src="/js/third-party/search/algolia-search.js"></script>
+
+
+
+
+
+  
+
+
+
+
+
+</body>
+</html>

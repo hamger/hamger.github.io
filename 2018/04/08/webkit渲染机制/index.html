@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.0.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.4/css/all.min.css" integrity="sha256-mUZM63G8m73Mcidfrv5E+Y61y7a12O5mW4ezU3bxqW4=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"hangermeng.top","root":"/","images":"/images","scheme":"Muse","darkmode":false,"version":"8.8.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"},"algolia":{"appID":"ZV0EGDRD8C","apiKey":"01ab18713b33dcc47e43484208996a80","indexName":"hexo_hamger","hits":{"per_page":10}}}</script><script src="/js/config.js"></script>
+<meta name="description" content="从输入URL到DOM 用户输入URL，webkit调用其资源加载器加载对应的网页 网页被交给HTML解释器,经历以下解析变成DOM结构：Bytes → Characters → Tokens → Nodes → Object Model。如果节点需要依赖其他资源：图片、css、视频等，调用资源加载器异步加载他们，期间不阻碍DOM树的构建 如果遇到js标签，调用js引擎解释并执行，js可能会修改DO">
+<meta property="og:type" content="article">
+<meta property="og:title" content="webkit渲染机制">
+<meta property="og:url" content="https://hangermeng.top/2018/04/08/webkit%E6%B8%B2%E6%9F%93%E6%9C%BA%E5%88%B6/index.html">
+<meta property="og:site_name" content="Hank&#39;s Blog">
+<meta property="og:description" content="从输入URL到DOM 用户输入URL，webkit调用其资源加载器加载对应的网页 网页被交给HTML解释器,经历以下解析变成DOM结构：Bytes → Characters → Tokens → Nodes → Object Model。如果节点需要依赖其他资源：图片、css、视频等，调用资源加载器异步加载他们，期间不阻碍DOM树的构建 如果遇到js标签，调用js引擎解释并执行，js可能会修改DO">
+<meta property="og:locale">
+<meta property="article:published_time" content="2018-04-08T13:04:53.000Z">
+<meta property="article:modified_time" content="2022-02-10T09:38:19.402Z">
+<meta property="article:author" content="Hank">
+<meta property="article:tag" content="other">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://hangermeng.top/2018/04/08/webkit%E6%B8%B2%E6%9F%93%E6%9C%BA%E5%88%B6/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-Hans","comments":true,"permalink":"https://hangermeng.top/2018/04/08/webkit%E6%B8%B2%E6%9F%93%E6%9C%BA%E5%88%B6/","path":"2018/04/08/webkit渲染机制/","title":"webkit渲染机制"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>webkit渲染机制 | Hank's Blog</title>
+  
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Hank's Blog</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">耕种思考的自留地</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu">
+        <li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a></li>
+        <li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a></li>
+        <li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a></li>
+        <li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container"></div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container">
+  <div class="algolia-stats"><hr></div>
+  <div class="algolia-hits"></div>
+  <div class="algolia-pagination"></div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BB%8E%E8%BE%93%E5%85%A5URL%E5%88%B0DOM"><span class="nav-number">1.</span> <span class="nav-text">从输入URL到DOM</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BB%8EDOM%E5%88%B0%E5%B1%8F%E5%B9%95"><span class="nav-number">2.</span> <span class="nav-text">从DOM到屏幕</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%A0%91%E4%B9%8B%E9%97%B4%E7%9A%84%E5%85%B3%E7%B3%BB"><span class="nav-number">3.</span> <span class="nav-text">树之间的关系</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%8F%82%E8%80%83"><span class="nav-number">4.</span> <span class="nav-text">参考</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Hank"
+      src="/images/avatar.jpg">
+  <p class="site-author-name" itemprop="name">Hank</p>
+  <div class="site-description" itemprop="description">Learning progress and good health</div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">125</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">35</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author site-overview-item animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/hamger" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;hamger" rel="noopener" target="_blank"><i class="github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:2313303800@qq.com" title="E-Mail → mailto:2313303800@qq.com" rel="noopener" target="_blank"><i class="envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="https://hangermeng.top/2018/04/08/webkit%E6%B8%B2%E6%9F%93%E6%9C%BA%E5%88%B6/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="Hank">
+      <meta itemprop="description" content="Learning progress and good health">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hank's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          webkit渲染机制
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2018-04-08 21:04:53" itemprop="dateCreated datePublished" datetime="2018-04-08T21:04:53+08:00">2018-04-08</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2022-02-10 17:38:19" itemprop="dateModified" datetime="2022-02-10T17:38:19+08:00">2022-02-10</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <h4 id="从输入URL到DOM"><a href="#从输入URL到DOM" class="headerlink" title="从输入URL到DOM"></a>从输入URL到DOM</h4><ol>
+<li>用户输入URL，webkit调用其资源加载器加载对应的网页</li>
+<li>网页被交给HTML解释器,经历以下解析变成DOM结构：Bytes → Characters → Tokens → Nodes → Object Model。如果节点需要依赖其他资源：图片、css、视频等，调用资源加载器异步加载他们，期间不阻碍DOM树的构建</li>
+<li>如果遇到js标签，调用js引擎解释并执行，js可能会修改DOM树结构，所以会阻碍DOM树的构建。网页中依赖的js资源加载完成后，触发DOMContentLoad事件</li>
+</ol>
+<span id="more"></span>
+<p>DOM树上挂载的是DOM节点，页面上的每个HTML元素都存储成为一个DOM节点，比如body, div等。DOM树的根节点为Document节点。Render树上挂载的对象称为RenderObject，一般情况下DOM树上的每个节点对应RenderObject树上的一个节点，但是也有例外，比如某个DOM节点设置为None时，在Render树上就没有相对应的RenderObject。RenderObject对象实际上是DOM节点一个虚拟的输出，它知道如何控制DOM节点的绘制。</p>
+<h4 id="从DOM到屏幕"><a href="#从DOM到屏幕" class="headerlink" title="从DOM到屏幕"></a>从DOM到屏幕</h4><ol>
+<li>css文件下载完成后会被css解释器解释成CSSOM， 并在DOM树上附加解释后的样式信息，构建RenderObject树，即：Render Tree。</li>
+<li>webkit会根据网页的层次结构创建RenderLayer树，处理诸如z-index、浮动、定位等布局</li>
+<li>浏览器之后会将每个RenderLayer栅格化，并独立的绘制进位图中，将这些位图作为纹理上传至 GPU，复合多个层来生成最终的屏幕图像。</li>
+</ol>
+<h4 id="树之间的关系"><a href="#树之间的关系" class="headerlink" title="树之间的关系"></a>树之间的关系</h4><ul>
+<li>DOM树: html代码下载完后解析的结果，包含了所有HTML标签，包括display:none的隐藏标签，还有用JS动态添加的元素等</li>
+<li>Render树: RenderObject组成的树结构，RenderObject和DOM结构的Node可视节点基本上是一对一的关系，CSSOM生成后和DOM树合成的树结构，DOM树知道如何绘制自己，但是要注意特殊情况。</li>
+<li>RenderLayer树: 由RenderLayer组成，RenderLayer和RenderObject是一对多的关系，RenderLayer主要负责网页的层次关系</li>
+</ul>
+<h4 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h4><p><a target="_blank" rel="noopener" href="https://juejin.im/entry/57f9eb9e0bd1d00058bc0a1b">WEBKIT 渲染不可不知的这四棵树</a></p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/other/" rel="tag"># other</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2018/04/04/webpack%E9%A1%B9%E7%9B%AE%E4%BC%98%E5%8C%96/" rel="prev" title="webpack项目优化">
+                  <i class="fa fa-chevron-left"></i> webpack项目优化
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2018/04/08/Last-Modified%E5%B7%A5%E4%BD%9C%E5%8E%9F%E7%90%86/" rel="next" title="Last-Modified工作原理">
+                  Last-Modified工作原理 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Hank</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" rel="noopener" target="_blank">NexT.Muse</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script>
+
+  
+<script src="https://cdn.jsdelivr.net/npm/algoliasearch@4.11.0/dist/algoliasearch-lite.umd.js" integrity="sha256-48AZ24Ct05NAMLT7hvYgeW1X350OgEcZvHd6Ih6xwOA=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/instantsearch.js@4.33.2/dist/instantsearch.production.min.js" integrity="sha256-0B5Q7I/DVd8yp8JYLzbpELEonNBlVe7NLixMCLEnlBU=" crossorigin="anonymous"></script><script src="/js/third-party/search/algolia-search.js"></script>
+
+
+
+
+
+  
+
+
+
+
+
+</body>
+</html>

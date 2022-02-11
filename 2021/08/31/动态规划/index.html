@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.0.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.4/css/all.min.css" integrity="sha256-mUZM63G8m73Mcidfrv5E+Y61y7a12O5mW4ezU3bxqW4=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"hangermeng.top","root":"/","images":"/images","scheme":"Muse","darkmode":false,"version":"8.8.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"},"algolia":{"appID":"ZV0EGDRD8C","apiKey":"01ab18713b33dcc47e43484208996a80","indexName":"hexo_hamger","hits":{"per_page":10}}}</script><script src="/js/config.js"></script>
+<meta name="description" content="动态规划（dynamic planning）问题的一般形式就是求最值。比如说让你求最⻓递增子序列、最小编辑距离等等。因为要求最值，肯定要把所有可行的答案穷举出来，然后在其中找最值。但是动态规划的穷举有点特别，因为这类问题存在「重叠子问题」，如果暴力穷举的话效率会极其低下，所以需要「备忘录」或者「DP table」来优化穷举过程，避免不必要的计算。因为存在「重叠子问题」，所以一定会具备「最优子结构」">
+<meta property="og:type" content="article">
+<meta property="og:title" content="动态规划">
+<meta property="og:url" content="https://hangermeng.top/2021/08/31/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/index.html">
+<meta property="og:site_name" content="Hank&#39;s Blog">
+<meta property="og:description" content="动态规划（dynamic planning）问题的一般形式就是求最值。比如说让你求最⻓递增子序列、最小编辑距离等等。因为要求最值，肯定要把所有可行的答案穷举出来，然后在其中找最值。但是动态规划的穷举有点特别，因为这类问题存在「重叠子问题」，如果暴力穷举的话效率会极其低下，所以需要「备忘录」或者「DP table」来优化穷举过程，避免不必要的计算。因为存在「重叠子问题」，所以一定会具备「最优子结构」">
+<meta property="og:locale">
+<meta property="article:published_time" content="2021-08-31T07:24:23.000Z">
+<meta property="article:modified_time" content="2022-02-10T09:38:19.404Z">
+<meta property="article:author" content="Hank">
+<meta property="article:tag" content="algorithm">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://hangermeng.top/2021/08/31/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-Hans","comments":true,"permalink":"https://hangermeng.top/2021/08/31/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/","path":"2021/08/31/动态规划/","title":"动态规划"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>动态规划 | Hank's Blog</title>
+  
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Hank's Blog</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">耕种思考的自留地</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu">
+        <li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a></li>
+        <li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a></li>
+        <li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a></li>
+        <li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container"></div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container">
+  <div class="algolia-stats"><hr></div>
+  <div class="algolia-hits"></div>
+  <div class="algolia-pagination"></div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%89%E5%A4%A7%E6%AD%A5%E9%AA%A4"><span class="nav-number">1.</span> <span class="nav-text">三大步骤</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%88%AC%E6%A5%BC%E6%A2%AF"><span class="nav-number">2.</span> <span class="nav-text">爬楼梯</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%89%E8%A7%92%E5%BD%A2%E6%9C%80%E5%B0%8F%E8%B7%AF%E5%BE%84%E5%92%8C"><span class="nav-number">3.</span> <span class="nav-text">三角形最小路径和</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%BB%9A%E5%8A%A8%E6%95%B0%E7%BB%84"><span class="nav-number">4.</span> <span class="nav-text">滚动数组</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Hank"
+      src="/images/avatar.jpg">
+  <p class="site-author-name" itemprop="name">Hank</p>
+  <div class="site-description" itemprop="description">Learning progress and good health</div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">125</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">35</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author site-overview-item animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/hamger" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;hamger" rel="noopener" target="_blank"><i class="github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:2313303800@qq.com" title="E-Mail → mailto:2313303800@qq.com" rel="noopener" target="_blank"><i class="envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="https://hangermeng.top/2021/08/31/%E5%8A%A8%E6%80%81%E8%A7%84%E5%88%92/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="Hank">
+      <meta itemprop="description" content="Learning progress and good health">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hank's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          动态规划
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2021-08-31 15:24:23" itemprop="dateCreated datePublished" datetime="2021-08-31T15:24:23+08:00">2021-08-31</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2022-02-10 17:38:19" itemprop="dateModified" datetime="2022-02-10T17:38:19+08:00">2022-02-10</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <p>动态规划（dynamic planning）问题的一般形式就是<strong>求最值</strong>。比如说让你求最⻓递增子序列、最小编辑距离等等。因为要求最值，肯定要把所有可行的答案穷举出来，然后在其中找最值。但是动态规划的穷举有点特别，因为这类问题存在「重叠子问题」，如果暴力穷举的话效率会极其低下，所以需要「备忘录」或者「DP table」来优化穷举过程，避免不必要的计算。因为存在「重叠子问题」，所以一定会具备「最优子结构」，只有列出正确的「状态转移方程」才能正确地穷举。</p>
+<h3 id="三大步骤"><a href="#三大步骤" class="headerlink" title="三大步骤"></a>三大步骤</h3><p>动态规划，无非就是利用历史记录，来避免我们的重复计算。而这些历史记录，我们得需要一些变量来保存，一般是用一维数组或者二维数组来保存。</p>
+<ol>
+<li>定义 dp 数组</li>
+</ol>
+<p>首先判断是一维数组还是二维数组，再判断 <code>dp[i]</code> 或者 <code>dp[i][j]</code> 中 <code>i</code> 和 <code>j</code> 的含义。</p>
+<ol start="2">
+<li>找出数组元素之间的关系式（状态转移方程）</li>
+</ol>
+<p>这一步是最困难的，如果是一维数组，我们一般寻找 <code>dp[n]</code> 、 <code>dp[n-1]</code> 、 <code>dp[n-2]</code> 之间的关系，如果是二维数组，一般寻找 <code>dp[i][j]</code> 、 <code>dp[i-1][j]</code> 、 <code>dp[i][j-1]</code> 、 <code>dp[i-1][j-1]</code> 之间的关系。</p>
+<ol start="3">
+<li>找出初始值。</li>
+</ol>
+<p>基于状态转移方程，写出它的边界值，例如 <code>dp[1]</code> 、 <code>dp[1][1]</code> 等初始可得的值。</p>
+<span id="more"></span>
+
+<h3 id="爬楼梯"><a href="#爬楼梯" class="headerlink" title="爬楼梯"></a>爬楼梯</h3><p>假设你正在爬楼梯。需要 n 阶你才能到达楼顶。每次你可以爬 1 或 2 个台阶。你有多少种不同的方法可以爬到楼顶呢？<a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/climbing-stairs/">LeetCode地址</a></p>
+<ol>
+<li><p>显然 dp 数组为<code>dp[n]</code>， n 为楼梯阶数</p>
+</li>
+<li><p>思考 <code>dp[n]</code> 应该等于什么，也就是思考他的子问题（子问题可以是一组）是什么。分析题意子问题应该是 <code>dp[n - 1]</code> 和 <code>dp[n - 2]</code>，他们和 <code>dp[n]</code> 的关系是：<code>dp[n] = dp[n - 1] + dp[n - 2]</code>。</p>
+</li>
+<li><p>写出初始值，即<code>dp[1] = 1</code>和<code>dp[2] = 2</code></p>
+</li>
+<li><p>写遍历方法的时候需要注意，<strong>从小到大的填写</strong>dp数组，因为求<code>dp[n]</code>的值，必须先求其子问题的值</p>
+</li>
+</ol>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">climbStairs</span>(<span class="params">n</span>):</span></span><br><span class="line">  <span class="comment"># 最小实现</span></span><br><span class="line">  <span class="keyword">if</span> n &lt;= <span class="number">2</span>: <span class="keyword">return</span> n</span><br><span class="line"></span><br><span class="line">  <span class="comment"># 创建 dp 数组</span></span><br><span class="line">  dp = [<span class="number">0</span>] * (n + <span class="number">1</span>)</span><br><span class="line">  dp[<span class="number">1</span>] = <span class="number">1</span></span><br><span class="line">  dp[<span class="number">2</span>] = <span class="number">2</span></span><br><span class="line"></span><br><span class="line">  <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">3</span>, n + <span class="number">1</span>):</span><br><span class="line">    <span class="comment"># 循环中使用状态转移方程</span></span><br><span class="line">    dp[i] = dp[i - <span class="number">1</span>] + dp[i - <span class="number">2</span>]</span><br><span class="line">  <span class="keyword">return</span> dp[n]</span><br></pre></td></tr></table></figure>
+
+<h3 id="三角形最小路径和"><a href="#三角形最小路径和" class="headerlink" title="三角形最小路径和"></a>三角形最小路径和</h3><p><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/triangle/">LeetCode地址</a></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">minimumTotal</span>(<span class="params">triangle</span>):</span></span><br><span class="line">  n = <span class="built_in">len</span>(triangle)</span><br><span class="line">  f = [[<span class="number">0</span>] * n <span class="keyword">for</span> _ <span class="keyword">in</span> <span class="built_in">range</span>(n)]</span><br><span class="line">  f[<span class="number">0</span>][<span class="number">0</span>] = triangle[<span class="number">0</span>][<span class="number">0</span>]</span><br><span class="line"></span><br><span class="line">  <span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">1</span>, n):</span><br><span class="line">      <span class="comment"># 最左边的值来自最左侧的数据 triangle[i][0]</span></span><br><span class="line">      f[i][<span class="number">0</span>] = f[i - <span class="number">1</span>][<span class="number">0</span>] + triangle[i][<span class="number">0</span>]</span><br><span class="line">      <span class="comment"># 中间的值来自左侧或者右侧的最小值</span></span><br><span class="line">      <span class="keyword">for</span> j <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">1</span>, i):</span><br><span class="line">          f[i][j] = <span class="built_in">min</span>(f[i - <span class="number">1</span>][j - <span class="number">1</span>], f[i - <span class="number">1</span>][j]) + triangle[i][j]</span><br><span class="line">      <span class="comment"># 最右边的值来自最右侧的数据 triangle[i][i]</span></span><br><span class="line">      f[i][i] = f[i - <span class="number">1</span>][i - <span class="number">1</span>] + triangle[i][i]</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">return</span> <span class="built_in">min</span>(f[n - <span class="number">1</span>])</span><br></pre></td></tr></table></figure>
+
+<h3 id="滚动数组"><a href="#滚动数组" class="headerlink" title="滚动数组"></a>滚动数组</h3><p>当状态转移方程为 <code>dp[i][j] = dp[i][j - 1] + dp[i -1][j]</code> 时，可以使用滚动数组进行优化，降低空间复杂度，优化之后为 <code>dp[j] += dp[j-1]</code> 。</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/algorithm/" rel="tag"># algorithm</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2021/08/30/%E5%9B%9E%E6%BA%AF%E7%AE%97%E6%B3%95/" rel="prev" title="回溯算法">
+                  <i class="fa fa-chevron-left"></i> 回溯算法
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2021/09/13/python-%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" rel="next" title="python 学习笔记">
+                  python 学习笔记 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Hank</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" rel="noopener" target="_blank">NexT.Muse</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script>
+
+  
+<script src="https://cdn.jsdelivr.net/npm/algoliasearch@4.11.0/dist/algoliasearch-lite.umd.js" integrity="sha256-48AZ24Ct05NAMLT7hvYgeW1X350OgEcZvHd6Ih6xwOA=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/instantsearch.js@4.33.2/dist/instantsearch.production.min.js" integrity="sha256-0B5Q7I/DVd8yp8JYLzbpELEonNBlVe7NLixMCLEnlBU=" crossorigin="anonymous"></script><script src="/js/third-party/search/algolia-search.js"></script>
+
+
+
+
+
+  
+
+
+
+
+
+</body>
+</html>

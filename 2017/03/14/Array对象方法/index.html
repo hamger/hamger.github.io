@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.0.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.4/css/all.min.css" integrity="sha256-mUZM63G8m73Mcidfrv5E+Y61y7a12O5mW4ezU3bxqW4=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"hangermeng.top","root":"/","images":"/images","scheme":"Muse","darkmode":false,"version":"8.8.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"},"algolia":{"appID":"ZV0EGDRD8C","apiKey":"01ab18713b33dcc47e43484208996a80","indexName":"hexo_hamger","hits":{"per_page":10}}}</script><script src="/js/config.js"></script>
+<meta name="description" content="在实际的 JavaScript 代码编写中，经常会遇到处理数组的需求，因此在这里罗列一下原生的数组操作方法，常用的方法在前。 头尾增删添加 push()     向数组的末尾添加一个或更多元素，并返回新的长度。 unshift()  向数组的开头添加一个或更多元素，并返回新的长度。  123var arr &#x3D; [1, 2, 4, 5]console.log(arr.push(&amp;#x27;2&amp;#x2">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Array对象方法">
+<meta property="og:url" content="https://hangermeng.top/2017/03/14/Array%E5%AF%B9%E8%B1%A1%E6%96%B9%E6%B3%95/index.html">
+<meta property="og:site_name" content="Hank&#39;s Blog">
+<meta property="og:description" content="在实际的 JavaScript 代码编写中，经常会遇到处理数组的需求，因此在这里罗列一下原生的数组操作方法，常用的方法在前。 头尾增删添加 push()     向数组的末尾添加一个或更多元素，并返回新的长度。 unshift()  向数组的开头添加一个或更多元素，并返回新的长度。  123var arr &#x3D; [1, 2, 4, 5]console.log(arr.push(&amp;#x27;2&amp;#x2">
+<meta property="og:locale">
+<meta property="article:published_time" content="2017-03-14T14:52:25.000Z">
+<meta property="article:modified_time" content="2022-02-10T09:38:19.382Z">
+<meta property="article:author" content="Hank">
+<meta property="article:tag" content="JavaScript">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://hangermeng.top/2017/03/14/Array%E5%AF%B9%E8%B1%A1%E6%96%B9%E6%B3%95/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-Hans","comments":true,"permalink":"https://hangermeng.top/2017/03/14/Array%E5%AF%B9%E8%B1%A1%E6%96%B9%E6%B3%95/","path":"2017/03/14/Array对象方法/","title":"Array对象方法"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>Array对象方法 | Hank's Blog</title>
+  
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Hank's Blog</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">耕种思考的自留地</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu">
+        <li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a></li>
+        <li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a></li>
+        <li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a></li>
+        <li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container"></div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container">
+  <div class="algolia-stats"><hr></div>
+  <div class="algolia-hits"></div>
+  <div class="algolia-pagination"></div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%A4%B4%E5%B0%BE%E5%A2%9E%E5%88%A0"><span class="nav-number">1.</span> <span class="nav-text">头尾增删</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B7%BB%E5%8A%A0"><span class="nav-number">1.1.</span> <span class="nav-text">添加</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%A0%E9%99%A4"><span class="nav-number">1.2.</span> <span class="nav-text">删除</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B1%80%E9%83%A8%E5%A2%9E%E5%88%A0"><span class="nav-number">2.</span> <span class="nav-text">局部增删</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#slice"><span class="nav-number">2.1.</span> <span class="nav-text">slice()</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#splice"><span class="nav-number">2.2.</span> <span class="nav-text">splice()</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%8E%92%E5%BA%8F%E6%95%B0%E7%BB%84"><span class="nav-number">3.</span> <span class="nav-text">排序数组</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%81%8D%E5%8E%86%E6%95%B0%E7%BB%84"><span class="nav-number">4.</span> <span class="nav-text">遍历数组</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E8%BF%9E%E6%8E%A5%E6%95%B0%E7%BB%84"><span class="nav-number">5.</span> <span class="nav-text">连接数组</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%88%86%E9%9A%94%E6%95%B0%E7%BB%84"><span class="nav-number">6.</span> <span class="nav-text">分隔数组</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%A3%80%E7%B4%A2%E6%95%B0%E7%BB%84"><span class="nav-number">7.</span> <span class="nav-text">检索数组</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%B1%BB%E5%9E%8B%E8%BD%AC%E6%8D%A2"><span class="nav-number">8.</span> <span class="nav-text">类型转换</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Hank"
+      src="/images/avatar.jpg">
+  <p class="site-author-name" itemprop="name">Hank</p>
+  <div class="site-description" itemprop="description">Learning progress and good health</div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">125</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">35</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author site-overview-item animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/hamger" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;hamger" rel="noopener" target="_blank"><i class="github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:2313303800@qq.com" title="E-Mail → mailto:2313303800@qq.com" rel="noopener" target="_blank"><i class="envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="https://hangermeng.top/2017/03/14/Array%E5%AF%B9%E8%B1%A1%E6%96%B9%E6%B3%95/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="Hank">
+      <meta itemprop="description" content="Learning progress and good health">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hank's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Array对象方法
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2017-03-14 22:52:25" itemprop="dateCreated datePublished" datetime="2017-03-14T22:52:25+08:00">2017-03-14</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2022-02-10 17:38:19" itemprop="dateModified" datetime="2022-02-10T17:38:19+08:00">2022-02-10</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <p>在实际的 JavaScript 代码编写中，经常会遇到处理数组的需求，因此在这里罗列一下原生的数组操作方法，常用的方法在前。</p>
+<h2 id="头尾增删"><a href="#头尾增删" class="headerlink" title="头尾增删"></a>头尾增删</h2><h3 id="添加"><a href="#添加" class="headerlink" title="添加"></a>添加</h3><ul>
+<li>push()     向数组的末尾添加一个或更多元素，并返回新的长度。</li>
+<li>unshift()  向数组的开头添加一个或更多元素，并返回新的长度。</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> arr = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">4</span>, <span class="number">5</span>]</span><br><span class="line"><span class="built_in">console</span>.log(arr.push(<span class="string">&#x27;2&#x27;</span>)) <span class="comment">// 5</span></span><br><span class="line"><span class="built_in">console</span>.log(arr) <span class="comment">// [1, 2, 4, 5, &quot;2&quot;]</span></span><br></pre></td></tr></table></figure>
+
+<span id="more"></span>
+<h3 id="删除"><a href="#删除" class="headerlink" title="删除"></a>删除</h3><ul>
+<li>pop()      删除并返回数组的最后一个元素。</li>
+<li>shift()    删除并返回数组的第一个元素。</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> arr = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">4</span>, <span class="number">5</span>]</span><br><span class="line"><span class="built_in">console</span>.log(arr.pop()) <span class="comment">// 5</span></span><br><span class="line"><span class="built_in">console</span>.log(arr) <span class="comment">// [1,2,4]</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="局部增删"><a href="#局部增删" class="headerlink" title="局部增删"></a>局部增删</h2><ul>
+<li>slice()    选取数组的的一部分，并返回一个新数组。不改变原数组。</li>
+<li>splice()   从数组中删除、插入、替换元素，并返回删除的数组。改变原数组。</li>
+</ul>
+<h3 id="slice"><a href="#slice" class="headerlink" title="slice()"></a>slice()</h3><p>语法 <code>array.slice(start, end)</code><br>返回从 start 到 end （** 不包括该元素 **）的数组。</p>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>start</td>
+<td>可选。规定从何处开始选取。如果是负数，那么它规定从数组尾部开始算起的位置。也就是说，-1 指最后一个元素，-2 指倒数第二个元素，以此类推。</td>
+</tr>
+<tr>
+<td>end</td>
+<td>可选。规定从何处结束选取。该参数是数组片断结束处的数组下标。如果没有指定该参数，那么切分的数组包含从 start 到数组结束的所有元素。如果这个参数是负数，那么它规定的是从数组尾部开始算起的元素。</td>
+</tr>
+</tbody></table>
+<h3 id="splice"><a href="#splice" class="headerlink" title="splice()"></a>splice()</h3><p>这是一个很强大的方法， slice() 能实现的功能它也可以实现，最大的区别是它还可以替换元素，另外这个方法是改变原数组的。<br>语法 <code>array.splice(index,howmany,item1,.....,itemX)</code></p>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>index</td>
+<td>必需。规定从何处开始操作，必须是数字。</td>
+</tr>
+<tr>
+<td>howmany</td>
+<td>必需。规定应该删除多少元素，必须是数字，可以是 “0”。如果未规定此参数，则删除从 index 开始到原数组结尾的所有元素。</td>
+</tr>
+<tr>
+<td>item1, …, itemX</td>
+<td>可选。要添加到数组的新元素。</td>
+</tr>
+</tbody></table>
+<h2 id="排序数组"><a href="#排序数组" class="headerlink" title="排序数组"></a>排序数组</h2><ul>
+<li>reverse() 反转数组的元素顺序。改变原数组。</li>
+<li>sort()     对数组的元素进行排序。改变原数组。</li>
+</ul>
+<p>这两个方法在本博客<a href="https://hangermeng.top/2017/03/14/JS%E9%87%8D%E6%8E%92%E6%96%B9%E6%B3%95/">JS重排方法</a>一文中有更详细的解释。</p>
+<h2 id="遍历数组"><a href="#遍历数组" class="headerlink" title="遍历数组"></a>遍历数组</h2><ul>
+<li>every() 检测数值元素的每个元素是否都符合条件。</li>
+<li>some()  检测数组元素中是否有元素符合指定条件。</li>
+<li>filter()     检测数值元素，并返回符合条件所有元素的数组。</li>
+<li>map()  通过指定函数处理数组的每个元素，并返回处理后的数组。</li>
+</ul>
+<p>这四个方法在本博客<a href="https://hangermeng.top/2017/03/01/JS%E6%95%B0%E7%BB%84%E8%BF%AD%E4%BB%A3/">JS数组迭代</a>一文中有更详细的解释。</p>
+<h2 id="连接数组"><a href="#连接数组" class="headerlink" title="连接数组"></a>连接数组</h2><p>concat() 方法用于连接两个或多个数组。该方法不会改变现有的数组，而仅仅会返回被连接数组的一个副本。<br>语法 <code>array1.concat(array2,array3,...,arrayX)</code></p>
+<h2 id="分隔数组"><a href="#分隔数组" class="headerlink" title="分隔数组"></a>分隔数组</h2><p>join() 方法用于把数组中的所有元素转换一个字符串。元素是通过指定的分隔符（默认为逗号）进行分隔的。不改变原数组。<br>语法 <code>array.join(separator)</code>  </p>
+<h2 id="检索数组"><a href="#检索数组" class="headerlink" title="检索数组"></a>检索数组</h2><ul>
+<li>indexOf() 从头到尾搜索，并返回第一个指定项的索引。</li>
+<li>lastIndexOf() 从尾到头搜索，并返回第一个指定项的索引。</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">array.indexOf(item,start)</span><br><span class="line">array.lastIndexOf(item,start)</span><br></pre></td></tr></table></figure>
+<p>start 是可选参数，规定在数组中开始检索的位置。</p>
+<h2 id="类型转换"><a href="#类型转换" class="headerlink" title="类型转换"></a>类型转换</h2><ul>
+<li>toString() 把数组转换为字符串，并返回结果。不改变原数组。</li>
+<li>valueOf() 返回数组对象的原始值。不改变原数组。</li>
+</ul>
+<p><code>array.toString()</code> 等价于 <code>array.join()</code></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> arr = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">4</span>, <span class="number">5</span>]</span><br><span class="line"><span class="built_in">console</span>.log(arr.valueOf()) <span class="comment">// [1, 2, 4, 5]</span></span><br><span class="line"><span class="built_in">console</span>.log(arr.toString()) <span class="comment">// 1,2,4,5</span></span><br></pre></td></tr></table></figure>
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/JavaScript/" rel="tag"># JavaScript</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2017/03/14/JS%E9%87%8D%E6%8E%92%E6%96%B9%E6%B3%95/" rel="prev" title="JS重排方法">
+                  <i class="fa fa-chevron-left"></i> JS重排方法
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2017/03/15/JS%E4%BA%8B%E4%BB%B6%E6%A8%A1%E6%8B%9F/" rel="next" title="JS事件模拟">
+                  JS事件模拟 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Hank</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" rel="noopener" target="_blank">NexT.Muse</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script>
+
+  
+<script src="https://cdn.jsdelivr.net/npm/algoliasearch@4.11.0/dist/algoliasearch-lite.umd.js" integrity="sha256-48AZ24Ct05NAMLT7hvYgeW1X350OgEcZvHd6Ih6xwOA=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/instantsearch.js@4.33.2/dist/instantsearch.production.min.js" integrity="sha256-0B5Q7I/DVd8yp8JYLzbpELEonNBlVe7NLixMCLEnlBU=" crossorigin="anonymous"></script><script src="/js/third-party/search/algolia-search.js"></script>
+
+
+
+
+
+  
+
+
+
+
+
+</body>
+</html>

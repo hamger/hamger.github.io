@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.0.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.4/css/all.min.css" integrity="sha256-mUZM63G8m73Mcidfrv5E+Y61y7a12O5mW4ezU3bxqW4=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"hangermeng.top","root":"/","images":"/images","scheme":"Muse","darkmode":false,"version":"8.8.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"},"algolia":{"appID":"ZV0EGDRD8C","apiKey":"01ab18713b33dcc47e43484208996a80","indexName":"hexo_hamger","hits":{"per_page":10}}}</script><script src="/js/config.js"></script>
+<meta name="description" content="从Vue项目实践中抽离出部分组件，并集合成一个组件库项目，本文会指导你构建一个组件库的开发和发布环境，以及如何编写一个Vue组件。阅读过程中建议结合项目代码hg-vcompoments。 搭建项目为了快速搭建一个项目，我们使用vue-cli（npm install -g vue-cli）来创建。 123vue init webpack hg-vcomponentscd hg-vcomponents">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Vue组件库构建.md">
+<meta property="og:url" content="https://hangermeng.top/2018/02/16/Vue%E7%BB%84%E4%BB%B6%E5%BA%93%E6%9E%84%E5%BB%BA/index.html">
+<meta property="og:site_name" content="Hank&#39;s Blog">
+<meta property="og:description" content="从Vue项目实践中抽离出部分组件，并集合成一个组件库项目，本文会指导你构建一个组件库的开发和发布环境，以及如何编写一个Vue组件。阅读过程中建议结合项目代码hg-vcompoments。 搭建项目为了快速搭建一个项目，我们使用vue-cli（npm install -g vue-cli）来创建。 123vue init webpack hg-vcomponentscd hg-vcomponents">
+<meta property="og:locale">
+<meta property="article:published_time" content="2018-02-16T12:52:01.000Z">
+<meta property="article:modified_time" content="2022-02-10T09:38:19.394Z">
+<meta property="article:author" content="Hank">
+<meta property="article:tag" content="Vue.js">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://hangermeng.top/2018/02/16/Vue%E7%BB%84%E4%BB%B6%E5%BA%93%E6%9E%84%E5%BB%BA/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-Hans","comments":true,"permalink":"https://hangermeng.top/2018/02/16/Vue%E7%BB%84%E4%BB%B6%E5%BA%93%E6%9E%84%E5%BB%BA/","path":"2018/02/16/Vue组件库构建/","title":"Vue组件库构建.md"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>Vue组件库构建.md | Hank's Blog</title>
+  
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Hank's Blog</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">耕种思考的自留地</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu">
+        <li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a></li>
+        <li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a></li>
+        <li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a></li>
+        <li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container"></div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container">
+  <div class="algolia-stats"><hr></div>
+  <div class="algolia-hits"></div>
+  <div class="algolia-pagination"></div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%90%AD%E5%BB%BA%E9%A1%B9%E7%9B%AE"><span class="nav-number">1.</span> <span class="nav-text">搭建项目</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%94%B9%E9%80%A0%E9%A1%B9%E7%9B%AE%E7%BB%93%E6%9E%84"><span class="nav-number">1.1.</span> <span class="nav-text">改造项目结构</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%BC%80%E5%8F%91%E4%B8%8E%E7%94%9F%E4%BA%A7"><span class="nav-number">1.2.</span> <span class="nav-text">开发与生产</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BC%96%E5%86%99%E7%BB%84%E4%BB%B6"><span class="nav-number">2.</span> <span class="nav-text">编写组件</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#props"><span class="nav-number">2.1.</span> <span class="nav-text">props</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#slot"><span class="nav-number">2.2.</span> <span class="nav-text">slot</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%B5%8B%E8%AF%95"><span class="nav-number">2.3.</span> <span class="nav-text">测试</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%8A%E4%BC%A0NPM"><span class="nav-number">3.</span> <span class="nav-text">上传NPM</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Hank"
+      src="/images/avatar.jpg">
+  <p class="site-author-name" itemprop="name">Hank</p>
+  <div class="site-description" itemprop="description">Learning progress and good health</div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">125</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">35</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author site-overview-item animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/hamger" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;hamger" rel="noopener" target="_blank"><i class="github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:2313303800@qq.com" title="E-Mail → mailto:2313303800@qq.com" rel="noopener" target="_blank"><i class="envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="https://hangermeng.top/2018/02/16/Vue%E7%BB%84%E4%BB%B6%E5%BA%93%E6%9E%84%E5%BB%BA/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="Hank">
+      <meta itemprop="description" content="Learning progress and good health">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hank's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Vue组件库构建.md
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2018-02-16 20:52:01" itemprop="dateCreated datePublished" datetime="2018-02-16T20:52:01+08:00">2018-02-16</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2022-02-10 17:38:19" itemprop="dateModified" datetime="2022-02-10T17:38:19+08:00">2022-02-10</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <p>从Vue项目实践中抽离出部分组件，并集合成一个组件库项目，本文会指导你构建一个组件库的开发和发布环境，以及如何编写一个Vue组件。阅读过程中建议结合项目代码<a target="_blank" rel="noopener" href="https://github.com/hamger/hg-vcomponents">hg-vcompoments</a>。</p>
+<h2 id="搭建项目"><a href="#搭建项目" class="headerlink" title="搭建项目"></a>搭建项目</h2><p>为了快速搭建一个项目，我们使用vue-cli（<code>npm install -g vue-cli</code>）来创建。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">vue init webpack hg-vcomponents</span><br><span class="line"><span class="built_in">cd</span> hg-vcomponents</span><br><span class="line">npm install</span><br></pre></td></tr></table></figure>
+<span id="more"></span>
+<h3 id="改造项目结构"><a href="#改造项目结构" class="headerlink" title="改造项目结构"></a>改造项目结构</h3><p>使用vue-cli创建的目录结构并不是我们需要的结构，应此需要进行改造，改造后结构如下</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">. hg-vcomponents</span><br><span class="line">├── package.json  --------------------- 项目配置</span><br><span class="line">├── README.md  ------------------------ 说明文件</span><br><span class="line">├── build  ---------------------------- 构建代码文件</span><br><span class="line">├── config  --------------------------- 构建配置文件</span><br><span class="line">├── dist  ----------------------------- 组件打包后代码</span><br><span class="line">├── index.html  ----------------------- 入口页面</span><br><span class="line">└── src  ------------------------------ 源码目录</span><br><span class="line">    └── components  ------------------- 所有组件的目录</span><br><span class="line">        └── HollowArrow  -------------- 某个组件的目录</span><br><span class="line">            ├── hollow-arrow.vue  ----- 组件代码</span><br><span class="line">            └── README.md  ------------ 组件使用说明</span><br><span class="line">        └── index.js  ----------------- 导出所有组件</span><br><span class="line">    ├── examples  --------------------- 组件Demo的目录</span><br><span class="line">        ├── arrows.vue  --------------- 某个组件的Demo</span><br><span class="line">        └── index.vue  ---------------- 所有Demo的入口</span><br><span class="line">    ├── router  ----------------------- vue-router目录</span><br><span class="line">    ├── App.vue  ---------------------- vue根组件文件</span><br><span class="line">    └── main.js  ---------------------- 项目入口文件</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>src/components/index.js</p>
+</blockquote>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> HollowArrow <span class="keyword">from</span> <span class="string">&#x27;./HollowArrow/hollow-arrow.vue&#x27;</span>;</span><br><span class="line"><span class="keyword">export</span> &#123;</span><br><span class="line">  HollowArrow</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>src/examples/index.vue</p>
+</blockquote>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">template</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;tab&quot;</span>&gt;</span><span class="tag">&lt;<span class="name">router-link</span> <span class="attr">to</span>=<span class="string">&quot;/arrows&quot;</span>&gt;</span>箭头组件<span class="tag">&lt;/<span class="name">router-link</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">template</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="javascript"></span></span><br><span class="line"><span class="javascript"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</span></span><br><span class="line"><span class="javascript">  <span class="attr">name</span>: <span class="string">&#x27;el-index&#x27;</span></span></span><br><span class="line"><span class="javascript">&#125;;</span></span><br><span class="line"><span class="javascript"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>src/router/index.js</p>
+</blockquote>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> Vue <span class="keyword">from</span> <span class="string">&#x27;vue&#x27;</span>;</span><br><span class="line"><span class="keyword">import</span> Router <span class="keyword">from</span> <span class="string">&#x27;vue-router&#x27;</span>;</span><br><span class="line"><span class="keyword">const</span> Index = <span class="function">() =&gt;</span> <span class="keyword">import</span>(<span class="string">&#x27;@/examples/index.vue&#x27;</span>); <span class="comment">// 所有的组件测试案例入口页面</span></span><br><span class="line"><span class="keyword">const</span> Arrows = <span class="function">() =&gt;</span> <span class="keyword">import</span>(<span class="string">&#x27;@/examples/arrows.vue&#x27;</span>); <span class="comment">// hollow-arrow组件的测试案例</span></span><br><span class="line">Vue.use(Router);</span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="keyword">new</span> Router(&#123;</span><br><span class="line">  <span class="attr">routes</span>: [</span><br><span class="line">    &#123;</span><br><span class="line">      <span class="attr">path</span>: <span class="string">&#x27;/&#x27;</span>,</span><br><span class="line">      <span class="attr">name</span>: <span class="string">&#x27;index&#x27;</span>,</span><br><span class="line">      <span class="attr">component</span>: Index</span><br><span class="line">    &#125;,</span><br><span class="line">    &#123;</span><br><span class="line">      <span class="attr">path</span>: <span class="string">&#x27;/arrows&#x27;</span>,</span><br><span class="line">      <span class="attr">name</span>: <span class="string">&#x27;arrows&#x27;</span>,</span><br><span class="line">      <span class="attr">component</span>: Arrows</span><br><span class="line">    &#125;,</span><br><span class="line">  ]</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<h3 id="开发与生产"><a href="#开发与生产" class="headerlink" title="开发与生产"></a>开发与生产</h3><p>通过设置<code>build/webpack.base.conf.js</code>，使<code>build</code>时打包<code>components</code>文件夹里的内容</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">entry: &#123;</span><br><span class="line">    <span class="attr">app</span>: process.env.NODE_ENV === <span class="string">&#x27;production&#x27;</span></span><br><span class="line">      ? <span class="string">&#x27;./src/components/index.js&#x27;</span> <span class="comment">// 生产模式下导入文件</span></span><br><span class="line">      : <span class="string">&#x27;./src/main.js&#x27;</span> <span class="comment">// 开发模式下导入文件</span></span><br><span class="line">&#125;,</span><br></pre></td></tr></table></figure>
+<p>这样设置后使得项目的开发与生产独立开来，使用<code>npm run dev</code>进入开发环境，就可以看到组件的demo页面，方便本地调试。使用<code>npm run build</code>打包组件库代码。<br>由于<code>dist</code>文件夹下文件是要导出的文件，所以在<code>.gitignore</code>文件中记得把<code>dist/</code>去掉。</p>
+<h2 id="编写组件"><a href="#编写组件" class="headerlink" title="编写组件"></a>编写组件</h2><p>编写一个Vue组件经常会用到<code>props</code>和<code>slot</code>。</p>
+<h3 id="props"><a href="#props" class="headerlink" title="props"></a>props</h3><p>vue父组件通过<code>props</code>向子组件传递数据</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">&quot;hg-to-top&quot;</span> <span class="attr">:style</span>=<span class="string">&quot;&#123;height: height&#125;&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">...</span><br><span class="line">props: &#123;</span><br><span class="line">  height: &#123;</span><br><span class="line">    type: String,</span><br><span class="line">    default: &#x27;30px&#x27;</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;,</span><br></pre></td></tr></table></figure>
+
+<h3 id="slot"><a href="#slot" class="headerlink" title="slot"></a>slot</h3><p>vue父组件通过<code>slot</code>向子组件传递<code>template</code></p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">&quot;hg-to-top&quot;</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">slot</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">span</span> <span class="attr">class</span>=<span class="string">&quot;hg-to-top-arrows&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">span</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">slot</span>&gt;</span>  </span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>如果父组件中不传入<code>slot</code>，默认显示子组件中<code>slot</code>标签里的内容。</p>
+<p>完整组件代码见<a target="_blank" rel="noopener" href="https://github.com/hamger/hg-vcomponents/blob/master/src/components/ToTop/to-top.vue">这里</a>。</p>
+<h3 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h3><p>开发一个组件的同时会需要进行本地测试，在<code>examples</code>下新建<code>arrows.vue</code>用来测试组件</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">template</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">hollow-arrow</span> <span class="attr">:direction</span>=<span class="string">&quot;&#x27;left&#x27;&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">hollow-arrow</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">template</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="javascript"></span></span><br><span class="line"><span class="javascript"><span class="keyword">import</span> &#123; HollowArrow &#125; <span class="keyword">from</span> <span class="string">&#x27;@/components&#x27;</span>;</span></span><br><span class="line"><span class="javascript"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</span></span><br><span class="line"><span class="javascript">  <span class="attr">components</span>: &#123;</span></span><br><span class="line"><span class="javascript">    HollowArrow</span></span><br><span class="line"><span class="javascript">  &#125;,</span></span><br><span class="line"><span class="javascript">&#125;;</span></span><br><span class="line"><span class="javascript"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="上传NPM"><a href="#上传NPM" class="headerlink" title="上传NPM"></a>上传NPM</h2><p>开发的组件希望被更多的人使用，这时就需要上传NPM。</p>
+<blockquote>
+<p>修改<code>package.json</code>配置</p>
+</blockquote>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">&quot;private&quot;</span>: <span class="literal">false</span>, <span class="comment">// 因为组件包是公用的，所以 private 为 false</span></span><br><span class="line"><span class="string">&quot;main&quot;</span>: <span class="string">&quot;dist/hg-vcomponents.min.js&quot;</span>, <span class="comment">// 导出文件名，即 import 引入的文件</span></span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>登录npm后，在根目录输入命令</p>
+</blockquote>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">npm version patch</span><br><span class="line">npm publish</span><br></pre></td></tr></table></figure>
+<p>现在你可以使用<code>npm install hg-vconponents</code>下载自己的组件库了，并通过如下方式引入</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> <span class="string">&#x27;hg-vcomponents/dist/hg-vcomponents.min.css&#x27;</span>;</span><br><span class="line"><span class="keyword">import</span> &#123; HollowArrow &#125; <span class="keyword">from</span> <span class="string">&#x27;hg-vcomponents&#x27;</span>;</span><br></pre></td></tr></table></figure>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Vue-js/" rel="tag"># Vue.js</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2018/02/15/form%E6%A0%87%E7%AD%BE%E5%B1%9E%E6%80%A7/" rel="prev" title="form标签属性">
+                  <i class="fa fa-chevron-left"></i> form标签属性
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2018/02/17/Vue%E4%B8%AD%E5%BC%95%E7%94%A8%E5%9B%BE%E7%89%87%E5%9C%B0%E5%9D%80/" rel="next" title="Vue中引用图片地址">
+                  Vue中引用图片地址 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Hank</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" rel="noopener" target="_blank">NexT.Muse</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script>
+
+  
+<script src="https://cdn.jsdelivr.net/npm/algoliasearch@4.11.0/dist/algoliasearch-lite.umd.js" integrity="sha256-48AZ24Ct05NAMLT7hvYgeW1X350OgEcZvHd6Ih6xwOA=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/instantsearch.js@4.33.2/dist/instantsearch.production.min.js" integrity="sha256-0B5Q7I/DVd8yp8JYLzbpELEonNBlVe7NLixMCLEnlBU=" crossorigin="anonymous"></script><script src="/js/third-party/search/algolia-search.js"></script>
+
+
+
+
+
+  
+
+
+
+
+
+</body>
+</html>

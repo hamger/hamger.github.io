@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.0.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.4/css/all.min.css" integrity="sha256-mUZM63G8m73Mcidfrv5E+Y61y7a12O5mW4ezU3bxqW4=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"hangermeng.top","root":"/","images":"/images","scheme":"Muse","darkmode":false,"version":"8.8.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"},"algolia":{"appID":"ZV0EGDRD8C","apiKey":"01ab18713b33dcc47e43484208996a80","indexName":"hexo_hamger","hits":{"per_page":10}}}</script><script src="/js/config.js"></script>
+<meta name="description" content="React 组件 APIReact 组件 API 中有以下7个常用方法:  设置状态：setState 替换状态：replaceState 设置属性：setProps 替换属性：replaceProps 强制更新：forceUpdate 获取DOM节点：findDOMNode 判断组件挂载状态：isMounted  setState1setState(nextState[, callback])">
+<meta property="og:type" content="article">
+<meta property="og:title" content="React基础2">
+<meta property="og:url" content="https://hangermeng.top/2018/03/09/React%E5%9F%BA%E7%A1%802/index.html">
+<meta property="og:site_name" content="Hank&#39;s Blog">
+<meta property="og:description" content="React 组件 APIReact 组件 API 中有以下7个常用方法:  设置状态：setState 替换状态：replaceState 设置属性：setProps 替换属性：replaceProps 强制更新：forceUpdate 获取DOM节点：findDOMNode 判断组件挂载状态：isMounted  setState1setState(nextState[, callback])">
+<meta property="og:locale">
+<meta property="article:published_time" content="2018-03-09T00:37:59.000Z">
+<meta property="article:modified_time" content="2022-02-10T09:38:19.390Z">
+<meta property="article:author" content="Hank">
+<meta property="article:tag" content="React">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://hangermeng.top/2018/03/09/React%E5%9F%BA%E7%A1%802/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-Hans","comments":true,"permalink":"https://hangermeng.top/2018/03/09/React%E5%9F%BA%E7%A1%802/","path":"2018/03/09/React基础2/","title":"React基础2"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>React基础2 | Hank's Blog</title>
+  
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Hank's Blog</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">耕种思考的自留地</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu">
+        <li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a></li>
+        <li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a></li>
+        <li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a></li>
+        <li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container"></div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container">
+  <div class="algolia-stats"><hr></div>
+  <div class="algolia-hits"></div>
+  <div class="algolia-pagination"></div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#React-%E7%BB%84%E4%BB%B6-API"><span class="nav-number">1.</span> <span class="nav-text">React 组件 API</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#setState"><span class="nav-number">1.1.</span> <span class="nav-text">setState</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#replaceState"><span class="nav-number">1.2.</span> <span class="nav-text">replaceState</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#setProps"><span class="nav-number">1.3.</span> <span class="nav-text">setProps</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#replaceProps"><span class="nav-number">1.4.</span> <span class="nav-text">replaceProps</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#forceUpdate"><span class="nav-number">1.5.</span> <span class="nav-text">forceUpdate</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#findDOMNode"><span class="nav-number">1.6.</span> <span class="nav-text">findDOMNode</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#isMounted"><span class="nav-number">1.7.</span> <span class="nav-text">isMounted</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%BB%84%E4%BB%B7%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F"><span class="nav-number">2.</span> <span class="nav-text">组价生命周期</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F%E7%9A%84%E6%96%B9%E6%B3%95"><span class="nav-number">2.1.</span> <span class="nav-text">生命周期的方法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%94%9F%E5%91%BD%E5%91%A8%E6%9C%9F%E7%9A%84%E5%AE%9E%E4%BE%8B"><span class="nav-number">2.2.</span> <span class="nav-text">生命周期的实例</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Hank"
+      src="/images/avatar.jpg">
+  <p class="site-author-name" itemprop="name">Hank</p>
+  <div class="site-description" itemprop="description">Learning progress and good health</div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">125</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">35</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author site-overview-item animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/hamger" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;hamger" rel="noopener" target="_blank"><i class="github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:2313303800@qq.com" title="E-Mail → mailto:2313303800@qq.com" rel="noopener" target="_blank"><i class="envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="https://hangermeng.top/2018/03/09/React%E5%9F%BA%E7%A1%802/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="Hank">
+      <meta itemprop="description" content="Learning progress and good health">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hank's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          React基础2
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2018-03-09 08:37:59" itemprop="dateCreated datePublished" datetime="2018-03-09T08:37:59+08:00">2018-03-09</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2022-02-10 17:38:19" itemprop="dateModified" datetime="2022-02-10T17:38:19+08:00">2022-02-10</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <h3 id="React-组件-API"><a href="#React-组件-API" class="headerlink" title="React 组件 API"></a>React 组件 API</h3><p>React 组件 API 中有以下7个常用方法:</p>
+<ul>
+<li>设置状态：setState</li>
+<li>替换状态：replaceState</li>
+<li>设置属性：setProps</li>
+<li>替换属性：replaceProps</li>
+<li>强制更新：forceUpdate</li>
+<li>获取DOM节点：findDOMNode</li>
+<li>判断组件挂载状态：isMounted</li>
+</ul>
+<h4 id="setState"><a href="#setState" class="headerlink" title="setState"></a>setState</h4><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">setState(nextState[, callback])</span><br></pre></td></tr></table></figure>
+<ul>
+<li>nextState：一个对象。将要设置的新状态，该状态会和当前的state合并</li>
+<li>callback：回调函数。该函数会在setState设置成功，且组件重新渲染后调用</li>
+</ul>
+<h4 id="replaceState"><a href="#replaceState" class="headerlink" title="replaceState"></a>replaceState</h4><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">replaceState(nextState[, callback])</span><br></pre></td></tr></table></figure>
+<ul>
+<li>nextState：一个对象。将要设置的新状态，该状态会替换当前的state。</li>
+<li>callback：回调函数。该函数会在replaceState设置成功，且组件重新渲染后调用。</li>
+</ul>
+<h4 id="setProps"><a href="#setProps" class="headerlink" title="setProps"></a>setProps</h4><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">setProps(nextProps[, callback])</span><br></pre></td></tr></table></figure>
+<ul>
+<li>nextProps：一个对象。将要设置的新属性，该状态会和当前的props合并</li>
+<li>callback：回调函数。该函数会在setProps设置成功，且组件重新渲染后调用</li>
+</ul>
+<h4 id="replaceProps"><a href="#replaceProps" class="headerlink" title="replaceProps"></a>replaceProps</h4><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">replaceProps(nextProps[, callback])</span><br></pre></td></tr></table></figure>
+<ul>
+<li>nextProps：一个对象。将要设置的新属性，该属性会替换当前的props。</li>
+<li>callback：回调函数。该函数会在replaceProps设置成功，且组件重新渲染后调用。</li>
+</ul>
+<h4 id="forceUpdate"><a href="#forceUpdate" class="headerlink" title="forceUpdate"></a>forceUpdate</h4><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">forceUpdate([callback])</span><br></pre></td></tr></table></figure>
+<ul>
+<li>callback：回调函数。该函数会在组件render()方法调用后调用。</li>
+</ul>
+<p>forceUpdate()方法会使组件和子组件调用自身的render()方法重新渲染组件。但是，组件重新渲染时，依然会读取this.props和this.state，如果状态没有改变，那么React只会更新DOM。</p>
+<p>一般来说，应该尽量避免使用forceUpdate()，而仅从this.props和this.state中读取状态并由React触发render()调用。</p>
+<h4 id="findDOMNode"><a href="#findDOMNode" class="headerlink" title="findDOMNode"></a>findDOMNode</h4><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">DOMElement findDOMNode()</span><br></pre></td></tr></table></figure>
+<p>如果组件已经挂载到DOM中，该方法返回对应的本地浏览器 DOM 元素。当render返回null 或 false时，this.findDOMNode()也会返回null。</p>
+<h4 id="isMounted"><a href="#isMounted" class="headerlink" title="isMounted"></a>isMounted</h4><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">bool isMounted()</span><br></pre></td></tr></table></figure>
+<p>返回值：true或false，表示组件是否已挂载到DOM中。可以使用该方法保证了setState()和forceUpdate()在异步场景下的调用不会出错。</p>
+<span id="more"></span>
+<h3 id="组价生命周期"><a href="#组价生命周期" class="headerlink" title="组价生命周期"></a>组价生命周期</h3><p>组件的生命周期可分成三个状态：</p>
+<ul>
+<li>Mounting：已插入真实 DOM</li>
+<li>Updating：正在被重新渲染</li>
+<li>Unmounting：已移出真实 DOM</li>
+</ul>
+<h4 id="生命周期的方法"><a href="#生命周期的方法" class="headerlink" title="生命周期的方法"></a>生命周期的方法</h4><ul>
+<li>componentWillMount： 在渲染前调用, 在客户端也在服务端。</li>
+<li>componentDidMount：在第一次渲染后调用，只在客户端。之后组件已经生成了对应的DOM结构，可以通过this.getDOMNode()来进行访问。</li>
+<li>componentWillReceiveProps：在组件接收到一个新的 prop 时被调用。这个方法在初始化render时不会被调用。</li>
+<li>shouldComponentUpdate：返回一个布尔值。在组件接收到新的props或者state时被调用。在初始化时或者使用forceUpdate时不被调用。 </li>
+<li>componentWillUpdate：在组件接收到新的props或者state但还没有render时被调用。在初始化时不会被调用。</li>
+<li>componentDidUpdate：在组件完成更新后立即调用。在初始化时不会被调用。</li>
+<li>componentWillUnmount：在组件从 DOM 中移除的时候立刻被调用。</li>
+</ul>
+<p>具体见<a target="_blank" rel="noopener" href="https://doc.react-china.org/">官方文档(中文)</a></p>
+<h4 id="生命周期的实例"><a href="#生命周期的实例" class="headerlink" title="生命周期的实例"></a>生命周期的实例</h4><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> Button = React.createClass(&#123;</span><br><span class="line">  <span class="attr">getInitialState</span>: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> &#123;</span><br><span class="line">      <span class="attr">data</span>:<span class="number">0</span></span><br><span class="line">    &#125;;</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="attr">setNewNumber</span>: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">this</span>.setState(&#123;<span class="attr">data</span>: <span class="built_in">this</span>.state.data + <span class="number">1</span>&#125;)</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="attr">render</span>: <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> (</span><br><span class="line">      <span class="xml"><span class="tag">&lt;<span class="name">div</span>&gt;</span></span></span><br><span class="line"><span class="xml">        <span class="tag">&lt;<span class="name">button</span> <span class="attr">onClick</span> = <span class="string">&#123;this.setNewNumber&#125;</span>&gt;</span>INCREMENT<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span></span><br><span class="line"><span class="xml">        <span class="tag">&lt;<span class="name">Content</span> <span class="attr">myNumber</span> = <span class="string">&#123;this.state.data&#125;</span>&gt;</span><span class="tag">&lt;/<span class="name">Content</span>&gt;</span></span></span><br><span class="line"><span class="xml">      <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line">    );</span><br><span class="line">  &#125;</span><br><span class="line">&#125;);</span><br><span class="line"><span class="keyword">var</span> Content = React.createClass(&#123;</span><br><span class="line">  <span class="attr">componentWillMount</span>:<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">&#x27;Component WILL MOUNT!&#x27;</span>)</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="attr">componentDidMount</span>:<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">&#x27;Component DID MOUNT!&#x27;</span>)</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="attr">componentWillReceiveProps</span>:<span class="function"><span class="keyword">function</span>(<span class="params">newProps</span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">&#x27;Component WILL RECEIVE PROPS!&#x27;</span>)</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="attr">shouldComponentUpdate</span>:<span class="function"><span class="keyword">function</span>(<span class="params">newProps, newState</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="attr">componentWillUpdate</span>:<span class="function"><span class="keyword">function</span>(<span class="params">nextProps, nextState</span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">&#x27;Component WILL UPDATE!&#x27;</span>);</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="attr">componentDidUpdate</span>:<span class="function"><span class="keyword">function</span>(<span class="params">prevProps, prevState</span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">&#x27;Component DID UPDATE!&#x27;</span>)</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="attr">componentWillUnmount</span>:<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">&#x27;Component WILL UNMOUNT!&#x27;</span>)</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="attr">render</span>: <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> (</span><br><span class="line">      <span class="xml"><span class="tag">&lt;<span class="name">div</span>&gt;</span></span></span><br><span class="line"><span class="xml">        <span class="tag">&lt;<span class="name">h3</span>&gt;</span>&#123;this.props.myNumber&#125;<span class="tag">&lt;/<span class="name">h3</span>&gt;</span></span></span><br><span class="line"><span class="xml">      <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line">    );</span><br><span class="line">  &#125;</span><br><span class="line">&#125;);</span><br><span class="line">ReactDOM.render(</span><br><span class="line">  <span class="xml"><span class="tag">&lt;<span class="name">div</span>&gt;</span></span></span><br><span class="line"><span class="xml">    <span class="tag">&lt;<span class="name">Button</span> /&gt;</span></span></span><br><span class="line"><span class="xml">  <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span>,</span><br><span class="line">  <span class="built_in">document</span>.getElementById(<span class="string">&#x27;example&#x27;</span>)</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/React/" rel="tag"># React</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2018/03/09/React%E5%9F%BA%E7%A1%80/" rel="prev" title="React基础">
+                  <i class="fa fa-chevron-left"></i> React基础
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2018/03/10/TypeScript%E5%AD%A6%E4%B9%A0/" rel="next" title="TypeScript学习">
+                  TypeScript学习 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Hank</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" rel="noopener" target="_blank">NexT.Muse</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script>
+
+  
+<script src="https://cdn.jsdelivr.net/npm/algoliasearch@4.11.0/dist/algoliasearch-lite.umd.js" integrity="sha256-48AZ24Ct05NAMLT7hvYgeW1X350OgEcZvHd6Ih6xwOA=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/instantsearch.js@4.33.2/dist/instantsearch.production.min.js" integrity="sha256-0B5Q7I/DVd8yp8JYLzbpELEonNBlVe7NLixMCLEnlBU=" crossorigin="anonymous"></script><script src="/js/third-party/search/algolia-search.js"></script>
+
+
+
+
+
+  
+
+
+
+
+
+</body>
+</html>

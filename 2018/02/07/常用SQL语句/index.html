@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.0.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.4/css/all.min.css" integrity="sha256-mUZM63G8m73Mcidfrv5E+Y61y7a12O5mW4ezU3bxqW4=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"hangermeng.top","root":"/","images":"/images","scheme":"Muse","darkmode":false,"version":"8.8.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"},"algolia":{"appID":"ZV0EGDRD8C","apiKey":"01ab18713b33dcc47e43484208996a80","indexName":"hexo_hamger","hits":{"per_page":10}}}</script><script src="/js/config.js"></script>
+<meta name="description" content="SQL 是用于访问和处理数据库的标准的计算机语言。SQL 语句不区分大小写。注意在命名表的时候不要用MySQL的关键字（关键字一览表），否则插入数据的时候就报错。 SELECT - 从数据库中提取数据1234567891011121314151617181920&#x2F;&#x2F; 查询整个表SELECT * FROM table_name;&#x2F;&#x2F; 查询指定列SELECT column_name, column_n">
+<meta property="og:type" content="article">
+<meta property="og:title" content="常用SQL语句">
+<meta property="og:url" content="https://hangermeng.top/2018/02/07/%E5%B8%B8%E7%94%A8SQL%E8%AF%AD%E5%8F%A5/index.html">
+<meta property="og:site_name" content="Hank&#39;s Blog">
+<meta property="og:description" content="SQL 是用于访问和处理数据库的标准的计算机语言。SQL 语句不区分大小写。注意在命名表的时候不要用MySQL的关键字（关键字一览表），否则插入数据的时候就报错。 SELECT - 从数据库中提取数据1234567891011121314151617181920&#x2F;&#x2F; 查询整个表SELECT * FROM table_name;&#x2F;&#x2F; 查询指定列SELECT column_name, column_n">
+<meta property="og:locale">
+<meta property="article:published_time" content="2018-02-07T13:01:04.000Z">
+<meta property="article:modified_time" content="2022-02-10T09:38:19.406Z">
+<meta property="article:author" content="Hank">
+<meta property="article:tag" content="SQL">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://hangermeng.top/2018/02/07/%E5%B8%B8%E7%94%A8SQL%E8%AF%AD%E5%8F%A5/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-Hans","comments":true,"permalink":"https://hangermeng.top/2018/02/07/%E5%B8%B8%E7%94%A8SQL%E8%AF%AD%E5%8F%A5/","path":"2018/02/07/常用SQL语句/","title":"常用SQL语句"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>常用SQL语句 | Hank's Blog</title>
+  
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Hank's Blog</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">耕种思考的自留地</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu">
+        <li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a></li>
+        <li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a></li>
+        <li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a></li>
+        <li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>Search
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container"></div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container">
+  <div class="algolia-stats"><hr></div>
+  <div class="algolia-hits"></div>
+  <div class="algolia-pagination"></div>
+</div>
+
+    </div>
+  </div>
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#SELECT-%E4%BB%8E%E6%95%B0%E6%8D%AE%E5%BA%93%E4%B8%AD%E6%8F%90%E5%8F%96%E6%95%B0%E6%8D%AE"><span class="nav-number">1.</span> <span class="nav-text">SELECT - 从数据库中提取数据</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#INSERT-INTO-%E5%90%91%E6%95%B0%E6%8D%AE%E5%BA%93%E4%B8%AD%E6%8F%92%E5%85%A5%E6%96%B0%E6%95%B0%E6%8D%AE"><span class="nav-number">2.</span> <span class="nav-text">INSERT INTO - 向数据库中插入新数据</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#UPDATE-%E6%9B%B4%E6%96%B0%E6%95%B0%E6%8D%AE%E5%BA%93%E4%B8%AD%E7%9A%84%E6%95%B0%E6%8D%AE"><span class="nav-number">3.</span> <span class="nav-text">UPDATE - 更新数据库中的数据</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#DELETE-%E4%BB%8E%E6%95%B0%E6%8D%AE%E5%BA%93%E4%B8%AD%E5%88%A0%E9%99%A4%E6%95%B0%E6%8D%AE"><span class="nav-number">4.</span> <span class="nav-text">DELETE - 从数据库中删除数据</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#CREATE-%E5%88%9B%E5%BB%BA%E6%95%B0%E6%8D%AE%E5%BA%93%E3%80%81%E8%A1%A8%E3%80%81%E7%B4%A2%E5%BC%95"><span class="nav-number">5.</span> <span class="nav-text">CREATE - 创建数据库、表、索引</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Hank"
+      src="/images/avatar.jpg">
+  <p class="site-author-name" itemprop="name">Hank</p>
+  <div class="site-description" itemprop="description">Learning progress and good health</div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">125</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">35</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author site-overview-item animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/hamger" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;hamger" rel="noopener" target="_blank"><i class="github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:2313303800@qq.com" title="E-Mail → mailto:2313303800@qq.com" rel="noopener" target="_blank"><i class="envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="https://hangermeng.top/2018/02/07/%E5%B8%B8%E7%94%A8SQL%E8%AF%AD%E5%8F%A5/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="Hank">
+      <meta itemprop="description" content="Learning progress and good health">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hank's Blog">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          常用SQL语句
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2018-02-07 21:01:04" itemprop="dateCreated datePublished" datetime="2018-02-07T21:01:04+08:00">2018-02-07</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2022-02-10 17:38:19" itemprop="dateModified" datetime="2022-02-10T17:38:19+08:00">2022-02-10</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <p>SQL 是用于访问和处理数据库的标准的计算机语言。<strong>SQL 语句不区分大小写</strong>。注意在命名表的时候<strong>不要用MySQL的关键字</strong>（<a target="_blank" rel="noopener" href="https://www.cnblogs.com/wuyifu/p/5949764.html">关键字一览表</a>），否则插入数据的时候就报错。</p>
+<h3 id="SELECT-从数据库中提取数据"><a href="#SELECT-从数据库中提取数据" class="headerlink" title="SELECT - 从数据库中提取数据"></a>SELECT - 从数据库中提取数据</h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="operator">/</span><span class="operator">/</span> 查询整个表</span><br><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> table_name;</span><br><span class="line"><span class="operator">/</span><span class="operator">/</span> 查询指定列</span><br><span class="line"><span class="keyword">SELECT</span> column_name, column_name2</span><br><span class="line"><span class="keyword">FROM</span> table_name;</span><br><span class="line"><span class="operator">/</span><span class="operator">/</span> 查询作者是 hanger 的文章，并按发布时间降序排序(默认升序 aes)</span><br><span class="line"><span class="keyword">select</span> <span class="operator">*</span> <span class="keyword">from</span> articles <span class="keyword">where</span> author <span class="operator">=</span> <span class="string">&#x27;hanger&#x27;</span> <span class="keyword">order</span> <span class="keyword">by</span> publish_time <span class="keyword">desc</span></span><br><span class="line"><span class="operator">/</span><span class="operator">/</span> &quot;Websites&quot; 表中选取所有网站，并按照 &quot;country&quot; 和 &quot;alexa&quot; 列排序</span><br><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> Websites</span><br><span class="line"><span class="keyword">ORDER</span> <span class="keyword">BY</span> country,alexa;</span><br><span class="line"><span class="operator">/</span><span class="operator">/</span> <span class="keyword">DISTINCT</span> 使查询结果去除重复值</span><br><span class="line"><span class="keyword">SELECT</span> <span class="keyword">DISTINCT</span> column_name, column_name</span><br><span class="line"><span class="keyword">FROM</span> table_name;</span><br><span class="line"><span class="operator">/</span><span class="operator">/</span> &quot;Websites&quot; 表中选取 alexa 排名大于 &quot;15&quot; 且国家为 &quot;CN&quot; 或 &quot;USA&quot; 的所有网站</span><br><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> Websites</span><br><span class="line"><span class="keyword">WHERE</span> alexa <span class="operator">&gt;</span> <span class="number">15</span></span><br><span class="line"><span class="keyword">AND</span> (country<span class="operator">=</span><span class="string">&#x27;CN&#x27;</span> <span class="keyword">OR</span> country<span class="operator">=</span><span class="string">&#x27;USA&#x27;</span>);</span><br><span class="line"><span class="operator">/</span><span class="operator">/</span> 查询前五条数据(limit index, length)</span><br><span class="line"><span class="keyword">SELECT</span> <span class="operator">*</span> <span class="keyword">FROM</span> Persons</span><br><span class="line">LIMIT <span class="number">0</span>,<span class="number">5</span>;</span><br></pre></td></tr></table></figure>
+<span id="more"></span>
+
+<p>SQL 使用单引号来环绕文本值（大部分数据库系统也接受双引号）。如果是数值字段，请不要使用引号。<br>下面的运算符可以在 WHERE 子句中使用：</p>
+<table>
+<thead>
+<tr>
+<th>运算符</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>=</td>
+<td>等于</td>
+</tr>
+<tr>
+<td>&lt;&gt;</td>
+<td>不等于。注释：在 SQL 的一些版本中，该操作符可被写成 !=</td>
+</tr>
+</tbody></table>
+<blockquote>
+<p>| 大于<br>&lt;  | 小于<br>= | 大于等于<br>&lt;= | 小于等于<br>BETWEEN | 在某个范围内<br>LIKE |  搜索某种模式<br>IN | 指定针对某个列的多个可能值</p>
+</blockquote>
+<h3 id="INSERT-INTO-向数据库中插入新数据"><a href="#INSERT-INTO-向数据库中插入新数据" class="headerlink" title="INSERT INTO - 向数据库中插入新数据"></a>INSERT INTO - 向数据库中插入新数据</h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="operator">/</span><span class="operator">/</span> 无需指定要插入数据的列名(按列顺序插入数据)</span><br><span class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> table_name</span><br><span class="line"><span class="keyword">VALUES</span> (value1,value2,value3,...);</span><br><span class="line"><span class="operator">/</span><span class="operator">/</span> 需要指定列名及被插入的值</span><br><span class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> table_name (column1,column2,column3,...)</span><br><span class="line"><span class="keyword">VALUES</span> (value1,value2,value3,...);</span><br></pre></td></tr></table></figure>
+
+<h3 id="UPDATE-更新数据库中的数据"><a href="#UPDATE-更新数据库中的数据" class="headerlink" title="UPDATE - 更新数据库中的数据"></a>UPDATE - 更新数据库中的数据</h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="operator">/</span><span class="operator">/</span> 把 &quot;菜鸟教程&quot; 的 alexa 排名更新为 <span class="number">5000</span>，country 改为 USA</span><br><span class="line">UPDATE Websites </span><br><span class="line"><span class="keyword">SET</span> alexa<span class="operator">=</span><span class="string">&#x27;5000&#x27;</span>, country<span class="operator">=</span><span class="string">&#x27;USA&#x27;</span> </span><br><span class="line"><span class="keyword">WHERE</span> name<span class="operator">=</span><span class="string">&#x27;菜鸟教程&#x27;</span>;</span><br></pre></td></tr></table></figure>
+<p><strong>警告！</strong>在更新记录时要格外小心！在上面的实例中，如果省略了<code>WHERE</code>，执行后将<code>Websites</code>表中所有数据的<code>alexa</code>改为<code>5000</code>，<code>country</code>改为<code>USA</code>！</p>
+<h3 id="DELETE-从数据库中删除数据"><a href="#DELETE-从数据库中删除数据" class="headerlink" title="DELETE - 从数据库中删除数据"></a>DELETE - 从数据库中删除数据</h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="operator">/</span><span class="operator">/</span> 删除指定行</span><br><span class="line"><span class="keyword">DELETE</span> <span class="keyword">FROM</span> table_name</span><br><span class="line"><span class="keyword">WHERE</span> some_column<span class="operator">=</span>some_value;</span><br><span class="line"><span class="operator">/</span><span class="operator">/</span> 删除表中所有的行，但表结构、属性、索引将保持不变</span><br><span class="line"><span class="keyword">DELETE</span> <span class="keyword">FROM</span> table_name;</span><br><span class="line"><span class="keyword">DELETE</span> <span class="operator">*</span> <span class="keyword">FROM</span> table_name;</span><br></pre></td></tr></table></figure>
+
+<h3 id="CREATE-创建数据库、表、索引"><a href="#CREATE-创建数据库、表、索引" class="headerlink" title="CREATE - 创建数据库、表、索引"></a>CREATE - 创建数据库、表、索引</h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="operator">/</span><span class="operator">/</span> 创建数据库</span><br><span class="line"><span class="keyword">CREATE</span> DATABASE dbname;</span><br><span class="line"><span class="operator">/</span><span class="operator">/</span> 创建 persons 表</span><br><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> Persons</span><br><span class="line">(</span><br><span class="line">PersonID <span class="type">int</span>,</span><br><span class="line">LastName <span class="type">varchar</span>(<span class="number">255</span>),</span><br><span class="line">FirstName <span class="type">varchar</span>(<span class="number">255</span>),</span><br><span class="line">Address <span class="type">varchar</span>(<span class="number">255</span>),</span><br><span class="line">City <span class="type">varchar</span>(<span class="number">255</span>)</span><br><span class="line">);</span><br><span class="line"><span class="operator">/</span><span class="operator">/</span> 在 &quot;Persons&quot; 表的 &quot;LastName&quot;、&quot;FirstName&quot; 列上创建一个名为 &quot;PIndex&quot; 的索引，允许使用重复的值</span><br><span class="line"><span class="keyword">CREATE</span> INDEX PIndex</span><br><span class="line"><span class="keyword">ON</span> Persons (LastName, FirstName)</span><br><span class="line"><span class="operator">/</span><span class="operator">/</span> <span class="keyword">UNIQUE</span> 在表上创建一个唯一的索引。不允许使用重复的值</span><br><span class="line"><span class="keyword">CREATE</span> <span class="keyword">UNIQUE</span> INDEX index_name</span><br><span class="line"><span class="keyword">ON</span> table_name (column_name)</span><br></pre></td></tr></table></figure>
+<p>在不读取整个表的情况下，索引使数据库应用程序可以更快地查找数据。更新一个包含索引的表需要比更新一个没有索引的表花费更多的时间，这是由于索引本身也需要更新。因此，理想的做法是仅仅在常常被搜索的列（以及表）上面创建索引。</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/SQL/" rel="tag"># SQL</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2018/01/28/js%E4%B8%AD%E7%9A%84this%E6%8C%87%E5%90%91/" rel="prev" title="js中的this指向">
+                  <i class="fa fa-chevron-left"></i> js中的this指向
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2018/02/10/SVG-%E5%9B%BE%E5%BD%A2/" rel="next" title="SVG 图形">
+                  SVG 图形 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Hank</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" rel="noopener" target="_blank">NexT.Muse</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script>
+
+  
+<script src="https://cdn.jsdelivr.net/npm/algoliasearch@4.11.0/dist/algoliasearch-lite.umd.js" integrity="sha256-48AZ24Ct05NAMLT7hvYgeW1X350OgEcZvHd6Ih6xwOA=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/instantsearch.js@4.33.2/dist/instantsearch.production.min.js" integrity="sha256-0B5Q7I/DVd8yp8JYLzbpELEonNBlVe7NLixMCLEnlBU=" crossorigin="anonymous"></script><script src="/js/third-party/search/algolia-search.js"></script>
+
+
+
+
+
+  
+
+
+
+
+
+</body>
+</html>
