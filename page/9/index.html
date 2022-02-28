@@ -154,13 +154,13 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">125</span>
+          <span class="site-state-item-count">126</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">35</span>
+        <span class="site-state-item-count">36</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
@@ -197,6 +197,86 @@
 
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://hangermeng.top/2017/06/08/%E5%88%97%E8%A1%A8%E6%A8%A1%E6%9D%BF%E5%BC%95%E6%93%8E%E8%BF%9B%E5%8C%96%E4%B9%8B%E8%B7%AF/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="Hank">
+      <meta itemprop="description" content="Learning progress and good health">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hank's Blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2017/06/08/%E5%88%97%E8%A1%A8%E6%A8%A1%E6%9D%BF%E5%BC%95%E6%93%8E%E8%BF%9B%E5%8C%96%E4%B9%8B%E8%B7%AF/" class="post-title-link" itemprop="url">列表模板引擎进化之路</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2017-06-08 07:31:43" itemprop="dateCreated datePublished" datetime="2017-06-08T07:31:43+08:00">2017-06-08</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2022-02-10 17:38:19" itemprop="dateModified" datetime="2022-02-10T17:38:19+08:00">2022-02-10</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>平时的工作中，经常会遇到渲染列表的需求，比如下面的代码</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> data = [&#123;<span class="attr">id</span>: <span class="number">1</span>, <span class="attr">name</span>: <span class="string">&#x27;hanger&#x27;</span>&#125;, &#123;<span class="attr">id</span>: <span class="number">2</span>, <span class="attr">name</span>: <span class="string">&#x27;Alice&#x27;</span>&#125;]</span><br><span class="line"><span class="keyword">var</span> tableContent = <span class="string">&#x27;&#x27;</span></span><br><span class="line">data.forEach(<span class="function"><span class="keyword">function</span> (<span class="params">obj</span>) </span>&#123;</span><br><span class="line">    tableContent += <span class="string">&#x27;&lt;tr&gt;&#x27;</span> +</span><br><span class="line">        <span class="string">&#x27;&lt;th &gt;&#x27;</span> + obj.id + <span class="string">&#x27;&lt;/th&gt;&#x27;</span> +</span><br><span class="line">        <span class="string">&#x27;&lt;th&gt;&#x27;</span> + obj.name + <span class="string">&#x27;&lt;/th&gt;&#x27;</span> +</span><br><span class="line">        <span class="string">&#x27;&lt;/tr&gt;&#x27;</span></span><br><span class="line">&#125;)</span><br><span class="line"><span class="built_in">console</span>.log(tableContent)</span><br></pre></td></tr></table></figure>
+<p>向上面这样写一个字符串十分繁琐，而且不可复用。那么有什么办法可以解决这样的问题呢？<br>我们都知道js的replace()函数可以实现字符串的替换，replace()第二个参数可以为函数，在开启列表模板引擎进化之旅之前需要先理解<a href="https://hangermeng.top/2017/03/17/replace-%E6%96%B9%E6%B3%95/">replace方法</a>。<br>现在我要利用replace()的强大能力来解决上面这个问题。直接上最初的代码：</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2017/06/08/%E5%88%97%E8%A1%A8%E6%A8%A1%E6%9D%BF%E5%BC%95%E6%93%8E%E8%BF%9B%E5%8C%96%E4%B9%8B%E8%B7%AF/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -1128,89 +1208,6 @@
             </div>
           <!--/noindex-->
         
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://hangermeng.top/2017/03/27/PHP%E5%8D%95%E5%8F%8C%E5%BC%95%E5%8F%B7%E5%8C%BA%E5%88%AB/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.jpg">
-      <meta itemprop="name" content="Hank">
-      <meta itemprop="description" content="Learning progress and good health">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hank's Blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2017/03/27/PHP%E5%8D%95%E5%8F%8C%E5%BC%95%E5%8F%B7%E5%8C%BA%E5%88%AB/" class="post-title-link" itemprop="url">PHP单双引号区别</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2017-03-27 23:09:21" itemprop="dateCreated datePublished" datetime="2017-03-27T23:09:21+08:00">2017-03-27</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2022-02-10 17:38:19" itemprop="dateModified" datetime="2022-02-10T17:38:19+08:00">2022-02-10</time>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <ul>
-<li>单引号内字段不进行解释，直接输出。</li>
-<li>双引号内字段会经过编译器解释，然后再当作HTML代码输出。</li>
-</ul>
-<p>双引号内部变量会解析,单引号则不解析。</p>
-<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$abc</span> = <span class="string">&#x27;my name is Tom&#x27;</span>;</span><br><span class="line"><span class="keyword">echo</span> <span class="variable">$abc</span>; <span class="comment">//结果是:my name is Tom</span></span><br><span class="line"><span class="keyword">echo</span> <span class="string">&#x27;$abc&#x27;</span>; <span class="comment">//结果是:$abc</span></span><br><span class="line"><span class="keyword">echo</span> <span class="string">&quot;<span class="subst">$abc</span>&quot;</span>; <span class="comment">//结果是:my name is Tom</span></span><br></pre></td></tr></table></figure>
-
-<p>建议 PHP 引号使用原则：</p>
-<ol>
-<li>纯字符串最外层用单引号。</li>
-<li>包含变量时最外层用双引号。</li>
-<li>包含特殊符号(如换行符\n)时最外层用双引号。</li>
-</ol>
-
       
     </div>
 

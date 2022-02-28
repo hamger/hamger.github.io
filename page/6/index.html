@@ -154,13 +154,13 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">125</span>
+          <span class="site-state-item-count">126</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">35</span>
+        <span class="site-state-item-count">36</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
@@ -197,6 +197,91 @@
 
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://hangermeng.top/2018/03/08/%E5%AD%97%E7%AC%A6%E4%B8%B2%E7%9A%84%E6%8B%93%E5%B1%95/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="Hank">
+      <meta itemprop="description" content="Learning progress and good health">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hank's Blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2018/03/08/%E5%AD%97%E7%AC%A6%E4%B8%B2%E7%9A%84%E6%8B%93%E5%B1%95/" class="post-title-link" itemprop="url">字符串的拓展</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2018-03-08 22:58:01" itemprop="dateCreated datePublished" datetime="2018-03-08T22:58:01+08:00">2018-03-08</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2022-02-10 17:38:19" itemprop="dateModified" datetime="2022-02-10T17:38:19+08:00">2022-02-10</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>ES6 加强了对 Unicode 的支持，并且扩展了字符串对象。<br>ES6 为字符串添加了遍历器接口，使得字符串可以被<code>for...of</code>循环遍历。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="keyword">let</span> codePoint <span class="keyword">of</span> <span class="string">&#x27;foo&#x27;</span>) &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(codePoint)</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// &quot;f&quot;</span></span><br><span class="line"><span class="comment">// &quot;o&quot;</span></span><br><span class="line"><span class="comment">// &quot;o&quot;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="charAt"><a href="#charAt" class="headerlink" title="charAt()"></a>charAt()</h3><p>ES5 对字符串对象提供<code>arAt</code>方法，返回字符串给定位置的字符。该方法不能识别码点大于<code>0xFFFF</code>的字符。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">&#x27;abc&#x27;</span>.charAt(<span class="number">0</span>) <span class="comment">// &quot;a&quot;</span></span><br><span class="line"><span class="string">&#x27;𠮷&#x27;</span>.charAt(<span class="number">0</span>) <span class="comment">// &quot;\uD842&quot;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="repeat"><a href="#repeat" class="headerlink" title="repeat()"></a>repeat()</h3><p>repeat方法返回一个新字符串，表示将原字符串重复n次。参数如果是小数，会被取整。参数不能是小于等于<code>-1</code>的负数或<code>Infinity</code>。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">&#x27;x&#x27;</span>.repeat(<span class="number">3</span>) <span class="comment">// &quot;xxx&quot;</span></span><br><span class="line"><span class="string">&#x27;hello&#x27;</span>.repeat(<span class="number">2</span>) <span class="comment">// &quot;hellohello&quot;</span></span><br><span class="line"><span class="string">&#x27;na&#x27;</span>.repeat(-<span class="number">0.9</span>) <span class="comment">// &quot;&quot;</span></span><br><span class="line"><span class="string">&#x27;na&#x27;</span>.repeat(<span class="number">2.9</span>) <span class="comment">// &quot;nana&quot;</span></span><br></pre></td></tr></table></figure>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2018/03/08/%E5%AD%97%E7%AC%A6%E4%B8%B2%E7%9A%84%E6%8B%93%E5%B1%95/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -953,79 +1038,6 @@
 <p>ss和ssr它的原理都是一样的，就是socks5代理。socks5代理是把你的网络数据请求通过一条连接你和代理服务器之间的通道，由服务器转发到目的地，这个过程中你是没有通过一条专用通道的，只是数据包的发出，然后被代理服务器收到，整个过程并没有额外的处理。通俗的说，现在你有一个代理服务器在香港，比如你现在想要访问google，你的电脑发出请求，流量通过socks5连接发到你在香港的服务器上，然后再由你在香港的服务器去访问google，再把访问结果传回你的电脑，这样就实现了翻墙。</p>
 <h3 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h3><p>Chrome不需要Proxy SwitchyOmega和Proxy SwitchySharp插件，这两个插件的作用就是，快速切换代理，判断网站需不需要使用某个代理的（ss已经有pac模式了，所以不需要这个）。如果你用shadowsocks的话，就不需要这个插件了！</p>
 <p>Shadowsocks客户端的<a target="_blank" rel="noopener" href="https://shadowsocks.org/en/download/clients.html">下载地址</a>，需要翻墙访问。</p>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://hangermeng.top/2018/02/25/VPN%E4%B8%8EVPS/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.jpg">
-      <meta itemprop="name" content="Hank">
-      <meta itemprop="description" content="Learning progress and good health">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hank's Blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2018/02/25/VPN%E4%B8%8EVPS/" class="post-title-link" itemprop="url">VPN与VPS</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2018-02-25 15:41:23" itemprop="dateCreated datePublished" datetime="2018-02-25T15:41:23+08:00">2018-02-25</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2022-02-10 17:38:19" itemprop="dateModified" datetime="2022-02-10T17:38:19+08:00">2022-02-10</time>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h3 id="VPN"><a href="#VPN" class="headerlink" title="VPN"></a>VPN</h3><p>VPN(Virtual Private Network 虚拟专用网络)属于远程访问技术，我们可以简单的把VPN当成是一个软件。用一个帐号和密码，就可以通过虚拟专线网络代理，突破网络限制来直接访问远程网站（比如上国外网站Facebook和Twitter），或着是加速网络访问和数据传输（比如网游加速器）。VPN分为两种，一种是静态的VPN，另外一种就是动态的VPN。动态的VPN是每登陆一次，就变化一次IP的。</p>
-<h3 id="VPS"><a href="#VPS" class="headerlink" title="VPS"></a>VPS</h3><p>VPS(Virtual Private Server 虚拟专用服务器)属于虚拟主机技术，我们可以简单的把VPS作为服务器。一台服务器用软件分割开以后，就成了多台独立的（虚拟）服务器，他们有独立的操作系统和独立的IP，这个时候每一个独立的小的（虚拟）服务器，就是一个VPS。VPS是桌面操作的，用远程登陆以后，和自己的机器是一样的布局，可以在上面进行安装软件、搭建网站等操作。</p>
-<h3 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h3><p><a target="_blank" rel="noopener" href="https://moshuqi.github.io/2017/07/20/%E8%87%AA%E5%B7%B1%E6%90%AD%E5%BB%BAVPN%E6%9C%8D%E5%8A%A1%E5%99%A8/#%E8%B4%AD%E4%B9%B0vps">搬瓦工vps + shadowsock 搭建vpn</a></p>
 
       
     </div>

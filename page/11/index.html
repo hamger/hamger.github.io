@@ -154,13 +154,13 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">125</span>
+          <span class="site-state-item-count">126</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">35</span>
+        <span class="site-state-item-count">36</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
@@ -197,6 +197,97 @@
 
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://hangermeng.top/2017/03/15/JS%E4%BA%8B%E4%BB%B6%E6%A8%A1%E6%8B%9F/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="Hank">
+      <meta itemprop="description" content="Learning progress and good health">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hank's Blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2017/03/15/JS%E4%BA%8B%E4%BB%B6%E6%A8%A1%E6%8B%9F/" class="post-title-link" itemprop="url">JS事件模拟</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2017-03-15 20:13:03" itemprop="dateCreated datePublished" datetime="2017-03-15T20:13:03+08:00">2017-03-15</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2022-02-10 17:38:19" itemprop="dateModified" datetime="2022-02-10T17:38:19+08:00">2022-02-10</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>事件通常是在由用户和浏览器进行交互时触发，其实通过 Javascript 也可以在任何时间触发特定的事件。这种能力在测试web应用程序的时候，模拟事件是非常有用的。</p>
+<h2 id="事件模拟三步"><a href="#事件模拟三步" class="headerlink" title="事件模拟三步"></a>事件模拟三步</h2><ol>
+<li>通过 document.createEvent() 方法创建 event 对象，接收一个参数，即表示要创建的事件类型的字符串：<ul>
+<li>UIEvents：通用的 UI 事件，鼠标事件键盘事件都是继承自UI事件，在 DOM3  级上使用的是 UIEvent 。</li>
+<li>MouseEvents：通用的鼠标事件，在 DOM3 级上使用的是 MouseEvent 。</li>
+<li>MutationEvents：通用的突变事件，在 DOM3 级上使用的是 MutationEvent 。</li>
+<li>HTMLEvents：通用的 HTML 事件，在 DOM3 级上还没有等效的。</li>
+</ul>
+</li>
+</ol>
+<ol start="2">
+<li>在创建了event对象之后，还需要使用与事件有关的信息对其进行初始化。每种类型的event对象都有一个特殊的方法，为它传入适当的数据就可以初始化该event对象。用 event.init……() 此类行的方法。</li>
+<li>触发事件。这需要使用 dispatchEvent()方法，接收一个参数，即表示要触发的 event 对象。</li>
+</ol>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2017/03/15/JS%E4%BA%8B%E4%BB%B6%E6%A8%A1%E6%8B%9F/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -905,78 +996,6 @@
             </div>
           <!--/noindex-->
         
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://hangermeng.top/2017/03/10/%E6%8D%A2%E8%A1%8C%E7%AC%A6%E5%92%8C%E5%9B%9E%E8%BD%A6%E7%AC%A6%E7%9A%84%E5%8C%BA%E5%88%AB/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.jpg">
-      <meta itemprop="name" content="Hank">
-      <meta itemprop="description" content="Learning progress and good health">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hank's Blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2017/03/10/%E6%8D%A2%E8%A1%8C%E7%AC%A6%E5%92%8C%E5%9B%9E%E8%BD%A6%E7%AC%A6%E7%9A%84%E5%8C%BA%E5%88%AB/" class="post-title-link" itemprop="url">换行符和回车符的区别</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2017-03-10 22:33:16" itemprop="dateCreated datePublished" datetime="2017-03-10T22:33:16+08:00">2017-03-10</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2022-02-10 17:38:19" itemprop="dateModified" datetime="2022-02-10T17:38:19+08:00">2022-02-10</time>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h2 id="区别"><a href="#区别" class="headerlink" title="区别"></a>区别</h2><p>换行(\n)就是光标下移一行但不移到这一行的开头，回车(\r)就是回到当前行的开头但不下移一行。按下 Enter 键后会执行 \n\r 。</p>
-<h2 id="来历"><a href="#来历" class="headerlink" title="来历"></a>来历</h2><p>在计算机还没有出现之前，有一种叫做电传打字机的玩意，每秒钟可以打10个字符。但是它有一个问题，就是打完一行换行的时候，要用去0.2秒，正 好可以打两个字符。要是在这0.2秒里面，又有新的字符传过来，那么这个字符将丢失。<br>于是，研制人员想了个办法解决这个问题，就是在每行后面加两个表示结束的字符。一个叫做“回车”，告诉打字机把打印头定位在左边界；另一个叫做“换行”，告诉打字机把纸向下移一行。<br>后来，计算机发明了，这两个概念也就被般到了计算机上。那时，存储器很贵，一些科学家认为在每行结尾加两个字符太浪费了，加一个就可以。于是，就出现了分歧。<br>Unix/Mac系统里，每行结尾只有“&lt;换行&gt;”，即”\n”；Windows系统里面，每行结尾是“&lt;换行&gt;&lt;回车&gt;”，即“\n\r”。一个直接后果是，Unix/Mac系统下的文件在 Windows里打开的话，所有文字会变成一行；而Windows里的文件在Unix/Mac下打开的话，在每行的结尾可能会多出一个^M符号。</p>
-
       
     </div>
 
