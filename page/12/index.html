@@ -154,7 +154,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">126</span>
+          <span class="site-state-item-count">127</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -197,6 +197,86 @@
 
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://hangermeng.top/2017/03/11/Bootstrap%E6%A0%85%E6%A0%BC%E5%B8%83%E5%B1%80%E5%8E%9F%E7%90%86/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="Hank">
+      <meta itemprop="description" content="Learning progress and good health">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hank's Blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2017/03/11/Bootstrap%E6%A0%85%E6%A0%BC%E5%B8%83%E5%B1%80%E5%8E%9F%E7%90%86/" class="post-title-link" itemprop="url">Bootstrap栅格布局原理</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2017-03-11 17:46:12" itemprop="dateCreated datePublished" datetime="2017-03-11T17:46:12+08:00">2017-03-11</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2022-02-10 17:38:19" itemprop="dateModified" datetime="2022-02-10T17:38:19+08:00">2022-02-10</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>今天有个电话面试问到 Bootstrap 栅格布局的原理，当时没答出来，之后百度了下，发现这个问题我应该答出来的。<br>实现列组合方式非常简单，只涉及两个CSS两个特性：浮动与宽度百分比。</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.col-md-1</span>, <span class="selector-class">.col-md-2</span>,... <span class="selector-class">.col-md-11</span>, <span class="selector-class">.col-md-12</span> &#123;</span><br><span class="line">    <span class="attribute">float</span>: left;</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"> <span class="selector-class">.col-md-12</span> &#123;</span><br><span class="line">   <span class="attribute">width</span>: <span class="number">100%</span>;</span><br><span class="line"> &#125;</span><br><span class="line"> <span class="selector-class">.col-md-11</span> &#123;</span><br><span class="line">   <span class="attribute">width</span>: <span class="number">91.66666667%</span>;</span><br><span class="line"> &#125;</span><br><span class="line">...</span><br><span class="line"> <span class="selector-class">.col-md-2</span> &#123;</span><br><span class="line">   <span class="attribute">width</span>: <span class="number">16.66666667%</span>;</span><br><span class="line"> &#125;</span><br><span class="line"> <span class="selector-class">.col-md-1</span> &#123;</span><br><span class="line">   <span class="attribute">width</span>: <span class="number">8.33333333%</span>;</span><br><span class="line"> &#125;</span><br></pre></td></tr></table></figure>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2017/03/11/Bootstrap%E6%A0%85%E6%A0%BC%E5%B8%83%E5%B1%80%E5%8E%9F%E7%90%86/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -965,89 +1045,6 @@
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/2017/03/03/arguments%E3%80%81callee%E3%80%81caller/#more" rel="contents">
-                Read more &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://hangermeng.top/2017/03/02/BFC%E7%90%86%E8%A7%A3%E8%AE%B0%E5%BD%95/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.jpg">
-      <meta itemprop="name" content="Hank">
-      <meta itemprop="description" content="Learning progress and good health">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hank's Blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2017/03/02/BFC%E7%90%86%E8%A7%A3%E8%AE%B0%E5%BD%95/" class="post-title-link" itemprop="url">理解BFC</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2017-03-02 17:29:20" itemprop="dateCreated datePublished" datetime="2017-03-02T17:29:20+08:00">2017-03-02</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2022-02-10 17:38:19" itemprop="dateModified" datetime="2022-02-10T17:38:19+08:00">2022-02-10</time>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h2 id="BFC是什么"><a href="#BFC是什么" class="headerlink" title="BFC是什么"></a>BFC是什么</h2><p>在解释 BFC 是什么之前，需要先介绍 Box、Formatting Context的概念。</p>
-<h3 id="Box"><a href="#Box" class="headerlink" title="Box"></a>Box</h3><p>Box 是 CSS 布局的对象和基本单位， 直观点来说，就是一个页面是由很多个 Box 组成的。元素的类型和 display 属性，决定了这个 Box 的类型。 不同类型的 Box， 会参与不同的 Formatting Context（一个决定如何渲染文档的容器），因此Box内的元素会以不同的方式渲染。主要有两类盒子：</p>
-<ul>
-<li>block-level box(块级元素):display 属性为 block, list-item, table 的元素，会生成 block-level box。并且参与 block fomatting context；</li>
-<li>inline-level box(内联元素):display 属性为 inline, inline-block, inline-table 的元素，会生成 inline-level box。并且参与 inline formatting context；</li>
-</ul>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2017/03/02/BFC%E7%90%86%E8%A7%A3%E8%AE%B0%E5%BD%95/#more" rel="contents">
                 Read more &raquo;
               </a>
             </div>

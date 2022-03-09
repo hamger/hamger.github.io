@@ -154,7 +154,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">126</span>
+          <span class="site-state-item-count">127</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -197,6 +197,93 @@
 
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://hangermeng.top/2018/03/25/%E6%90%AD%E5%BB%BAAndroid%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="Hank">
+      <meta itemprop="description" content="Learning progress and good health">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hank's Blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2018/03/25/%E6%90%AD%E5%BB%BAAndroid%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83/" class="post-title-link" itemprop="url">搭建Android开发环境</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2018-03-25 17:59:51" itemprop="dateCreated datePublished" datetime="2018-03-25T17:59:51+08:00">2018-03-25</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2022-02-10 17:38:19" itemprop="dateModified" datetime="2022-02-10T17:38:19+08:00">2022-02-10</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>学习 ReactNative 的第一步就是搭建开发环境，在搭建Android开发环境中又遇到不少坑，详细安装过程见<a target="_blank" rel="noopener" href="https://reactnative.cn/docs/0.51/getting-started.html#content">这里</a>，以下记录搭建过程中遇到的坑。</p>
+<h3 id="坑一"><a href="#坑一" class="headerlink" title="坑一"></a>坑一</h3><p>运行<code>react-native run-android</code>后报错</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">* What went wrong:</span><br><span class="line">A problem occurred evaluating project <span class="string">&#x27;:app&#x27;</span>.  </span><br><span class="line">&gt; SDK location not found. Define location with sdk.dir <span class="keyword">in</span> the local.properties file or with an ANDROID_HOME environment variable.</span><br></pre></td></tr></table></figure>
+<p>解决方法是在<code>android</code>目录下创建一个名叫<code>local.properties</code>文件，里边的内容如下</p>
+<ul>
+<li>in Windows: <code>C:/Users/USERNAME/AppData/Local/Android/sdk</code></li>
+<li>in macOS: <code>sdk.dir = /Users/USERNAME/Library/Android/sdk</code></li>
+<li>in linux: <code>sdk.dir = /home/USERNAME/Android/Sdk</code></li>
+</ul>
+<p>这里的<code>USERNAME</code>是你的用户名，然后在终端运行<code>react-native run-android</code>。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2018/03/25/%E6%90%AD%E5%BB%BAAndroid%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -960,94 +1047,6 @@
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/2018/03/09/React%E5%9F%BA%E7%A1%802/#more" rel="contents">
-                Read more &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://hangermeng.top/2018/03/09/React%E5%9F%BA%E7%A1%80/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.jpg">
-      <meta itemprop="name" content="Hank">
-      <meta itemprop="description" content="Learning progress and good health">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hank's Blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2018/03/09/React%E5%9F%BA%E7%A1%80/" class="post-title-link" itemprop="url">React基础</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2018-03-09 08:37:20" itemprop="dateCreated datePublished" datetime="2018-03-09T08:37:20+08:00">2018-03-09</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2022-02-10 17:38:19" itemprop="dateModified" datetime="2022-02-10T17:38:19+08:00">2022-02-10</time>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h3 id="起步"><a href="#起步" class="headerlink" title="起步"></a>起步</h3><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">&quot;https://cdn.bootcss.com/react/15.4.2/react.min.js&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">&quot;https://cdn.bootcss.com/react/15.4.2/react-dom.min.js&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">&quot;https://cdn.bootcss.com/babel-standalone/6.22.1/babel.min.js&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="javascript"></span></span><br><span class="line"><span class="javascript">ReactDOM.render(</span></span><br><span class="line"><span class="javascript">  <span class="xml"><span class="tag">&lt;<span class="name">h1</span>&gt;</span>Hello, world!<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span>,</span></span><br><span class="line"><span class="javascript">  <span class="built_in">document</span>.getElementById(<span class="string">&#x27;example&#x27;</span>)</span></span><br><span class="line"><span class="javascript">);</span></span><br><span class="line"><span class="javascript"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
-<h3 id="JSX"><a href="#JSX" class="headerlink" title="JSX"></a>JSX</h3><p>React 使用 JSX 来替代常规的 JavaScript。JSX中有如下注意点：</p>
-<ul>
-<li>变量需要包含在<code>&#123;&#125;</code>中</li>
-<li>不能使用<code>if else</code>，可以使用三元表达式来替代</li>
-<li>注释需要写在花括号中</li>
-<li>JSX 允许在模板中插入数组，数组会自动展开所有成员</li>
-<li>在添加属性时， class 属性需要写成 className ，for 属性需要写成 htmlFor ，因为 class 和 for 是 JavaScript 的保留字</li>
-<li>组件类只能包含一个顶层标签<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> myStyle = &#123;</span><br><span class="line">  <span class="attr">fontSize</span>: <span class="number">100</span>,</span><br><span class="line">  <span class="attr">color</span>: <span class="string">&#x27;#FF0000&#x27;</span></span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">var</span> arr = [</span><br><span class="line">  <span class="xml"><span class="tag">&lt;<span class="name">h1</span>&gt;</span>菜鸟教程<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span>,</span><br><span class="line">  <span class="xml"><span class="tag">&lt;<span class="name">h2</span>&gt;</span>学的不仅是技术，更是梦想！<span class="tag">&lt;/<span class="name">h2</span>&gt;</span></span>,</span><br><span class="line">];</span><br><span class="line">ReactDOM.render(</span><br><span class="line">  <span class="xml"><span class="tag">&lt;<span class="name">div</span>&gt;</span></span></span><br><span class="line"><span class="xml">  <span class="tag">&lt;<span class="name">h1</span>&gt;</span>&#123;1 + 2&#125;<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span></span><br><span class="line"><span class="xml">  <span class="tag">&lt;<span class="name">h2</span>&gt;</span>&#123;i == 1 ? &#x27;True!&#x27; : &#x27;False&#x27;&#125;<span class="tag">&lt;/<span class="name">h2</span>&gt;</span></span></span><br><span class="line"><span class="xml">  <span class="tag">&lt;<span class="name">p</span> <span class="attr">style</span> = <span class="string">&#123;myStyle&#125;</span>&gt;</span>react is cool!<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span></span><br><span class="line"><span class="xml">  <span class="tag">&lt;<span class="name">p</span>&gt;</span>&#123;arr&#125;<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span></span><br><span class="line"><span class="xml">  &#123;/*注释...*/&#125;</span></span><br><span class="line"><span class="xml">  <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span></span><br><span class="line">  ,</span><br><span class="line">  <span class="built_in">document</span>.getElementById(<span class="string">&#x27;example&#x27;</span>)</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
-React 可以渲染 HTML 标签 (strings) 或 React 组件 (classes)。React 的 JSX 使用大、小写的约定来区分本地组件的类和 HTML 标签。<br>要渲染 HTML 标签，只需在 JSX 里使用<strong>小写字母</strong>的标签名。<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> myDivElement = <span class="xml"><span class="tag">&lt;<span class="name">div</span> <span class="attr">className</span>=<span class="string">&quot;foo&quot;</span> /&gt;</span></span>;</span><br><span class="line">ReactDOM.render(myDivElement, <span class="built_in">document</span>.getElementById(<span class="string">&#x27;example&#x27;</span>));</span><br></pre></td></tr></table></figure>
-要渲染 React 组件，只需创建一个<strong>大写字母开头</strong>的本地变量。<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> MyComponent = React.createClass(&#123;<span class="comment">/*...*/</span>&#125;);</span><br><span class="line"><span class="keyword">var</span> myElement = <span class="xml"><span class="tag">&lt;<span class="name">MyComponent</span> <span class="attr">someProperty</span>=<span class="string">&#123;true&#125;</span> /&gt;</span></span>;</span><br><span class="line">ReactDOM.render(myElement, <span class="built_in">document</span>.getElementById(<span class="string">&#x27;example&#x27;</span>));</span><br></pre></td></tr></table></figure>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2018/03/09/React%E5%9F%BA%E7%A1%80/#more" rel="contents">
                 Read more &raquo;
               </a>
             </div>

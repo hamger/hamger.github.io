@@ -154,7 +154,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">126</span>
+          <span class="site-state-item-count">127</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -197,6 +197,87 @@
 
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://hangermeng.top/2020/09/02/js%E5%8F%98%E9%87%8F%E6%8F%90%E5%8D%87/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="Hank">
+      <meta itemprop="description" content="Learning progress and good health">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hank's Blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2020/09/02/js%E5%8F%98%E9%87%8F%E6%8F%90%E5%8D%87/" class="post-title-link" itemprop="url">js变量提升</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2020-09-02 15:08:04" itemprop="dateCreated datePublished" datetime="2020-09-02T15:08:04+08:00">2020-09-02</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2022-02-10 17:38:19" itemprop="dateModified" datetime="2022-02-10T17:38:19+08:00">2022-02-10</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h3 id="全局中的解析和执行过程"><a href="#全局中的解析和执行过程" class="headerlink" title="全局中的解析和执行过程"></a>全局中的解析和执行过程</h3><p>预处理：创建一个词法环境（LexicalEnvironment，在后面简写为LE），扫描JS中的<strong>用声明的方式声明的函数</strong>和<strong>用var定义的变量</strong>，将它们加到预处理阶段的词法环境中去。</p>
+<h4 id="一、全局环境中如何理解预处理"><a href="#一、全局环境中如何理解预处理" class="headerlink" title="一、全局环境中如何理解预处理"></a>一、全局环境中如何理解预处理</h4><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> a = <span class="number">1</span>;<span class="comment">//用var定义的变量，以赋值</span></span><br><span class="line"><span class="keyword">var</span> b;<span class="comment">//用var定义的变量，未赋值</span></span><br><span class="line">c = <span class="number">3</span>;<span class="comment">//未定义，直接赋值</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">d</span>(<span class="params"></span>)</span>&#123;<span class="comment">//用声明的方式声明的函数</span></span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">&#x27;hello&#x27;</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">var</span> e = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;<span class="comment">//函数表达式</span></span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">&#x27;world&#x27;</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>在预处理时上面代码创建词法作用域可以这样表示：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">LE &#123; <span class="comment">// 此时的LE相当于window</span></span><br><span class="line">    <span class="attr">a</span>:<span class="literal">undefined</span></span><br><span class="line">    <span class="attr">b</span>:<span class="literal">undefined</span></span><br><span class="line">    <span class="attr">d</span>:对函数的一个引用</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2020/09/02/js%E5%8F%98%E9%87%8F%E6%8F%90%E5%8D%87/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -1075,84 +1156,6 @@
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/2018/10/18/vim%E4%BD%BF%E7%94%A8%E6%80%BB%E7%BB%93/#more" rel="contents">
-                Read more &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://hangermeng.top/2018/10/13/%E9%9F%B3%E6%A0%87%E5%AD%97%E6%AF%8D%E5%AF%B9%E5%BA%94%E8%A1%A8/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.jpg">
-      <meta itemprop="name" content="Hank">
-      <meta itemprop="description" content="Learning progress and good health">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hank's Blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2018/10/13/%E9%9F%B3%E6%A0%87%E5%AD%97%E6%AF%8D%E5%AF%B9%E5%BA%94%E8%A1%A8/" class="post-title-link" itemprop="url">音标字母对应表</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2018-10-13 15:48:36" itemprop="dateCreated datePublished" datetime="2018-10-13T15:48:36+08:00">2018-10-13</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2022-02-10 17:38:19" itemprop="dateModified" datetime="2022-02-10T17:38:19+08:00">2022-02-10</time>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>掌握了<a target="_blank" rel="noopener" href="https://zhuanlan.zhihu.com/p/35702220">音标</a>和其对应的字母（组合），就可以根据读音来拼写单词了。</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2018/10/13/%E9%9F%B3%E6%A0%87%E5%AD%97%E6%AF%8D%E5%AF%B9%E5%BA%94%E8%A1%A8/#more" rel="contents">
                 Read more &raquo;
               </a>
             </div>

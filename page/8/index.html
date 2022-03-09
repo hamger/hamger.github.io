@@ -154,7 +154,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">126</span>
+          <span class="site-state-item-count">127</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -197,6 +197,85 @@
 
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://hangermeng.top/2018/02/11/less%E8%AF%AD%E6%B3%95%E5%9F%BA%E7%A1%80/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="Hank">
+      <meta itemprop="description" content="Learning progress and good health">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hank's Blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2018/02/11/less%E8%AF%AD%E6%B3%95%E5%9F%BA%E7%A1%80/" class="post-title-link" itemprop="url">less语法基础</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2018-02-11 21:11:43" itemprop="dateCreated datePublished" datetime="2018-02-11T21:11:43+08:00">2018-02-11</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2022-02-10 17:38:19" itemprop="dateModified" datetime="2022-02-10T17:38:19+08:00">2022-02-10</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h3 id="Variables"><a href="#Variables" class="headerlink" title="Variables"></a>Variables</h3><p><code>less</code>定义变量的符号是<code>@</code>，<code>sass</code>定义变量符号是<code>$</code>。</p>
+<figure class="highlight less"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">@images:</span> <span class="string">&quot;../img&quot;</span>;</span><br><span class="line"><span class="selector-tag">body</span> &#123;</span><br><span class="line">  <span class="attribute">color</span>: <span class="number">#444</span>;</span><br><span class="line">  <span class="attribute">background</span>: url(<span class="string">&quot;@&#123;images&#125;/white-sand.png&quot;</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="variable">@property:</span> color;</span><br><span class="line"><span class="selector-class">.widget</span> &#123;</span><br><span class="line">  @&#123;property&#125;: <span class="selector-id">#0ee</span>;</span><br><span class="line">  <span class="selector-tag">background-</span><span class="variable">@&#123;property&#125;</span>: <span class="selector-id">#999</span>;</span><br><span class="line">&#125;</span><br><span class="line">@<span class="selector-tag">mySelector</span>: <span class="selector-tag">banner</span>;</span><br><span class="line"><span class="selector-class">.@&#123;mySelector&#125;</span> &#123;</span><br><span class="line">  <span class="attribute">font-weight</span>: bold;</span><br><span class="line">  <span class="attribute">line-height</span>: <span class="number">40px</span>;</span><br><span class="line">  <span class="attribute">margin</span>: <span class="number">0</span> auto;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2018/02/11/less%E8%AF%AD%E6%B3%95%E5%9F%BA%E7%A1%80/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -965,103 +1044,6 @@
 <li><code>new Date(milliseconds)</code> 参数必须是 Number 类型</li>
 </ul>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">new</span> <span class="built_in">Date</span>(<span class="string">&quot;January 12,2006 22:19:35&quot;</span>); <span class="comment">// 注意格式 </span></span><br><span class="line"></span><br><span class="line"><span class="keyword">new</span> <span class="built_in">Date</span>(<span class="string">&quot;January 12,2006&quot;</span>); <span class="comment">// String 类型</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">new</span> <span class="built_in">Date</span>(<span class="string">&quot;2006/2/2 22:19:35&quot;</span>); <span class="comment">// String 类型 </span></span><br><span class="line"></span><br><span class="line"><span class="keyword">new</span> <span class="built_in">Date</span>(<span class="number">2006</span>,<span class="number">0</span>,<span class="number">12</span>,<span class="number">22</span>,<span class="number">19</span>,<span class="number">35</span>); <span class="comment">// 不能放 Array 类型 </span></span><br><span class="line"></span><br><span class="line"><span class="keyword">new</span> <span class="built_in">Date</span>(<span class="number">2006</span>,<span class="number">0</span>,<span class="number">12</span>); <span class="comment">// 可以是String 或 Number</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">new</span> <span class="built_in">Date</span>(<span class="number">1137075575000</span>); <span class="comment">// 必须是 Number 类型</span></span><br></pre></td></tr></table></figure>
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://hangermeng.top/2017/09/24/%E5%AE%9E%E7%8E%B0%E5%8F%8C%E5%90%91%E7%BB%91%E5%AE%9A/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.jpg">
-      <meta itemprop="name" content="Hank">
-      <meta itemprop="description" content="Learning progress and good health">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hank's Blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2017/09/24/%E5%AE%9E%E7%8E%B0%E5%8F%8C%E5%90%91%E7%BB%91%E5%AE%9A/" class="post-title-link" itemprop="url">实现双向绑定</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2017-09-24 21:49:56" itemprop="dateCreated datePublished" datetime="2017-09-24T21:49:56+08:00">2017-09-24</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2022-02-10 17:38:19" itemprop="dateModified" datetime="2022-02-10T17:38:19+08:00">2022-02-10</time>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>Vue 的一个最明显的特性就是其不太引人注意的响应式系统。数据模型仅仅是普通的 JavaScript 对象，而当你修改它们时，视图会进行更新。<br>这是如何做到的呢？下面我将实现一个双向绑定的简单案例，我将分三步来实现：</p>
-<ol>
-<li>model -&gt; view 初始化</li>
-<li>view -&gt; model 绑定</li>
-<li>model -&gt; view 绑定</li>
-</ol>
-<p>学习过程需要结合代码（<a target="_blank" rel="noopener" href="https://github.com/hamger/vue-study">源码地址</a>），<br>以上三步分别对应<code>vue-es5</code>下的<code>step1.html</code>、<code>step2.html</code>、<code>step3.html</code>。</p>
-<h3 id="step1"><a href="#step1" class="headerlink" title="step1"></a>step1</h3><p>第一步我们要考虑的应该是如何把</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">&quot;app&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;text&quot;</span> <span class="attr">v-model</span>=<span class="string">&quot;start&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">br</span>&gt;</span> &#123;&#123;start&#125;&#125;</span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="javascript"></span></span><br><span class="line"><span class="javascript"><span class="keyword">var</span> vm = <span class="keyword">new</span> Vue(&#123;</span></span><br><span class="line"><span class="javascript">    <span class="attr">el</span>: <span class="string">&#x27;app&#x27;</span>,</span></span><br><span class="line"><span class="javascript">    <span class="attr">data</span>: &#123;</span></span><br><span class="line"><span class="javascript">        <span class="attr">start</span>: <span class="string">&#x27;hello world&#x27;</span></span></span><br><span class="line"><span class="javascript">    &#125;</span></span><br><span class="line"><span class="javascript">&#125;)</span></span><br><span class="line"><span class="javascript"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
-<p>中<code>input</code>的<code>value</code>值和<code>&#123;&#123;start&#125;&#125;</code>变为<code>vm.data.start</code>的值，即将 model 转化为 view 。我们需要一个方法，该方法可以实现以上的转化，让<code>v-mode=&quot;start&quot;</code>和<code>&#123;&#123;start&#125;&#125;</code>绑定到的<code>data.start</code>的值，代码如下，具体代码和效果见step1.html。</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 劫持节点并转化为文档片段</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">node2Fragment</span>(<span class="params">node, vm</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> flag = <span class="built_in">document</span>.createDocumentFragment()</span><br><span class="line">    <span class="keyword">var</span> child</span><br><span class="line">    <span class="keyword">while</span> (child = node.firstChild) &#123; <span class="comment">// 编译每个节点，直到node下无子节点</span></span><br><span class="line">        compile(child, vm)</span><br><span class="line">        flag.appendChild(child) <span class="comment">// appendchild方法会自动删除node的child节点（子节点有且仅有一个父节点）</span></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> flag <span class="comment">// 返回填充后的文档片段</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 编译节点</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">compile</span>(<span class="params">node, vm</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> reg = <span class="regexp">/\&#123;\&#123;(.*)\&#125;\&#125;/</span></span><br><span class="line">    <span class="keyword">if</span> (node.nodeType === <span class="number">1</span>) &#123; <span class="comment">// 元素节点</span></span><br><span class="line">        <span class="keyword">var</span> attr = node.attributes</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; attr.length; i++) &#123;</span><br><span class="line">            <span class="keyword">if</span> (attr[i].nodeName == <span class="string">&#x27;v-model&#x27;</span>) &#123;</span><br><span class="line">                <span class="keyword">var</span> name = attr[i].nodeValue.trim()</span><br><span class="line">                node.value = vm.data[name]</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;;</span><br><span class="line">    <span class="keyword">if</span> (node.nodeType === <span class="number">3</span>) &#123; <span class="comment">// 文本节点</span></span><br><span class="line">        <span class="keyword">if</span> (reg.test(node.nodeValue)) &#123;</span><br><span class="line">            <span class="keyword">var</span> name = <span class="built_in">RegExp</span>.$1.trim()</span><br><span class="line">            node.nodeValue = vm.data[name]</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 创建Vue对象</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Vue</span>(<span class="params">options</span>) </span>&#123;</span><br><span class="line">    <span class="built_in">this</span>.data = options.data</span><br><span class="line">    <span class="keyword">var</span> node = <span class="built_in">document</span>.getElementById(options.el)</span><br><span class="line">    <span class="keyword">var</span> dom = node2Fragment(node, <span class="built_in">this</span>)</span><br><span class="line">    <span class="comment">// 将dom片段添加到目标元素</span></span><br><span class="line">    node.appendChild(dom)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h3 id="step2"><a href="#step2" class="headerlink" title="step2"></a>step2</h3><p>第二步需要实现view层向model层的绑定，当用户输入改变input的值(view层)时，反映到data中(model层)并改变对应的值。这里需要用到<code>Object.defineProperty()</code>来设置对象的访问器属性。</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 将vm.data上的数据挂载在vm上</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">observe</span>(<span class="params">obj, vm</span>) </span>&#123;</span><br><span class="line">    <span class="built_in">Object</span>.keys(obj).forEach(<span class="function"><span class="keyword">function</span>(<span class="params">key</span>) </span>&#123;</span><br><span class="line">        defineReactive(vm, key, obj[key])</span><br><span class="line">    &#125;)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 创建响应式数据</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">defineReactive</span>(<span class="params">obj, key, val</span>) </span>&#123;</span><br><span class="line">    <span class="built_in">Object</span>.defineProperty(obj, key, &#123;</span><br><span class="line">        <span class="attr">get</span>: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">            <span class="keyword">return</span> val</span><br><span class="line">        &#125;,</span><br><span class="line">        <span class="attr">set</span>: <span class="function"><span class="keyword">function</span>(<span class="params">newVal</span>) </span>&#123;</span><br><span class="line">            <span class="keyword">if</span> (newVal === val) <span class="keyword">return</span></span><br><span class="line">            val = newVal</span><br><span class="line">            <span class="built_in">console</span>.log(<span class="string">&quot;新属性值为&quot;</span> + val)</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>把observe函数在vue构造器中调用</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Vue</span>(<span class="params">options</span>) </span>&#123;</span><br><span class="line">    <span class="built_in">this</span>.data = options.data</span><br><span class="line">    <span class="keyword">var</span> node = <span class="built_in">document</span>.getElementById(options.el)</span><br><span class="line">    observe(<span class="built_in">this</span>.data,<span class="built_in">this</span>) <span class="comment">// 监听数据</span></span><br><span class="line">    <span class="keyword">var</span> dom = node2Fragment(node, <span class="built_in">this</span>)</span><br><span class="line">    node.appendChild(dom)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>同时我们也需要修改一下原来的<code>compile</code>函数,将<code>vm.data[name]</code>改为<code>vm.[name]</code></p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">compile</span>(<span class="params">node, vm</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> reg = <span class="regexp">/\&#123;\&#123;(.*)\&#125;\&#125;/</span></span><br><span class="line">    <span class="keyword">if</span> (node.nodeType === <span class="number">1</span>) &#123;</span><br><span class="line">        <span class="keyword">var</span> attr = node.attributes <span class="comment">// 获取节点的所有属性</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; attr.length; i++) &#123;</span><br><span class="line">            <span class="keyword">if</span> (attr[i].nodeName == <span class="string">&#x27;v-model&#x27;</span>) &#123;</span><br><span class="line">                <span class="keyword">var</span> name = attr[i].nodeValue.trim()</span><br><span class="line">                node.addEventListener(<span class="string">&#x27;input&#x27;</span>, <span class="function"><span class="keyword">function</span>(<span class="params">e</span>) </span>&#123;</span><br><span class="line">                    vm[name] = e.target.value; </span><br><span class="line">                &#125;);</span><br><span class="line">                node.value = vm[name]</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;;</span><br><span class="line">    <span class="keyword">if</span> (node.nodeType === <span class="number">3</span>) &#123;</span><br><span class="line">        <span class="keyword">if</span> (reg.test(node.nodeValue)) &#123;</span><br><span class="line">            <span class="keyword">var</span> name = <span class="built_in">RegExp</span>.$1.trim()</span><br><span class="line">            node.nodeValue = vm[name]</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>这样当view层被改动时，相应的model层中对应的数据也会改变，具体代码和效果见step2.html。</p>
-<h3 id="step3"><a href="#step3" class="headerlink" title="step3"></a>step3</h3><p>现在我们离双向绑定只差最后一步了，也是最重要和最难理解的一步，如何实现当model层中数据改变的时候响应式地改变view层的显示，即当改变<code>input</code>输入的时候能马上在下方视图得到显示。第一步做的是初始化绑定，现在要完成的是，当用户改变data值，再回过头去改变view层，这里将用到一个设计模式：观察者模式。<br>观察者模式是程序设计中的一种设计模式，定义了一种一对多的依赖关系，让多个观察者对象同时监听某一个主题对象。这个主题对象在状态上发生变化时，会通知所有观察者对象，让他们能够自动更新自己。下面代码是一个应用观察者模式的简单例子</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 创建一个主题类</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Dep</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">this</span>.subs = [] <span class="comment">// 主题的订阅者们</span></span><br><span class="line">&#125; </span><br><span class="line"><span class="comment">// 添加订阅者</span></span><br><span class="line">Dep.prototype.addSub = <span class="function"><span class="keyword">function</span>(<span class="params">sub</span>) </span>&#123;</span><br><span class="line">    <span class="built_in">this</span>.subs.push(sub)</span><br><span class="line">&#125;;</span><br><span class="line"><span class="comment">// 发布公告</span></span><br><span class="line">Dep.prototype.notify = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">this</span>.subs.forEach(<span class="function"><span class="keyword">function</span>(<span class="params">sub</span>) </span>&#123;</span><br><span class="line">        sub.update()</span><br><span class="line">    &#125;)</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 创建一个订阅者类</span></span><br><span class="line"><span class="function"><span class="keyword">function</span>  <span class="title">Watcher</span>(<span class="params">name</span>) </span>&#123;</span><br><span class="line">    <span class="built_in">this</span>.name = name</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 更新自己</span></span><br><span class="line">Watcher.prototype.update = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="built_in">this</span>.name+<span class="string">&#x27;更新了&#x27;</span>)</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 实例化一个主题</span></span><br><span class="line"><span class="keyword">var</span> dep = <span class="keyword">new</span> Dep()</span><br><span class="line"></span><br><span class="line"><span class="comment">// 实例化订阅者并添加到主题</span></span><br><span class="line"><span class="keyword">var</span> sub1 = <span class="keyword">new</span> Watcher(<span class="string">&#x27;sub1&#x27;</span>)</span><br><span class="line">dep.addSub(sub1)</span><br><span class="line"><span class="keyword">var</span> sub2 = <span class="keyword">new</span> Watcher(<span class="string">&#x27;sub2&#x27;</span>)</span><br><span class="line">dep.addSub(sub2)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 主题发布公告，订阅者更新自己</span></span><br><span class="line">dep.notify()</span><br></pre></td></tr></table></figure>
-<p>接下来我们要将该模式应用在我们的案例中，添加如下代码</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 创建一个主题类</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Dep</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="built_in">this</span>.subs = [] <span class="comment">// 主题的订阅者</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">Dep.prototype = &#123;</span><br><span class="line">    <span class="comment">// 添加订阅者</span></span><br><span class="line">    <span class="attr">addSub</span>: <span class="function"><span class="keyword">function</span>(<span class="params">sub</span>) </span>&#123;</span><br><span class="line">        <span class="built_in">this</span>.subs.push(sub) </span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="comment">// 发布更新公告</span></span><br><span class="line">    <span class="attr">notify</span>: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="built_in">this</span>.subs.forEach(<span class="function"><span class="keyword">function</span>(<span class="params">sub</span>) </span>&#123;</span><br><span class="line">            sub.update() <span class="comment">// 触发对应属性的 setter</span></span><br><span class="line">        &#125;)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 创建一个订阅者类</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Watcher</span>(<span class="params">vm, node, name</span>) </span>&#123;</span><br><span class="line">    Dep.target = <span class="built_in">this</span> <span class="comment">// 未订阅标记</span></span><br><span class="line">    <span class="built_in">this</span>.name = name</span><br><span class="line">    <span class="built_in">this</span>.node = node</span><br><span class="line">    <span class="built_in">this</span>.vm = vm</span><br><span class="line">    <span class="built_in">this</span>.update() <span class="comment">// 初始化视图，触发对应属性的 getter</span></span><br><span class="line">    Dep.target = <span class="literal">null</span> <span class="comment">// 已订阅标记</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">Watcher.prototype = &#123;</span><br><span class="line">    <span class="attr">update</span>: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">        <span class="built_in">this</span>.node.nodeValue = <span class="built_in">this</span>.vm[<span class="built_in">this</span>.name] <span class="comment">// 触发对应属性的 getter/setter</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>还需要修改一下<code>defineReactive</code>函数和<code>compile</code>函数</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">defineReactive</span>(<span class="params">obj, key, val</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> dep = <span class="keyword">new</span> Dep() <span class="comment">// 实例化一个主题</span></span><br><span class="line">    <span class="built_in">Object</span>.defineProperty(obj, key, &#123;</span><br><span class="line">        <span class="attr">get</span>: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">            <span class="comment">// 添加订阅者到主题</span></span><br><span class="line">            <span class="keyword">if</span> (Dep.target) dep.addSub(Dep.target)</span><br><span class="line">            <span class="keyword">return</span> val</span><br><span class="line">        &#125;,</span><br><span class="line">        <span class="attr">set</span>: <span class="function"><span class="keyword">function</span>(<span class="params">newVal</span>) </span>&#123;</span><br><span class="line">            <span class="keyword">if</span> (newVal === val) <span class="keyword">return</span></span><br><span class="line">            val = newVal</span><br><span class="line">            dep.notify() <span class="comment">// 发布更新公告</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">compile</span>(<span class="params">node, vm</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> reg = <span class="regexp">/\&#123;\&#123;(.*)\&#125;\&#125;/</span></span><br><span class="line">    <span class="keyword">if</span> (node.nodeType === <span class="number">1</span>) &#123; </span><br><span class="line">        <span class="keyword">var</span> attr = node.attributes</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; attr.length; i++) &#123;</span><br><span class="line">            <span class="keyword">if</span> (attr[i].nodeName == <span class="string">&#x27;v-model&#x27;</span>) &#123;</span><br><span class="line">                <span class="keyword">var</span> name = attr[i].nodeValue.trim()</span><br><span class="line">                node.addEventListener(<span class="string">&#x27;input&#x27;</span>, <span class="function"><span class="keyword">function</span>(<span class="params">e</span>) </span>&#123;</span><br><span class="line">                    vm[name] = e.target.value</span><br><span class="line">                &#125;);</span><br><span class="line">                node.value = vm[name]</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;;</span><br><span class="line">    <span class="keyword">if</span> (node.nodeType === <span class="number">3</span>) &#123; </span><br><span class="line">        <span class="keyword">if</span> (reg.test(node.nodeValue)) &#123;</span><br><span class="line">            <span class="keyword">var</span> name = <span class="built_in">RegExp</span>.$1.trim()</span><br><span class="line">            <span class="keyword">new</span> Watcher(vm, node, name) <span class="comment">// 初始化数据并添加订阅者</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>至此我们已经实现了基础的双向绑定功能，具体代码和效果见step3.html。</p>
-<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>最后在理解一下 Vue 官网对其响应式原理的解释：<a target="_blank" rel="noopener" href="https://cn.vuejs.org/v2/guide/reactivity.html#%E5%A6%82%E4%BD%95%E8%BF%BD%E8%B8%AA%E5%8F%98%E5%8C%96">Vue响应式原理</a></p>
-
       
     </div>
 
