@@ -154,7 +154,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">127</span>
+          <span class="site-state-item-count">128</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -197,6 +197,83 @@
 
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://hangermeng.top/2018/02/14/event-srcElement%E4%B8%8Eevent-target%E7%9A%84%E5%8C%BA%E5%88%AB/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="Hank">
+      <meta itemprop="description" content="Learning progress and good health">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hank's Blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2018/02/14/event-srcElement%E4%B8%8Eevent-target%E7%9A%84%E5%8C%BA%E5%88%AB/" class="post-title-link" itemprop="url">event.srcElement与event.target的区别</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2018-02-14 21:12:24" itemprop="dateCreated datePublished" datetime="2018-02-14T21:12:24+08:00">2018-02-14</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2022-02-10 17:38:19" itemprop="dateModified" datetime="2022-02-10T17:38:19+08:00">2022-02-10</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p><code>event.srcElement</code>与<code>event.target</code>两者作用相同，都是指向触发事件的元素，包含了该元素的各种属性。IE浏览器支持<code>srcElement</code>，而firefox支持<code>target</code>，解决兼容的方法</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> eve = event.srcElement ? event.srcElement : event.target;</span><br></pre></td></tr></table></figure>
+<h3 id="this-与-event-srcElement"><a href="#this-与-event-srcElement" class="headerlink" title="this 与 event.srcElement"></a>this 与 event.srcElement</h3><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;text&quot;</span> <span class="attr">onblur</span>=<span class="string">&quot;alert(this.value)&quot;</span>/&gt;</span> // 合法</span><br><span class="line"><span class="comment">&lt;!-- fuction method() &#123;</span></span><br><span class="line"><span class="comment">  alert(this.value);</span></span><br><span class="line"><span class="comment">&#125; --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;text&quot;</span> <span class="attr">onblur</span>=<span class="string">&quot;method()&quot;</span>/&gt;</span> // 非法，method() 是被响应函数调用的函数。 </span><br></pre></td></tr></table></figure>
+<p>解决方法如下</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- fuction method(btn) &#123;</span></span><br><span class="line"><span class="comment">  alert(btn.value);</span></span><br><span class="line"><span class="comment">&#125; --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;text&quot;</span> <span class="attr">onblur</span>=<span class="string">&quot;method(this)&quot;</span>/&gt;</span></span><br></pre></td></tr></table></figure>
+<p>或者</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- fuction method() &#123;</span></span><br><span class="line"><span class="comment">  alert(window.event.srcElement.value);</span></span><br><span class="line"><span class="comment">&#125; --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;text&quot;</span> <span class="attr">onblur</span>=<span class="string">&quot;method()&quot;</span>/&gt;</span></span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -927,123 +1004,6 @@
 </tbody></table>
 <p>其中<code>max()</code>和<code>min()</code>的参数不能是数组只能是数字，如果要求数组中的极值则可以使用<code>Math.max.apply(Math, array)</code>。</p>
 
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://hangermeng.top/2017/10/22/Date%E5%AF%B9%E8%B1%A1/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.jpg">
-      <meta itemprop="name" content="Hank">
-      <meta itemprop="description" content="Learning progress and good health">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hank's Blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2017/10/22/Date%E5%AF%B9%E8%B1%A1/" class="post-title-link" itemprop="url">Date 对象</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2017-10-22 13:58:01" itemprop="dateCreated datePublished" datetime="2017-10-22T13:58:01+08:00">2017-10-22</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2022-02-10 17:38:19" itemprop="dateModified" datetime="2022-02-10T17:38:19+08:00">2022-02-10</time>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>Date 对象用于处理日期与实际，记录一下它的方法以及传参。</p>
-<h3 id="常用方法"><a href="#常用方法" class="headerlink" title="常用方法"></a>常用方法</h3><table>
-<thead>
-<tr>
-<th>方法</th>
-<th>描述</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>getFullYear()</td>
-<td>返回四位数字年份</td>
-</tr>
-<tr>
-<td>getMonth()</td>
-<td>返回月份 (0 ~ 11)</td>
-</tr>
-<tr>
-<td>getDate()</td>
-<td>返回一个月中的某一天 <strong>(1 ~ 31)</strong></td>
-</tr>
-<tr>
-<td>getHours()</td>
-<td>返回 Date 对象的小时 (0 ~ 23)</td>
-</tr>
-<tr>
-<td>getMinutes()</td>
-<td>返回 Date 对象的分钟 (0 ~ 59)</td>
-</tr>
-<tr>
-<td>getSeconds()</td>
-<td>返回 Date 对象的秒数 (0 ~ 59)</td>
-</tr>
-<tr>
-<td>getDay()</td>
-<td>返回一周中的某一天 (0 ~ 6)</td>
-</tr>
-<tr>
-<td>getTime()</td>
-<td>返回 1970 年 1 月 1 日至今的毫秒数</td>
-</tr>
-</tbody></table>
-<h3 id="new-Date-参数"><a href="#new-Date-参数" class="headerlink" title="new Date() 参数"></a>new Date() 参数</h3><ul>
-<li><code>new Date(&quot;month dd,yyyy hh:mm:ss&quot;)</code> 这里的<code>month</code>是一个英文月份单词如<code>January</code></li>
-<li><code>new Date(&quot;yyyy/MM/dd hh:mm:ss&quot;)</code> 用<code>/</code>分隔日期比用<code>-</code>等分隔兼容性更好</li>
-<li><code>new Date(yyyy, MM, dd, hh, mm, ss)</code> 参数不能放 Array 类型，且每项必须是 String 或 Number 类型</li>
-<li><code>new Date(milliseconds)</code> 参数必须是 Number 类型</li>
-</ul>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">new</span> <span class="built_in">Date</span>(<span class="string">&quot;January 12,2006 22:19:35&quot;</span>); <span class="comment">// 注意格式 </span></span><br><span class="line"></span><br><span class="line"><span class="keyword">new</span> <span class="built_in">Date</span>(<span class="string">&quot;January 12,2006&quot;</span>); <span class="comment">// String 类型</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">new</span> <span class="built_in">Date</span>(<span class="string">&quot;2006/2/2 22:19:35&quot;</span>); <span class="comment">// String 类型 </span></span><br><span class="line"></span><br><span class="line"><span class="keyword">new</span> <span class="built_in">Date</span>(<span class="number">2006</span>,<span class="number">0</span>,<span class="number">12</span>,<span class="number">22</span>,<span class="number">19</span>,<span class="number">35</span>); <span class="comment">// 不能放 Array 类型 </span></span><br><span class="line"></span><br><span class="line"><span class="keyword">new</span> <span class="built_in">Date</span>(<span class="number">2006</span>,<span class="number">0</span>,<span class="number">12</span>); <span class="comment">// 可以是String 或 Number</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">new</span> <span class="built_in">Date</span>(<span class="number">1137075575000</span>); <span class="comment">// 必须是 Number 类型</span></span><br></pre></td></tr></table></figure>
       
     </div>
 

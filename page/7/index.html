@@ -154,7 +154,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">127</span>
+          <span class="site-state-item-count">128</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -197,6 +197,78 @@
 
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://hangermeng.top/2018/02/28/ES6%E4%B8%AD%E7%B1%BB%E7%9A%84%E7%94%A8%E6%B3%95/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="Hank">
+      <meta itemprop="description" content="Learning progress and good health">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hank's Blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2018/02/28/ES6%E4%B8%AD%E7%B1%BB%E7%9A%84%E7%94%A8%E6%B3%95/" class="post-title-link" itemprop="url">ES6中类的用法</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2018-02-28 20:29:45" itemprop="dateCreated datePublished" datetime="2018-02-28T20:29:45+08:00">2018-02-28</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2022-02-10 17:38:19" itemprop="dateModified" datetime="2022-02-10T17:38:19+08:00">2022-02-10</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>ES6引入了Class（类）这个概念,作为对象的模板,通过class关键字,可以定义类。class不存在变量提升。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> methodName = <span class="string">&quot;getInfo&quot;</span>; </span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Person</span></span>&#123;  </span><br><span class="line">    <span class="comment">// constructor方法是类的构造函数是默认方法</span></span><br><span class="line">    <span class="title">constructor</span> (<span class="params">x,y</span>) &#123;</span><br><span class="line">    	<span class="comment">// ES6实例属性只能在constructor构造函数中定义  </span></span><br><span class="line">        <span class="built_in">this</span>.x = x;  </span><br><span class="line">        <span class="built_in">this</span>.y = y;  </span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 注意！方法之间不需要逗号分隔！</span></span><br><span class="line"> 	<span class="comment">// toString方法是Person类内部定义的方法，ES6中它是不可枚举的，但ES5中可以枚举。</span></span><br><span class="line">    toString () &#123;  </span><br><span class="line">        <span class="keyword">return</span> (<span class="built_in">this</span>.x + <span class="string">&quot;的年龄是&quot;</span> +<span class="built_in">this</span>.y+<span class="string">&quot;岁&quot;</span>);  </span><br><span class="line">    &#125;</span><br><span class="line">	<span class="comment">// 在ES6中,类的属性名可以使用表达式</span></span><br><span class="line">    [methodName] () &#123;  </span><br><span class="line">       <span class="built_in">console</span>.log(<span class="string">&#x27;输出&#x27;</span> + <span class="built_in">this</span>.x + <span class="string">&#x27;的基本信息&#x27;</span>);  </span><br><span class="line">    &#125;</span><br><span class="line">	<span class="comment">// static关键字，就表示该方法为“静态方法”，实例无法调用，只能类自身调用</span></span><br><span class="line">    <span class="keyword">static</span> <span class="function"><span class="title">getCommon</span>(<span class="params"></span>)</span>&#123;  </span><br><span class="line">        <span class="keyword">return</span> <span class="string">&#x27;父类的静态方法&#x27;</span>;  </span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 在类的原型上追加方法</span></span><br><span class="line"><span class="built_in">Object</span>.assign(Person.prototype, &#123;</span><br><span class="line">    <span class="function"><span class="title">getWeight</span>(<span class="params"></span>)</span>&#123;  </span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">&#x27;71kg&#x27;</span>);  </span><br><span class="line">    &#125;,  </span><br><span class="line">    <span class="function"><span class="title">getHeight</span>(<span class="params"></span>)</span>&#123;  </span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">&#x27;175cm&#x27;</span>);  </span><br><span class="line">    &#125;  </span><br><span class="line">&#125;); </span><br><span class="line"></span><br><span class="line"><span class="comment">// 定义静态属性，目前ES6，只有这种写法可行，因为ES6明确规定，Class内部只有静态方法，没有静态属性。</span></span><br><span class="line">Person.firstName = <span class="string">&#x27;pca&#x27;</span>;  </span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> tom = <span class="keyword">new</span> Person(<span class="string">&#x27;tom&#x27;</span>, <span class="number">23</span>);</span><br><span class="line">tom.getInfo();</span><br><span class="line">tom.getWeight();</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -932,83 +1004,6 @@
 <li><code>multipart/form-data</code>: 不对字符编码，在使用包含文件上传控件的表单时，必须使用该值</li>
 <li><code>text/plain</code>: 空格转换为<code>+</code>加号，但不对特殊字符编码</li>
 </ul>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://hangermeng.top/2018/02/14/event-srcElement%E4%B8%8Eevent-target%E7%9A%84%E5%8C%BA%E5%88%AB/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.jpg">
-      <meta itemprop="name" content="Hank">
-      <meta itemprop="description" content="Learning progress and good health">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hank's Blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2018/02/14/event-srcElement%E4%B8%8Eevent-target%E7%9A%84%E5%8C%BA%E5%88%AB/" class="post-title-link" itemprop="url">event.srcElement与event.target的区别</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2018-02-14 21:12:24" itemprop="dateCreated datePublished" datetime="2018-02-14T21:12:24+08:00">2018-02-14</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2022-02-10 17:38:19" itemprop="dateModified" datetime="2022-02-10T17:38:19+08:00">2022-02-10</time>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p><code>event.srcElement</code>与<code>event.target</code>两者作用相同，都是指向触发事件的元素，包含了该元素的各种属性。IE浏览器支持<code>srcElement</code>，而firefox支持<code>target</code>，解决兼容的方法</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> eve = event.srcElement ? event.srcElement : event.target;</span><br></pre></td></tr></table></figure>
-<h3 id="this-与-event-srcElement"><a href="#this-与-event-srcElement" class="headerlink" title="this 与 event.srcElement"></a>this 与 event.srcElement</h3><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;text&quot;</span> <span class="attr">onblur</span>=<span class="string">&quot;alert(this.value)&quot;</span>/&gt;</span> // 合法</span><br><span class="line"><span class="comment">&lt;!-- fuction method() &#123;</span></span><br><span class="line"><span class="comment">  alert(this.value);</span></span><br><span class="line"><span class="comment">&#125; --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;text&quot;</span> <span class="attr">onblur</span>=<span class="string">&quot;method()&quot;</span>/&gt;</span> // 非法，method() 是被响应函数调用的函数。 </span><br></pre></td></tr></table></figure>
-<p>解决方法如下</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- fuction method(btn) &#123;</span></span><br><span class="line"><span class="comment">  alert(btn.value);</span></span><br><span class="line"><span class="comment">&#125; --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;text&quot;</span> <span class="attr">onblur</span>=<span class="string">&quot;method(this)&quot;</span>/&gt;</span></span><br></pre></td></tr></table></figure>
-<p>或者</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- fuction method() &#123;</span></span><br><span class="line"><span class="comment">  alert(window.event.srcElement.value);</span></span><br><span class="line"><span class="comment">&#125; --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">&quot;text&quot;</span> <span class="attr">onblur</span>=<span class="string">&quot;method()&quot;</span>/&gt;</span></span><br></pre></td></tr></table></figure>
 
       
     </div>

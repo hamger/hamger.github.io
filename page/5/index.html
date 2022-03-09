@@ -154,7 +154,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">127</span>
+          <span class="site-state-item-count">128</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -197,6 +197,85 @@
 
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://hangermeng.top/2018/03/27/%E5%AE%9E%E7%8E%B0%E7%9B%B8%E5%AF%B9%E4%BA%8E%E7%88%B6%E5%85%83%E7%B4%A0%E7%9A%84%E5%9B%BA%E5%AE%9A%E5%AE%9A%E4%BD%8D/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="Hank">
+      <meta itemprop="description" content="Learning progress and good health">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hank's Blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2018/03/27/%E5%AE%9E%E7%8E%B0%E7%9B%B8%E5%AF%B9%E4%BA%8E%E7%88%B6%E5%85%83%E7%B4%A0%E7%9A%84%E5%9B%BA%E5%AE%9A%E5%AE%9A%E4%BD%8D/" class="post-title-link" itemprop="url">实现相对于父元素的固定定位</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2018-03-27 21:24:26" itemprop="dateCreated datePublished" datetime="2018-03-27T21:24:26+08:00">2018-03-27</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2022-02-10 17:38:19" itemprop="dateModified" datetime="2022-02-10T17:38:19+08:00">2022-02-10</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>传统的<code>position: fixed;</code>是相对于窗口的固定定位，但是实际项目中经常会遇到需要根据指定父元素固定定位的情况。研究后找到了两种可行的实现方案。以下代码的效果是<code>.header</code>会相对于<code>.wrapper</code>固定显示，这就实现了相对于父元素的固定定位。</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;wrapper&quot;</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;header&quot;</span>&gt;</span>little title<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;content&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">v-for</span>=<span class="string">&quot;(item, index) in new Array(30)&quot;</span>&gt;</span>item - &#123;&#123;index&#125;&#125;<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2018/03/27/%E5%AE%9E%E7%8E%B0%E7%9B%B8%E5%AF%B9%E4%BA%8E%E7%88%B6%E5%85%83%E7%B4%A0%E7%9A%84%E5%9B%BA%E5%AE%9A%E5%AE%9A%E4%BD%8D/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -823,7 +902,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2022-02-10 17:38:19" itemprop="dateModified" datetime="2022-02-10T17:38:19+08:00">2022-02-10</time>
+      <time title="Modified: 2022-03-09 16:49:48" itemprop="dateModified" datetime="2022-03-09T16:49:48+08:00">2022-03-09</time>
     </span>
 
   
@@ -930,123 +1009,6 @@
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/2018/03/10/TypeScript%E5%AD%A6%E4%B9%A0/#more" rel="contents">
-                Read more &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://hangermeng.top/2018/03/09/React%E5%9F%BA%E7%A1%802/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.jpg">
-      <meta itemprop="name" content="Hank">
-      <meta itemprop="description" content="Learning progress and good health">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hank's Blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2018/03/09/React%E5%9F%BA%E7%A1%802/" class="post-title-link" itemprop="url">React基础2</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2018-03-09 08:37:59" itemprop="dateCreated datePublished" datetime="2018-03-09T08:37:59+08:00">2018-03-09</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2022-02-10 17:38:19" itemprop="dateModified" datetime="2022-02-10T17:38:19+08:00">2022-02-10</time>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h3 id="React-组件-API"><a href="#React-组件-API" class="headerlink" title="React 组件 API"></a>React 组件 API</h3><p>React 组件 API 中有以下7个常用方法:</p>
-<ul>
-<li>设置状态：setState</li>
-<li>替换状态：replaceState</li>
-<li>设置属性：setProps</li>
-<li>替换属性：replaceProps</li>
-<li>强制更新：forceUpdate</li>
-<li>获取DOM节点：findDOMNode</li>
-<li>判断组件挂载状态：isMounted</li>
-</ul>
-<h4 id="setState"><a href="#setState" class="headerlink" title="setState"></a>setState</h4><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">setState(nextState[, callback])</span><br></pre></td></tr></table></figure>
-<ul>
-<li>nextState：一个对象。将要设置的新状态，该状态会和当前的state合并</li>
-<li>callback：回调函数。该函数会在setState设置成功，且组件重新渲染后调用</li>
-</ul>
-<h4 id="replaceState"><a href="#replaceState" class="headerlink" title="replaceState"></a>replaceState</h4><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">replaceState(nextState[, callback])</span><br></pre></td></tr></table></figure>
-<ul>
-<li>nextState：一个对象。将要设置的新状态，该状态会替换当前的state。</li>
-<li>callback：回调函数。该函数会在replaceState设置成功，且组件重新渲染后调用。</li>
-</ul>
-<h4 id="setProps"><a href="#setProps" class="headerlink" title="setProps"></a>setProps</h4><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">setProps(nextProps[, callback])</span><br></pre></td></tr></table></figure>
-<ul>
-<li>nextProps：一个对象。将要设置的新属性，该状态会和当前的props合并</li>
-<li>callback：回调函数。该函数会在setProps设置成功，且组件重新渲染后调用</li>
-</ul>
-<h4 id="replaceProps"><a href="#replaceProps" class="headerlink" title="replaceProps"></a>replaceProps</h4><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">replaceProps(nextProps[, callback])</span><br></pre></td></tr></table></figure>
-<ul>
-<li>nextProps：一个对象。将要设置的新属性，该属性会替换当前的props。</li>
-<li>callback：回调函数。该函数会在replaceProps设置成功，且组件重新渲染后调用。</li>
-</ul>
-<h4 id="forceUpdate"><a href="#forceUpdate" class="headerlink" title="forceUpdate"></a>forceUpdate</h4><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">forceUpdate([callback])</span><br></pre></td></tr></table></figure>
-<ul>
-<li>callback：回调函数。该函数会在组件render()方法调用后调用。</li>
-</ul>
-<p>forceUpdate()方法会使组件和子组件调用自身的render()方法重新渲染组件。但是，组件重新渲染时，依然会读取this.props和this.state，如果状态没有改变，那么React只会更新DOM。</p>
-<p>一般来说，应该尽量避免使用forceUpdate()，而仅从this.props和this.state中读取状态并由React触发render()调用。</p>
-<h4 id="findDOMNode"><a href="#findDOMNode" class="headerlink" title="findDOMNode"></a>findDOMNode</h4><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">DOMElement findDOMNode()</span><br></pre></td></tr></table></figure>
-<p>如果组件已经挂载到DOM中，该方法返回对应的本地浏览器 DOM 元素。当render返回null 或 false时，this.findDOMNode()也会返回null。</p>
-<h4 id="isMounted"><a href="#isMounted" class="headerlink" title="isMounted"></a>isMounted</h4><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">bool isMounted()</span><br></pre></td></tr></table></figure>
-<p>返回值：true或false，表示组件是否已挂载到DOM中。可以使用该方法保证了setState()和forceUpdate()在异步场景下的调用不会出错。</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2018/03/09/React%E5%9F%BA%E7%A1%802/#more" rel="contents">
                 Read more &raquo;
               </a>
             </div>

@@ -154,7 +154,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">127</span>
+          <span class="site-state-item-count">128</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -197,6 +197,123 @@
 
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://hangermeng.top/2018/03/09/React%E5%9F%BA%E7%A1%802/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="Hank">
+      <meta itemprop="description" content="Learning progress and good health">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Hank's Blog">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2018/03/09/React%E5%9F%BA%E7%A1%802/" class="post-title-link" itemprop="url">React基础2</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2018-03-09 08:37:59" itemprop="dateCreated datePublished" datetime="2018-03-09T08:37:59+08:00">2018-03-09</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2022-02-10 17:38:19" itemprop="dateModified" datetime="2022-02-10T17:38:19+08:00">2022-02-10</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h3 id="React-组件-API"><a href="#React-组件-API" class="headerlink" title="React 组件 API"></a>React 组件 API</h3><p>React 组件 API 中有以下7个常用方法:</p>
+<ul>
+<li>设置状态：setState</li>
+<li>替换状态：replaceState</li>
+<li>设置属性：setProps</li>
+<li>替换属性：replaceProps</li>
+<li>强制更新：forceUpdate</li>
+<li>获取DOM节点：findDOMNode</li>
+<li>判断组件挂载状态：isMounted</li>
+</ul>
+<h4 id="setState"><a href="#setState" class="headerlink" title="setState"></a>setState</h4><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">setState(nextState[, callback])</span><br></pre></td></tr></table></figure>
+<ul>
+<li>nextState：一个对象。将要设置的新状态，该状态会和当前的state合并</li>
+<li>callback：回调函数。该函数会在setState设置成功，且组件重新渲染后调用</li>
+</ul>
+<h4 id="replaceState"><a href="#replaceState" class="headerlink" title="replaceState"></a>replaceState</h4><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">replaceState(nextState[, callback])</span><br></pre></td></tr></table></figure>
+<ul>
+<li>nextState：一个对象。将要设置的新状态，该状态会替换当前的state。</li>
+<li>callback：回调函数。该函数会在replaceState设置成功，且组件重新渲染后调用。</li>
+</ul>
+<h4 id="setProps"><a href="#setProps" class="headerlink" title="setProps"></a>setProps</h4><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">setProps(nextProps[, callback])</span><br></pre></td></tr></table></figure>
+<ul>
+<li>nextProps：一个对象。将要设置的新属性，该状态会和当前的props合并</li>
+<li>callback：回调函数。该函数会在setProps设置成功，且组件重新渲染后调用</li>
+</ul>
+<h4 id="replaceProps"><a href="#replaceProps" class="headerlink" title="replaceProps"></a>replaceProps</h4><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">replaceProps(nextProps[, callback])</span><br></pre></td></tr></table></figure>
+<ul>
+<li>nextProps：一个对象。将要设置的新属性，该属性会替换当前的props。</li>
+<li>callback：回调函数。该函数会在replaceProps设置成功，且组件重新渲染后调用。</li>
+</ul>
+<h4 id="forceUpdate"><a href="#forceUpdate" class="headerlink" title="forceUpdate"></a>forceUpdate</h4><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">forceUpdate([callback])</span><br></pre></td></tr></table></figure>
+<ul>
+<li>callback：回调函数。该函数会在组件render()方法调用后调用。</li>
+</ul>
+<p>forceUpdate()方法会使组件和子组件调用自身的render()方法重新渲染组件。但是，组件重新渲染时，依然会读取this.props和this.state，如果状态没有改变，那么React只会更新DOM。</p>
+<p>一般来说，应该尽量避免使用forceUpdate()，而仅从this.props和this.state中读取状态并由React触发render()调用。</p>
+<h4 id="findDOMNode"><a href="#findDOMNode" class="headerlink" title="findDOMNode"></a>findDOMNode</h4><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">DOMElement findDOMNode()</span><br></pre></td></tr></table></figure>
+<p>如果组件已经挂载到DOM中，该方法返回对应的本地浏览器 DOM 元素。当render返回null 或 false时，this.findDOMNode()也会返回null。</p>
+<h4 id="isMounted"><a href="#isMounted" class="headerlink" title="isMounted"></a>isMounted</h4><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">bool isMounted()</span><br></pre></td></tr></table></figure>
+<p>返回值：true或false，表示组件是否已挂载到DOM中。可以使用该方法保证了setState()和forceUpdate()在异步场景下的调用不会出错。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2018/03/09/React%E5%9F%BA%E7%A1%802/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -976,78 +1093,6 @@ React 可以渲染 HTML 标签 (strings) 或 React 组件 (classes)。React 的 
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&#123;&#125; == &#123;&#125; <span class="comment">// false</span></span><br><span class="line">[] == [] <span class="comment">// false</span></span><br></pre></td></tr></table></figure>
 <p>但是如果是<strong>引用地址</strong>就可以确定是否存在</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> obj = &#123;<span class="attr">aa</span>: <span class="number">13</span>&#125;;</span><br><span class="line"><span class="keyword">let</span> arr = [<span class="number">12</span>, <span class="number">99</span>];</span><br><span class="line"><span class="keyword">let</span> arr2 = [obj, arr, <span class="number">96</span>, <span class="string">&#x27;55&#x27;</span>, <span class="literal">undefined</span>, <span class="literal">null</span>];</span><br><span class="line"><span class="built_in">console</span>.log(arr2.indexOf(obj)); <span class="comment">// 0</span></span><br><span class="line"><span class="built_in">console</span>.log(arr2.indexOf(arr)); <span class="comment">// 1</span></span><br></pre></td></tr></table></figure>
-
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://hangermeng.top/2018/02/28/ES6%E4%B8%AD%E7%B1%BB%E7%9A%84%E7%94%A8%E6%B3%95/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.jpg">
-      <meta itemprop="name" content="Hank">
-      <meta itemprop="description" content="Learning progress and good health">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hank's Blog">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2018/02/28/ES6%E4%B8%AD%E7%B1%BB%E7%9A%84%E7%94%A8%E6%B3%95/" class="post-title-link" itemprop="url">ES6中类的用法</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">Posted on</span>
-
-      <time title="Created: 2018-02-28 20:29:45" itemprop="dateCreated datePublished" datetime="2018-02-28T20:29:45+08:00">2018-02-28</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2022-02-10 17:38:19" itemprop="dateModified" datetime="2022-02-10T17:38:19+08:00">2022-02-10</time>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>ES6引入了Class（类）这个概念,作为对象的模板,通过class关键字,可以定义类。class不存在变量提升。</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> methodName = <span class="string">&quot;getInfo&quot;</span>; </span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Person</span></span>&#123;  </span><br><span class="line">    <span class="comment">// constructor方法是类的构造函数是默认方法</span></span><br><span class="line">    <span class="title">constructor</span> (<span class="params">x,y</span>) &#123;</span><br><span class="line">    	<span class="comment">// ES6实例属性只能在constructor构造函数中定义  </span></span><br><span class="line">        <span class="built_in">this</span>.x = x;  </span><br><span class="line">        <span class="built_in">this</span>.y = y;  </span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 注意！方法之间不需要逗号分隔！</span></span><br><span class="line"> 	<span class="comment">// toString方法是Person类内部定义的方法，ES6中它是不可枚举的，但ES5中可以枚举。</span></span><br><span class="line">    toString () &#123;  </span><br><span class="line">        <span class="keyword">return</span> (<span class="built_in">this</span>.x + <span class="string">&quot;的年龄是&quot;</span> +<span class="built_in">this</span>.y+<span class="string">&quot;岁&quot;</span>);  </span><br><span class="line">    &#125;</span><br><span class="line">	<span class="comment">// 在ES6中,类的属性名可以使用表达式</span></span><br><span class="line">    [methodName] () &#123;  </span><br><span class="line">       <span class="built_in">console</span>.log(<span class="string">&#x27;输出&#x27;</span> + <span class="built_in">this</span>.x + <span class="string">&#x27;的基本信息&#x27;</span>);  </span><br><span class="line">    &#125;</span><br><span class="line">	<span class="comment">// static关键字，就表示该方法为“静态方法”，实例无法调用，只能类自身调用</span></span><br><span class="line">    <span class="keyword">static</span> <span class="function"><span class="title">getCommon</span>(<span class="params"></span>)</span>&#123;  </span><br><span class="line">        <span class="keyword">return</span> <span class="string">&#x27;父类的静态方法&#x27;</span>;  </span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 在类的原型上追加方法</span></span><br><span class="line"><span class="built_in">Object</span>.assign(Person.prototype, &#123;</span><br><span class="line">    <span class="function"><span class="title">getWeight</span>(<span class="params"></span>)</span>&#123;  </span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">&#x27;71kg&#x27;</span>);  </span><br><span class="line">    &#125;,  </span><br><span class="line">    <span class="function"><span class="title">getHeight</span>(<span class="params"></span>)</span>&#123;  </span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">&#x27;175cm&#x27;</span>);  </span><br><span class="line">    &#125;  </span><br><span class="line">&#125;); </span><br><span class="line"></span><br><span class="line"><span class="comment">// 定义静态属性，目前ES6，只有这种写法可行，因为ES6明确规定，Class内部只有静态方法，没有静态属性。</span></span><br><span class="line">Person.firstName = <span class="string">&#x27;pca&#x27;</span>;  </span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> tom = <span class="keyword">new</span> Person(<span class="string">&#x27;tom&#x27;</span>, <span class="number">23</span>);</span><br><span class="line">tom.getInfo();</span><br><span class="line">tom.getWeight();</span><br></pre></td></tr></table></figure>
 
       
     </div>
